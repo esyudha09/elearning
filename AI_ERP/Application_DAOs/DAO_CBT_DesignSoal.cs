@@ -151,6 +151,7 @@ namespace AI_ERP.Application_DAOs
 
         public static void Insert(CBT_DesignSoal DesignSoal, string user_id)
         {
+            
             SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
             SqlCommand comm = conn.CreateCommand();
             SqlTransaction transaction = null;
