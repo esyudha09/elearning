@@ -1,7 +1,10 @@
 {
   "ExpandedNodes": [
-    ""
+    "",
+    "\\AI_ERP",
+    "\\AI_ERP\\Application_Modules",
+    "\\AI_ERP\\Application_Modules\\CBT"
   ],
-  "SelectedNode": "\\C:\\@work\\e-learning",
+  "SelectedNode": "\\AI_ERP\\Application_Modules\\CBT\\wf.BankSoal.aspx",
   "PreviewInSolutionExplorer": false
 }
