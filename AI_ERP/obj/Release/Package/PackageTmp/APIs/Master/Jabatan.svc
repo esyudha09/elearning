@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="AI_ERP.APIs.Master.Jabatan" CodeBehind="Jabatan.svc.cs" %>

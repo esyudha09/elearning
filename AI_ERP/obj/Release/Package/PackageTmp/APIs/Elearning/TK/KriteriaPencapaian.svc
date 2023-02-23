@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="AI_ERP.APIs.Elearning.TK.KriteriaPencapaian" CodeBehind="KriteriaPencapaian.svc.cs" %>

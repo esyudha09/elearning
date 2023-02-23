@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="utf-8"?>
+<wsdl:definitions xmlns:soapenc="http://schemas.xmlsoap.org/soap/encoding/" xmlns:mime="http://schemas.xmlsoap.org/wsdl/mime/" xmlns:tns="http://tempuri.org/" xmlns:s="http://www.w3.org/2001/XMLSchema" xmlns:soap="http://schemas.xmlsoap.org/wsdl/soap/" xmlns:tm="http://microsoft.com/wsdl/mime/textMatching/" xmlns:http="http://schemas.xmlsoap.org/wsdl/http/" xmlns:soap12="http://schemas.xmlsoap.org/wsdl/soap12/" targetNamespace="http://tempuri.org/" xmlns:wsdl="http://schemas.xmlsoap.org/wsdl/">
+  <wsdl:types>
+    <s:schema elementFormDefault="qualified" targetNamespace="http://tempuri.org/">
+      <s:element name="LokasiFileFotoSiswa">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="nis" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+      <s:element name="LokasiFileFotoSiswaResponse">
+        <s:complexType>
+          <s:sequence>
+            <s:element minOccurs="0" maxOccurs="1" name="LokasiFileFotoSiswaResult" type="s:string" />
+          </s:sequence>
+        </s:complexType>
+      </s:element>
+    </s:schema>
+  </wsdl:types>
+  <wsdl:message name="LokasiFileFotoSiswaSoapIn">
+    <wsdl:part name="parameters" element="tns:LokasiFileFotoSiswa" />
+  </wsdl:message>
+  <wsdl:message name="LokasiFileFotoSiswaSoapOut">
+    <wsdl:part name="parameters" element="tns:LokasiFileFotoSiswaResponse" />
+  </wsdl:message>
+  <wsdl:portType name="FileFotoSoap">
+    <wsdl:operation name="LokasiFileFotoSiswa">
+      <wsdl:input message="tns:LokasiFileFotoSiswaSoapIn" />
+      <wsdl:output message="tns:LokasiFileFotoSiswaSoapOut" />
+    </wsdl:operation>
+  </wsdl:portType>
+  <wsdl:binding name="FileFotoSoap" type="tns:FileFotoSoap">
+    <soap:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LokasiFileFotoSiswa">
+      <soap:operation soapAction="http://tempuri.org/LokasiFileFotoSiswa" style="document" />
+      <wsdl:input>
+        <soap:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:binding name="FileFotoSoap12" type="tns:FileFotoSoap">
+    <soap12:binding transport="http://schemas.xmlsoap.org/soap/http" />
+    <wsdl:operation name="LokasiFileFotoSiswa">
+      <soap12:operation soapAction="http://tempuri.org/LokasiFileFotoSiswa" style="document" />
+      <wsdl:input>
+        <soap12:body use="literal" />
+      </wsdl:input>
+      <wsdl:output>
+        <soap12:body use="literal" />
+      </wsdl:output>
+    </wsdl:operation>
+  </wsdl:binding>
+  <wsdl:service name="FileFoto">
+    <wsdl:port name="FileFotoSoap" binding="tns:FileFotoSoap">
+      <soap:address location="http://aplikasi.alizhar.sch.id/keuangan/webservices/FileFoto.asmx" />
+    </wsdl:port>
+    <wsdl:port name="FileFotoSoap12" binding="tns:FileFotoSoap12">
+      <soap12:address location="http://aplikasi.alizhar.sch.id/keuangan/webservices/FileFoto.asmx" />
+    </wsdl:port>
+  </wsdl:service>
+</wsdl:definitions>

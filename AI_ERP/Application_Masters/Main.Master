@@ -1,0 +1,787 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="Main.master.cs" Inherits="AI_ERP.Application_Masters.Main" %>
+<!DOCTYPE html>
+
+<html style="background-color: #ffffff;">
+<head runat="server">
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <meta charset="UTF-8">
+    <meta content="IE=edge" http-equiv="X-UA-Compatible">
+    <meta content="initial-scale=1.0, maximum-scale=1.0, user-scalable=no, width=device-width" name="viewport">
+    <title>Al-Izhar Pondok Labu</title>
+
+    <!-- css -->
+    <link href="~/Application_Templates/material-master/css/base.min-20200113h.css" rel="stylesheet">
+    <link href="~/Application_Templates/material-master/css/project.min.css" rel="stylesheet">
+    <link href="~/Application_CLibs/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+    <link href="~/Application_CLibs/uploadercss/component.css" rel="stylesheet">
+    <link href="~/Application_CLibs/main.css" rel="stylesheet">
+
+    <style type="text/css">
+        .tooltip {
+            display: inline-block;
+            position: relative;
+            text-align: left;
+        }
+
+            .tooltip h3 {
+                margin: 12px 0;
+            }
+
+            .tooltip .bottom {
+                /*min-width:200px;*/
+                /*max-width:400px;*/
+                top: 40px;
+                left: 50%;
+                transform: translate(-50%, 0);
+                padding: 20px;
+                color: #666666;
+                background-color: #EEEEEE;
+                font-weight: normal;
+                font-size: 13px;
+                border-radius: 8px;
+                position: absolute;
+                z-index: 99999999;
+                box-sizing: border-box;
+                box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+                display: none;
+            }
+
+            .tooltip:hover .bottom {
+                display: block;
+            }
+
+            .tooltip .bottom img {
+                width: 400px;
+            }
+
+            .tooltip .bottom i {
+                position: absolute;
+                bottom: 100%;
+                left: 50%;
+                margin-left: -12px;
+                width: 24px;
+                height: 12px;
+                overflow: hidden;
+            }
+
+                .tooltip .bottom i::after {
+                    content: '';
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    left: 50%;
+                    transform: translate(-50%,50%) rotate(45deg);
+                    background-color: #EEEEEE;
+                    box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+                }
+
+            .tooltip .top {
+                top: -5px;
+                left: 50%;
+                transform: translate(-50%,-100%);
+                padding: 4px 10px 4px 10px;
+                color: #ffffff;
+                background-color: black;
+                font-weight: normal;
+                font-size: 14px;
+                border-radius: 4px;
+                position: absolute;
+                z-index: 99999999;
+                box-sizing: border-box;
+                box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+                /*display:none;*/
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.8s;
+            }
+
+            .tooltip:hover .top {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .tooltip .top i {
+                position: absolute;
+                top: 100%;
+                left: 50%;
+                margin-left: -15px;
+                width: 30px;
+                height: 15px;
+                overflow: hidden;
+            }
+
+            .tooltip .text-content {
+                padding: 10px 20px;
+            }
+
+            .tooltip .top i::after {
+                content: '';
+                position: absolute;
+                width: 15px;
+                height: 15px;
+                left: 50%;
+                transform: translate(-50%,-50%) rotate(45deg);
+                background-color: black;
+                box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+            }
+
+            .tooltip .right {
+                min-width: 200px;
+                max-width: 400px;
+                top: 50%;
+                left: 100%;
+                margin-left: 20px;
+                transform: translate(0, -50%);
+                padding: 0;
+                color: #EEEEEE;
+                background-color: #444444;
+                font-weight: normal;
+                font-size: 13px;
+                border-radius: 8px;
+                position: absolute;
+                z-index: 99999999;
+                box-sizing: border-box;
+                box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+                visibility: hidden;
+                opacity: 0;
+                transition: opacity 0.8s;
+            }
+
+            .tooltip:hover .right {
+                visibility: visible;
+                opacity: 1;
+            }
+
+            .tooltip .right img {
+                width: 400px;
+                border-radius: 8px 8px 0 0;
+            }
+
+            .tooltip .text-content {
+                padding: 10px 20px;
+                width: 400px;
+            }
+
+            .tooltip .right i {
+                position: absolute;
+                top: 50%;
+                right: 100%;
+                margin-top: -12px;
+                width: 12px;
+                height: 24px;
+                overflow: hidden;
+            }
+
+                .tooltip .right i::after {
+                    content: '';
+                    position: absolute;
+                    width: 12px;
+                    height: 12px;
+                    left: 0;
+                    top: 50%;
+                    transform: translate(50%,-50%) rotate(-45deg);
+                    background-color: #444444;
+                    box-shadow: 0 1px 8px rgba(0,0,0,0.5);
+                }
+
+        /**
+         * Tooltip Styles
+         */
+
+        /* Add this attribute to the element that needs a tooltip */
+        [data-tooltip] {
+            position: relative;
+            z-index: 99;
+            cursor: pointer;
+        }
+
+            /* Hide the tooltip content by default */
+            [data-tooltip]:before,
+            [data-tooltip]:after {
+                visibility: hidden;
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+                filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=0);
+                opacity: 0;
+                pointer-events: none;
+            }
+
+            /* Position tooltip above the element */
+            [data-tooltip]:before {
+                position: absolute;
+                bottom: 150%;
+                left: 50%;
+                margin-bottom: 5px;
+                margin-left: -80px;
+                padding: 7px;
+                width: 160px;
+                -webkit-border-radius: 3px;
+                -moz-border-radius: 3px;
+                border-radius: 3px;
+                background-color: #000;
+                background-color: hsla(0, 0%, 20%, 0.9);
+                color: #fff;
+                content: attr(data-tooltip);
+                text-align: center;
+                font-size: 14px;
+                line-height: 1.2;
+            }
+
+            /* Triangle hack to make tooltip look like a speech bubble */
+            [data-tooltip]:after {
+                position: absolute;
+                bottom: 150%;
+                left: 50%;
+                margin-left: -5px;
+                width: 0;
+                border-top: 5px solid #000;
+                border-top: 5px solid hsla(0, 0%, 20%, 0.9);
+                border-right: 5px solid transparent;
+                border-left: 5px solid transparent;
+                content: " ";
+                font-size: 0;
+                line-height: 0;
+            }
+
+            /* Show tooltip content on hover */
+            [data-tooltip]:hover:before,
+            [data-tooltip]:hover:after {
+                visibility: visible;
+                -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
+                filter: progid: DXImageTransform.Microsoft.Alpha(Opacity=100);
+                opacity: 1;
+            }
+    </style>
+    <style type="text/css">
+        .checkbox-circle, .radiobtn-circle {
+            border: 2px solid rgba(130, 130, 130, 0.54);
+            -webkit-transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+            transition: border-color 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+        }
+    </style>
+    <style type="text/css">
+        .mce-toolbar-grp {
+            background-color: #F6F6F6 !important;
+            background-image: none !important;
+        }
+
+        .mce-btn {
+            background-color: #F6F6F6 !important;
+        }
+
+        .mce-tinymce.mce-container.mce-panel {
+            border: 1.5px solid #E0E0E0 !important;
+        }
+
+        .btn-trans {
+            background: transparent;
+            border-style: none;
+            font-weight: bold;
+            color: grey;
+        }
+
+        .btn-nav {
+            background: transparent;
+            border-style: none;
+            font-weight: bold;
+            color: mediumvioletred;
+        }
+
+        .typeahead {
+            z-index: 1051;
+        }
+
+        .label-input {
+            /*color: #6C774C;*/
+            color: slategrey;
+            font-weight: normal;
+            text-transform: uppercase;
+        }
+
+        @media screen and (max-width: 600px) {
+            .textsearch {
+                display: none;
+            }
+        }
+
+        @media screen and (min-width: 601px) {
+            .textsearch {
+                display: table;
+            }
+        }
+
+        .menu-backdrop.in {
+            opacity: 0;
+        }
+
+        .tile-collapse.active {
+            margin-bottom: 0px;
+        }
+
+        .tile.active {
+            /* margin-top: 24px; */
+            margin-bottom: 0px;
+        }
+    </style>
+    <style type="text/css">
+        .input-box {
+            border-style: solid;
+            border-width: 1px;
+            border-color: #DBDBDB;
+            padding: 6px;
+            outline: none;
+            width: 100%;
+            margin-top: 5px;
+            font-size: small;
+        }
+
+        .text-input {
+            display: inline-block;
+            padding: 6px;
+            padding-left: 15px;
+            padding-right: 15px;
+            margin: 0;
+            outline: 0;
+            background-color: #F5F8FA;
+            border: 1px solid #E6ECF0;
+            /*border-radius: 30px;*/
+            border-radius: 0px;
+            font-size: small;
+        }
+
+        .selectedrow {
+            background-color: #bfede8;
+        }
+    </style>
+
+    <%--<script type="text/javascript" src="<%= ResolveUrl("~/Application_CLibs/tinymce/tinymce.min.3.js") %>"></script>--%>
+    <script src="https://cdn.tiny.cloud/1/cevrmarqtmvxsxq2sn2fyock0pg3tvnfaody4zin3k0dk54e/tinymce/6/tinymce.min.js" referrerpolicy="origin"></script>
+    <script type="text/javascript">
+        function imageExists(image_url) {
+
+            var http = new XMLHttpRequest();
+
+            http.open('HEAD', image_url, false);
+            http.send();
+
+            return http.status != 404;
+
+        }
+
+        String.prototype.replaceAll = function (search, replacement) {
+            var target = this;
+            return target.split(search).join(replacement);
+        };
+    </script>
+</head>
+<body class="page-brand"
+    onresize="if (typeof parent.Resize === 'function') Resize();"
+    onload="EndRequestHandler(); if (typeof parent.Resize === 'function') Resize();"
+    style="padding-right: 0px; background-color: #ffffff;">
+    <div id="preloader" style="background: rgba(0, 0, 0, 0.7); position: fixed; left: 0px; top: 0px; bottom: 0px; right: 0px; z-index: 9999999999">
+        <div class="loder-box" style="background-color: transparent; color: #ffffff;">
+            <div class="progress-circular progress-circular-white">
+                <div class="progress-circular-wrapper" style="margin: 0 auto; display: table;">
+                    <div class="progress-circular-inner">
+                        <div class="progress-circular-left">
+                            <div class="progress-circular-spinner"></div>
+                        </div>
+                        <div class="progress-circular-gap"></div>
+                        <div class="progress-circular-right">
+                            <div class="progress-circular-spinner"></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div style="margin: 0 auto; display: table; padding-top: 30px; font-weight: bold;">
+                Sedang Proses...
+            </div>
+        </div>
+    </div>
+
+    <form id="form1" runat="server" enctype="multipart/form-data">
+        <asp:ScriptManager runat="server" ID="ScriptManager1"></asp:ScriptManager>
+        <header
+            class="header header-transparent header-waterfall ui-header"
+            style="/*-webkit-box-shadow: 0 1px 8px rgba(0,0,0,.3); box-shadow: 0 1px 8px rgba(0,0,0,.3); */ background-color: #6A6F75; background-color: #4B4B4B; background-color: #ffffff; color: white; border-style: none; border-width: 1px; border-color: #dddddd; border-left-style: none; border-top-style: none; border-right-style: none; z-index: 1000;">
+            <ul onmousedown="this.style.backgroundColor = 'black';"
+                <%--onmouseup="this.style.backgroundColor = '#b20000';--%>
+                onmouseup="this.style.backgroundColor = '#0F9D58';"
+                class="nav nav-list pull-left" style="height: 100%; /*background-color: #b20000; */ background-color: #0F9D58; margin-right: 20px;">
+                <li>
+                    <a data-toggle="menu" href="#ui_menu">
+                        <asp:Image runat="server" ID="imgAtas" ImageUrl="~/Application_Templates/logo.png" Style="height: 40px; width: 28px; margin-top: -5px;" />
+                    </a>
+                </li>
+            </ul>
+            <a class="header-logo header-affix-hide margin-left-no margin-right-no"
+                data-offset-top="213" data-spy="affix"
+                href="#" style="display: none;">&nbsp;&nbsp;
+                <label style="font-weight: bold; font-size: 16px; display: none;">
+                    Al-Izhar
+                    <span style="font-weight: normal;">Pondok Labu</span>
+                </label>
+                <div runat="server" id="div_title" style="font-size: large; font-weight: bold; color: #767676;">
+                    &nbsp;
+                </div>
+            </a>
+            <span class="header-logo header-affix margin-left-no margin-right-no" data-offset-top="213" data-spy="affix" style="font-weight: bold; color: #787878; font-size: 15px;">
+                <asp:UpdatePanel runat="server" ID="upHeaderAffix">
+                    <ContentTemplate>
+                        <asp:Literal runat="server" ID="lblHeaderAffix"></asp:Literal>
+                    </ContentTemplate>
+                </asp:UpdatePanel>
+            </span>
+            <ul class="nav nav-list pull-right">
+                <li class="dropdown margin-right" style="cursor: pointer; display: none;">
+                    <a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown" style="cursor: pointer; font-size: x-large; margin-top: -1px;">
+                        <span class="badge"
+                            style="background-color: red; position: absolute; top: 10px; right: -10px;">1</span>
+                        <label style="color: white; font-weight: bold;">
+                            <i class="fa fa-bell-o"
+                                style="background-color: #4B4B4B; padding: 5px; border-radius: 100%; cursor: pointer; background: transparent;"></i>
+                        </label>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right" style="width: 300px;">
+                        <li>
+                            <div style="font-weight: bold; color: grey; width: 100%; background-color: white; padding: 15px; border-style: none; border-width: 1px; border-color: #E4DFDF; margin-bottom: 5px; margin-top: 0px; text-align: justify;">
+                                <span style="color: grey; font-weight: bold;">PSB SMA Tahun Pelajaran 2018/2019</span><br />
+                                <br />
+                                <hr style="margin: 2px;" />
+                                <br />
+                                <span style="color: grey; font-weight: normal;">Telah dibuka pendaftaran siswa baru SMA Al-Izhar Pondok Labu tahun pelajaran 2018/2019
+                                    <br />
+                                    <br />
+                                    <a href="http://psb.alizhar.sch.id/sma" target="_blank" style="background-color: #3367d6; color: white;">
+                                        <span style="color: white;">Selengkapnya...</span>
+                                    </a>
+                                </span>
+                            </div>
+                        </li>
+                    </ul>
+                </li>
+                <li class="dropdown margin-right">
+                    <a class="dropdown-toggle padding-left-no padding-right-no" data-toggle="dropdown">
+                        <span class="access-hide"></span>
+                        <span class="avatar avatar-sm" style="margin-top: 12px;">
+                            <img
+                                alt=""
+                                src="<%= ResolveUrl("~/Application_Controls/Res/ImageViewer.aspx?ID=" + AI_ERP.Application_Libs.Libs.LOGGED_USER_M.NoInduk + "&Jenis=Pegawai" + "&Time=" + DateTime.Now.ToString()) %>"
+                                style="border-style: solid; border-color: white; border-width: 1px;" />
+                        </span>
+                    </a>
+                    <ul class="dropdown-menu dropdown-menu-right">
+                        <li style="padding: 0px;">
+                            <a class="padding-right-lg waves-attach" href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.MASTER.PEGAWAI_INPUT.ROUTE) + "?p=" + AI_ERP.Application_Libs.Libs.Encryptdata(AI_ERP.Application_Libs.Libs.LOGGED_USER_M.NoInduk) + "&act=" + AI_ERP.Application_Libs.RandomLibs.RND.USER %>" style="padding: 0px; padding-left: 15px; color: grey; font-weight: bold;"><span class="icon icon-lg margin-right">account_box</span>Profil Saya</a>
+                        </li>
+                        <li style="padding: 0px;">
+                            <hr style="margin: 0px;" />
+                        </li>
+                        <li style="display: none;">
+                            <a class="padding-right-lg waves-attach" href="javascript:void(0)" style="padding: 0px;"><span class="icon icon-lg margin-right">add_to_photos</span>Upload Photo</a>
+                        </li>
+                        <li style="padding: 0px;">
+                            <a class="padding-right-lg waves-attach" href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.LOGOUT.ROUTE) %>" style="padding: 0px; padding-left: 15px; color: grey; font-weight: bold;"><span class="icon icon-lg margin-right">exit_to_app</span>Keluar</a>
+                        </li>
+                    </ul>
+                </li>
+            </ul>
+
+            <asp:UpdatePanel runat="server" ID="upHeaderTools">
+                <ContentTemplate>
+                    <div id="div_Header" class="textsearch" visible="false" runat="server" style="margin: 0 auto; margin-top: 9px; padding-left: 10px; padding-right: 10px; width: 50%;">
+                        <div style="background-color: #5A5A5A; background-color: #F1F3F4; border-radius: 5px; padding: 2px; border-width: 1px; border-style: solid; border-color: #e1e1e1;">
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="width: 30px; text-align: center; color: grey; background-color: #5A5A5A; background-color: #F1F3F4; padding-top: 0px; padding-bottom: 0px; padding-left: 5px; padding-right: 5px;">
+                                        <i class="fa fa-search"></i>
+                                    </td>
+                                    <td style="padding-left: 0px; background-color: #5A5A5A; background-color: #F1F3F4; padding-top: 3px; padding-bottom: 3px;">
+                                        <asp:TextBox title=" Cari Data " placeholder="Pencarian Cepat..." ID="txtCari" runat="server" Style="color: black; font-weight: bold; background: transparent; padding: 5px; border-style: none; width: 100%; border-radius: 5px; outline: none;"></asp:TextBox>
+                                    </td>
+                                </tr>
+                            </table>
+                        </div>
+                    </div>
+
+                    <div
+                        runat="server" id="sub_header_guru"
+                        visible="false">
+                        <div>
+                            <label style="margin: 0 auto; display: table; margin-top: 10px;">
+                                <div style="text-align: center; width: 100%;">
+                                    <a title=" Presensi Siswa " runat="server" id="a_timeline" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Presensi Siswa</span>
+                                    </a>
+                                    <div style="display: none;">
+                                    <a title=" Jurnal Guru " runat="server" id="a_jurnal_guru" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Jurnal Guru&nbsp;<sup style="background-color: red; color: white; padding-left: 5px; padding-right: 5px; border-radius: 3px;">CS</sup></span>
+                                    </a>
+                                    </div>
+                                    <a title=" Data Siswa " runat="server" id="a_siswa" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Data Siswa</span>
+                                    </a>
+                                    <a title=" Nilai Akademik " runat="server" id="a_penilaian" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Nilai Akademik</span>
+                                    </a>
+                                    <div style="display: none;">
+                                    <a title=" Kunjungan Perpustakaan " runat="server" id="a_kunjunganperpus" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Kunjungan Perpustakaan&nbsp;<sup style="background-color: red; color: white; padding-left: 5px; padding-right: 5px; border-radius: 3px;">CS</sup></span>
+                                    </a>
+                                    </div>
+                                </div>
+                                <hr style="margin: 0px; margin-top: 5px; margin-bottom: 5px; display: none;" />
+                                <div style="text-align: center; width: 100%; margin-bottom: 15px; display: none;">
+                                    <a title=" Informasi " runat="server" id="a_informasi" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Informasi&nbsp;<sup style="background-color: red; color: white; padding-left: 5px; padding-right: 5px; border-radius: 3px;">CS</sup></span>
+                                    </a>
+                                    <a title=" Evaluasi " runat="server" id="a_evaluasi" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Evaluasi&nbsp;<sup style="background-color: red; color: white; padding-left: 5px; padding-right: 5px; border-radius: 3px;">CS</sup></span>
+                                    </a>
+                                    <a title=" Administrasi " runat="server" id="a_administrasi" href="#" class="btn btn-flat waves-attach waves-effect" style="padding: 0px; font-weight: normal;">
+                                        <span style="font-weight: bold; font-size: small; text-transform: none;">Administrasi&nbsp;<sup style="background-color: red; color: white; padding-left: 5px; padding-right: 5px; border-radius: 3px;">CS</sup></span>
+                                    </a>
+                                </div>
+                            </label>
+                        </div>
+                    </div>
+                </ContentTemplate>
+            </asp:UpdatePanel>
+        </header>
+        <asp:UpdatePanel runat="server" ID="upMenu">
+            <ContentTemplate>
+                <nav aria-hidden="true" class="menu" id="ui_menu" tabindex="-1" style="z-index: 1000;">
+                    <div class="menu-scroll" style="box-shadow: 0 0 1.6rem rgba(0,0,0,0.23);">
+                        <div class="menu-content">
+                            <a class="menu-logo"
+                                href=""
+                                style="font-weight: bold; color: #808080;">
+                                <asp:Image runat="server" ID="imgLogoAtas" ImageUrl="~/Application_Templates/material-master/images/logotrans.png" />
+                                &nbsp;&nbsp;
+								Al-Izhar
+                                &nbsp;
+                                <span style="font-weight: normal;">Pondok Labu</span>
+                            </a>
+                            <ul class="nav">
+                                <li>
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.BERANDA.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/house.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-top: -10px; margin-right: 5px;" />
+                                        &nbsp;
+										Beranda</a>
+                                </li>
+                                <li>
+                                    <hr style="margin-top: 0px; margin-bottom: 0px;" />
+                                </li>
+                                <li style="padding-left: 15px; display: none;">
+                                    <span style="font-weight: bold;">I - Informasi</span>
+                                </li>
+                                <asp:Literal runat="server" ID="ltrMenuKelasSaya"></asp:Literal>
+                                <li>
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.LINK_PEMBELAJARAN_EKSTERNAL.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <i class="fa fa-external-link"></i>
+                                        &nbsp;&nbsp;
+										Portal Link Sumber Belajar</a>
+                                </li>
+                                <li style="display: none;">
+                                    <hr style="margin-top: 0px; margin-bottom: 0px;" />
+                                </li>
+                                <li runat="server" id="li_kelas_psb" style="display: none;">
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_PROFIL_SISWA.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/bedge.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-right: 5px;" />
+                                        &nbsp;
+										Profil Siswa</a>
+                                </li>
+                                <li style="display: none;">
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_ABSENSI_SISWA.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/placeholder.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-right: 5px;" />
+                                        &nbsp;
+										Absensi</a>
+                                </li>
+                                <li style="display: none;">
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_TUGAS_SISWA.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/open-book.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-top: -10px; margin-right: 5px;" />
+                                        &nbsp;
+										Tugas</a>
+                                </li>
+                                <li style="display: none;">
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_KALENDER_AKADEMIK.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/calendar.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-right: 5px;" />
+                                        &nbsp;
+										Kalender Akademik</a>
+                                </li>
+                                <li style="display: none;">
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_NILAI_SISWA.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/touchscreen.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-right: 5px;" />
+                                        &nbsp;
+										Penilaian</a>
+                                </li>
+                                <li style="display: none;">
+                                    <a class="waves-attach"
+                                        style="font-weight: bold; color: #808080; display: none;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/book.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-right: 5px;" />
+                                        &nbsp;
+										Buku Penghubung</a>
+                                </li>
+                                <li style="display: none;">
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_UANG_SEKOLAH.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/022-money.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-right: 5px;" />
+                                        &nbsp;
+										Uang Sekolah</a>
+                                </li>
+                                <li style="display: none;">
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_TRANSAKSI_KANTIN.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/009-shop.svg") %>"
+                                            style="margin: 0 auto; height: 20px; width: 20px; margin-right: 5px;" />
+                                        &nbsp;
+										Kantin</a>
+                                </li>
+                                <li style="display: none;">
+                                    <hr style="margin-top: 0px; margin-bottom: 0px;" />
+                                </li>
+                                <li style="display: none;">
+                                    <a class="collapsed waves-attach" data-toggle="collapse"
+                                        href="#ui_menu_master_data"
+                                        style="font-weight: bold; color: #808080;">
+                                        <i class="fa fa-database" aria-hidden="true" style="margin-right: 10px;"></i>
+                                        &nbsp;
+										Master Data
+                                        <label class="fa fa-ellipsis-v pull-right" style="margin-top: 25px;"></label>
+                                    </a>
+                                    <ul class="menu-collapse collapse" id="ui_menu_master_data">
+                                        <li>
+                                            <a class="waves-attach"
+                                                href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.EDUCATION.Elearning.ORTU_TRANSAKSI_KANTIN.ROUTE) %>"
+                                                style="font-weight: bold; color: #808080;">
+                                                <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/020-office.svg") %>"
+                                                    style="margin: 0 auto; height: 20px; width: 20px; margin-top: -10px; margin-right: 10px;" />
+                                                Data Unit</a>
+                                        </li>
+                                    </ul>
+                                </li>
+                                <li>
+                                    <hr style="margin-top: 0px; margin-bottom: 0px;" />
+                                </li>
+                                <li>
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.MASTER.PEGAWAI_INPUT.ROUTE) + "?p=" + AI_ERP.Application_Libs.Libs.Encryptdata(AI_ERP.Application_Libs.Libs.LOGGED_USER_M.NoInduk) + "&act=" + AI_ERP.Application_Libs.RandomLibs.RND.USER %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <span style="font-weight: bold;">
+                                            <span class="icon icon-lg" style="margin-right: 10px;">account_box</span>
+                                            Profil Saya
+                                        </span>
+                                    </a>
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.UBAH_PASSWORD.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <span style="font-weight: bold;">
+                                            <i class="fa fa-lock" aria-hidden="true" style="margin-right: 10px;"></i>
+                                            &nbsp;&nbsp;
+											Ubah Password
+                                        </span>
+                                    </a>
+                                    <a class="waves-attach"
+                                        href="<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.LOGOUT.ROUTE) %>"
+                                        style="font-weight: bold; color: #808080;">
+                                        <span style="font-weight: bold;">
+                                            <i class="fa fa-sign-out" aria-hidden="true" style="margin-right: 10px;"></i>
+                                            &nbsp;
+											Keluar
+                                        </span>
+                                    </a>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+                </nav>
+            </ContentTemplate>
+        </asp:UpdatePanel>
+
+        <main class="content" style="width: 100%;">
+            <div class="content-header ui-content-header" style="background-color: #ffffff;">
+                <div style="margin-left: 15px; margin-right: 15px;">
+                    <div class="content-heading" style="color: #767676; font-weight: bold; font-size: large; padding-top: 20px; padding-bottom: 0px;">
+
+                        <section class="content-inner margin-top-no margin-bottom-no" runat="server" id="HeaderCard">
+                            <div class="row">
+                                <div class="col-lg-12 col-md-12" style="background-color: #ffffff;">
+                                    <div class="card margin-bottom-no" style="color: grey; background-color: #ffffff; border-bottom-left-radius: 0px; border-bottom-right-radius: 0px; box-shadow: none; border-style: none;">
+                                        <div class="card-inner" style="padding: 0px; margin: 7px; width: 100%;">
+                                            <div style="width: 100%; padding: 10px; padding-top: 5px; padding-bottom: 5px;">
+
+                                                <div runat="server" id="div_header_title">
+                                                    <asp:UpdatePanel runat="server" ID="upHeadingTitle">
+                                                        <ContentTemplate>
+                                                            <asp:Literal runat="server" ID="lblHeadingTitle"></asp:Literal>
+                                                        </ContentTemplate>
+                                                    </asp:UpdatePanel>
+
+                                                    <hr style="margin-top: 10px; margin-bottom: 10px;" />
+                                                </div>
+
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </section>
+
+                    </div>
+                </div>
+            </div>
+
+            <div style="margin-top: 20px;">
+                <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server"></asp:ContentPlaceHolder>
+            </div>
+        </main>
+
+        <asp:ContentPlaceHolder ID="cpNomor2" runat="server"></asp:ContentPlaceHolder>
+
+        <div class="fbtn-container" style="display: none;">
+            <div class="fbtn-inner">
+                <a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown" style="background-color: #a91212;">
+                    <span class="fbtn-text fbtn-text-left">Aplikasi</span><span class="fbtn-ori icon">apps</span>
+                    <span class="fbtn-sub icon">apps</span>
+                </a>
+            </div>
+        </div>
+    </form>
+
+    <!-- js -->
+    <%--<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/2.2.0/jquery.min.js"></script>--%>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Application_CLibs/js/jquery.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Application_CLibs/js/main.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Application_CLibs/ChartJS/Chart.bundle.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Application_CLibs/uploadercss/custom-file-input.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Application_Templates/material-master/js/base.ok.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Application_Templates/material-master/js/project.min.js") %>"></script>
+    <script type="text/javascript" src="<%= ResolveUrl("~/Application_CLibs/js/bootstrap3-typeahead.min.js") %>"></script>
+
+    <asp:ContentPlaceHolder ID="KontenBawah" runat="server"></asp:ContentPlaceHolder>
+</body>
+</html>

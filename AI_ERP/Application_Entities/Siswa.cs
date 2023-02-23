@@ -1,0 +1,122 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace AI_ERP.Application_Entities
+{
+    public class Siswa
+    {
+        public Guid Kode { get; set; }
+        public string NISGlobal { get; set; }
+        public string NIS { get; set; }
+        public string NISN { get; set; }
+        public string NISSekolah { get; set; }
+        public string TahunAjaran { get; set; }
+        public string Rel_Sekolah { get; set; }
+        public bool IsNonAktif { get; set; }
+        public string Rel_Kelas { get; set; }
+        public string Rel_KelasDet { get; set; }
+        public string Rel_KelasDetPerwalian { get; set; }
+        public string Rel_KelasDetJurusan { get; set; }
+        public string Rel_KelasDetSosialisasi { get; set; }
+        public string Rel_KelasBidangStudi { get; set; }
+        public string Rel_BidangStudi { get; set; }
+        public string Nama { get; set; }
+        public string Panggilan { get; set; }
+        public string TempatLahir { get; set; }
+        public DateTime TanggalLahir { get; set; }
+        public string JenisKelamin { get; set; }
+        public string NISLama { get; set; }
+        public string NoSeleksi { get; set; }
+        public string Agama { get; set; }
+        public string TelpRumah { get; set; }
+        public string HP { get; set; }
+        public string Email { get; set; }
+        public string StatusAnak { get; set; }
+        public string AnakKe { get; set; }
+        public string DariBersaudara { get; set; }
+        public string JumlahKakak { get; set; }
+        public string JumlahAdik { get; set; }
+        public string JumlahSaudaraKandung { get; set; }
+        public string JumlahSaudaraTiri { get; set; }
+        public string JumlahSaudaraAngkat { get; set; }
+        public string NIK { get; set; }
+        public string WargaNegara { get; set; }
+        public string BahasaSehariHari { get; set; }
+        public string Hobi { get; set; }
+        public string HobiLainnya { get; set; }
+        public string Alamat { get; set; }
+        public string RT { get; set; }
+        public string RW { get; set; }
+        public string Kelurahan { get; set; }
+        public string Kecamatan { get; set; }
+        public string Kabupaten { get; set; }
+        public string Provinsi { get; set; }
+        public string KodePOS { get; set; }
+        public string StatusTempatTinggal { get; set; }
+        public string JarakKeSekolah { get; set; }
+        public string KeSekolahDengan { get; set; }
+        public string WaktuTempuh { get; set; }
+        public string AsalSMA { get; set; }
+        public string AsalSMP { get; set; }
+        public string AsalSD { get; set; }
+        public string AsalTK { get; set; }
+        public string AsalKB { get; set; }
+        public string BakatKesenian { get; set; }
+        public string BakatOlahRaga { get; set; }
+        public string BakatKemasyarakatan { get; set; }
+        public string BakatLainLain { get; set; }
+        public string StatusHubunganDenganOrtu { get; set; }
+        public string StatusPernikahanOrtu { get; set; }
+        public string SiswaTinggalDengan { get; set; }
+        public string NamaAyah { get; set; }
+        public string TempatLahirAyah { get; set; }
+        public DateTime TanggalLahirAyah { get; set; }
+        public string AgamaAyah { get; set; }
+        public string SukuBangsaAyah { get; set; }
+        public string WargaNegaraAyah { get; set; }
+        public string PendidikanAyah { get; set; }
+        public string PendidikanAyahLainnya { get; set; }
+        public string JurusanPendidikanAyah { get; set; }
+        public string AlamatRumahAyah { get; set; }
+        public string NIKAyah { get; set; }
+        public string NoTelponAyah { get; set; }
+        public string EmailAyah { get; set; }
+        public string PekerjaanAyah { get; set; }
+        public string NamaInstansiAyah { get; set; }
+        public string NoTelponKantorAyah { get; set; }
+        public string AlamatKantorAyah { get; set; }
+        public string NamaIbu { get; set; }
+        public string TempatLahirIbu { get; set; }
+        public DateTime TanggalLahirIbu { get; set; }
+        public string AgamaIbu { get; set; }
+        public string SukuBangsaIbu { get; set; }
+        public string WargaNegaraIbu { get; set; }
+        public string PendidikanIbu { get; set; }
+        public string PendidikanIbuLainnya { get; set; }
+        public string JurusanPendidikanIbu { get; set; }
+        public string AlamatRumahIbu { get; set; }
+        public string NIKIbu { get; set; }
+        public string NoTelponIbu { get; set; }
+        public string EmailIbu { get; set; }
+        public string PekerjaanIbu { get; set; }
+        public string NamaInstansiIbu { get; set; }
+        public string NoTelponKantorIbu { get; set; }
+        public string AlamatKantorIbu { get; set; }
+        public string NamaKontakDarurat { get; set; }
+        public string HubunganKontakDarurat { get; set; }
+        public string NoTelponKontakDarurat { get; set; }
+        public string AlamatKontakDarurat { get; set; }
+        public string Catatan { get; set; }
+        public bool IsTinggalDgAyahKandung { get; set; }
+        public bool IsTinggalDgIbuKandung { get; set; }
+        public bool IsTinggalDgAyahTiri { get; set; }
+        public bool IsTinggalDgIbuTiri { get; set; }
+        public bool IsTinggalDgKakek { get; set; }
+        public bool IsTinggalDgNenek { get; set; }
+        public bool IsTinggalDgKakak { get; set; }
+        public bool IsTinggalDgAdik { get; set; }
+        public string TinggalDenganLainnya { get; set; }
+    }
+}

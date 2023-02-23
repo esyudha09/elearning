@@ -1,0 +1,1 @@
+﻿<%@ ServiceHost Language="C#" Debug="true" Service="AI_ERP.APIs.Elearning.SMA.StrukturNilai.DoSaveDeskripsi" CodeBehind="DoSaveDeskripsi.svc.cs" %>

@@ -1,0 +1,13 @@
+/*This file is only needed for demo purposes in demo/ subdirectory */
+
+body {
+  margin: 0;
+  font-family: Verdana, Helvetica, Arial, FreeSans, sans-serif;
+  color: #454545;
+  min-width: 700px;
+  position: fixed;
+  left: 0px;
+  top: 0px;
+  bottom: 40px; 
+  right: 0px;
+}
