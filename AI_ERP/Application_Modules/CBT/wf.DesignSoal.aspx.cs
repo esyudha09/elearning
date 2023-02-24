@@ -30,7 +30,8 @@ namespace AI_ERP.Application_Modules.CBT
             DoSearch,
             DoShowData,
             DoChangePage,
-            DoShowConfirmHapus
+            DoShowConfirmHapus,
+            ViewSoal
         }
 
         private static class QS
@@ -239,13 +240,30 @@ namespace AI_ERP.Application_Modules.CBT
 
 
 
-        protected void btnDoAdd_Click(object sender, EventArgs e)
+        protected void btnDoAddSoal_Click(object sender, EventArgs e)
         {
             //InitFields();
             txtKeyAction.Value = JenisAction.Add.ToString();
             BindListBankSoalView();
             //var urlInput = Libs.GetQueryString("m");
             //Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?m=" + urlInput));
+        }
+        
+        protected void btnDoViewSoal_Click(object sender, EventArgs e)
+        {
+            //InitFields();
+            txtKeyAction.Value = JenisAction.ViewSoal.ToString();
+            //BindListBankSoalView();
+            //var urlInput = Libs.GetQueryString("m");
+            //Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?m=" + urlInput));
+        }
+
+        protected void btnDoAddNewSoal_Click(object sender, EventArgs e)
+        {
+            //InitFields();
+           
+            var urlInput = Libs.GetQueryString("m");
+            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?m=" + urlInput));
         }
 
         protected void lnkOKHapus_Click(object sender, EventArgs e)
@@ -292,11 +310,12 @@ namespace AI_ERP.Application_Modules.CBT
                 txtKeyAction.Value = ex.Message;
             }
         }
-
-        protected void btnShowDetail_Click(object sender, EventArgs e)
+            
+        protected void btnShowSoalDetail_Click(object sender, EventArgs e)
         {
-            var urlInput = Libs.GetQueryString("m");
-            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?id=" + txtID.Value + "&m=" + urlInput));
+            var mapel = Libs.GetQueryString("m");
+            var id = (sender as LinkButton).CommandArgument.ToString();
+            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?id=" + id + "&m=" + mapel));
         }
 
         protected void btnDoCari_Click(object sender, EventArgs e)

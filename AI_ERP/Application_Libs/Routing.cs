@@ -1565,6 +1565,14 @@ namespace AI_ERP.Application_Libs
 
                         public static string RouteName { get { return GetRouteName(ROUTE); } }
                     }
+                    public static class SOAL_VIEW
+                    {
+                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
+                        public const string ROUTE = "~/cbt/sv";
+                        public const string FILE = "~/Application_Modules/CBT/wf.BankSoal.View.aspx";
+
+                        public static string RouteName { get { return GetRouteName(ROUTE); } }
+                    }
 
                     public static class SOAL_INPUT
                     {

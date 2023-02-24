@@ -853,6 +853,11 @@ namespace AI_ERP
              Routing.URL.APPLIACTION_MODULES.CBT.DESIGN_SOAL.RouteName,
              Routing.URL.APPLIACTION_MODULES.CBT.DESIGN_SOAL.FILE
          );
+            RouteTable.Routes.MapPageRoute(
+             "CBT_SOAL_VIEW",
+             Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.RouteName,
+             Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.FILE
+         );
 
             RouteTable.Routes.MapHubs();
         }

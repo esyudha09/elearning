@@ -60,6 +60,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.HiddenField id_login;
 
         /// <summary>
+        /// txtSoalID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField txtSoalID;
+
+        /// <summary>
         /// btnDoCari control.
         /// </summary>
         /// <remarks>
@@ -67,15 +76,6 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDoCari;
-
-        /// <summary>
-        /// btnShowDetail control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnShowDetail;
 
         /// <summary>
         /// btnShowConfirmDelete control.
@@ -157,6 +157,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnDoAdd;
+
+        /// <summary>
+        /// LinkButton1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
         /// btnBack control.

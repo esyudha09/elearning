@@ -911,7 +911,7 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
                                                                             "?m=" + Libs.GetQueryString("m") + "&u=" + Libs.GetQueryString("u") + "&kp=" + m.Kode+  "&kur='KURTILAS'" + "&nama=" + Libs.GetHTMLSimpleText(m_kp.Nama) +
                                                                             "\" " +
                                                                     "style=\"margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-left: 7px; padding-right: 7px; margin-top: 2px;\">" +
-                                                                    "<i class=\"fa fa-folder-open\"></i> Create" +
+                                                                    "<i class=\"fa fa-home\"></i> Rumah Soal " +
                                                                 "</a>" +
                                                         "</td>";
                                                 html += "<td style=\"background-color: white;\">" +
@@ -1813,7 +1813,18 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
 
 
 
-
+        protected void btnBackToMapel_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.ROUTE // + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                        )
+                );
+        }
 
 
 

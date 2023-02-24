@@ -1197,6 +1197,7 @@
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\I-B.jpg" />
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\I-C.jpg" />
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\KEPSEK_SD.jpg" />
+    <Content Include="Application_Modules\CBT\wf.BankSoal.View.aspx" />
     <Content Include="Application_Modules\CBT\wf.DesignSoal.aspx" />
     <Content Include="Application_Modules\CBT\wf.RumahSoal.Input.aspx" />
     <Content Include="Application_Modules\CBT\wf.BankSoal.Input.aspx" />
@@ -1785,6 +1786,7 @@
       <DependentUpon>dsRapor.xsd</DependentUpon>
     </Content>
     <Content Include="Application_Files\Rekap Presensi Siswa 22 Sep 2021 - 24 Sep 2021.xlsx" />
+    <Content Include="Application_Masters\Second.Master" />
     <None Include="Properties\PublishProfiles\AI_ERP.pubxml" />
     <None Include="Service References\svcFileFoto\FileFoto.disco" />
     <None Include="Service References\svcFileFoto\configuration91.svcinfo" />
@@ -2755,12 +2757,26 @@
     <Compile Include="Application_Libs\Routing.cs" />
     <Compile Include="Application_Libs\RoutingData.cs" />
     <Compile Include="Application_Libs\UserManagementSettings.cs" />
+    <Compile Include="Application_Masters\Second.Master.cs">
+      <DependentUpon>Second.Master</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application_Masters\Second.Master.designer.cs">
+      <DependentUpon>Second.Master</DependentUpon>
+    </Compile>
     <Compile Include="Application_Masters\Main.Master.cs">
       <DependentUpon>Main.Master</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
     <Compile Include="Application_Masters\Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.BankSoal.View.aspx.cs">
+      <DependentUpon>wf.BankSoal.View.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.BankSoal.View.aspx.designer.cs">
+      <DependentUpon>wf.BankSoal.View.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application_Modules\CBT\wf.DesignSoal.aspx.cs">
       <DependentUpon>wf.DesignSoal.aspx</DependentUpon>

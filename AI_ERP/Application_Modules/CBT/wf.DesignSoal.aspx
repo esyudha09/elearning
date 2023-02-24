@@ -14,6 +14,13 @@
             document.location.href = url;
         }
 
+        function GoToURL2(url) {
+            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
+width=0,height=0,left=-1000,top=-1000`;
+
+            open(url, 'test', params);
+        }
+
         function HideModal() {
             $('#ui_modal_input_data').modal('hide');
             $('#ui_modal_confirm_hapus').modal('hide');
@@ -38,6 +45,9 @@
                     break;
                 case "<%= JenisAction.Add %>":
                     $('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
+                    break;
+                case "<%= JenisAction.ViewSoal %>":
+                    $('#ui_modal_input_data2').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.AddWithMessage %>":
                     HideModal();
@@ -144,7 +154,7 @@
         }
 
     </script>
-   
+
     <script>
         $(document).ready(function () {
             //$(".btnBack").delegate('tr', 'click', function () {
@@ -172,14 +182,15 @@
 
     <asp:UpdatePanel runat="server" ID="upMain">
         <ContentTemplate>
-            
+
             <asp:HiddenField runat="server" ID="txtKeyAction" />
             <asp:HiddenField runat="server" ID="txtID" />
             <asp:HiddenField runat="server" ID="id_login" />
+            <asp:HiddenField runat="server" ID="txtSoalID" />
 
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCari" OnClick="btnDoCari_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
-            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowDetail" OnClick="btnShowDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
+            <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowSoalDetail" OnClick="btnShowSOALDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
@@ -249,17 +260,17 @@
                                                                             </a>
                                                                             <ul class="dropdown-menu-list-table">
                                                                                 <li style="background-color: white; padding: 10px;">
-                                                                                    <label
-                                                                                        onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>'; <%= btnShowDetail.ClientID %>.click(); "
+                                                                                    <%--<label
+                                                                                        onclick="<%= txtSoalID.ClientID %>.value = '<%# Eval("Rel_BankSoal").ToString() %>'; <%= btnShowDetail.ClientID %>.click(); "
                                                                                         id="btnDetail" style="color: #114D79; cursor: pointer; padding-left: 5px; padding-right: 5px; font-weight: bold;">
-                                                                                        <i class="fa fa-info-circle" title=" Lihat Detail "></i>&nbsp;&nbsp;&nbsp;Lihat Detail</label>
+                                                                                        <i class="fa fa-info-circle" title=" Lihat Detail "></i>&nbsp;&nbsp;&nbsp;Lihat Detail</label>--%>
                                                                                 </li>
                                                                                 <li style="padding: 0px;">
                                                                                     <hr style="margin: 0px; padding: 0px;" />
                                                                                 </li>
                                                                                 <li style="background-color: white; padding: 10px;">
                                                                                     <label
-                                                                                        onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>'; <%= btnShowConfirmDelete.ClientID %>.click(); "
+                                                                                        onclick="<%= txtSoalID.ClientID %>.value = '<%# Eval("Kode").ToString() %>'; <%= btnShowConfirmDelete.ClientID %>.click(); "
                                                                                         id="btnHapus" style="color: #9E0000; cursor: pointer; padding-left: 5px; padding-right: 5px; font-weight: bold;">
                                                                                         <i class="fa fa-times" title=" Hapus Data "></i>&nbsp;&nbsp;&nbsp;Hapus Data</label>
                                                                                 </li>
@@ -375,8 +386,12 @@
                                                             <span class="fbtn-text fbtn-text-left">Refresh Data</span>
                                                             <i class="fa fa-refresh"></i>
                                                         </asp:LinkButton>
-                                                        <asp:LinkButton ToolTip=" Tambah Data " runat="server" ID="btnDoAdd" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnDoAdd_Click">
-                                                            <span class="fbtn-text fbtn-text-left">Tambah Data</span>
+                                                        <asp:LinkButton ToolTip=" Tambah Data " runat="server" ID="btnDoAdd" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnDoAddSoal_Click">
+                                                            <span class="fbtn-text fbtn-text-left">Dari Bank Soal</span>
+                                                            <i class="fa fa-plus" style="color: white;"></i>
+                                                        </asp:LinkButton>
+                                                        <asp:LinkButton ToolTip=" Tambah Data " runat="server" ID="LinkButton1" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnDoAddNewSoal_Click">
+                                                            <span class="fbtn-text fbtn-text-left">Buat Soal Baru</span>
                                                             <i class="fa fa-plus" style="color: white;"></i>
                                                         </asp:LinkButton>
                                                         <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnBack" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnBackToMenu_Click">
@@ -439,7 +454,9 @@
 
                                                                                             <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Soal
                                                                                             </th>
-                                                                                            
+                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Jenis
+                                                                                            </th>
+
                                                                                             <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;"></th>
 
                                                                                         </tr>
@@ -457,23 +474,50 @@
                                                                                 </td>
 
                                                                                 <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-
                                                                                     <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
-                                                                                        <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
+                                                                                        <%#     (Eval("Soal").ToString().Length > 100) ? 
+                                                                                                (AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString().Substring(0,100) + "...")) : 
+                                                                                                 AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
                                                                                         %>
+                                                                                       
                                                                                     </span>
                                                                                 </td>
-                                                                               
-                                                                                <td style="width: 10px; font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-                                                                                    <asp:linkbutton ToolTip=" Tambah Soal " runat="server" ID="tes" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect"
+                                                                                <td>
+
+                                                                                    <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
+                                                                                        <%#     
+                                                                                                 AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Jenis").ToString())
+                                                                                        %>
+                                                                                       
+                                                                                    </span>
+
+                                                                                </td>
+
+                                                                                <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: right;">
+                                                                                    <label
+                                                                                        onclick="GoToURL2('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetQueryString("m")%>&id=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%> ');"
+                                                                                        
+                                                                                        
+                                                                                       
+                                                                                        title=" Lihat Data Soal" class="btn btn-brand">
+                                                                                        <i class="fa fa-eye"></i>
+                                                                                    </label>
+
+                                                                                    <%--<button tooltip=" Lihat Soal " runat="server" id="detailSoal" cssclass="btn btn-orange"
+                                                                                        commandargument='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%>'
+                                                                                        onclick="btnDoViewSoal_Click">
+
+                                                                                        <span class="fbtn-text fbtn-text-left">Lihat Soal</span>
+                                                                                        <i class="fa fa-eye"></i>
+                                                                                    </button>--%>
+                                                                                    <asp:LinkButton ToolTip=" Tambah Soal " runat="server" ID="addSoal" CssClass="btn btn-green  "
                                                                                         CommandArgument='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%>'
-                                                                                        OnClick="lnkOKInput_Click"
-                                                                                        Style="background-color: #257228;">
+                                                                                        OnClick="lnkOKInput_Click">
+                                                                                      
                                                                                         <span class="fbtn-text fbtn-text-left">Tambah Soal</span>
                                                                                         <i class="fa fa-plus"></i>
-                                                                                    </asp:linkbutton>
-                                                                                   
+                                                                                    </asp:LinkButton>
+
                                                                                 </td>
 
                                                                             </tr>
@@ -569,6 +613,53 @@
                                                                 </div>--%>
                                                             </asp:View>
                                                         </asp:MultiView>
+
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-right">
+                                <%--<asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>--%>
+                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
+                                <br />
+                                <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div aria-hidden="true" class="modal fade" id="ui_modal_input_data2" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                        <div class="modal-inner"
+                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
+                            <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal"><i class="fa fa-close"></i></a>
+                            <div style="width: 100%;">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        <div class="" style="padding: 0px;">
+                                            <div class="card" style="margin-top: 0px;">
+                                                <div class="card-main">
+                                                    <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
+                                                        <table style="width: 100%;">
+
+                                                            <tr>
+                                                                <td style="background-color: #295BC8; padding: 0px;">
+                                                                    <hr style="margin: 0px; border-style: solid; border-width: 1px; border-color: #2555BE;" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
+
+
 
                                                     </div>
                                                 </div>
