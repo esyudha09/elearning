@@ -111,7 +111,6 @@
             RenderDropDownOnTables();
             InitModalFocus();
             document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
-
             Sys.Browser.WebKit = {};
             if (navigator.userAgent.indexOf('WebKit/') > -1) {
                 Sys.Browser.agent = Sys.Browser.WebKit;
