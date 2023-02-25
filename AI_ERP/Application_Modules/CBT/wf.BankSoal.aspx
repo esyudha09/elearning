@@ -157,7 +157,6 @@
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                 <div class="col-xs-12">
-
                     <div class="col-md-8 col-md-offset-2" style="padding: 0px;">
                         <div class="card" style="margin-top: 40px;">
                             <div class="card-main">
