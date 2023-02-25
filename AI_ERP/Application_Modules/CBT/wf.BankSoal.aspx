@@ -120,8 +120,7 @@
             }
         }
 
-        function InitModalFocus() {
-          
+        function InitModalFocus() {         
         }
 
         function TriggerSave() {
