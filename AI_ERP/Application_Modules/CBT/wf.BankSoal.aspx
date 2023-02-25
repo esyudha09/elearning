@@ -136,7 +136,6 @@
 
     <asp:UpdatePanel runat="server" ID="upMain">
         <ContentTemplate>
-
             <asp:HiddenField runat="server" ID="txtKeyAction" />
             <asp:HiddenField runat="server" ID="txtID" />
             <asp:HiddenField runat="server" ID="id_login" />
@@ -248,15 +247,15 @@
                                                                     %>
                                                                 </span>
                                                             </td>
-                                                          
-                                                          <td style="width:15px;font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
+
+                                                            <td style="width: 15px; font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
                                                                         AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Jenis").ToString())
                                                                     %>
                                                                 </span>
-                                                            </td>                                                                                                                        
-                                                            
+                                                            </td>
+
                                                         </tr>
                                                     </ItemTemplate>
                                                     <EmptyDataTemplate>
@@ -362,7 +361,7 @@
                 </div>
             </div>
 
-            
+
 
             <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_hapus" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
                 <div class="modal-dialog modal-xs">
