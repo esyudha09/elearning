@@ -121,14 +121,7 @@
         }
 
         function InitModalFocus() {
-           <%-- $('#ui_modal_input_data').on('shown.bs.modal', function () {
-                if (document.getElementById("<%= txtSoal.ClientID %>") !== undefined && document.getElementById("<%= txtSoal.ClientID %>") !== null) {
-                    document.getElementById("<%= txtJawaban.ClientID %>").focus();
-                }
-                else {
-                    document.getElementById("<%= txtSoal.ClientID %>").focus();
-                }
-            });--%>
+          
         }
 
         function TriggerSave() {
