@@ -31,7 +31,8 @@ namespace AI_ERP.Application_Modules.CBT
             DoShowData,
             DoChangePage,
             DoShowConfirmHapus,
-            ViewSoal
+            ViewSoal,
+            DoShowUpdateSkor
         }
 
         private static class QS
@@ -422,6 +423,15 @@ namespace AI_ERP.Application_Modules.CBT
                 );
         }
 
+        protected void btnUpdateSkor_Click(object sender, EventArgs e)
+        {
+            if (txtID.Value.Trim() != "")
+            {
+                txtSkorUpdate.Text = txtSkorVal.Value;
+                txtKeyAction.Value = JenisAction.DoShowUpdateSkor.ToString();
+            }
+
+        }
 
     }
 }

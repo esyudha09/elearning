@@ -110,6 +110,9 @@
                         }
                     });
                     break;
+                case "<%= JenisAction.DoShowUpdateSkor %>":
+                    $('#ui_modal_update_skor').modal({ backdrop: 'static', keyboard: false, show: true });
+                    break;
                 default:
                     HideModal();
                     if (jenis_act.trim() != "") {
@@ -188,11 +191,15 @@
             <asp:HiddenField runat="server" ID="txtID" />
             <asp:HiddenField runat="server" ID="id_login" />
             <asp:HiddenField runat="server" ID="txtSoalID" />
+            <asp:HiddenField runat="server" ID="txtSkorVal" />
+
+
 
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCari" OnClick="btnDoCari_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCariSoal" OnClick="btnDoCariSoal_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowSoalDetail" OnClick="btnShowSOALDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
+            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnUpdateSkor" OnClick="btnUpdateSkor_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
@@ -303,9 +310,13 @@
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-                                                                <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
-                                                                    <asp:TextBox runat="server" ID="txtSkor" style="width:30px"/>                                                                                                                                
-                                                                  
+                                                                <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;" >
+                                                                    <%# 
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Skor").ToString())
+                                                                    %>  &nbsp;                                                                                                                          
+                                                                  <i class="fa fa-edit" onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>';<%= txtSkorVal.ClientID %>.value = '<%# Eval("Skor").ToString() %>'; <%= btnUpdateSkor.ClientID %>.click(); "></i>
+                                                                </span>
+                                                                <%--<asp:TextBox ValidationGroup="vldInput" CssClass="form-control" runat="server" ID="txtSkorUpdate"></asp:TextBox>--%>
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -683,99 +694,150 @@
                         </div>
                     </div>
                 </div>
+            </div>
+            <div aria-hidden="true" class="modal fade" id="ui_modal_input_data2" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
+                <div class="modal-dialog modal-lg">
+                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                        <div class="modal-inner"
+                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
+                            <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal"><i class="fa fa-close"></i></a>
+                            <div style="width: 100%;">
+                                <div class="row">
+                                    <div class="col-lg-12">
 
-                <div aria-hidden="true" class="modal fade" id="ui_modal_input_data2" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
-                    <div class="modal-dialog modal-lg">
-                        <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-                            <div class="modal-inner"
-                                style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
-                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal"><i class="fa fa-close"></i></a>
-                                <div style="width: 100%;">
-                                    <div class="row">
-                                        <div class="col-lg-12">
+                                        <div class="" style="padding: 0px;">
+                                            <div class="card" style="margin-top: 0px;">
+                                                <div class="card-main">
+                                                    <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
+                                                        <table style="width: 100%;">
 
-                                            <div class="" style="padding: 0px;">
-                                                <div class="card" style="margin-top: 0px;">
-                                                    <div class="card-main">
-                                                        <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
-                                                            <table style="width: 100%;">
-
-                                                                <tr>
-                                                                    <td style="background-color: #295BC8; padding: 0px;">
-                                                                        <hr style="margin: 0px; border-style: solid; border-width: 1px; border-color: #2555BE;" />
-                                                                    </td>
-                                                                </tr>
-                                                            </table>
+                                                            <tr>
+                                                                <td style="background-color: #295BC8; padding: 0px;">
+                                                                    <hr style="margin: 0px; border-style: solid; border-width: 1px; border-color: #2555BE;" />
+                                                                </td>
+                                                            </tr>
+                                                        </table>
 
 
 
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-right">
+                                <%--<asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>--%>
+                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
+                                <br />
+                                <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_hapus" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
+                <div class="modal-dialog modal-xs">
+                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                        <div class="modal-inner"
+                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
+                            <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
+                                <div class="media-object margin-right-sm pull-left">
+                                    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
+                                </div>
+                                <div class="media-inner">
+                                    <span style="font-weight: bold;">Konfirmasi
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="width: 100%;">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        <div style="width: 100%; background-color: white; padding-top: 15px;">
+                                            <div class="row" style="margin-left: 15px; margin-right: 15px;">
+                                                <div class="col-xs-12">
+                                                    <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
+                                                        <div class="col-xs-12">
+                                                            <asp:Literal runat="server" ID="ltrMsgConfirmHapus"></asp:Literal>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <p class="text-right">
-                                    <%--<asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>--%>
-                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
-                                    <br />
-                                    <br />
-                                </p>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-right">
+                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKHapus" OnClick="lnkOKHapus_Click" Text="  OK  "></asp:LinkButton>
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
+                                <br />
+                                <br />
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
 
-                <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_hapus" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
-                    <div class="modal-dialog modal-xs">
-                        <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-                            <div class="modal-inner"
-                                style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
-                                <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
-                                    <div class="media-object margin-right-sm pull-left">
-                                        <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
-                                    </div>
-                                    <div class="media-inner">
-                                        <span style="font-weight: bold;">Konfirmasi
-                                        </span>
-                                    </div>
+
+
+            <div aria-hidden="true" class="modal fade" id="ui_modal_update_skor" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
+                <div class="modal-dialog modal-xs">
+                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                        <div class="modal-inner"
+                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
+                            <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
+                                <div class="media-object margin-right-sm pull-left">
+                                    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
                                 </div>
-                                <div style="width: 100%;">
-                                    <div class="row">
-                                        <div class="col-lg-12">
+                                <div class="media-inner">
+                                    <span style="font-weight: bold;">Update Skor
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="width: 100%;">
+                                <div class="row">
+                                    <div class="col-lg-12">
 
-                                            <div style="width: 100%; background-color: white; padding-top: 15px;">
-                                                <div class="row" style="margin-left: 15px; margin-right: 15px;">
-                                                    <div class="col-xs-12">
-                                                        <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
-                                                            <div class="col-xs-12">
-                                                                <asp:Literal runat="server" ID="ltrMsgConfirmHapus"></asp:Literal>
+                                        <div style="width: 100%; background-color: white; padding-top: 15px;">
+                                            <div class="row" style="margin-left: 15px; margin-right: 15px;">
+                                                <div class="col-xs-12">
+                                                    <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                                                <label class="label-input" for="<%= txtSkorUpdate.ClientID %>" style="text-transform: none;">Skor :</label>
+                                                                <asp:TextBox ValidationGroup="vldInput" CssClass="form-control " runat="server" ID="txtSkorUpdate"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
-                            <div class="modal-footer">
-                                <p class="text-right">
-                                    <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKHapus" OnClick="lnkOKHapus_Click" Text="  OK  "></asp:LinkButton>
-                                    <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
-                                    <br />
-                                    <br />
-                                </p>
-                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-right">
+                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton6" Text="  OK  "></asp:LinkButton>
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
+                                <br />
+                                <br />
+                            </p>
                         </div>
                     </div>
                 </div>
+            </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="btnRefresh" />
