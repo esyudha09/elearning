@@ -369,12 +369,25 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-        protected void btnBackToMenu_Click(object sender, EventArgs e)
+        protected void btnBackToSoal_Click(object sender, EventArgs e)
         {
             Response.Redirect(
                     ResolveUrl(
                             Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE +
                             QS.GetURLVariable()
+                        )
+                );
+        }
+
+        protected void btnBackToMapel_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.ROUTE // + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
                         )
                 );
         }

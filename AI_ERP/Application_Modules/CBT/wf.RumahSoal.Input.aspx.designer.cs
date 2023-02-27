@@ -204,22 +204,31 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_button_settings;
 
         /// <summary>
-        /// btnDoAdd control.
+        /// btnSoal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnDoAdd;
+        protected global::System.Web.UI.WebControls.LinkButton btnSoal;
 
         /// <summary>
-        /// btnBack control.
+        /// LinkButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBack;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
+        /// <summary>
+        /// LinkButton2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
 
         /// <summary>
         /// Master property.

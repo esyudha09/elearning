@@ -9,7 +9,7 @@
         var currentValue = 0;
 
 
-        
+
         function GoToURL(url) {
             document.location.href = url;
         }
@@ -111,7 +111,6 @@
             RenderDropDownOnTables();
             InitModalFocus();
             document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
-
             Sys.Browser.WebKit = {};
             if (navigator.userAgent.indexOf('WebKit/') > -1) {
                 Sys.Browser.agent = Sys.Browser.WebKit;
@@ -121,14 +120,6 @@
         }
 
         function InitModalFocus() {
-           <%-- $('#ui_modal_input_data').on('shown.bs.modal', function () {
-                if (document.getElementById("<%= txtSoal.ClientID %>") !== undefined && document.getElementById("<%= txtSoal.ClientID %>") !== null) {
-                    document.getElementById("<%= txtJawaban.ClientID %>").focus();
-                }
-                else {
-                    document.getElementById("<%= txtSoal.ClientID %>").focus();
-                }
-            });--%>
         }
 
         function TriggerSave() {
@@ -145,7 +136,6 @@
 
     <asp:UpdatePanel runat="server" ID="upMain">
         <ContentTemplate>
-
             <asp:HiddenField runat="server" ID="txtKeyAction" />
             <asp:HiddenField runat="server" ID="txtID" />
             <asp:HiddenField runat="server" ID="id_login" />
@@ -157,7 +147,6 @@
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                 <div class="col-xs-12">
-
                     <div class="col-md-8 col-md-offset-2" style="padding: 0px;">
                         <div class="card" style="margin-top: 40px;">
                             <div class="card-main">
@@ -258,15 +247,15 @@
                                                                     %>
                                                                 </span>
                                                             </td>
-                                                          
-                                                          <td style="width:15px;font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
+
+                                                            <td style="width: 15px; font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
                                                                         AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Jenis").ToString())
                                                                     %>
                                                                 </span>
-                                                            </td>                                                                                                                        
-                                                            
+                                                            </td>
+
                                                         </tr>
                                                     </ItemTemplate>
                                                     <EmptyDataTemplate>
@@ -303,7 +292,7 @@
                                             <asp:SqlDataSource ID="sql_ds" runat="server"></asp:SqlDataSource>
 
                                             <div class="content-header ui-content-header"
-                                                style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
+                                                style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 10; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
 
                                                 <div style="padding-left: 15px;">
                                                     <asp:DataPager ID="dpData" runat="server" PageSize="100" PagedControlID="lvData">
@@ -349,16 +338,23 @@
                                                         <asp:LinkButton ToolTip=" Tambah Data " runat="server" ID="btnDoAdd" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnDoAdd_Click">
                                                             <span class="fbtn-text fbtn-text-left">Tambah Data</span>
                                                             <i class="fa fa-plus" style="color: white;"></i>
-                                                        </asp:LinkButton>
-                                                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnBack" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnBackToMenu_Click">
-                                                            <span class="fbtn-text fbtn-text-left">Data Mata Pelajaran</span>
-                                                            <i class="fa fa-arrow-left"></i>
-                                                        </asp:LinkButton>
+                                                        </asp:LinkButton>                                                      
                                                     </div>
 
                                                 </div>
                                             </div>
-
+                                            <div class="content-header ui-content-header"
+                                                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 450px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                <div style="padding-left: 0px;">
+                                                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1"
+                                                        OnClick="btnBackToMapel_Click"
+                                                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Mata Pelajaran
+                                                    </asp:LinkButton>
+                                                </div>
+                                            </div>
                                         </asp:View>
                                     </asp:MultiView>
 
@@ -372,7 +368,7 @@
                 </div>
             </div>
 
-            
+
 
             <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_hapus" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
                 <div class="modal-dialog modal-xs">

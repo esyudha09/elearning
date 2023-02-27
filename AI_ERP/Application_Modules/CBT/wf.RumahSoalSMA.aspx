@@ -1290,7 +1290,7 @@
                 style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 250px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                 <div style="padding-left: 0px;">
                     <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2" 
-                        onclick="btnBackToMapel_Click"
+                        onclick="btnBackToKelas_Click"
                         CssClass="btn-trans waves-attach waves-circle waves-effect"  Style="font-weight: bold; color: ghostwhite;">
                                                         &nbsp;&nbsp;
                                                         <i class="fa fa-arrow-left"></i>

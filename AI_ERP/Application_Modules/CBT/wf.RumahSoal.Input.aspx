@@ -25,8 +25,8 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_deskripsi",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
+                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight |  numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
                 mergetags_list: [
@@ -206,6 +206,7 @@
 
         function TriggerSave() {
             tinyMCE.triggerSave();
+            document.getElementById("<%= btnSoal.ClientID %>").style.display = 'block';
         }
     </script>
 </asp:Content>
@@ -404,20 +405,45 @@
                         <span class="fbtn-sub icon"><span class="fa fa-cogs"></span></span>
                     </a>
                     <div class="fbtn-dropup" style="z-index: 999999;">
-                    
-                        <asp:LinkButton  runat="server" ID="btnDoAdd" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnSoal_Click">
+
+                        <asp:LinkButton runat="server" ID="btnSoal" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;display:none" OnClick="btnSoal_Click">
                                                             <span class="fbtn-text fbtn-text-left">Pengaturan Soal</span>
                                                             <i class="fa fa-plus" style="color: white;"></i>
                         </asp:LinkButton>
-                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnBack" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnBackToMenu_Click">
+                        <%--<asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnBack" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnBackToMenu_Click">
                                                             <span class="fbtn-text fbtn-text-left">Kembali</span>
                                                             <i class="fa fa-arrow-left"></i>
-                        </asp:LinkButton>
+                        </asp:LinkButton>--%>
                     </div>
 
                 </div>
             </div>
-            
+
+            <div class="content-header ui-content-header"
+                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 260px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                <div style="padding-left: 0px;">
+                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1"
+                        OnClick="btnBackToMapel_Click"
+                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Mata Pelajaran
+                    </asp:LinkButton>
+                </div>
+            </div>
+            <div class="content-header ui-content-header"
+                style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 110px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                <div style="padding-left: 0px;">
+                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2"
+                        OnClick="btnBackToKelas_Click"
+                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Kelas
+                    </asp:LinkButton>
+                </div>
+            </div>
+
         </ContentTemplate>
         <Triggers>
         </Triggers>

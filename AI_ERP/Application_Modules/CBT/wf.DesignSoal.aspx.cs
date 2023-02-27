@@ -116,6 +116,7 @@ namespace AI_ERP.Application_Modules.CBT
 
             string sKeyEnter = "if(event.keyCode == 13){";
             this.Master.txtCariData.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + btnDoCari.ClientID + "').click(); return false; }");
+            ///txtCariData.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + btnDoCariSoal.ClientID + "').click(); return false; }");
             //cboUnit.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + txtNama.ClientID + "').focus(); return false; }");
             //txtSoal.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + txtSoal.ClientID + "').focus(); return false; }");
             //txtJwbEssay.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + txtSoal.ClientID + "').focus(); return false; }");
@@ -238,11 +239,10 @@ namespace AI_ERP.Application_Modules.CBT
             BindListView(true, "");
         }
 
-
-
         protected void btnDoAddSoal_Click(object sender, EventArgs e)
         {
             //InitFields();
+            txtCariSoal.Text = string.Empty;
             txtKeyAction.Value = JenisAction.Add.ToString();
             BindListBankSoalView();
             //var urlInput = Libs.GetQueryString("m");
@@ -324,6 +324,21 @@ namespace AI_ERP.Application_Modules.CBT
             dpData.SetPageProperties(0, dpData.MaximumRows, true);
             BindListView(true, this.Master.txtCariData.Text);
         }
+        
+        protected void btnDoCariSoal_Click(object sender, EventArgs e)
+        {
+            this.Session[SessionViewDataName] = 0;
+            dpDataBs.SetPageProperties(0, dpData.MaximumRows, true);
+            
+            BindListBankSoalView(true,txtCariSoal.Text);
+            txtKeyAction.Value = JenisAction.Add.ToString();
+        }
+
+        //public TextBox txtCariData
+        //{
+        //    get { return txt; }
+        //    set { txtCari = value; }
+        //}
 
         protected void btnShowConfirmDelete_Click(object sender, EventArgs e)
         {
@@ -341,23 +356,12 @@ namespace AI_ERP.Application_Modules.CBT
                     }
                 }
             }
-        }
-
-        protected void btnBackToMenu_Click(object sender, EventArgs e)
-        {
-            var m = Libs.GetQueryString("m");
-            var kp = Libs.GetQueryString("kp");
-            var kur = Libs.GetQueryString("kur");
-            var unit = Libs.GetQueryString("u");
-            Response.Redirect(
-                    ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
-                        )
-                );
-        }
+        } 
 
         private void BindListBankSoalView(bool isbind = true, string keyword = "")
         {
+         
+
             Sql_dsbs.ConnectionString = Libs.GetConnectionString_ERP();
             Sql_dsbs.SelectCommandType = SqlDataSourceCommandType.StoredProcedure;
 
@@ -377,6 +381,45 @@ namespace AI_ERP.Application_Modules.CBT
             }
 
             if (isbind) lvDataBs.DataBind();
+        }
+
+        protected void btnBackToMapel_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.ROUTE // + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                        )
+                );
+        }
+
+        protected void btnBackToKelas_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?&m=" + m + "&u=" + unit
+                        )
+                );
+        }
+
+        protected void btnBackToFormRumahSoal_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                        )
+                );
         }
 
 

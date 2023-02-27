@@ -103,7 +103,7 @@ namespace AI_ERP.Application_Modules.CBT
                 }
             }
 
-           
+
 
 
         }
@@ -149,45 +149,26 @@ namespace AI_ERP.Application_Modules.CBT
 
 
 
-        protected void lvData_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
-        {
-            this.Session[SessionViewDataName] = e.StartRowIndex;
-            txtKeyAction.Value = JenisAction.DoChangePage.ToString();
-        }
-
-
-        protected void InitFields()
-        {
-            txtID.Value = "";
-            txtSoal.Text = "";
-            txtJwbEssay.Text = "";
-            txtJwbGanda1.Text = "";
-            txtJwbGanda2.Text = "";
-            txtJwbGanda3.Text = "";
-            txtJwbGanda4.Text = "";
-            txtJwbGanda5.Text = "";
-            //chkEssay.Checked = false;
-            //chkGanda.Checked = false;
-        }
 
 
 
-        protected void lnkOKHapus_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                if (txtID.Value.Trim() != "")
-                {
-                    DAO_CBT_BankSoal.Delete(txtID.Value, Libs.LOGGED_USER_M.UserID);
+        //protected void InitFields()
+        //{
+        //    txtID.Value = "";
+        //    txtSoal.Text = "";
+        //    txtJwbEssay.Text = "";
+        //    txtJwbGanda1.Text = "";
+        //    txtJwbGanda2.Text = "";
+        //    txtJwbGanda3.Text = "";
+        //    txtJwbGanda4.Text = "";
+        //    txtJwbGanda5.Text = "";
+        //    //chkEssay.Checked = false;
+        //    //chkGanda.Checked = false;
+        //}
 
-                    txtKeyAction.Value = JenisAction.DoDelete.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                txtKeyAction.Value = ex.Message;
-            }
-        }
+
+
+
 
         protected void lnkOKInput_Click(object sender, EventArgs e)
         {
@@ -205,9 +186,9 @@ namespace AI_ERP.Application_Modules.CBT
                 //{
                 //    m.Jenis = "ganda";
                 //}
-                m.Soal = txtSoalVal.Value;
-                m.Jenis = cboJenis.SelectedValue;
-               
+
+                // m.Jenis = cboJenis.SelectedValue;
+
                 if (ChkJwbGanda1.Checked)
                 {
                     m.JwbGanda = "a";
@@ -233,43 +214,26 @@ namespace AI_ERP.Application_Modules.CBT
                     m.JwbGanda = "";
                 }
 
-                if (txtID.Value.Trim() != "")
-                {
-                    
-                    m.JwbEssay = txtJwbEssayVal.Value != "" ? txtJwbEssayVal.Value : txtJwbEssay.Text;
-                    m.JwbGanda1 = txtJwbGanda1Val.Value != "" ? txtJwbGanda1Val.Value : txtJwbGanda1.Text;
-                    m.JwbGanda2 = txtJwbGanda2Val.Value != "" ? txtJwbGanda2Val.Value : txtJwbGanda2.Text;
-                    m.JwbGanda3 = txtJwbGanda3Val.Value != "" ? txtJwbGanda3Val.Value : txtJwbGanda3.Text;
-                    m.JwbGanda4 = txtJwbGanda4Val.Value != "" ? txtJwbGanda4Val.Value : txtJwbGanda4.Text;
-                    m.JwbGanda5 = txtJwbGanda5Val.Value != "" ? txtJwbGanda5Val.Value : txtJwbGanda5.Text;
 
-                    m.Kode = new Guid(txtID.Value);
-                    DAO_CBT_BankSoal.Update(m, Libs.LOGGED_USER_M.UserID);
-                    getData(txtID.Value);
 
-                    txtKeyAction.Value = JenisAction.DoUpdate.ToString();
-                }
-                else
-                {
-                    
-                    m.JwbEssay = txtJwbEssay.Text;
-                    m.JwbGanda1 = txtJwbGanda1.Text;
-                    m.JwbGanda2 = txtJwbGanda2.Text;
-                    m.JwbGanda3 = txtJwbGanda3.Text;
-                    m.JwbGanda4 = txtJwbGanda4.Text;
-                    m.JwbGanda5 = txtJwbGanda5.Text;
+                m.JwbEssay = txtJwbEssay.Text;
+                m.JwbGanda1 = txtJwbGanda1.Text;
+                m.JwbGanda2 = txtJwbGanda2.Text;
+                m.JwbGanda3 = txtJwbGanda3.Text;
+                m.JwbGanda4 = txtJwbGanda4.Text;
+                m.JwbGanda5 = txtJwbGanda5.Text;
 
-                    DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
+                DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
 
-                    Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE + QS.GetURLVariable()));
+                Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE + QS.GetURLVariable()));
 
-                    //InitFields();
-                    // txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
-                }
+                //InitFields();
+                // txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
+
             }
             catch (Exception ex)
             {
-                txtKeyAction.Value = ex.Message;
+
             }
         }
 
@@ -281,9 +245,9 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 if (m.Soal != null)
                 {
-                    txtID.Value = m.Kode.ToString();
 
                     txtSoal.Text = m.Soal.ToString();
+                    //txtJenis.Text = m.Jenis.ToString();
                     txtJwbEssay.Text = m.JwbEssay.ToString();
                     txtJwbGanda1.Text = m.JwbGanda1.ToString();
                     txtJwbGanda2.Text = m.JwbGanda2.ToString();
@@ -291,15 +255,11 @@ namespace AI_ERP.Application_Modules.CBT
                     txtJwbGanda4.Text = m.JwbGanda4.ToString();
                     txtJwbGanda5.Text = m.JwbGanda5.ToString();
 
-                    txtSoalVal.Value = m.Soal.ToString();
-                    txtJwbEssayVal.Value = m.JwbEssay.ToString();
-                    txtJwbGanda1Val.Value = m.JwbGanda1.ToString();
-                    txtJwbGanda2Val.Value = m.JwbGanda2.ToString();
-                    txtJwbGanda3Val.Value = m.JwbGanda3.ToString();
-                    txtJwbGanda4Val.Value = m.JwbGanda4.ToString();
-                    txtJwbGanda5Val.Value = m.JwbGanda5.ToString();
 
-                    cboJenis.SelectedValue = m.Jenis.ToString();
+
+
+
+                    // cboJenis.SelectedValue = m.Jenis.ToString();
                     if (m.Jenis == "essay")
                     {
                         EssayDiv.Attributes.Add("style", "display:block");
@@ -344,7 +304,7 @@ namespace AI_ERP.Application_Modules.CBT
 
 
 
-        
+
 
         protected void btnBackToMenu_Click(object sender, EventArgs e)
         {
