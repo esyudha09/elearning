@@ -15,12 +15,20 @@
         }
 
         function GoToURL2(url) {
-            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,
-width=0,height=0,left=-1000,top=-1000`;
+            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
 
             open(url, 'test', params);
         }
 
+        function btnDoCariSoal(event) {
+            if (event.keyCode == 13) {
+                document.getElementById("<%= btnDoCariSoal.ClientID %>").click();
+                HideModal();
+                return true;
+            } else {
+                return false;
+            }
+        }
         function HideModal() {
             $('#ui_modal_input_data').modal('hide');
             $('#ui_modal_confirm_hapus').modal('hide');
@@ -157,19 +165,12 @@ width=0,height=0,left=-1000,top=-1000`;
 
     <script>
         $(document).ready(function () {
-            //$(".btnBack").delegate('tr', 'click', function () {
-            //    alert("You clicked my <tr>!");
-            //    //get <td> element values here!!??
+            //$("#txtCariSoal").keyup(function (event) {
+            //    alert("asdfa")
+            //    if (event.keyCode === 13) {
+            //        $("#myButton").click();
+            //    }
             //});
-            //function lnkOKInput_Click() {
-            //    alert("asdf")
-            //}
-            $("#ContentPlaceHolder1_lvDataBs_tes_0").click(function () {
-                alert("You clicked my <tr>!");
-
-
-
-            });
         });
     </script>
 </asp:Content>
@@ -190,6 +191,7 @@ width=0,height=0,left=-1000,top=-1000`;
 
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCari" OnClick="btnDoCari_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
+            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCariSoal" OnClick="btnDoCariSoal_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowSoalDetail" OnClick="btnShowSOALDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
 
@@ -302,10 +304,8 @@ width=0,height=0,left=-1000,top=-1000`;
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
-                                                                    <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Skor").ToString())
-                                                                    %>
-                                                                </span>
+                                                                    <asp:TextBox runat="server" ID="txtSkor" style="width:30px"/>                                                                                                                                
+                                                                  
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -343,10 +343,10 @@ width=0,height=0,left=-1000,top=-1000`;
                                             <asp:SqlDataSource ID="sql_ds" runat="server"></asp:SqlDataSource>
 
                                             <div class="content-header ui-content-header"
-                                                style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
+                                                style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 10; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
 
                                                 <div style="padding-left: 15px;">
-                                                    <asp:DataPager ID="dpData" runat="server" PageSize="100" PagedControlID="lvData">
+                                                    <asp:DataPager ID="dpData" runat="server" PageSize="10" PagedControlID="lvData">
                                                         <Fields>
                                                             <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowFirstPageButton="True" FirstPageText='&nbsp;<i class="fa fa-backward"></i>&nbsp;' ShowPreviousPageButton="True" PreviousPageText='&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;' ShowNextPageButton="false" />
                                                             <asp:TemplatePagerField>
@@ -394,12 +394,48 @@ width=0,height=0,left=-1000,top=-1000`;
                                                             <span class="fbtn-text fbtn-text-left">Buat Soal Baru</span>
                                                             <i class="fa fa-plus" style="color: white;"></i>
                                                         </asp:LinkButton>
-                                                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnBack" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnBackToMenu_Click">
+                                                        <%--  <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnBack" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnBackToMenu_Click">
                                                             <span class="fbtn-text fbtn-text-left">Rumah Soal</span>
                                                             <i class="fa fa-arrow-left"></i>
-                                                        </asp:LinkButton>
+                                                        </asp:LinkButton>--%>
                                                     </div>
 
+                                                </div>
+                                            </div>
+                                            <div class="content-header ui-content-header"
+                                                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 700px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                <div style="padding-left: 0px;">
+                                                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2"
+                                                        OnClick="btnBackToMapel_Click"
+                                                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Mata Pelajaran
+                                                    </asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="content-header ui-content-header"
+                                                style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 550px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                <div style="padding-left: 0px;">
+                                                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton3"
+                                                        OnClick="btnBackToKelas_Click"
+                                                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Kelas
+                                                    </asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="content-header ui-content-header"
+                                                style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 460px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                <div style="padding-left: 0px;">
+                                                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton4"
+                                                        OnClick="btnBackToFormRumahSoal_Click"
+                                                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Form Rumah Soal
+                                                    </asp:LinkButton>
                                                 </div>
                                             </div>
 
@@ -430,164 +466,176 @@ width=0,height=0,left=-1000,top=-1000`;
                                             <div class="card" style="margin-top: 0px;">
                                                 <div class="card-main">
                                                     <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
-                                                        <table style="width: 100%;">
+                                                        <%-- <table style="width: 100%;">
 
                                                             <tr>
                                                                 <td style="background-color: #295BC8; padding: 0px;">
                                                                     <hr style="margin: 0px; border-style: solid; border-width: 1px; border-color: #2555BE;" />
                                                                 </td>
                                                             </tr>
-                                                        </table>
+                                                        </table>--%>
 
-                                                        <asp:MultiView runat="server" ID="MultiView1" ActiveViewIndex="0">
-                                                            <asp:View runat="server" ID="View1">
 
-                                                                <div style="padding: 0px; margin: 0px;">
-                                                                    <asp:ListView ID="lvDataBs" DataSourceID="sql_dsbs" runat="server">
-                                                                        <LayoutTemplate>
-                                                                            <div class="table-responsive" style="margin: 0px; box-shadow: none;">
-                                                                                <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">
-                                                                                    <thead>
-                                                                                        <tr style="background-color: #3367d6;">
-                                                                                            <th style="text-align: center; font-weight: bold; color: white; background-color: #3367d6; vertical-align: middle; width: 80px;">#
-                                                                                            </th>
 
-                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Soal
-                                                                                            </th>
-                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Jenis
-                                                                                            </th>
+                                                        <div>
+                                                            <div id="div_Header2" class="textsearch" runat="server" style="margin: 0 auto; margin: 9px; padding-left: 10px; padding-right: 10px; width: 50%;">
+                                                                <div style="background-color: #5A5A5A; background-color: #F1F3F4; border-radius: 5px; padding: 2px; border-width: 1px; border-style: solid; border-color: #e1e1e1;">
+                                                                    <table style="width: 100%;">
+                                                                        <tr>
+                                                                            <td style="width: 30px; text-align: center; color: grey; background-color: #5A5A5A; background-color: #F1F3F4; padding-top: 0px; padding-bottom: 0px; padding-left: 5px; padding-right: 5px;">
+                                                                                <i class="fa fa-search"></i>
+                                                                            </td>
+                                                                            <td style="padding-left: 0px; background-color: #5A5A5A; background-color: #F1F3F4; padding-top: 3px; padding-bottom: 3px;">
+                                                                                <asp:TextBox title=" Cari Data " placeholder="Pencarian Cepat..." ID="txtCariSoal"
+                                                                                    onkeypress="btnDoCariSoal(event)" runat="server" Style="color: black; font-weight: bold; background: transparent; padding: 5px; border-style: none; width: 100%; border-radius: 5px; outline: none;"></asp:TextBox>
+                                                                            </td>
+                                                                        </tr>
+                                                                    </table>
+                                                                </div>
+                                                            </div>
 
-                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;"></th>
+                                                            <asp:MultiView runat="server" ID="MultiView1" ActiveViewIndex="0">
+                                                                <asp:View runat="server" ID="View1">
+                                                                    <div style="padding: 0px; margin: 0px;">
+                                                                        <asp:ListView ID="lvDataBs" DataSourceID="sql_dsbs" runat="server">
+                                                                            <LayoutTemplate>
 
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr id="itemPlaceholder" runat="server"></tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </LayoutTemplate>
-                                                                        <ItemTemplate>
-                                                                            <tr class="<%# (Container.DisplayIndex % 2 == 0 ? "standardrow" : "oddrow") %>">
-                                                                                <td style="text-align: center; padding: 10px; vertical-align: middle; color: #bfbfbf;">
-                                                                                    <%# (int)(this.Session[SessionViewDataName] == null ? 0 : this.Session[SessionViewDataName]) + (Container.DisplayIndex + 1) %>.
-                                                                                </td>
+                                                                                <div class="table-responsive" style="margin: 0px; box-shadow: none;">
+                                                                                    <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">
+                                                                                        <thead>
+                                                                                            <tr style="background-color: #3367d6;">
+                                                                                                <th style="text-align: center; font-weight: bold; color: white; background-color: #3367d6; vertical-align: middle; width: 80px;">#
+                                                                                                </th>
 
-                                                                                <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-                                                                                    <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
-                                                                                        <%#     (Eval("Soal").ToString().Length > 100) ? 
+                                                                                                <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Soal
+                                                                                                </th>
+                                                                                                <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Jenis
+                                                                                                </th>
+
+                                                                                                <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;"></th>
+
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr id="itemPlaceholder" runat="server"></tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </LayoutTemplate>
+                                                                            <ItemTemplate>
+                                                                                <tr class="<%# (Container.DisplayIndex % 2 == 0 ? "standardrow" : "oddrow") %>">
+                                                                                    <td style="text-align: center; padding: 10px; vertical-align: middle; color: #bfbfbf;">
+                                                                                        <%# (int)(this.Session[SessionViewDataName] == null ? 0 : this.Session[SessionViewDataName]) + (Container.DisplayIndex + 1) %>.
+                                                                                    </td>
+
+                                                                                    <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
+                                                                                        <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
+                                                                                            <%#     (Eval("Soal").ToString().Length > 100) ? 
                                                                                                 (AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString().Substring(0,100) + "...")) : 
                                                                                                  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
-                                                                                        %>
+                                                                                            %>
                                                                                        
-                                                                                    </span>
-                                                                                </td>
-                                                                                <td>
+                                                                                        </span>
+                                                                                    </td>
+                                                                                    <td>
 
-                                                                                    <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
-                                                                                        <%#     
+                                                                                        <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
+                                                                                            <%#     
                                                                                                  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Jenis").ToString())
-                                                                                        %>
+                                                                                            %>
                                                                                        
-                                                                                    </span>
+                                                                                        </span>
 
-                                                                                </td>
+                                                                                    </td>
 
-                                                                                <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: right;">
-                                                                                    <label
-                                                                                        onclick="GoToURL2('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetQueryString("m")%>&id=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%> ');"
-                                                                                        
-                                                                                        
-                                                                                       
-                                                                                        title=" Lihat Data Soal" class="btn btn-brand">
-                                                                                        <i class="fa fa-eye"></i>
-                                                                                    </label>
+                                                                                    <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: right;">
+                                                                                        <label
+                                                                                            onclick="GoToURL2('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetQueryString("m")%>&id=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%> ');"
+                                                                                            title=" Lihat Data Soal" class="btn btn-brand">
+                                                                                            <i class="fa fa-eye"></i>
+                                                                                        </label>
 
-                                                                                    <%--<button tooltip=" Lihat Soal " runat="server" id="detailSoal" cssclass="btn btn-orange"
+                                                                                        <%--<button tooltip=" Lihat Soal " runat="server" id="detailSoal" cssclass="btn btn-orange"
                                                                                         commandargument='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%>'
                                                                                         onclick="btnDoViewSoal_Click">
 
                                                                                         <span class="fbtn-text fbtn-text-left">Lihat Soal</span>
                                                                                         <i class="fa fa-eye"></i>
                                                                                     </button>--%>
-                                                                                    <asp:LinkButton ToolTip=" Tambah Soal " runat="server" ID="addSoal" CssClass="btn btn-green  "
-                                                                                        CommandArgument='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%>'
-                                                                                        OnClick="lnkOKInput_Click">
+                                                                                        <asp:LinkButton ToolTip=" Tambah Soal " runat="server" ID="addSoal" CssClass="btn btn-green  "
+                                                                                            CommandArgument='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%>'
+                                                                                            OnClick="lnkOKInput_Click">
                                                                                       
                                                                                         <span class="fbtn-text fbtn-text-left">Tambah Soal</span>
                                                                                         <i class="fa fa-plus"></i>
-                                                                                    </asp:LinkButton>
+                                                                                        </asp:LinkButton>
 
-                                                                                </td>
+                                                                                    </td>
 
-                                                                            </tr>
-                                                                        </ItemTemplate>
-                                                                        <EmptyDataTemplate>
-                                                                            <div class="table-responsive" style="margin-top: 0px; margin-bottom: 0px; box-shadow: 0 -1px 0 rgba(0, 0, 0, 0), 0 0 3px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.0);">
-                                                                                <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">
-                                                                                    <thead>
-                                                                                        <tr style="background-color: #3367d6;">
-                                                                                            <th style="text-align: center; font-weight: bold; color: white; background-color: #3367d6; vertical-align: middle; width: 80px;">#
-                                                                                            </th>
-                                                                                            <th style="text-align: center; background-color: #3367d6; width: 80px; vertical-align: middle;">
-                                                                                                <i class="fa fa-cog"></i>
-                                                                                            </th>
-                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Unit Sekolah, Mata Pelajaran
-                                                                                            </th>
-                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Alias
-                                                                                            </th>
-                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Jenis
-                                                                                            </th>
-                                                                                            <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Keterangan
-                                                                                            </th>
-                                                                                        </tr>
-                                                                                    </thead>
-                                                                                    <tbody>
-                                                                                        <tr>
-                                                                                            <td colspan="6" style="text-align: center; padding: 10px;">..:: Data Kosong ::..
-                                                                                            </td>
-                                                                                        </tr>
-                                                                                    </tbody>
-                                                                                </table>
-                                                                            </div>
-                                                                        </EmptyDataTemplate>
-                                                                    </asp:ListView>
-                                                                </div>
-                                                                <asp:SqlDataSource ID="Sql_dsbs" runat="server"></asp:SqlDataSource>
+                                                                                </tr>
+                                                                            </ItemTemplate>
+                                                                            <EmptyDataTemplate>
+                                                                                <div class="table-responsive" style="margin-top: 0px; margin-bottom: 0px; box-shadow: 0 -1px 0 rgba(0, 0, 0, 0), 0 0 3px rgba(0, 0, 0, 0.18), 0 1px 3px rgba(0, 0, 0, 0.0);">
+                                                                                    <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">
+                                                                                        <thead>
+                                                                                            <tr style="background-color: #3367d6;">
+                                                                                                <th style="text-align: center; font-weight: bold; color: white; background-color: #3367d6; vertical-align: middle; width: 80px;">#
+                                                                                                </th>
+                                                                                                <th style="text-align: center; background-color: #3367d6; width: 80px; vertical-align: middle;">
+                                                                                                    <i class="fa fa-cog"></i>
+                                                                                                </th>
+                                                                                                <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Soal
+                                                                                                </th>
+                                                                                                <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Jenis
+                                                                                                </th>
+                                                                                            </tr>
+                                                                                        </thead>
+                                                                                        <tbody>
+                                                                                            <tr>
+                                                                                                <td colspan="6" style="text-align: center; padding: 10px;">..:: Data Kosong ::..
+                                                                                                </td>
+                                                                                            </tr>
+                                                                                        </tbody>
+                                                                                    </table>
+                                                                                </div>
+                                                                            </EmptyDataTemplate>
+                                                                        </asp:ListView>
+                                                                    </div>
+                                                                    <asp:SqlDataSource ID="Sql_dsbs" runat="server"></asp:SqlDataSource>
 
-                                                                <div class="content-header ui-content-header"
-                                                                    style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
+                                                                    <div class="content-header ui-content-header"
+                                                                        style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
 
-                                                                    <div style="padding-left: 15px;">
-                                                                        <asp:DataPager ID="dbData" runat="server" PageSize="100" PagedControlID="lvDataBs">
-                                                                            <Fields>
-                                                                                <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowFirstPageButton="True" FirstPageText='&nbsp;<i class="fa fa-backward"></i>&nbsp;' ShowPreviousPageButton="True" PreviousPageText='&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;' ShowNextPageButton="false" />
-                                                                                <asp:TemplatePagerField>
-                                                                                    <PagerTemplate>
-                                                                                        <label style="color: grey; font-weight: normal; padding: 5px; border-style: solid; border-color: #F1F1F1; border-width: 1px; padding-left: 10px; padding-right: 10px; border-radius: 5px;">
-                                                                                            Hal.
+                                                                        <div style="padding-left: 15px;">
+                                                                            <asp:DataPager ID="dpDataBs" runat="server" PageSize="100" PagedControlID="lvDataBs">
+                                                                                <Fields>
+                                                                                    <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowFirstPageButton="True" FirstPageText='&nbsp;<i class="fa fa-backward"></i>&nbsp;' ShowPreviousPageButton="True" PreviousPageText='&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;' ShowNextPageButton="false" />
+                                                                                    <asp:TemplatePagerField>
+                                                                                        <PagerTemplate>
+                                                                                            <label style="color: grey; font-weight: normal; padding: 5px; border-style: solid; border-color: #F1F1F1; border-width: 1px; padding-left: 10px; padding-right: 10px; border-radius: 5px;">
+                                                                                                Hal.
                                                                         <%# ((Container.StartRowIndex + 1) / (Container.PageSize)) + 1 %>
                                                                         &nbsp;/&nbsp;
                                                                         <%# Math.Floor(Convert.ToDecimal((Container.TotalRowCount) / (Container.PageSize))) + 1 %>
-                                                                                        </label>
-                                                                                    </PagerTemplate>
-                                                                                </asp:TemplatePagerField>
-                                                                                <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowLastPageButton="True" LastPageText='&nbsp;<i class="fa fa-forward"></i>&nbsp;' ShowNextPageButton="True" NextPageText='&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;' ShowPreviousPageButton="false" />
-                                                                                <asp:TemplatePagerField>
-                                                                                    <PagerTemplate>
-                                                                                        <span style="padding-top: 10px; padding-bottom: 10px; color: gray;">
-                                                                                            <span class="badge">
-                                                                                                <asp:Label ID="ttlRcrd" runat="server" Text="<%#Container.TotalRowCount%>"></asp:Label>
+                                                                                            </label>
+                                                                                        </PagerTemplate>
+                                                                                    </asp:TemplatePagerField>
+                                                                                    <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowLastPageButton="True" LastPageText='&nbsp;<i class="fa fa-forward"></i>&nbsp;' ShowNextPageButton="True" NextPageText='&nbsp;<i class="fa fa-arrow-right"></i>&nbsp;' ShowPreviousPageButton="false" />
+                                                                                    <asp:TemplatePagerField>
+                                                                                        <PagerTemplate>
+                                                                                            <span style="padding-top: 10px; padding-bottom: 10px; color: gray;">
+                                                                                                <span class="badge">
+                                                                                                    <asp:Label ID="ttlRcrd" runat="server" Text="<%#Container.TotalRowCount%>"></asp:Label>
+                                                                                                </span>
                                                                                             </span>
-                                                                                        </span>
-                                                                                    </PagerTemplate>
-                                                                                </asp:TemplatePagerField>
-                                                                            </Fields>
-                                                                        </asp:DataPager>
+                                                                                        </PagerTemplate>
+                                                                                    </asp:TemplatePagerField>
+                                                                                </Fields>
+                                                                            </asp:DataPager>
+                                                                        </div>
                                                                     </div>
-                                                                </div>
 
-                                                                <%--<div class="fbtn-container" id="div1" runat="server">
+                                                                    <%--<div class="fbtn-container" id="div1" runat="server">
 
                                                                     <div class="fbtn-inner">
                                                                         <a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown" style="background-color: #a91212;" title=" Pilihan ">
@@ -611,126 +659,123 @@ width=0,height=0,left=-1000,top=-1000`;
 
                                                                     </div>
                                                                 </div>--%>
-                                                            </asp:View>
-                                                        </asp:MultiView>
+                                                                </asp:View>
+                                                            </asp:MultiView>
 
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <p class="text-right">
-                                <%--<asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>--%>
-                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
-                                <br />
-                                <br />
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div aria-hidden="true" class="modal fade" id="ui_modal_input_data2" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
-                <div class="modal-dialog modal-lg">
-                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-                        <div class="modal-inner"
-                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
-                            <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal"><i class="fa fa-close"></i></a>
-                            <div style="width: 100%;">
-                                <div class="row">
-                                    <div class="col-lg-12">
-
-                                        <div class="" style="padding: 0px;">
-                                            <div class="card" style="margin-top: 0px;">
-                                                <div class="card-main">
-                                                    <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
-                                                        <table style="width: 100%;">
-
-                                                            <tr>
-                                                                <td style="background-color: #295BC8; padding: 0px;">
-                                                                    <hr style="margin: 0px; border-style: solid; border-width: 1px; border-color: #2555BE;" />
-                                                                </td>
-                                                            </tr>
-                                                        </table>
-
-
-
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <p class="text-right">
-                                <%--<asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>--%>
-                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
-                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
-                                <br />
-                                <br />
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_hapus" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
-                <div class="modal-dialog modal-xs">
-                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-                        <div class="modal-inner"
-                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
-                            <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
-                                <div class="media-object margin-right-sm pull-left">
-                                    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
-                                </div>
-                                <div class="media-inner">
-                                    <span style="font-weight: bold;">Konfirmasi
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="width: 100%;">
-                                <div class="row">
-                                    <div class="col-lg-12">
-
-                                        <div style="width: 100%; background-color: white; padding-top: 15px;">
-                                            <div class="row" style="margin-left: 15px; margin-right: 15px;">
-                                                <div class="col-xs-12">
-                                                    <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
-                                                        <div class="col-xs-12">
-                                                            <asp:Literal runat="server" ID="ltrMsgConfirmHapus"></asp:Literal>
                                                         </div>
                                                     </div>
                                                 </div>
                                             </div>
-                                        </div>
 
+                                        </div>
                                     </div>
                                 </div>
                             </div>
-                        </div>
-                        <div class="modal-footer">
-                            <p class="text-right">
-                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKHapus" OnClick="lnkOKHapus_Click" Text="  OK  "></asp:LinkButton>
-                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
-                                <br />
-                                <br />
-                            </p>
+                            <div class="modal-footer">
+                                <p class="text-right">
+                                    <%--<asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>--%>
+                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
+                                    <br />
+                                    <br />
+                                </p>
+                            </div>
                         </div>
                     </div>
                 </div>
-            </div>
+
+                <div aria-hidden="true" class="modal fade" id="ui_modal_input_data2" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
+                    <div class="modal-dialog modal-lg">
+                        <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                            <div class="modal-inner"
+                                style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal"><i class="fa fa-close"></i></a>
+                                <div style="width: 100%;">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <div class="" style="padding: 0px;">
+                                                <div class="card" style="margin-top: 0px;">
+                                                    <div class="card-main">
+                                                        <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
+                                                            <table style="width: 100%;">
+
+                                                                <tr>
+                                                                    <td style="background-color: #295BC8; padding: 0px;">
+                                                                        <hr style="margin: 0px; border-style: solid; border-width: 1px; border-color: #2555BE;" />
+                                                                    </td>
+                                                                </tr>
+                                                            </table>
 
 
 
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p class="text-right">
+                                    <%--<asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>--%>
+                                &nbsp;&nbsp; &nbsp;&nbsp; &nbsp;&nbsp;
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
+                                    <br />
+                                    <br />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_hapus" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
+                    <div class="modal-dialog modal-xs">
+                        <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                            <div class="modal-inner"
+                                style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
+                                <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
+                                    <div class="media-object margin-right-sm pull-left">
+                                        <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
+                                    </div>
+                                    <div class="media-inner">
+                                        <span style="font-weight: bold;">Konfirmasi
+                                        </span>
+                                    </div>
+                                </div>
+                                <div style="width: 100%;">
+                                    <div class="row">
+                                        <div class="col-lg-12">
+
+                                            <div style="width: 100%; background-color: white; padding-top: 15px;">
+                                                <div class="row" style="margin-left: 15px; margin-right: 15px;">
+                                                    <div class="col-xs-12">
+                                                        <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
+                                                            <div class="col-xs-12">
+                                                                <asp:Literal runat="server" ID="ltrMsgConfirmHapus"></asp:Literal>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="modal-footer">
+                                <p class="text-right">
+                                    <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKHapus" OnClick="lnkOKHapus_Click" Text="  OK  "></asp:LinkButton>
+                                    <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
+                                    <br />
+                                    <br />
+                                </p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
         </ContentTemplate>
         <Triggers>
             <asp:PostBackTrigger ControlID="btnRefresh" />

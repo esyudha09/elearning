@@ -1825,6 +1825,11 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
                         )
                 );
         }
+        
+        protected void btnBackToKelas_Click(object sender, EventArgs e)
+        {
+            Page.Response.Redirect(Page.Request.Url.ToString(), true);
+        }
 
 
 

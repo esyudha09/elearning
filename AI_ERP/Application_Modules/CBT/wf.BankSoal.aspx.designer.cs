@@ -159,13 +159,13 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.LinkButton btnDoAdd;
 
         /// <summary>
-        /// btnBack control.
+        /// LinkButton1 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBack;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
         /// ltrMsgConfirmHapus control.

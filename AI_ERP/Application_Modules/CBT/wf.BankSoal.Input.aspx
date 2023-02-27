@@ -24,7 +24,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_soal",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -52,7 +52,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_jwbEssay",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -80,7 +80,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_jwbGanda1",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -108,7 +108,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_jwbGanda2",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -137,7 +137,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_jwbGanda3",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -165,7 +165,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_jwbGanda4",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -193,7 +193,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_jwbGanda5",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount checklist mediaembed casechange export formatpainter pageembed linkchecker a11ychecker  permanentpen powerpaste advtable  editimage tinycomments tableofcontents footnotes mergetags autocorrect typography inlinecss',
+                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
                 tinycomments_author: 'Author name',
@@ -519,13 +519,25 @@
                     </div>
                 </div>
             </div>
-            <div class="content-header ui-content-header"
-                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 160px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+           <div class="content-header ui-content-header"
+                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 250px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                 <div style="padding-left: 0px;">
-                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnShowDataList" CssClass="btn-trans waves-attach waves-circle waves-effect" OnClick="btnBackToMenu_Click" Style="font-weight: bold; color: ghostwhite;">
+                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1" 
+                        onclick="btnBackToMapel_Click"
+                        CssClass="btn-trans waves-attach waves-circle waves-effect"  Style="font-weight: bold; color: ghostwhite;">
                                                         &nbsp;&nbsp;
                                                         <i class="fa fa-arrow-left"></i>
-                                                        &nbsp;&nbsp;Data Soal
+                                                        &nbsp;&nbsp;Mata Pelajaran
+                    </asp:LinkButton>
+                </div>
+            </div>
+            <div class="content-header ui-content-header"
+                style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 100px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                <div style="padding-left: 0px;">
+                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnShowDataList" CssClass="btn-trans waves-attach waves-circle waves-effect" OnClick="btnBackToSoal_Click" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Soal
                     </asp:LinkButton>
                 </div>
             </div>

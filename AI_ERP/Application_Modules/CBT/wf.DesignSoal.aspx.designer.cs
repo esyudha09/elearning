@@ -78,6 +78,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.Button btnDoCari;
 
         /// <summary>
+        /// btnDoCariSoal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnDoCariSoal;
+
+        /// <summary>
         /// btnShowConfirmDelete control.
         /// </summary>
         /// <remarks>
@@ -168,13 +177,49 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
 
         /// <summary>
-        /// btnBack control.
+        /// LinkButton2 control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnBack;
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
+
+        /// <summary>
+        /// LinkButton3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
+
+        /// <summary>
+        /// LinkButton4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton4;
+
+        /// <summary>
+        /// div_Header2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_Header2;
+
+        /// <summary>
+        /// txtCariSoal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtCariSoal;
 
         /// <summary>
         /// MultiView1 control.
@@ -213,13 +258,13 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.SqlDataSource Sql_dsbs;
 
         /// <summary>
-        /// dbData control.
+        /// dpDataBs control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataPager dbData;
+        protected global::System.Web.UI.WebControls.DataPager dpDataBs;
 
         /// <summary>
         /// ltrMsgConfirmHapus control.
