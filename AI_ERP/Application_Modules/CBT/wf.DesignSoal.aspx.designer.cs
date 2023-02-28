@@ -78,6 +78,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.HiddenField txtSkorVal;
 
         /// <summary>
+        /// txtUrutVal control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField txtUrutVal;
+
+        /// <summary>
         /// btnDoCari control.
         /// </summary>
         /// <remarks>
@@ -103,6 +112,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnUpdateSkor;
+
+        /// <summary>
+        /// btnUpdateUrut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Button btnUpdateUrut;
 
         /// <summary>
         /// btnShowConfirmDelete control.
@@ -303,13 +321,13 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.LinkButton lnkOKHapus;
 
         /// <summary>
-        /// txtSkorUpdate control.
+        /// txtSkor control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.TextBox txtSkorUpdate;
+        protected global::System.Web.UI.WebControls.TextBox txtSkor;
 
         /// <summary>
         /// LinkButton6 control.
@@ -319,6 +337,24 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton6;
+
+        /// <summary>
+        /// txtUrut control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtUrut;
+
+        /// <summary>
+        /// LinkButton5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton5;
 
         /// <summary>
         /// Master property.

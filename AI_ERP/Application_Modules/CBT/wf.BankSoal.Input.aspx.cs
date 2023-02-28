@@ -96,8 +96,19 @@ namespace AI_ERP.Application_Modules.CBT
                                        "&nbsp;&nbsp;" +
                                        "Form Input Soal";
 
-            this.Master.ShowHeaderTools = true;
+            this.Master.ShowHeaderTools = false;
             this.Master.HeaderCardVisible = false;
+            if (!string.IsNullOrEmpty(Libs.GetQueryString("rs")))
+            {
+                fromBankSoal.Attributes.Add("style", "display:none");
+                fromDesignSoal.Attributes.Add("style", "display:block");
+            }
+            else
+            {
+                fromBankSoal.Attributes.Add("style", "display:block");
+                fromDesignSoal.Attributes.Add("style", "display:none");
+            }
+
 
             if (!IsPostBack)
             {
@@ -110,7 +121,7 @@ namespace AI_ERP.Application_Modules.CBT
                 }
             }
 
-           
+
 
 
         }
@@ -214,7 +225,7 @@ namespace AI_ERP.Application_Modules.CBT
                 //}
                 m.Soal = txtSoalVal.Value;
                 m.Jenis = cboJenis.SelectedValue;
-               
+
                 if (ChkJwbGanda1.Checked)
                 {
                     m.JwbGanda = "a";
@@ -242,7 +253,7 @@ namespace AI_ERP.Application_Modules.CBT
 
                 if (txtID.Value.Trim() != "")
                 {
-                    
+
                     m.JwbEssay = txtJwbEssayVal.Value != "" ? txtJwbEssayVal.Value : txtJwbEssay.Text;
                     m.JwbGanda1 = txtJwbGanda1Val.Value != "" ? txtJwbGanda1Val.Value : txtJwbGanda1.Text;
                     m.JwbGanda2 = txtJwbGanda2Val.Value != "" ? txtJwbGanda2Val.Value : txtJwbGanda2.Text;
@@ -258,20 +269,33 @@ namespace AI_ERP.Application_Modules.CBT
                 }
                 else
                 {
-                    
+
                     m.JwbEssay = txtJwbEssay.Text;
                     m.JwbGanda1 = txtJwbGanda1.Text;
                     m.JwbGanda2 = txtJwbGanda2.Text;
                     m.JwbGanda3 = txtJwbGanda3.Text;
                     m.JwbGanda4 = txtJwbGanda4.Text;
                     m.JwbGanda5 = txtJwbGanda5.Text;
-
+                    m.Kode = Guid.NewGuid();
                     DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
 
-                    Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE + QS.GetURLVariable()));
+                    if (!string.IsNullOrEmpty(Libs.GetQueryString("rs")))
+                    {
+
+                        CBT_DesignSoal d = new CBT_DesignSoal();
+                        d.Rel_RumahSoal = Libs.GetQueryString("rs");
+                        d.Rel_BankSoal = m.Kode.ToString();
+                        DAO_CBT_DesignSoal.Insert(d, Libs.LOGGED_USER_M.UserID);
+
+                       // btnBackToDesignSoal_Click(null, null);
+                    }
+                    //else
+                    //{
+                    //    btnBackToSoal_Click(null, null);
+                    //}
 
                     //InitFields();
-                    // txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
+                    txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
                 }
             }
             catch (Exception ex)
@@ -347,10 +371,6 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-
-
-
-
         protected void btnShowConfirmDelete_Click(object sender, EventArgs e)
         {
             if (txtID.Value.Trim() != "")
@@ -388,6 +408,46 @@ namespace AI_ERP.Application_Modules.CBT
             Response.Redirect(
                     ResolveUrl(
                             Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.ROUTE // + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                        )
+                );
+        }
+
+        protected void btnBackToKelas_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?&m=" + m + "&u=" + unit
+                        )
+                );
+        }
+
+        protected void btnBackToFormRumahSoal_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                        )
+                );
+        }
+
+        protected void btnBackToDesignSoal_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            var rs = Libs.GetQueryString("rs");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.DESIGN_SOAL.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit + "&rs=" + rs
                         )
                 );
         }

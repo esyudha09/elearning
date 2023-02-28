@@ -44,6 +44,7 @@ namespace AI_ERP.Application_Entities
         public string Rel_BankSoal { get; set; }
         public string Jenis { get; set; }
         public int Skor { get; set; }
+        public int Urut { get; set; }
         public DateTime CreatedDate { get; set; }
         public DateTime UpdateDate { get; set; }
     }

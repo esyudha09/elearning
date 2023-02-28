@@ -32,7 +32,8 @@ namespace AI_ERP.Application_Modules.CBT
             DoChangePage,
             DoShowConfirmHapus,
             ViewSoal,
-            DoShowUpdateSkor
+            DoShowUpdateSkor,
+            DoShowUpdateUrut
         }
 
         private static class QS
@@ -102,6 +103,7 @@ namespace AI_ERP.Application_Modules.CBT
             this.Master.ShowHeaderTools = true;
             this.Master.HeaderCardVisible = false;
 
+           
             if (!IsPostBack)
             {
                 //InitInput();
@@ -262,9 +264,14 @@ namespace AI_ERP.Application_Modules.CBT
         protected void btnDoAddNewSoal_Click(object sender, EventArgs e)
         {
             //InitFields();
-           
-            var urlInput = Libs.GetQueryString("m");
-            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?m=" + urlInput));
+
+            var m = Libs.GetQueryString("m");
+            var kp = Libs.GetQueryString("kp");
+            var kur = Libs.GetQueryString("kur");
+            var unit = Libs.GetQueryString("u");
+            var rs = Libs.GetQueryString("rs");
+
+            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit + "&rs=" + rs));
         }
 
         protected void lnkOKHapus_Click(object sender, EventArgs e)
@@ -290,21 +297,11 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 CBT_DesignSoal m = new CBT_DesignSoal();
                 m.Rel_RumahSoal = Libs.GetQueryString("rs");
-                m.Rel_BankSoal = (sender as LinkButton).CommandArgument.ToString();
-                //if (txtID.Value.Trim() != "")
-                //{
-                //    m.Kode = new Guid(txtID.Value);
-                //    DAO_CBT_DesignSoal.Update(m, Libs.LOGGED_USER_M.UserID);
-                //    BindListView(!IsPostBack, this.Master.txtCariData.Text.Trim());
-                //    txtKeyAction.Value = JenisAction.DoUpdate.ToString();
-                //}
-                //else
-                //{
+                m.Rel_BankSoal = (sender as LinkButton).CommandArgument.ToString();             
                 DAO_CBT_DesignSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
-                BindListView(!IsPostBack, this.Master.txtCariData.Text.Trim());
-                //InitFields();
+                BindListView(!IsPostBack, this.Master.txtCariData.Text.Trim());            
                 txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
-                //}
+              
             }
             catch (Exception ex)
             {
@@ -334,13 +331,7 @@ namespace AI_ERP.Application_Modules.CBT
             BindListBankSoalView(true,txtCariSoal.Text);
             txtKeyAction.Value = JenisAction.Add.ToString();
         }
-
-        //public TextBox txtCariData
-        //{
-        //    get { return txt; }
-        //    set { txtCari = value; }
-        //}
-
+    
         protected void btnShowConfirmDelete_Click(object sender, EventArgs e)
         {
             if (txtID.Value.Trim() != "")
@@ -423,14 +414,72 @@ namespace AI_ERP.Application_Modules.CBT
                 );
         }
 
-        protected void btnUpdateSkor_Click(object sender, EventArgs e)
+        protected void btnDoUpdateSkor_Click(object sender, EventArgs e)
         {
             if (txtID.Value.Trim() != "")
             {
-                txtSkorUpdate.Text = txtSkorVal.Value;
+                txtSkor.Text = txtSkorVal.Value;
                 txtKeyAction.Value = JenisAction.DoShowUpdateSkor.ToString();
             }
 
+        }
+
+        protected void btnDoUpdateUrut_Click(object sender, EventArgs e)
+        {
+            if (txtID.Value.Trim() != "")
+            {
+                txtUrut.Text = txtUrutVal.Value;
+                txtKeyAction.Value = JenisAction.DoShowUpdateUrut.ToString();
+            }
+
+        }
+
+        protected void lnkOKUpdateSkor_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CBT_DesignSoal m = new CBT_DesignSoal();
+                m.Skor = Convert.ToInt32(txtSkor.Text); 
+              
+                if (txtID.Value.Trim() != "")
+                {
+                    m.Kode = new Guid(txtID.Value);
+                    DAO_CBT_DesignSoal.UpdateSkor(m, Libs.LOGGED_USER_M.UserID);
+                    BindListView(!IsPostBack, this.Master.txtCariData.Text.Trim());
+                    txtKeyAction.Value = JenisAction.DoUpdate.ToString();
+                }
+                
+                txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
+               
+            }
+            catch (Exception ex)
+            {
+                txtKeyAction.Value = ex.Message;
+            }
+        }
+        
+        protected void lnkOKUpdateUrut_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                CBT_DesignSoal m = new CBT_DesignSoal();
+                m.Urut = Convert.ToInt32(txtUrut.Text); 
+              
+                if (txtID.Value.Trim() != "")
+                {
+                    m.Kode = new Guid(txtID.Value);
+                    DAO_CBT_DesignSoal.UpdateUrut(m, Libs.LOGGED_USER_M.UserID);
+                    BindListView(!IsPostBack, this.Master.txtCariData.Text.Trim());
+                    txtKeyAction.Value = JenisAction.DoUpdate.ToString();
+                }
+                
+                txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
+               
+            }
+            catch (Exception ex)
+            {
+                txtKeyAction.Value = ex.Message;
+            }
         }
 
     }

@@ -242,9 +242,10 @@
                                                                 </span>
                                                                 <br />--%>
                                                                 <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
-                                                                    <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
-                                                                    %>
+                                                                     <%#     (Eval("Soal").ToString().Length > 100) ? 
+                                                                                                (AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString().Substring(0,100) + "...")) : 
+                                                                                                 AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
+                                                                                            %>
                                                                 </span>
                                                             </td>
 

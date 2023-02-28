@@ -48,7 +48,8 @@ namespace AI_ERP.Application_DAOs
             public const string JwbGanda2 = "JwbGanda2";
             public const string JwbGanda3 = "JwbGanda3";
             public const string JwbGanda4 = "JwbGanda4";
-            public const string JwbGanda5 = "JwbGanda5";    
+            public const string JwbGanda5 = "JwbGanda5";
+            public const string id_output = "id_output";
         }
 
         public static CBT_BankSoal GetEntityFromDataRow(DataRow row)
@@ -149,7 +150,7 @@ namespace AI_ERP.Application_DAOs
                 comm.CommandType = CommandType.StoredProcedure;
                 comm.CommandText = SP_INSERT;
 
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Guid.NewGuid()));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, BankSoal.Kode));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Mapel, BankSoal.Rel_Mapel));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Guru, BankSoal.Rel_Guru));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Soal, BankSoal.Soal));
@@ -161,11 +162,15 @@ namespace AI_ERP.Application_DAOs
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda3, BankSoal.JwbGanda3));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda4, BankSoal.JwbGanda4));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda5, BankSoal.JwbGanda5));
+                
 
                 comm.Parameters.Add(new SqlParameter("@user_id", user_id));
 
                 comm.ExecuteNonQuery();
                 transaction.Commit();
+                
+                
+              
             }
             catch (Exception ec)
             {

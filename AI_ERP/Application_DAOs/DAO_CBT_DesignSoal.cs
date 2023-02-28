@@ -25,12 +25,16 @@ namespace AI_ERP.Application_DAOs
 
         public const string SP_DELETE = "CBT_DESIGN_SOAL_DELETE";
 
+        public const string SP_UPDATE_SKOR = "CBT_DESIGN_SOAL_UPDATE_SKOR";
+        public const string SP_UPDATE_URUT = "CBT_DESIGN_SOAL_UPDATE_URUT";
+
         public static class NamaField
         {
             public const string Kode = "Kode";
             public const string Rel_RumahSoal = "Rel_RumahSoal";
             public const string Rel_BankSoal = "Rel_BankSoal";          
             public const string Skor = "Skor";
+            public const string Urut = "Urut";
                          
         }
 
@@ -184,7 +188,7 @@ namespace AI_ERP.Application_DAOs
             }
         }
 
-        public static void Update(CBT_DesignSoal DesignSoal, string user_id)
+        public static void UpdateSkor(CBT_DesignSoal DesignSoal, string user_id)
         {
             SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
             SqlCommand comm = conn.CreateCommand();
@@ -195,12 +199,9 @@ namespace AI_ERP.Application_DAOs
                 transaction = conn.BeginTransaction();
                 comm.Transaction = transaction;
                 comm.CommandType = CommandType.StoredProcedure;
-                comm.CommandText = SP_UPDATE;
+                comm.CommandText = SP_UPDATE_SKOR;
 
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, DesignSoal.Kode));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Guid.NewGuid()));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_RumahSoal, DesignSoal.Rel_RumahSoal));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, DesignSoal.Rel_BankSoal));           
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Skor, DesignSoal.Skor));
 
                 comm.Parameters.Add(new SqlParameter("@user_id", user_id));
@@ -218,6 +219,75 @@ namespace AI_ERP.Application_DAOs
                 conn.Close();
             }
         }
+
+        public static void UpdateUrut(CBT_DesignSoal DesignSoal, string user_id)
+        {
+            SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
+            SqlCommand comm = conn.CreateCommand();
+            SqlTransaction transaction = null;
+            try
+            {
+                conn.Open();
+                transaction = conn.BeginTransaction();
+                comm.Transaction = transaction;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = SP_UPDATE_URUT;
+
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, DesignSoal.Kode));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Urut, DesignSoal.Urut));
+
+                comm.Parameters.Add(new SqlParameter("@user_id", user_id));
+
+                comm.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ec)
+            {
+                transaction.Rollback();
+                throw new Exception(ec.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+
+        //public static void Update(CBT_DesignSoal DesignSoal, string user_id)
+        //{
+        //    SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
+        //    SqlCommand comm = conn.CreateCommand();
+        //    SqlTransaction transaction = null;
+        //    try
+        //    {
+        //        conn.Open();
+        //        transaction = conn.BeginTransaction();
+        //        comm.Transaction = transaction;
+        //        comm.CommandType = CommandType.StoredProcedure;
+        //        comm.CommandText = SP_UPDATE;
+
+        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, DesignSoal.Kode));
+        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Guid.NewGuid()));
+        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_RumahSoal, DesignSoal.Rel_RumahSoal));
+        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, DesignSoal.Rel_BankSoal));           
+        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Skor, DesignSoal.Skor));
+
+        //        comm.Parameters.Add(new SqlParameter("@user_id", user_id));
+
+        //        comm.ExecuteNonQuery();
+        //        transaction.Commit();
+        //    }
+        //    catch (Exception ec)
+        //    {
+        //        transaction.Rollback();
+        //        throw new Exception(ec.Message.ToString());
+        //    }
+        //    finally
+        //    {
+        //        conn.Close();
+        //    }
+        //}
+
 
 
 

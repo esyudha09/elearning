@@ -113,6 +113,9 @@
                 case "<%= JenisAction.DoShowUpdateSkor %>":
                     $('#ui_modal_update_skor').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
+                case "<%= JenisAction.DoShowUpdateUrut %>":
+                    $('#ui_modal_update_urut').modal({ backdrop: 'static', keyboard: false, show: true });
+                    break;
                 default:
                     HideModal();
                     if (jenis_act.trim() != "") {
@@ -192,6 +195,7 @@
             <asp:HiddenField runat="server" ID="id_login" />
             <asp:HiddenField runat="server" ID="txtSoalID" />
             <asp:HiddenField runat="server" ID="txtSkorVal" />
+            <asp:HiddenField runat="server" ID="txtUrutVal" />
 
 
 
@@ -199,7 +203,8 @@
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCari" OnClick="btnDoCari_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCariSoal" OnClick="btnDoCariSoal_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowSoalDetail" OnClick="btnShowSOALDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
-            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnUpdateSkor" OnClick="btnUpdateSkor_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
+            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnUpdateSkor" OnClick="btnDoUpdateSkor_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
+            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnUpdateUrut" OnClick="btnDoUpdateUrut_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
@@ -235,7 +240,7 @@
                                                             <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">
                                                                 <thead>
                                                                     <tr style="background-color: #3367d6;">
-                                                                        <th style="text-align: center; font-weight: bold; color: white; background-color: #3367d6; vertical-align: middle; width: 80px;">#
+                                                                        <th style="text-align: center; font-weight: bold; color: white; background-color: #3367d6; vertical-align: middle; width: 80px;">No.Urut
                                                                         </th>
                                                                         <th style="text-align: center; background-color: #3367d6; width: 80px; vertical-align: middle;">
                                                                             <i class="fa fa-cog"></i>
@@ -256,8 +261,16 @@
                                                     </LayoutTemplate>
                                                     <ItemTemplate>
                                                         <tr class="<%# (Container.DisplayIndex % 2 == 0 ? "standardrow" : "oddrow") %>">
-                                                            <td style="text-align: center; padding: 10px; vertical-align: middle; color: #bfbfbf;">
+                                                           <%-- <td style="text-align: center; padding: 10px; vertical-align: middle; color: #bfbfbf;">
                                                                 <%# (int)(this.Session[SessionViewDataName] == null ? 0 : this.Session[SessionViewDataName]) + (Container.DisplayIndex + 1) %>.
+                                                            </td>--%>
+                                                            <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
+                                                                <a href="javascript:void(0);" style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;" >
+                                                                    <i class="fa fa-edit" onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>';<%# txtUrutVal.ClientID%>.value = '<%# Eval("Urut").ToString() %>'; <%= btnUpdateUrut.ClientID %>.click(); "></i>
+                                                                    <%# 
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Urut").ToString())
+                                                                    %>  &nbsp;                                                                                                                                                                                            
+                                                                </a>                                                              
                                                             </td>
                                                             <td style="padding: 0px; text-align: center; width: 80px; vertical-align: middle;">
                                                                 <div style="margin: 0 auto; display: table;">
@@ -296,12 +309,12 @@
                                                                 </span>
                                                                 <br />--%>
                                                                 <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
-                                                                    <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
-                                                                    %>
+                                                                     <%#     (Eval("Soal").ToString().Length > 100) ? 
+                                                                                                (AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString().Substring(0,100) + "...")) : 
+                                                                                                 AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
+                                                                                            %>
                                                                 </span>
                                                             </td>
-
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
@@ -310,13 +323,13 @@
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-                                                                <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;" >
+                                                                <a href="javascript:void(0);" style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;" >
+                                                                    <i class="fa fa-edit" onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>';<%# txtSkorVal.ClientID%>.value = '<%# Eval("Skor").ToString() %>'; <%= btnUpdateSkor.ClientID %>.click(); "></i>
                                                                     <%# 
                                                                         AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Skor").ToString())
                                                                     %>  &nbsp;                                                                                                                          
-                                                                  <i class="fa fa-edit" onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>';<%= txtSkorVal.ClientID %>.value = '<%# Eval("Skor").ToString() %>'; <%= btnUpdateSkor.ClientID %>.click(); "></i>
-                                                                </span>
-                                                                <%--<asp:TextBox ValidationGroup="vldInput" CssClass="form-control" runat="server" ID="txtSkorUpdate"></asp:TextBox>--%>
+                                                                  
+                                                                </a>                                                             
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -357,7 +370,7 @@
                                                 style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 10; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
 
                                                 <div style="padding-left: 15px;">
-                                                    <asp:DataPager ID="dpData" runat="server" PageSize="10" PagedControlID="lvData">
+                                                    <asp:DataPager ID="dpData" runat="server" PageSize="100" PagedControlID="lvData">
                                                         <Fields>
                                                             <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowFirstPageButton="True" FirstPageText='&nbsp;<i class="fa fa-backward"></i>&nbsp;' ShowPreviousPageButton="True" PreviousPageText='&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;' ShowNextPageButton="false" />
                                                             <asp:TemplatePagerField>
@@ -457,16 +470,13 @@
                             </div>
                         </div>
                     </div>
-
-
-
                 </div>
             </div>
 
             <div aria-hidden="true" class="modal fade" id="ui_modal_input_data" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-                        <div class="modal-inner"
+                        <div class="modal-inner text-right"
                             style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 0; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
                             <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal"><i class="fa fa-close"></i></a>
                             <div style="width: 100%;">
@@ -695,6 +705,7 @@
                     </div>
                 </div>
             </div>
+
             <div aria-hidden="true" class="modal fade" id="ui_modal_input_data2" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
                 <div class="modal-dialog modal-lg">
                     <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
@@ -788,8 +799,6 @@
                 </div>
             </div>
 
-
-
             <div aria-hidden="true" class="modal fade" id="ui_modal_update_skor" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
                 <div class="modal-dialog modal-xs">
                     <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
@@ -814,8 +823,8 @@
                                                     <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
                                                         <div class="col-xs-12">
                                                             <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                                                <label class="label-input" for="<%= txtSkorUpdate.ClientID %>" style="text-transform: none;">Skor :</label>
-                                                                <asp:TextBox ValidationGroup="vldInput" CssClass="form-control " runat="server" ID="txtSkorUpdate"></asp:TextBox>
+                                                                <label class="label-input" for="<%= txtSkor.ClientID %>" style="text-transform: none;">Skor :</label>
+                                                                <asp:TextBox ValidationGroup="vldInput" CssClass="form-control " runat="server" ID="txtSkor"></asp:TextBox>
                                                             </div>
                                                         </div>
                                                     </div>
@@ -829,7 +838,56 @@
                         </div>
                         <div class="modal-footer">
                             <p class="text-right">
-                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton6" Text="  OK  "></asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton6" onclick="lnkOKUpdateSkor_Click" Text="  OK  "></asp:LinkButton>
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
+                                <br />
+                                <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div aria-hidden="true" class="modal fade" id="ui_modal_update_urut" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
+                <div class="modal-dialog modal-xs">
+                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                        <div class="modal-inner"
+                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
+                            <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
+                                <div class="media-object margin-right-sm pull-left">
+                                    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
+                                </div>
+                                <div class="media-inner">
+                                    <span style="font-weight: bold;">Update Nomor Urut
+                                    </span>
+                                </div>
+                            </div>
+                            <div style="width: 100%;">
+                                <div class="row">
+                                    <div class="col-lg-12">
+
+                                        <div style="width: 100%; background-color: white; padding-top: 15px;">
+                                            <div class="row" style="margin-left: 15px; margin-right: 15px;">
+                                                <div class="col-xs-12">
+                                                    <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
+                                                        <div class="col-xs-12">
+                                                            <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
+                                                                <label class="label-input" for="<%= txtUrut.ClientID %>" style="text-transform: none;">Skor :</label>
+                                                                <asp:TextBox ValidationGroup="vldInput" CssClass="form-control " runat="server" ID="txtUrut"></asp:TextBox>
+                                                            </div>
+                                                        </div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </div>
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-right">
+                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton5" onclick="lnkOKUpdateUrut_Click" Text="  OK  "></asp:LinkButton>
                                 <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
                                 <br />
                                 <br />

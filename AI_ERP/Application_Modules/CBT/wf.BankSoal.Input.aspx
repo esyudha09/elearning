@@ -7,6 +7,7 @@
     <script type="text/javascript">
 
         var currentValue = 0;
+       
         function JenisCheck() {
 
             if (document.getElementById("<%= cboJenis.ClientID %>").value == 'essay') {
@@ -266,10 +267,12 @@
                     break;
                 case "<%= JenisAction.Add %>":
                     ReInitTinyMCE();
+                    JenisCheck();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.AddWithMessage %>":
                     ReInitTinyMCE();
+                    JenisCheck();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     $('body').snackbar({
                         alive: 2000,
@@ -289,6 +292,7 @@
                     break;
                 case "<%= JenisAction.Update %>":
                     ReInitTinyMCE();
+                    JenisCheck();
                     //HideModal();
                     break;
                 case "<%= JenisAction.Delete %>":
@@ -519,26 +523,78 @@
                     </div>
                 </div>
             </div>
-           <div class="content-header ui-content-header"
-                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 250px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
-                <div style="padding-left: 0px;">
-                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1" 
-                        onclick="btnBackToMapel_Click"
-                        CssClass="btn-trans waves-attach waves-circle waves-effect"  Style="font-weight: bold; color: ghostwhite;">
+            <div id="fromBankSoal" runat="server" style="display:none">
+                <div class="content-header ui-content-header"
+                    style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 250px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1"
+                            OnClick="btnBackToMapel_Click"
+                            CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
                                                         &nbsp;&nbsp;
                                                         <i class="fa fa-arrow-left"></i>
                                                         &nbsp;&nbsp;Mata Pelajaran
-                    </asp:LinkButton>
+                        </asp:LinkButton>
+                    </div>
                 </div>
-            </div>
-            <div class="content-header ui-content-header"
-                style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 100px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
-                <div style="padding-left: 0px;">
-                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnShowDataList" CssClass="btn-trans waves-attach waves-circle waves-effect" OnClick="btnBackToSoal_Click" Style="font-weight: bold; color: ghostwhite;">
+                <div class="content-header ui-content-header"
+                    style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 100px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnShowDataList" CssClass="btn-trans waves-attach waves-circle waves-effect" OnClick="btnBackToSoal_Click" Style="font-weight: bold; color: ghostwhite;">
                                                         &nbsp;&nbsp;
                                                         <i class="fa fa-arrow-left"></i>
                                                         &nbsp;&nbsp;Soal
-                    </asp:LinkButton>
+                        </asp:LinkButton>
+                    </div>
+                </div>
+            </div>
+            <div id="fromDesignSoal" runat="server"  style="display:none">
+                <div class="content-header ui-content-header"
+                    style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 560px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2"
+                            OnClick="btnBackToMapel_Click"
+                            CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Mata Pelajaran
+                        </asp:LinkButton>
+                    </div>
+                </div>
+                <div class="content-header ui-content-header"
+                    style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 410px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton3"
+                            OnClick="btnBackToKelas_Click"
+                            CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Kelas
+                        </asp:LinkButton>
+                    </div>
+                </div>
+                <div class="content-header ui-content-header"
+                    style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton4"
+                            OnClick="btnBackToFormRumahSoal_Click"
+                            CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Form Rumah Soal
+                        </asp:LinkButton>
+                    </div>
+                </div>
+                <div class="content-header ui-content-header"
+                    style="background-color: orange; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 150px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton5"
+                            OnClick="btnBackToDesignSoal_Click"
+                            CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Design Soal
+                        </asp:LinkButton>
+                    </div>
                 </div>
             </div>
         </ContentTemplate>
