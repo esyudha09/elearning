@@ -1199,6 +1199,7 @@
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\KEPSEK_SD.jpg" />
     <Content Include="Application_Modules\CBT\wf.BankSoal.View.aspx" />
     <Content Include="Application_Modules\CBT\wf.DesignSoal.aspx" />
+    <Content Include="Application_Modules\CBT\wf.MapelCBT.Siswa.aspx" />
     <Content Include="Application_Modules\CBT\wf.RumahSoal.Input.aspx" />
     <Content Include="Application_Modules\CBT\wf.BankSoal.Input.aspx" />
     <Content Include="Application_Modules\CBT\wf.BankSoal.aspx" />
@@ -1397,6 +1398,7 @@
     <Content Include="Application_Templates\material-master\js\base.js" />
     <Content Include="Application_Templates\material-master\js\base.ok.js" />
     <Content Include="Logout.aspx" />
+    <Content Include="wf.Dashboard.Siswa.aspx" />
     <Content Include="wf.UbahPassword.aspx" />
     <None Include="Application_CLibs\signalR\jquery-1.6.4-vsdoc.js" />
     <Content Include="Application_CLibs\signalR\jquery-1.6.4.js" />
@@ -2784,6 +2786,13 @@
     </Compile>
     <Compile Include="Application_Modules\CBT\wf.DesignSoal.aspx.designer.cs">
       <DependentUpon>wf.DesignSoal.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.MapelCBT.Siswa.aspx.cs">
+      <DependentUpon>wf.MapelCBT.Siswa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.MapelCBT.Siswa.aspx.designer.cs">
+      <DependentUpon>wf.MapelCBT.Siswa.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application_Modules\CBT\wf.RumahSoal.Input.aspx.cs">
       <DependentUpon>wf.RumahSoal.Input.aspx</DependentUpon>
@@ -4276,6 +4285,13 @@
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>Reference.svcmap</DependentUpon>
+    </Compile>
+    <Compile Include="wf.Dashboard.Siswa.aspx.cs">
+      <DependentUpon>wf.Dashboard.Siswa.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="wf.Dashboard.Siswa.aspx.designer.cs">
+      <DependentUpon>wf.Dashboard.Siswa.aspx</DependentUpon>
     </Compile>
     <Compile Include="wf.Dashboard.aspx.cs">
       <DependentUpon>wf.Dashboard.aspx</DependentUpon>
