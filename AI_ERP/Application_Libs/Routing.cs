@@ -41,6 +41,14 @@ namespace AI_ERP.Application_Libs
 
                 public static string RouteName { get { return GetRouteName(ROUTE); } }
             }
+            
+            public static class BERANDA_SISWA
+            {
+                public const string ROUTE = "~/bs";
+                public const string FILE = "~/wf.Dashboard.Siswa.aspx";
+
+                public static string RouteName { get { return GetRouteName(ROUTE); } }
+            }
 
             public static class UBAH_PASSWORD
             {

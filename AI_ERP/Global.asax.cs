@@ -29,6 +29,12 @@ namespace AI_ERP
             );
 
             RouteTable.Routes.MapPageRoute(
+                "Beranda Siswa",
+                Routing.URL.BERANDA_SISWA.RouteName,
+                Routing.URL.BERANDA_SISWA.FILE
+            );
+
+            RouteTable.Routes.MapPageRoute(
                 "GantiPassword",
                 Routing.URL.UBAH_PASSWORD.RouteName,
                 Routing.URL.UBAH_PASSWORD.FILE

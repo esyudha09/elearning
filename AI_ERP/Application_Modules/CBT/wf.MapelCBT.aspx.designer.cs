@@ -7,11 +7,13 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AI_ERP.Application_Modules.CBT {
-    
-    
-    public partial class wf_MapelCBT {
-        
+namespace AI_ERP.Application_Modules.CBT
+{
+
+
+    public partial class wf_MapelCBT_Siswa
+    {
+
         /// <summary>
         /// upProgressMain control.
         /// </summary>
@@ -20,7 +22,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress upProgressMain;
-        
+
         /// <summary>
         /// upMain control.
         /// </summary>
@@ -29,7 +31,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upMain;
-        
+
         /// <summary>
         /// txtKeyAction control.
         /// </summary>
@@ -38,7 +40,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField txtKeyAction;
-        
+
         /// <summary>
         /// txtID control.
         /// </summary>
@@ -47,7 +49,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField txtID;
-        
+
         /// <summary>
         /// btnDoCari control.
         /// </summary>
@@ -56,7 +58,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnDoCari;
-        
+
         /// <summary>
         /// btnShowDetail control.
         /// </summary>
@@ -65,7 +67,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnShowDetail;
-        
+
         /// <summary>
         /// btnShowConfirmDelete control.
         /// </summary>
@@ -74,7 +76,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Button btnShowConfirmDelete;
-        
+
         /// <summary>
         /// mvMain control.
         /// </summary>
@@ -83,7 +85,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.MultiView mvMain;
-        
+
         /// <summary>
         /// vList control.
         /// </summary>
@@ -92,7 +94,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.View vList;
-        
+
         /// <summary>
         /// lvData control.
         /// </summary>
@@ -101,7 +103,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.ListView lvData;
-        
+
         /// <summary>
         /// sql_ds control.
         /// </summary>
@@ -110,7 +112,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.SqlDataSource sql_ds;
-        
+
         /// <summary>
         /// dpData control.
         /// </summary>
@@ -119,7 +121,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataPager dpData;
-        
+
         /// <summary>
         /// div_button_settings control.
         /// </summary>
@@ -128,7 +130,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_button_settings;
-        
+
         /// <summary>
         /// btnRefresh control.
         /// </summary>
@@ -137,7 +139,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton btnRefresh;
-        
+
         /// <summary>
         /// div_input_filter_unit control.
         /// </summary>
@@ -146,7 +148,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_input_filter_unit;
-        
+
         /// <summary>
         /// vldUnitSekolah control.
         /// </summary>
@@ -155,7 +157,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator vldUnitSekolah;
-        
+
         /// <summary>
         /// cboUnit control.
         /// </summary>
@@ -164,7 +166,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cboUnit;
-        
+
         /// <summary>
         /// vldNama control.
         /// </summary>
@@ -173,7 +175,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator vldNama;
-        
+
         /// <summary>
         /// txtNama control.
         /// </summary>
@@ -182,7 +184,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtNama;
-        
+
         /// <summary>
         /// txtAlias control.
         /// </summary>
@@ -191,7 +193,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtAlias;
-        
+
         /// <summary>
         /// vldJenis control.
         /// </summary>
@@ -200,7 +202,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RequiredFieldValidator vldJenis;
-        
+
         /// <summary>
         /// cboJenis control.
         /// </summary>
@@ -209,7 +211,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DropDownList cboJenis;
-        
+
         /// <summary>
         /// txtKeterangan control.
         /// </summary>
@@ -218,7 +220,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtKeterangan;
-        
+
         /// <summary>
         /// lnkOKInput control.
         /// </summary>
@@ -227,7 +229,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkOKInput;
-        
+
         /// <summary>
         /// ltrMsgConfirmHapus control.
         /// </summary>
@@ -236,7 +238,7 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal ltrMsgConfirmHapus;
-        
+
         /// <summary>
         /// lnkOKHapus control.
         /// </summary>
@@ -245,15 +247,17 @@ namespace AI_ERP.Application_Modules.CBT {
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton lnkOKHapus;
-        
+
         /// <summary>
         /// Master property.
         /// </summary>
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new AI_ERP.Application_Masters.Main Master {
-            get {
+        public new AI_ERP.Application_Masters.Main Master
+        {
+            get
+            {
                 return ((AI_ERP.Application_Masters.Main)(base.Master));
             }
         }

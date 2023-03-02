@@ -7,13 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AI_ERP.Application_Modules.CBT
-{
-
-
-    public partial class wf_BankSoal_View
-    {
-
+namespace AI_ERP.Application_Modules.CBT {
+    
+    
+    public partial class wf_MapelCBT {
+        
         /// <summary>
         /// upProgressMain control.
         /// </summary>
@@ -22,7 +20,7 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdateProgress upProgressMain;
-
+        
         /// <summary>
         /// upMain control.
         /// </summary>
@@ -31,189 +29,232 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.UpdatePanel upMain;
-
+        
         /// <summary>
-        /// txtSoal control.
+        /// txtKeyAction control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtSoal;
-
+        protected global::System.Web.UI.WebControls.HiddenField txtKeyAction;
+        
         /// <summary>
-        /// EssayDiv control.
+        /// txtID control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl EssayDiv;
-
+        protected global::System.Web.UI.WebControls.HiddenField txtID;
+        
         /// <summary>
-        /// txtJwbEssay control.
+        /// btnDoCari control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtJwbEssay;
-
+        protected global::System.Web.UI.WebControls.Button btnDoCari;
+        
         /// <summary>
-        /// GandaDiv control.
+        /// btnShowDetail control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.HtmlControls.HtmlGenericControl GandaDiv;
-
+        protected global::System.Web.UI.WebControls.Button btnShowDetail;
+        
         /// <summary>
-        /// hdKodejwbGanda1 control.
+        /// btnShowConfirmDelete control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda1;
-
+        protected global::System.Web.UI.WebControls.Button btnShowConfirmDelete;
+        
         /// <summary>
-        /// ChkJwbGanda1 control.
+        /// mvMain control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda1;
-
+        protected global::System.Web.UI.WebControls.MultiView mvMain;
+        
         /// <summary>
-        /// txtJwbGanda1 control.
+        /// vList control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtJwbGanda1;
-
+        protected global::System.Web.UI.WebControls.View vList;
+        
         /// <summary>
-        /// hdKodejwbGanda2 control.
+        /// lvData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda2;
-
+        protected global::System.Web.UI.WebControls.ListView lvData;
+        
         /// <summary>
-        /// ChkJwbGanda2 control.
+        /// sql_ds control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda2;
-
+        protected global::System.Web.UI.WebControls.SqlDataSource sql_ds;
+        
         /// <summary>
-        /// txtJwbGanda2 control.
+        /// dpData control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtJwbGanda2;
-
+        protected global::System.Web.UI.WebControls.DataPager dpData;
+        
         /// <summary>
-        /// hdKodejwbGanda3 control.
+        /// div_button_settings control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda3;
-
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_button_settings;
+        
         /// <summary>
-        /// ChkJwbGanda3 control.
+        /// btnRefresh control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda3;
-
+        protected global::System.Web.UI.WebControls.LinkButton btnRefresh;
+        
         /// <summary>
-        /// txtJwbGanda3 control.
+        /// div_input_filter_unit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtJwbGanda3;
-
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl div_input_filter_unit;
+        
         /// <summary>
-        /// hdKodejwbGanda4 control.
+        /// vldUnitSekolah control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda4;
-
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldUnitSekolah;
+        
         /// <summary>
-        /// ChkJwbGanda4 control.
+        /// cboUnit control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda4;
-
+        protected global::System.Web.UI.WebControls.DropDownList cboUnit;
+        
         /// <summary>
-        /// txtJwbGanda4 control.
+        /// vldNama control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtJwbGanda4;
-
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldNama;
+        
         /// <summary>
-        /// hdKodejwbGanda5 control.
+        /// txtNama control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda5;
-
+        protected global::System.Web.UI.WebControls.TextBox txtNama;
+        
         /// <summary>
-        /// ChkJwbGanda5 control.
+        /// txtAlias control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda5;
-
+        protected global::System.Web.UI.WebControls.TextBox txtAlias;
+        
         /// <summary>
-        /// txtJwbGanda5 control.
+        /// vldJenis control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Literal txtJwbGanda5;
-
+        protected global::System.Web.UI.WebControls.RequiredFieldValidator vldJenis;
+        
+        /// <summary>
+        /// cboJenis control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.DropDownList cboJenis;
+        
+        /// <summary>
+        /// txtKeterangan control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.TextBox txtKeterangan;
+        
+        /// <summary>
+        /// lnkOKInput control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkOKInput;
+        
+        /// <summary>
+        /// ltrMsgConfirmHapus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal ltrMsgConfirmHapus;
+        
+        /// <summary>
+        /// lnkOKHapus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkOKHapus;
+        
         /// <summary>
         /// Master property.
         /// </summary>
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new AI_ERP.Application_Masters.Second Master
-        {
-            get
-            {
-                return ((AI_ERP.Application_Masters.Second)(base.Master));
+        public new AI_ERP.Application_Masters.Main Master {
+            get {
+                return ((AI_ERP.Application_Masters.Main)(base.Master));
             }
         }
     }

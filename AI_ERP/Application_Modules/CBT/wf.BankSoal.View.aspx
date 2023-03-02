@@ -73,23 +73,68 @@
                                             <label style="color: #B7770D; font-size: small;">
                                                 JAWABAN PILIHAN GANDA :
                                             </label>
-                                            <ol type="a">
+                                            <ul type="none">
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:Literal runat="server" ID="txtJwbGanda1"></asp:Literal></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda1" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:Literal runat="server" ID="txtJwbGanda1" ></asp:Literal>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:Literal   runat="server" ID="txtJwbGanda2"></asp:Literal></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda2" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:Literal  runat="server" ID="txtJwbGanda2" ></asp:Literal>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:Literal  runat="server" ID="txtJwbGanda3"></asp:Literal></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda3" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:Literal   runat="server" ID="txtJwbGanda3" ></asp:Literal>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:Literal  runat="server" ID="txtJwbGanda4"></asp:Literal></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda4" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:Literal   runat="server" ID="txtJwbGanda4" ></asp:Literal>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:Literal  runat="server" ID="txtJwbGanda5"></asp:Literal></li>
-                                            </ol>
+                                                    <asp:HiddenField ID="hdKodejwbGanda5" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:Literal  runat="server" ID="txtJwbGanda5" ></asp:Literal>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>

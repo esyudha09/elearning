@@ -133,12 +133,24 @@ namespace AI_ERP
                 else
                 {
                     SessionLogin.CreateLoginAdminSession(login);
-                    Response.Redirect(
-                            ResolveUrl(
-                                AI_ERP.Application_Libs.Routing.URL.BERANDA.ROUTE +
-                                (b_test ? "?act=UC6MTowFYbG8SK5GvTWjxSvg" : "")
-                            )
-                        );
+                    if (login.NoInduk.Length > 11)
+                    {
+                        Response.Redirect(
+                                ResolveUrl(
+                                    AI_ERP.Application_Libs.Routing.URL.BERANDA_SISWA.ROUTE +
+                                    (b_test ? "?act=UC6MTowFYbG8SK5GvTWjxSvg" : "")
+                                )
+                            );
+                    }
+                    else
+                    {
+                        Response.Redirect(
+                                ResolveUrl(
+                                    AI_ERP.Application_Libs.Routing.URL.BERANDA.ROUTE +
+                                    (b_test ? "?act=UC6MTowFYbG8SK5GvTWjxSvg" : "")
+                                )
+                            );
+                    }
                 }
             }            
         }

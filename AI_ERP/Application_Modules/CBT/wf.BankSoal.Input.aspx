@@ -7,7 +7,7 @@
     <script type="text/javascript">
 
         var currentValue = 0;
-       
+
         function JenisCheck() {
 
             if (document.getElementById("<%= cboJenis.ClientID %>").value == 'essay') {
@@ -451,23 +451,68 @@
                                             <label style="color: #B7770D; font-size: small;">
                                                 JAWABAN PILIHAN GANDA :
                                             </label>
-                                            <ol type="a">
+                                            <ul type="none">
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda1" TextMode="MultiLine"></asp:TextBox></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda1" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda1" TextMode="MultiLine"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda2 " runat="server" ID="txtJwbGanda2" TextMode="MultiLine"></asp:TextBox></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda2" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda2" TextMode="MultiLine"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda3 " runat="server" ID="txtJwbGanda3" TextMode="MultiLine"></asp:TextBox></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda3" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda3" TextMode="MultiLine"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda4 " runat="server" ID="txtJwbGanda4" TextMode="MultiLine"></asp:TextBox></li>
+                                                    <asp:HiddenField ID="hdKodejwbGanda4" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda4" TextMode="MultiLine"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
                                                 <li>
-                                                    <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" />
-                                                    <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda5 " runat="server" ID="txtJwbGanda5" TextMode="MultiLine"></asp:TextBox></li>
-                                            </ol>
+                                                    <asp:HiddenField ID="hdKodejwbGanda5" runat="server" />
+                                                    <div class="row form-group">
+                                                        <div class="col-md-1 text-right">
+                                                            <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" />
+                                                        </div>
+                                                        <div class="col-md-11">
+                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda5" TextMode="MultiLine"></asp:TextBox>
+
+                                                        </div>
+                                                    </div>
+                                                </li>
+                                            </ul>
                                         </div>
                                     </div>
                                 </div>
@@ -523,7 +568,7 @@
                     </div>
                 </div>
             </div>
-            <div id="fromBankSoal" runat="server" style="display:none">
+            <div id="fromBankSoal" runat="server" style="display: none">
                 <div class="content-header ui-content-header"
                     style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 250px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">
@@ -547,7 +592,7 @@
                     </div>
                 </div>
             </div>
-            <div id="fromDesignSoal" runat="server"  style="display:none">
+            <div id="fromDesignSoal" runat="server" style="display: none">
                 <div class="content-header ui-content-header"
                     style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 560px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">

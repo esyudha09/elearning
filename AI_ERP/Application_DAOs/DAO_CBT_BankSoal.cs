@@ -7,6 +7,7 @@ using System.Data.Common;
 using System.Data.SqlClient;
 
 using AI_ERP.Application_Entities;
+using AI_ERP.APIs.Master;
 
 namespace AI_ERP.Application_DAOs
 {
@@ -15,7 +16,8 @@ namespace AI_ERP.Application_DAOs
         public const string SP_SELECT_ALL_BY_MAPEL = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL";
         public const string SP_SELECT_ALL_BY_MAPEL_FOR_SEARCH = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL_FOR_SEARCH";
         public const string SP_SELECT_BY_ID = "CBT_BANK_SOAL_SELECT_BY_ID";
-        
+        public const string SP_SELECT_JWB_GANDA_BY_HEADER = "CBT_BANK_SOAL_JWB_GANDA_SELECT_BY_HEADER";
+
         public const string SP_SELECT_BY_GURU_BY_TA = "Mapel_SELECT_BY_GURU_BY_TA";
         public const string SP_SELECT_BY_GURU_BY_TA_FOR_SEARCH = "Mapel_SELECT_BY_GURU_BY_TA_FOR_SEARCH";
 
@@ -31,9 +33,13 @@ namespace AI_ERP.Application_DAOs
 
         public const string SP_INSERT = "CBT_BANK_SOAL_INSERT";
 
+        public const string SP_JWB_GANDA_INSERT = "CBT_BANK_SOAL_JWB_GANDA_INSERT";      
+        public const string SP_JWB_GANDA_UPDATE = "CBT_BANK_SOAL_JWB_GANDA_UPDATE";
+
         public const string SP_UPDATE = "CBT_BANK_SOAL_UPDATE";
 
         public const string SP_DELETE = "CBT_BANK_SOAL_DELETE";
+        public const string SP_DELETE_JWB_GANDA = "CBT_BANK_SOAL_JWB_GANDA_DELETE";
 
         public static class NamaField
         {
@@ -43,13 +49,11 @@ namespace AI_ERP.Application_DAOs
             public const string Soal = "Soal";
             public const string Jenis = "Jenis";
             public const string JwbEssay = "JwbEssay";
-            public const string JwbGanda = "JwbGanda";
-            public const string JwbGanda1 = "JwbGanda1";
-            public const string JwbGanda2 = "JwbGanda2";
-            public const string JwbGanda3 = "JwbGanda3";
-            public const string JwbGanda4 = "JwbGanda4";
-            public const string JwbGanda5 = "JwbGanda5";
-            public const string id_output = "id_output";
+            public const string Rel_JwbGanda = "Rel_JwbGanda";
+
+            public const string Rel_BankSoal = "Rel_BankSoal";
+            public const string Jawaban = "Jawaban";
+
         }
 
         public static CBT_BankSoal GetEntityFromDataRow(DataRow row)
@@ -58,24 +62,29 @@ namespace AI_ERP.Application_DAOs
             {
                 Kode = new Guid(row[NamaField.Kode].ToString()),
                 Rel_Mapel = row[NamaField.Rel_Mapel].ToString(),
-                Rel_Guru = row[NamaField.Rel_Guru].ToString(),              
+                Rel_Guru = row[NamaField.Rel_Guru].ToString(),
                 Soal = row[NamaField.Soal].ToString(),
                 Jenis = row[NamaField.Jenis].ToString(),
                 JwbEssay = row[NamaField.JwbEssay].ToString(),
-                JwbGanda1 = row[NamaField.JwbGanda1].ToString(),
-                JwbGanda2 = row[NamaField.JwbGanda2].ToString(),
-                JwbGanda3 = row[NamaField.JwbGanda3].ToString(),
-                JwbGanda4 = row[NamaField.JwbGanda4].ToString(),
-                JwbGanda5 = row[NamaField.JwbGanda5].ToString(),
-                JwbGanda = row[NamaField.JwbGanda].ToString()
+                Rel_JwbGanda = row[NamaField.Rel_JwbGanda].ToString()
             };
         }
 
-        
+        public static CBT_BankSoalJawabGanda GetEntityFromDataRow2(DataRow row)
+        {
+            return new CBT_BankSoalJawabGanda
+            {
+                Kode = new Guid(row[NamaField.Kode].ToString()),
+                Jawaban = row[NamaField.Jawaban].ToString()
+            };
+        }
+
+
 
         public static CBT_BankSoal GetByID_Entity(string kode)
         {
             CBT_BankSoal hasil = new CBT_BankSoal();
+
             SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
             SqlCommand comm = conn.CreateCommand();
             SqlDataAdapter sqlDA;
@@ -96,6 +105,23 @@ namespace AI_ERP.Application_DAOs
                 {
                     hasil = GetEntityFromDataRow(row);
                 }
+
+                comm.Parameters.Clear();
+                comm.CommandText = SP_SELECT_JWB_GANDA_BY_HEADER;
+                comm.Parameters.AddWithValue("@" + NamaField.Rel_BankSoal, kode);
+                DataTable dtResult2 = new DataTable();
+                sqlDA = new SqlDataAdapter(comm);
+                sqlDA.Fill(dtResult2);
+
+                List<CBT_BankSoalJawabGanda> list_JwbGanda = new List<CBT_BankSoalJawabGanda>();
+                foreach (DataRow row in dtResult2.Rows)
+                {
+                    CBT_BankSoalJawabGanda j = new CBT_BankSoalJawabGanda();
+                    j = GetEntityFromDataRow2(row);
+                    list_JwbGanda.Add(j);
+                }
+
+                hasil.ListJwbGanda = list_JwbGanda;
             }
             catch (Exception ec)
             {
@@ -156,21 +182,31 @@ namespace AI_ERP.Application_DAOs
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Soal, BankSoal.Soal));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Jenis, BankSoal.Jenis));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbEssay, BankSoal.JwbEssay));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda, BankSoal.JwbGanda));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda1, BankSoal.JwbGanda1));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda2, BankSoal.JwbGanda2));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda3, BankSoal.JwbGanda3));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda4, BankSoal.JwbGanda4));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda5, BankSoal.JwbGanda5));
-                
-
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_JwbGanda, BankSoal.Rel_JwbGanda));
                 comm.Parameters.Add(new SqlParameter("@user_id", user_id));
 
+                comm.CommandText = SP_INSERT;
                 comm.ExecuteNonQuery();
+
+
+
+                foreach (CBT_BankSoalJawabGanda b in BankSoal.ListJwbGanda)
+                {
+                    comm.Parameters.Clear();
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, b.Kode));
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, BankSoal.Kode));
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Jawaban, b.Jawaban));
+                    comm.Parameters.Add(new SqlParameter("@user_id", user_id));
+                    comm.CommandText = SP_JWB_GANDA_INSERT;
+                    comm.ExecuteNonQuery();
+                }
+
+
+
                 transaction.Commit();
-                
-                
-              
+
+
+
             }
             catch (Exception ec)
             {
@@ -197,20 +233,29 @@ namespace AI_ERP.Application_DAOs
                 comm.CommandText = SP_UPDATE;
 
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, BankSoal.Kode));
-                //comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Mapel, BankSoal.Rel_Mapel));
-                //comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Guru, BankSoal.Rel_Guru));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Soal, BankSoal.Soal));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Jenis, BankSoal.Jenis));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbEssay, BankSoal.JwbEssay));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda, BankSoal.JwbGanda));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda1, BankSoal.JwbGanda1));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda2, BankSoal.JwbGanda2));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda3, BankSoal.JwbGanda3));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda4, BankSoal.JwbGanda4));
-                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbGanda5, BankSoal.JwbGanda5));               
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_JwbGanda, BankSoal.Rel_JwbGanda));
                 comm.Parameters.Add(new SqlParameter("@user_id", user_id));
-
                 comm.ExecuteNonQuery();
+
+
+                //comm.Parameters.Clear();
+                //comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, BankSoal.Kode));
+                //comm.CommandText = SP_DELETE_JWB_GANDA;
+                //comm.ExecuteNonQuery();
+
+                foreach (CBT_BankSoalJawabGanda b in BankSoal.ListJwbGanda)
+                {
+                    comm.Parameters.Clear();
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, b.Kode));                 
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Jawaban, b.Jawaban));
+                    comm.Parameters.Add(new SqlParameter("@user_id", user_id));
+                    comm.CommandText = SP_JWB_GANDA_UPDATE;
+                    comm.ExecuteNonQuery();
+                }
+
                 transaction.Commit();
             }
             catch (Exception ec)
@@ -224,8 +269,8 @@ namespace AI_ERP.Application_DAOs
             }
         }
 
-        
 
-       
+
+
     }
 }

@@ -170,132 +170,66 @@ namespace AI_ERP.Application_Modules.CBT
 
 
 
-        protected void lnkOKInput_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                CBT_BankSoal m = new CBT_BankSoal();
-                m.Rel_Mapel = Libs.GetQueryString("m");
-                m.Rel_Guru = Libs.LOGGED_USER_M.NoInduk;
 
-                //if (chkEssay.Checked)
-                //{
-                //    m.Jenis = "essay";
-                //}
-                //else if (chkGanda.Checked)
-                //{
-                //    m.Jenis = "ganda";
-                //}
-
-                // m.Jenis = cboJenis.SelectedValue;
-
-                if (ChkJwbGanda1.Checked)
-                {
-                    m.JwbGanda = "a";
-                }
-                else if (ChkJwbGanda2.Checked)
-                {
-                    m.JwbGanda = "b";
-                }
-                else if (ChkJwbGanda3.Checked)
-                {
-                    m.JwbGanda = "c";
-                }
-                else if (ChkJwbGanda4.Checked)
-                {
-                    m.JwbGanda = "d";
-                }
-                else if (ChkJwbGanda5.Checked)
-                {
-                    m.JwbGanda = "e";
-                }
-                else
-                {
-                    m.JwbGanda = "";
-                }
-
-
-
-                m.JwbEssay = txtJwbEssay.Text;
-                m.JwbGanda1 = txtJwbGanda1.Text;
-                m.JwbGanda2 = txtJwbGanda2.Text;
-                m.JwbGanda3 = txtJwbGanda3.Text;
-                m.JwbGanda4 = txtJwbGanda4.Text;
-                m.JwbGanda5 = txtJwbGanda5.Text;
-
-                DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
-
-                Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE + QS.GetURLVariable()));
-
-                //InitFields();
-                // txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
-
-            }
-            catch (Exception ex)
-            {
-
-            }
-        }
 
         protected void getData(string idsoal)
         {
 
             CBT_BankSoal m = DAO_CBT_BankSoal.GetByID_Entity(idsoal.Trim());
+
             if (m != null)
             {
                 if (m.Soal != null)
                 {
 
                     txtSoal.Text = m.Soal.ToString();
-                    //txtJenis.Text = m.Jenis.ToString();
                     txtJwbEssay.Text = m.JwbEssay.ToString();
-                    txtJwbGanda1.Text = m.JwbGanda1.ToString();
-                    txtJwbGanda2.Text = m.JwbGanda2.ToString();
-                    txtJwbGanda3.Text = m.JwbGanda3.ToString();
-                    txtJwbGanda4.Text = m.JwbGanda4.ToString();
-                    txtJwbGanda5.Text = m.JwbGanda5.ToString();
 
 
 
-
-
-                    // cboJenis.SelectedValue = m.Jenis.ToString();
                     if (m.Jenis == "essay")
                     {
                         EssayDiv.Attributes.Add("style", "display:block");
                         GandaDiv.Attributes.Add("style", "display:none");
-                        //chkEssay.Checked = true;
                     }
                     else if (m.Jenis == "ganda")
                     {
                         EssayDiv.Attributes.Add("style", "display:none");
                         GandaDiv.Attributes.Add("style", "display:block");
-                        //chkGanda.Checked = true;
                     }
 
-                    if (m.JwbGanda.ToString() == "a")
+
+
+                    txtJwbGanda1.Text = m.ListJwbGanda[0].Jawaban.ToString();
+                    txtJwbGanda2.Text = m.ListJwbGanda[1].Jawaban.ToString();
+                    txtJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
+                    txtJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
+                    txtJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
+
+
+
+
+                    if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[0].Kode.ToString())
                     {
                         ChkJwbGanda1.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "b")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[1].Kode.ToString())
                     {
                         ChkJwbGanda2.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "c")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[2].Kode.ToString())
                     {
                         ChkJwbGanda3.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "d")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[3].Kode.ToString())
                     {
                         ChkJwbGanda4.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "e")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[4].Kode.ToString())
                     {
                         ChkJwbGanda5.Checked = true;
                     }
                 }
-
-                //txtKeyAction.Value = JenisAction.DoShowData.ToString();
 
             }
         }

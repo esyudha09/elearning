@@ -212,55 +212,48 @@ namespace AI_ERP.Application_Modules.CBT
             try
             {
                 CBT_BankSoal m = new CBT_BankSoal();
+
+                m.Kode = Guid.NewGuid();
                 m.Rel_Mapel = Libs.GetQueryString("m");
                 m.Rel_Guru = Libs.LOGGED_USER_M.NoInduk;
-
-                //if (chkEssay.Checked)
-                //{
-                //    m.Jenis = "essay";
-                //}
-                //else if (chkGanda.Checked)
-                //{
-                //    m.Jenis = "ganda";
-                //}
                 m.Soal = txtSoalVal.Value;
                 m.Jenis = cboJenis.SelectedValue;
 
-                if (ChkJwbGanda1.Checked)
+                List<CBT_BankSoalJawabGanda> list_JwbGanda = new List<CBT_BankSoalJawabGanda>();
+
+                
+                bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
+                string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
+                string[] arrJwbGanda = 
+                    {
+                    txtJwbGanda1Val.Value != "" ? txtJwbGanda1Val.Value : txtJwbGanda1.Text,
+                    txtJwbGanda2Val.Value != "" ? txtJwbGanda2Val.Value : txtJwbGanda2.Text,
+                    txtJwbGanda3Val.Value != "" ? txtJwbGanda3Val.Value : txtJwbGanda3.Text,
+                    txtJwbGanda4Val.Value != "" ? txtJwbGanda4Val.Value : txtJwbGanda4.Text,
+                    txtJwbGanda5Val.Value != "" ? txtJwbGanda5Val.Value : txtJwbGanda5.Text,
+                    };
+
+                for (int i = 0; i < 5; i++)
                 {
-                    m.JwbGanda = "a";
+                    var j = new CBT_BankSoalJawabGanda
+                    {                     
+                        Kode = arrKodeJwbGanda[i] != "" ? new Guid(arrKodeJwbGanda[i]) : Guid.NewGuid(),
+                        Jawaban = arrJwbGanda[i]
+                    };
+
+                    list_JwbGanda.Add(j);
+
+                    if (arrJwbGandaChk[i])
+                        m.Rel_JwbGanda = j.Kode.ToString();
                 }
-                else if (ChkJwbGanda2.Checked)
-                {
-                    m.JwbGanda = "b";
-                }
-                else if (ChkJwbGanda3.Checked)
-                {
-                    m.JwbGanda = "c";
-                }
-                else if (ChkJwbGanda4.Checked)
-                {
-                    m.JwbGanda = "d";
-                }
-                else if (ChkJwbGanda5.Checked)
-                {
-                    m.JwbGanda = "e";
-                }
-                else
-                {
-                    m.JwbGanda = "";
-                }
+
+                m.ListJwbGanda = list_JwbGanda;
+
 
                 if (txtID.Value.Trim() != "")
                 {
 
                     m.JwbEssay = txtJwbEssayVal.Value != "" ? txtJwbEssayVal.Value : txtJwbEssay.Text;
-                    m.JwbGanda1 = txtJwbGanda1Val.Value != "" ? txtJwbGanda1Val.Value : txtJwbGanda1.Text;
-                    m.JwbGanda2 = txtJwbGanda2Val.Value != "" ? txtJwbGanda2Val.Value : txtJwbGanda2.Text;
-                    m.JwbGanda3 = txtJwbGanda3Val.Value != "" ? txtJwbGanda3Val.Value : txtJwbGanda3.Text;
-                    m.JwbGanda4 = txtJwbGanda4Val.Value != "" ? txtJwbGanda4Val.Value : txtJwbGanda4.Text;
-                    m.JwbGanda5 = txtJwbGanda5Val.Value != "" ? txtJwbGanda5Val.Value : txtJwbGanda5.Text;
-
                     m.Kode = new Guid(txtID.Value);
                     DAO_CBT_BankSoal.Update(m, Libs.LOGGED_USER_M.UserID);
                     getData(txtID.Value);
@@ -271,12 +264,6 @@ namespace AI_ERP.Application_Modules.CBT
                 {
 
                     m.JwbEssay = txtJwbEssay.Text;
-                    m.JwbGanda1 = txtJwbGanda1.Text;
-                    m.JwbGanda2 = txtJwbGanda2.Text;
-                    m.JwbGanda3 = txtJwbGanda3.Text;
-                    m.JwbGanda4 = txtJwbGanda4.Text;
-                    m.JwbGanda5 = txtJwbGanda5.Text;
-                    m.Kode = Guid.NewGuid();
                     DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
 
                     if (!string.IsNullOrEmpty(Libs.GetQueryString("rs")))
@@ -287,7 +274,7 @@ namespace AI_ERP.Application_Modules.CBT
                         d.Rel_BankSoal = m.Kode.ToString();
                         DAO_CBT_DesignSoal.Insert(d, Libs.LOGGED_USER_M.UserID);
 
-                       // btnBackToDesignSoal_Click(null, null);
+                        // btnBackToDesignSoal_Click(null, null);
                     }
                     //else
                     //{
@@ -295,6 +282,7 @@ namespace AI_ERP.Application_Modules.CBT
                     //}
 
                     //InitFields();
+                    getData(txtID.Value);
                     txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
                 }
             }
@@ -308,65 +296,68 @@ namespace AI_ERP.Application_Modules.CBT
         {
 
             CBT_BankSoal m = DAO_CBT_BankSoal.GetByID_Entity(idsoal.Trim());
+
             if (m != null)
             {
                 if (m.Soal != null)
                 {
                     txtID.Value = m.Kode.ToString();
-
                     txtSoal.Text = m.Soal.ToString();
                     txtJwbEssay.Text = m.JwbEssay.ToString();
-                    txtJwbGanda1.Text = m.JwbGanda1.ToString();
-                    txtJwbGanda2.Text = m.JwbGanda2.ToString();
-                    txtJwbGanda3.Text = m.JwbGanda3.ToString();
-                    txtJwbGanda4.Text = m.JwbGanda4.ToString();
-                    txtJwbGanda5.Text = m.JwbGanda5.ToString();
-
-                    txtSoalVal.Value = m.Soal.ToString();
-                    txtJwbEssayVal.Value = m.JwbEssay.ToString();
-                    txtJwbGanda1Val.Value = m.JwbGanda1.ToString();
-                    txtJwbGanda2Val.Value = m.JwbGanda2.ToString();
-                    txtJwbGanda3Val.Value = m.JwbGanda3.ToString();
-                    txtJwbGanda4Val.Value = m.JwbGanda4.ToString();
-                    txtJwbGanda5Val.Value = m.JwbGanda5.ToString();
 
                     cboJenis.SelectedValue = m.Jenis.ToString();
+
                     if (m.Jenis == "essay")
                     {
                         EssayDiv.Attributes.Add("style", "display:block");
                         GandaDiv.Attributes.Add("style", "display:none");
-                        //chkEssay.Checked = true;
                     }
                     else if (m.Jenis == "ganda")
                     {
                         EssayDiv.Attributes.Add("style", "display:none");
                         GandaDiv.Attributes.Add("style", "display:block");
-                        //chkGanda.Checked = true;
                     }
 
-                    if (m.JwbGanda.ToString() == "a")
+                    hdKodejwbGanda1.Value = m.ListJwbGanda[0].Kode.ToString();
+                    hdKodejwbGanda2.Value = m.ListJwbGanda[1].Kode.ToString();
+                    hdKodejwbGanda3.Value = m.ListJwbGanda[2].Kode.ToString();
+                    hdKodejwbGanda4.Value = m.ListJwbGanda[3].Kode.ToString();
+                    hdKodejwbGanda5.Value = m.ListJwbGanda[4].Kode.ToString();
+
+                    txtJwbGanda1.Text = m.ListJwbGanda[0].Jawaban.ToString();
+                    txtJwbGanda2.Text = m.ListJwbGanda[1].Jawaban.ToString();
+                    txtJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
+                    txtJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
+                    txtJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
+                   
+
+
+
+                    if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[0].Kode.ToString())
                     {
                         ChkJwbGanda1.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "b")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[1].Kode.ToString())
                     {
                         ChkJwbGanda2.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "c")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[2].Kode.ToString())
                     {
                         ChkJwbGanda3.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "d")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[3].Kode.ToString())
                     {
                         ChkJwbGanda4.Checked = true;
                     }
-                    else if (m.JwbGanda.ToString() == "e")
+                    else if (m.Rel_JwbGanda.ToString() == m.ListJwbGanda[4].Kode.ToString())
                     {
                         ChkJwbGanda5.Checked = true;
                     }
+
+
                 }
 
-                //txtKeyAction.Value = JenisAction.DoShowData.ToString();
+                txtKeyAction.Value = JenisAction.DoShowData.ToString();
 
             }
         }

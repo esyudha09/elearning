@@ -892,7 +892,7 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
                                                 html += "<td style=\"background-color: white; font-weight: normal; color: #bfbfbf; width: 30px;\">" +
                                                             
                                                         "</td>";
-                                                html += "<td style=\"padding-left: 0px; color: black; background-color: white; font-weight: bold;\">" +
+                                                html += "<td class='row' style=\"padding-left: 0px; color: black; background-color: white; font-weight: bold;\">" +
                                                             Libs.GetHTMLSimpleText(m_kp.Nama) +
                                                             "&nbsp;&nbsp;" +
                                                             "&nbsp;&nbsp;" +
@@ -906,19 +906,20 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
                                                                 ? "<sup title=\" Komponen Rapor \" class=\"badge\" style=\"background-color: #FF4081; font-weight: normal; border-radius: 0px; padding-left: 7px; padding-right: 7px; font-weight: bold; font-size: xx-small; padding-bottom: 2px; padding-top: 2px; display: initial;\">KR</sup>"
                                                                 : ""
                                                             ) +
-                                                            "<a class=\"btn btn-flat waves-attach waves-effect\" " +
+                                                           
+                                                        "</td>";
+                                                html += "<td style=\"background-color: white;\">" +
+                                                        "</td>";
+                                                html += "<td style=\"background-color: white;\">" +
+                                                        "</td>";
+                                                html += "<td style=\"background-color: white;\">" +
+                                                                "<a class=\"btn btn-flat waves-attach waves-effect\" " +
                                                                     "href=\"" + ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE) +
-                                                                            "?m=" + Libs.GetQueryString("m") + "&u=" + Libs.GetQueryString("u") + "&kp=" + m.Kode+  "&kur='KURTILAS'" + "&nama=" + Libs.GetHTMLSimpleText(m_kp.Nama) +
+                                                                            "?m=" + Libs.GetQueryString("m") + "&k=" + m_strukturnilai.Rel_Kelas +"&ta=" + m_strukturnilai.TahunAjaran +"&sm=" + m_strukturnilai.Semester + "&u=" + Libs.GetQueryString("u") + "&kp=" + m.Kode + "&kur='KURTILAS'" + "&nama=" + Libs.GetHTMLSimpleText(m_kp.Nama) +
                                                                             "\" " +
-                                                                    "style=\"margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-left: 7px; padding-right: 7px; margin-top: 2px;\">" +
-                                                                    "<i class=\"fa fa-home\"></i> Rumah Soal " +
+                                                                   ">" +
+                                                                    "<i class=\"fa fa-edit\"></i> Create " +
                                                                 "</a>" +
-                                                        "</td>";
-                                                html += "<td style=\"background-color: white;\">" +
-                                                        "</td>";
-                                                html += "<td style=\"background-color: white;\">" +
-                                                        "</td>";
-                                                html += "<td style=\"background-color: white;\">" +
                                                         "</td>";
                                                 html += "</tr>" +
                                                         s_html_deskripsi;

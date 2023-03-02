@@ -101,11 +101,12 @@ namespace AI_ERP.Application_Modules.CBT
             this.Master.ShowHeaderTools = false;
             this.Master.HeaderCardVisible = false;
 
-            
+
+            SetDropdown();
 
             if (!IsPostBack)
             {
-                SetDateDropdown();
+                
                 //InitInput();
                 InitKeyEventClient();
                 getData();
@@ -114,7 +115,7 @@ namespace AI_ERP.Application_Modules.CBT
 
         }
 
-        private void SetDateDropdown()
+        private void SetDropdown()
         {
 
             for (int i = 0; i <= 24; i++)
@@ -232,9 +233,12 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 CBT_RumahSoal m = new CBT_RumahSoal();
                 m.Rel_Mapel = Libs.GetQueryString("m");
+                m.Rel_Kelas = Libs.GetQueryString("k");
                 m.Rel_Rapor_StrukturNilai_KP = Libs.GetQueryString("kp");
                 m.Rel_Guru = Libs.LOGGED_USER_M.NoInduk;
                 m.Kurikulum = Libs.GetQueryString("kur");
+                m.TahunAjaran = Libs.GetQueryString("ta");
+                m.Semester = Libs.GetQueryString("sm");
 
 
 
@@ -285,7 +289,7 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void getData()
         {
-
+            
             CBT_RumahSoal m = DAO_CBT_RumahSoal_Input.GetByKP_Entity(Libs.GetQueryString("kp"));
             if (m != null)
             {
@@ -295,21 +299,21 @@ namespace AI_ERP.Application_Modules.CBT
                     txtID.Value = m.Kode.ToString();
                     txtNama.Text = m.Nama.ToString();
                     txtDeskripsi.Text = m.Deskripsi.ToString();
-                    DateTime startdate = Convert.ToDateTime(m.StartDatetime.ToString());
-                    DateTime enddate = Convert.ToDateTime(m.EndDatetime.ToString());
-                    
-                    if (startdate > Convert.ToDateTime("2000-01-01"))
+                    //string startdate = m.StartDatetime.ToString());
+                    //DateTime enddate = Convert.ToDateTime(m.EndDatetime.ToString());
+                    var aa = m.StartDatetime.ToString("yyyy-MM-dd HH:mm:ss");
+                    if (m.StartDatetime > Convert.ToDateTime("2000-01-01"))
                     {
-                        txtStartDate.Text = Libs.GetTanggalIndonesiaFromDate(startdate,false);
-                        cboStartJam.SelectedValue = startdate.Hour.ToString();
-                        cboStartMenit.SelectedValue = startdate.Minute.ToString();
+                        txtStartDate.Text = Libs.GetTanggalIndonesiaFromDate(m.StartDatetime,false);
+                        cboStartJam.SelectedValue = m.StartDatetime.ToString("yyyy-MM-dd HH:mm:ss").Substring(11, 2);
+                        cboStartMenit.SelectedValue = m.StartDatetime.ToString("yyyy-MM-dd HH:mm:ss").Substring (14, 2);
                     }
 
-                    if (enddate > Convert.ToDateTime("2000-01-01"))
+                    if (m.EndDatetime > Convert.ToDateTime("2000-01-01"))
                     {
-                        txtEndDate.Text = Libs.GetTanggalIndonesiaFromDate(enddate, false);
-                        cboEndJam.SelectedValue = enddate.Hour.ToString();
-                        cboEndMenit.SelectedValue = enddate.Minute.ToString();
+                        txtEndDate.Text = Libs.GetTanggalIndonesiaFromDate(m.EndDatetime, false);
+                        cboEndJam.SelectedValue = m.EndDatetime.ToString("yyyy-MM-dd HH:mm:ss").Substring(11, 2);
+                        cboEndMenit.SelectedValue = m.EndDatetime.ToString("yyyy-MM-dd HH:mm:ss").Substring(14, 2);
                     }
                     txtTimeLimit.Text = m.LimitTime.ToString();
                     cboLimitSatuan.SelectedValue = m.LimitSatuan.ToString();  

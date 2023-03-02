@@ -177,6 +177,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl GandaDiv;
 
         /// <summary>
+        /// hdKodejwbGanda1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda1;
+
+        /// <summary>
         /// ChkJwbGanda1 control.
         /// </summary>
         /// <remarks>
@@ -193,6 +202,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtJwbGanda1;
+
+        /// <summary>
+        /// hdKodejwbGanda2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda2;
 
         /// <summary>
         /// ChkJwbGanda2 control.
@@ -213,6 +231,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.TextBox txtJwbGanda2;
 
         /// <summary>
+        /// hdKodejwbGanda3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda3;
+
+        /// <summary>
         /// ChkJwbGanda3 control.
         /// </summary>
         /// <remarks>
@@ -231,6 +258,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.TextBox txtJwbGanda3;
 
         /// <summary>
+        /// hdKodejwbGanda4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda4;
+
+        /// <summary>
         /// ChkJwbGanda4 control.
         /// </summary>
         /// <remarks>
@@ -247,6 +283,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.TextBox txtJwbGanda4;
+
+        /// <summary>
+        /// hdKodejwbGanda5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda5;
 
         /// <summary>
         /// ChkJwbGanda5 control.

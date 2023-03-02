@@ -30,7 +30,10 @@ namespace AI_ERP.Application_DAOs
             public const string Kode = "Kode";
             public const string Rel_Rapor_StrukturNilai_KP = "Rel_Rapor_StrukturNilai_KP";
             public const string Rel_Mapel = "Rel_Mapel";
+            public const string Rel_Kelas = "Rel_Kelas";
             public const string Rel_Guru = "Rel_Guru";
+            public const string TahunAjaran = "TahunAjaran";
+            public const string Semester = "Semester";
             public const string Kurikulum = "Kurikulum";
             public const string Nama = "Nama";
             public const string Deskripsi = "Deskripsi";
@@ -177,8 +180,11 @@ namespace AI_ERP.Application_DAOs
 
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Guid.NewGuid()));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Mapel, RumahSoal.Rel_Mapel));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Kelas, RumahSoal.Rel_Kelas));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Guru, RumahSoal.Rel_Guru));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Rapor_StrukturNilai_KP, RumahSoal.Rel_Rapor_StrukturNilai_KP));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.TahunAjaran, RumahSoal.TahunAjaran));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Semester, RumahSoal.Semester));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kurikulum, RumahSoal.Kurikulum));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Nama, RumahSoal.Nama));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Deskripsi, RumahSoal.Deskripsi));
@@ -219,8 +225,11 @@ namespace AI_ERP.Application_DAOs
 
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, RumahSoal.Kode));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Mapel, RumahSoal.Rel_Mapel));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Kelas, RumahSoal.Rel_Kelas));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Guru, RumahSoal.Rel_Guru));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Rapor_StrukturNilai_KP, RumahSoal.Rel_Rapor_StrukturNilai_KP));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.TahunAjaran, RumahSoal.TahunAjaran));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Semester, RumahSoal.Semester));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kurikulum, RumahSoal.Kurikulum));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Nama, RumahSoal.Nama));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Deskripsi, RumahSoal.Deskripsi));
