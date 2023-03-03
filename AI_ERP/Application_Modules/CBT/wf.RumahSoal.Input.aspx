@@ -25,6 +25,7 @@
             tinymce.init({
                 mode: "exact",
                 selector: ".mcetiny_deskripsi",
+             
                 plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
                 toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight |  numlist bullist indent outdent | emoticons charmap | removeformat',
                 tinycomments_mode: 'embedded',
@@ -271,12 +272,12 @@
                                                     <label class="label-input" for="<%= txtStartDate.ClientID %>" style="text-transform: none;">Tanggal Mulai :</label>
                                                     <asp:TextBox ValidationGroup="vldInput" CssClass="form-control col-xs-10" runat="server" ID="txtStartDate"></asp:TextBox>
                                                 </div>
-                                                <div class="col-xs-1">
+                                                <div class="col-xs-2">
                                                     <label class="label-input" for="<%= cboStartJam.ClientID %>" style="text-transform: none;">Jam</label>
                                                     <asp:DropDownList runat="server" ID="cboStartJam" CssClass="form-control  col-xs-2">
                                                     </asp:DropDownList>
                                                 </div>
-                                                <div class="col-xs-1">
+                                                <div class="col-xs-2">
                                                     <label class="label-input" for="<%= cboStartMenit.ClientID %>" style="text-transform: none;">Menit</label>
                                                     <asp:DropDownList runat="server" ID="cboStartMenit" CssClass="form-control  col-xs-2">
                                                     </asp:DropDownList>
@@ -297,12 +298,12 @@
                                                     <label class="label-input" for="<%= txtEndDate.ClientID %>" style="text-transform: none;">Tanggal Selesai :</label>
                                                     <asp:TextBox ValidationGroup="vldInput" CssClass="form-control col-xs-10" runat="server" ID="txtEndDate"></asp:TextBox>
                                                 </div>
-                                                <div class="col-xs-1">
+                                                <div class="col-xs-2">
                                                     <label class="label-input" for="<%= cboEndJam.ClientID %>" style="text-transform: none;">Jam</label>
                                                     <asp:DropDownList runat="server" ID="cboEndJam" CssClass="form-control  col-xs-2">
                                                     </asp:DropDownList>
                                                 </div>
-                                                <div class="col-xs-1">
+                                                <div class="col-xs-2">
                                                     <label class="label-input" for="<%= cboEndMenit.ClientID %>" style="text-transform: none;">Menit</label>
                                                     <asp:DropDownList runat="server" ID="cboEndMenit" CssClass="form-control  col-xs-2">
                                                     </asp:DropDownList>

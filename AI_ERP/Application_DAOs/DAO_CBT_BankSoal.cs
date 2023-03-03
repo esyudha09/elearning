@@ -20,6 +20,7 @@ namespace AI_ERP.Application_DAOs
 
         public const string SP_SELECT_BY_GURU_BY_TA = "Mapel_SELECT_BY_GURU_BY_TA";
         public const string SP_SELECT_BY_GURU_BY_TA_FOR_SEARCH = "Mapel_SELECT_BY_GURU_BY_TA_FOR_SEARCH";
+        public const string SP_SELECT_MAPEL_SISWA_BY_ID = "CBT_MAPEL_SISWA_SELECT_BY_ID";
 
         //public const string SP_SELECT_ALL = "CBT_BankSoal_SELECT_ALL";       
         //public const string SP_SELECT_ALL_FOR_SEARCH = "CBT_BankSoal_SELECT_ALL_FOR_SEARCH";

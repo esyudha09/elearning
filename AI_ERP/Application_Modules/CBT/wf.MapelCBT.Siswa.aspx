@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Main.Master" AutoEventWireup="true" CodeBehind="wf.MapelCBT.Siswa.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_MapelCBT" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Main.Master" AutoEventWireup="true" CodeBehind="wf.MapelCBT.Siswa.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_MapelCBT_Siswa" %>
 
 <%@ MasterType VirtualPath="~/Application_Masters/Main.Master" %>
 <%@ Register TagPrefix="ucl" TagName="PostbackUpdateProgress" Src="~/Application_Controls/Res/PostbackUpdateProgress.ascx" %>
@@ -112,7 +112,7 @@
             }
         }
 
-        function InitModalFocus() {
+        <%--function InitModalFocus() {
             $('#ui_modal_input_data').on('shown.bs.modal', function () {
                 if (document.getElementById("<%= cboUnit.ClientID %>") !== undefined && document.getElementById("<%= cboUnit.ClientID %>") !== null) {
                     document.getElementById("<%= cboUnit.ClientID %>").focus();
@@ -121,7 +121,7 @@
                     document.getElementById("<%= txtNama.ClientID %>").focus();
                 }
             });
-        }
+        }--%>
 
         function TriggerSave() {
             tinyMCE.triggerSave();
@@ -142,8 +142,8 @@
             <asp:HiddenField runat="server" ID="txtID" />
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCari" OnClick="btnDoCari_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
-            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowDetail" OnClick="btnShowDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
-            <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
+            <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowDetail" OnClick="btnShowDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
+            <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                 <div class="col-xs-12">
@@ -185,11 +185,13 @@
                                                                         </th>--%>
                                                                         <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Unit Sekolah, Mata Pelajaran
                                                                         </th>
-                                                                        <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Alias
+                                                                        <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">KP
                                                                         </th>
-                                                                        <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Jenis
+                                                                        <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Mulai
                                                                         </th>
-                                                                        <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Keterangan
+                                                                        <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Akhir
+                                                                        </th>
+                                                                        <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;">Guru
                                                                         </th>
                                                                         <th style="background-color: #3367d6; text-align: left; padding-left: 10px; vertical-align: middle;"></th>
                                                                     </tr>
@@ -235,51 +237,59 @@
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none; color: #1DA1F2;">
                                                                     <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Unit").ToString())
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kelas").ToString())
                                                                     %>
                                                                 </span>
                                                                 <br />
                                                                 <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
                                                                     <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Nama").ToString())
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("NamaMapel").ToString())
+                                                                    %>
+                                                                </span>
+                                                            </td>
+                                                      
+                                                            <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
+                                                                <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
+                                                                    <%# 
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("NamaKP").ToString())
                                                                     %>
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Alias").ToString())
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Convert.ToDateTime(Eval("StartDateTime").ToString()).ToString("dd MMMM yyyy HH:mm:ss")) 
                                                                     %>
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Jenis").ToString())
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Convert.ToDateTime(Eval("EndDateTime").ToString()).ToString("dd MMMM yyyy HH:mm:ss")) 
                                                                     %>
                                                                 </span>
                                                             </td>
-                                                            <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
+                                                              <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Keterangan").ToString())
+                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("NamaGuru").ToString())
                                                                     %>
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-                                                                <%--<label
-                                                                    onclick="GoToURL('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString()) %>&u=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Unit").ToString()) %>');"
+                                                                <label
+                                                                    onclick="GoToURL('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE) %>?rs=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Rel_RumahSoal").ToString()) %>');"
                                                                     title=" Lihat Rumah Soal"
                                                                     style="margin-left: 10px; float: right; padding: 0px; padding-left: 15px; padding-right: 15px; cursor: pointer; color: cadetblue; border-width: 1px; border-style: solid; border-color: cadetblue; border-radius: 10px; font-size: 9pt;">
                                                                     Rumah Soal
-                                                                </label>--%>
-                                                                <asp:LinkButton OnClick="btnRumahSoal_Click" CssClass="btn btn-green waves-attach waves-light " runat="server" ID="btnRumahSoal" CommandArgument ='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())+","+ AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Unit").ToString())%>' Text ="Rumah Soal"> </asp:LinkButton>                                                                                                                                                                                 
-                                                                <label
+                                                                </label>
+                                                                <%--<asp:LinkButton OnClick="btnRumahSoal_Click" CssClass="btn btn-green waves-attach waves-light " runat="server" ID="btnRumahSoal" CommandArgument ='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())+","+ AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Unit").ToString())%>' Text ="Rumah Soal"> </asp:LinkButton>--%>                                                                                                                                                                                 
+                                                                <%--<label
                                                                     onclick="GoToURL('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString()) %>');"
                                                                     title=" Lihat Data Soal" class="btn btn-brand"
                                                                     >
                                                                     Bank Soal
-                                                                </label>
+                                                                </label>--%>
 
                                                             </td>
                                                         </tr>
@@ -349,20 +359,7 @@
                                                 </div>
                                             </div>
 
-                                            <div class="fbtn-container" id="div_button_settings" runat="server">
-                                                <div class="fbtn-inner">
-                                                    <a class="fbtn fbtn-lg fbtn-brand-accent waves-attach waves-circle waves-light" data-toggle="dropdown" style="background-color: #a91212;" title=" Pilihan ">
-                                                        <span class="fbtn-ori icon"><span class="fa fa-cogs"></span></span>
-                                                        <span class="fbtn-sub icon"><span class="fa fa-cogs"></span></span>
-                                                    </a>
-                                                    <div class="fbtn-dropup" style="z-index: 999999;">
-                                                        <asp:LinkButton OnClick="btnRefresh_Click" CssClass="fbtn fbtn-brand-accent waves-attach waves-circle waves-light" runat="server" ID="btnRefresh" title=" Refresh " Style="background-color: #601B70; color: white;">
-                                                            <span class="fbtn-text fbtn-text-left">Refresh Data</span>
-                                                            <i class="fa fa-refresh"></i>
-                                                        </asp:LinkButton>
-                                                    </div>
-                                                </div>
-                                            </div>
+                                           
 
                                         </asp:View>
                                     </asp:MultiView>
@@ -377,142 +374,10 @@
                 </div>
             </div>
 
-            <div aria-hidden="true" class="modal fade" id="ui_modal_input_data" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
-                <div class="modal-dialog modal-xs">
-                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-                        <div class="modal-inner"
-                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
-                            <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
-                                <div class="media-object margin-right-sm pull-left">
-                                    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
-                                </div>
-                                <div class="media-inner">
-                                    <span style="font-weight: bold;">Isi Data
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="width: 100%;">
-                                <div class="row">
-                                    <div class="col-lg-12">
-
-                                        <div style="width: 100%; background-color: white; padding-top: 15px;">
-                                            <div runat="server" id="div_input_filter_unit" class="row" style="margin-left: 30px; margin-right: 30px;">
-                                                <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-                                                    <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                                        <label class="label-input" for="<%= cboUnit.ClientID %>" style="text-transform: none;">Unit Sekolah</label>
-                                                        <asp:RequiredFieldValidator ValidationGroup="vldInput" runat="server" ID="vldUnitSekolah"
-                                                            ControlToValidate="cboUnit" Display="Dynamic" Style="float: right; font-weight: bold;"
-                                                            Text="<i class='fa fa-exclamation-triangle'></i>" ForeColor="Red" SetFocusOnError="true"></asp:RequiredFieldValidator>
-                                                        <asp:DropDownList runat="server" ID="cboUnit" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                                                <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-                                                    <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                                        <label class="label-input" for="<%= txtNama.ClientID %>" style="text-transform: none;">Nama</label>
-                                                        <asp:RequiredFieldValidator ValidationGroup="vldInput" runat="server" ID="vldNama"
-                                                            ControlToValidate="txtNama" Display="Dynamic" Style="float: right; font-weight: bold;"
-                                                            Text="<i class='fa fa-exclamation-triangle'></i>" ForeColor="Red" SetFocusOnError="true"></asp:RequiredFieldValidator>
-                                                        <asp:TextBox ValidationGroup="vldInput" CssClass="form-control" runat="server" ID="txtNama"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                                                <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-                                                    <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                                        <label class="label-input" for="<%= txtAlias.ClientID %>" style="text-transform: none;">Alias</label>
-                                                        <asp:TextBox ValidationGroup="vldInput" CssClass="form-control" runat="server" ID="txtAlias"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                                                <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-                                                    <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                                        <label class="label-input" for="<%= cboJenis.ClientID %>" style="text-transform: none;">Jenis</label>
-                                                        <asp:RequiredFieldValidator ValidationGroup="vldInput" runat="server" ID="vldJenis"
-                                                            ControlToValidate="cboJenis" Display="Dynamic" Style="float: right; font-weight: bold;"
-                                                            Text="<i class='fa fa-exclamation-triangle'></i>" ForeColor="Red" SetFocusOnError="true"></asp:RequiredFieldValidator>
-                                                        <asp:DropDownList runat="server" ID="cboJenis" CssClass="form-control"></asp:DropDownList>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                            <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                                                <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-                                                    <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                                        <label class="label-input" for="<%= txtKeterangan.ClientID %>" style="text-transform: none;">Keterangan</label>
-                                                        <asp:TextBox ValidationGroup="vldInput" CssClass="form-control" runat="server" ID="txtKeterangan"></asp:TextBox>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <p class="text-right">
-                                <asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="   OK   "></asp:LinkButton>
-                                &nbsp;&nbsp;
-                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" onclick="TriggerSave()" data-dismiss="modal">Batal</a>
-                                <br />
-                                <br />
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_hapus" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
-                <div class="modal-dialog modal-xs">
-                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-                        <div class="modal-inner"
-                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
-                            <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
-                                <div class="media-object margin-right-sm pull-left">
-                                    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
-                                </div>
-                                <div class="media-inner">
-                                    <span style="font-weight: bold;">Konfirmasi
-                                    </span>
-                                </div>
-                            </div>
-                            <div style="width: 100%;">
-                                <div class="row">
-                                    <div class="col-lg-12">
-
-                                        <div style="width: 100%; background-color: white; padding-top: 15px;">
-                                            <div class="row" style="margin-left: 15px; margin-right: 15px;">
-                                                <div class="col-xs-12">
-                                                    <div class="row" style="margin-bottom: 5px; padding-bottom: 5px;">
-                                                        <div class="col-xs-12">
-                                                            <asp:Literal runat="server" ID="ltrMsgConfirmHapus"></asp:Literal>
-                                                        </div>
-                                                    </div>
-                                                </div>
-                                            </div>
-                                        </div>
-
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                        <div class="modal-footer">
-                            <p class="text-right">
-                                <asp:LinkButton CssClass="btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKHapus" OnClick="lnkOKHapus_Click" Text="  OK  "></asp:LinkButton>
-                                <%--<a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>--%>
-                                <br />
-                                <br />
-                            </p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
+           
         </ContentTemplate>
         <Triggers>
-            <asp:PostBackTrigger ControlID="btnRefresh" />
+            <%--<asp:PostBackTrigger ControlID="btnRefresh" />--%>
             <asp:PostBackTrigger ControlID="btnDoCari" />
         </Triggers>
     </asp:UpdatePanel>

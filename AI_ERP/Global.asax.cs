@@ -864,6 +864,16 @@ namespace AI_ERP
              Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.RouteName,
              Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.FILE
          );
+            RouteTable.Routes.MapPageRoute(
+             "CBT_MAPEL_SISWA",
+             Routing.URL.APPLIACTION_MODULES.CBT.MAPEL_SISWA.RouteName,
+             Routing.URL.APPLIACTION_MODULES.CBT.MAPEL_SISWA.FILE
+         );
+            RouteTable.Routes.MapPageRoute(
+             "CBT_START_ATTEMPT",
+             Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.RouteName,
+             Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.FILE
+         );
 
             RouteTable.Routes.MapHubs();
         }

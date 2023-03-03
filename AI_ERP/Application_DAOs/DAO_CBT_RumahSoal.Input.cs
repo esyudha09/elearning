@@ -41,7 +41,9 @@ namespace AI_ERP.Application_DAOs
             public const string EndDatetime = "EndDatetime";
             public const string LimitTime = "LimitTime";
             public const string LimitSatuan = "LimitSatuan";
-            
+            public const string NamaKelas = "NamaKelas";
+            public const string NamaMapel = "NamaMapel";
+
         }
 
         public static CBT_RumahSoal GetEntityFromDataRow(DataRow row)
@@ -58,7 +60,11 @@ namespace AI_ERP.Application_DAOs
                 StartDatetime = Convert.ToDateTime(row[NamaField.StartDatetime]),
                 EndDatetime = Convert.ToDateTime(row[NamaField.EndDatetime]),
                 LimitTime = (int)row[NamaField.LimitTime],
-                LimitSatuan = row[NamaField.LimitSatuan].ToString()              
+                LimitSatuan = row[NamaField.LimitSatuan].ToString(),
+                NamaMapel = row[NamaField.NamaMapel].ToString(),
+                NamaKelas = row[NamaField.NamaKelas].ToString(),
+                TahunAjaran = row[NamaField.TahunAjaran].ToString(),
+                Semester = row[NamaField.Semester].ToString()
             };
         }
 

@@ -9,6 +9,10 @@ using AI_ERP.Application_Libs;
 using AI_ERP.Application_Entities;
 using AI_ERP.Application_DAOs;
 using static AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES;
+using Microsoft.SqlServer.Server;
+using static AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT;
+using System.Windows.Controls;
+using System.Windows.Ink;
 
 namespace AI_ERP.Application_Modules.CBT
 {
@@ -301,7 +305,7 @@ namespace AI_ERP.Application_Modules.CBT
                     txtDeskripsi.Text = m.Deskripsi.ToString();
                     //string startdate = m.StartDatetime.ToString());
                     //DateTime enddate = Convert.ToDateTime(m.EndDatetime.ToString());
-                    var aa = m.StartDatetime.ToString("yyyy-MM-dd HH:mm:ss");
+                  
                     if (m.StartDatetime > Convert.ToDateTime("2000-01-01"))
                     {
                         txtStartDate.Text = Libs.GetTanggalIndonesiaFromDate(m.StartDatetime,false);
@@ -322,7 +326,8 @@ namespace AI_ERP.Application_Modules.CBT
                 }
                 else
                 {
-
+                    txtDeskripsi.Text = "<p><img src=\"../../Application_Templates/sd header.png\" width=\"100%\"></p>";
+                                       
                     txtNama.Text = Libs.GetQueryString("nama");
 
                 }

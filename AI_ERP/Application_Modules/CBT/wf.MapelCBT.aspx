@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Main.Master" AutoEventWireup="true" CodeBehind="wf.MapelCBT.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_MapelCBT_Siswa" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Main.Master" AutoEventWireup="true" CodeBehind="wf.MapelCBT.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_MapelCBT" %>
 
 <%@ MasterType VirtualPath="~/Application_Masters/Main.Master" %>
 <%@ Register TagPrefix="ucl" TagName="PostbackUpdateProgress" Src="~/Application_Controls/Res/PostbackUpdateProgress.ascx" %>

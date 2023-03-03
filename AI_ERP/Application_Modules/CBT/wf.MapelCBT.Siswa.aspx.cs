@@ -11,7 +11,7 @@ using AI_ERP.Application_DAOs;
 
 namespace AI_ERP.Application_Modules.CBT
 {
-    public partial class wf_MapelCBT : System.Web.UI.Page
+    public partial class wf_MapelCBT_Siswa : System.Web.UI.Page
     {
         public const string SessionViewDataName = "PAGEDATAMAPEL";
 
@@ -101,48 +101,15 @@ namespace AI_ERP.Application_Modules.CBT
 
             if (!IsPostBack)
             {
-                InitInput();
-                InitKeyEventClient();
+               
+                
             }       
             BindListView(!IsPostBack, this.Master.txtCariData.Text);
         }
 
-        private void InitKeyEventClient()
-        {
-            if (IsPostBack) return;
+        
 
-            string sKeyEnter = "if(event.keyCode == 13){";
-            this.Master.txtCariData.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + btnDoCari.ClientID + "').click(); return false; }");
-            cboUnit.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + txtNama.ClientID + "').focus(); return false; }");
-            txtNama.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + txtAlias.ClientID + "').focus(); return false; }");
-            txtAlias.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + cboJenis.ClientID + "').focus(); return false; }");
-            cboJenis.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + txtKeterangan.ClientID + "').focus(); return false; }");
-            txtKeterangan.Attributes.Add("onkeydown", sKeyEnter + "document.getElementById('" + lnkOKInput.ClientID + "').click(); return false; }");
-        }
-
-        private void InitInput()
-        {
-            cboUnit.Items.Clear();
-            cboUnit.Items.Add("");
-            List<Sekolah> lst_sekolah = DAO_Sekolah.GetAll_Entity().OrderBy(m => m.UrutanJenjang).ToList();
-            div_input_filter_unit.Visible = true;
-            if (IsByAdminUnit())
-            {
-                cboUnit.Items.Clear();
-                lst_sekolah = lst_sekolah.FindAll(m => m.Kode.ToString().ToUpper().Trim() == QS.GetUnit().ToUpper().Trim()).ToList();
-                div_input_filter_unit.Visible = false;
-            }
-            foreach (Sekolah m in lst_sekolah)
-            {
-                cboUnit.Items.Add(new ListItem
-                {
-                    Value = m.Kode.ToString().ToUpper(),
-                    Text = m.Nama
-                });
-            }
-
-            Libs.JENIS_MAPEL.ListToDropdown(cboJenis, true, QS.GetUnit());
-        }
+        
 
         private void BindListView(bool isbind = true, string keyword = "")
         {
@@ -162,9 +129,10 @@ namespace AI_ERP.Application_Modules.CBT
             else
             {
                 sql_ds.SelectParameters.Clear();
-                sql_ds.SelectParameters.Add("Rel_Guru", Libs.LOGGED_USER_M.NoInduk);
+                sql_ds.SelectParameters.Add("Rel_Siswa", Libs.LOGGED_USER_M.NoInduk);
                 sql_ds.SelectParameters.Add("TahunAjaran", Libs.GetTahunAjaranNow());
-                sql_ds.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_BY_GURU_BY_TA;
+                sql_ds.SelectParameters.Add("Semester", "1");//Libs.GetSemesterByTanggal(DateTime.Today).ToString());
+                sql_ds.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_MAPEL_SISWA_BY_ID;
             }
 
             if (isbind) lvData.DataBind();
@@ -238,19 +206,11 @@ namespace AI_ERP.Application_Modules.CBT
             BindListView(true, "");
         }
 
-        protected void InitFields()
-        {
-            txtID.Value = "";
-            cboUnit.SelectedValue = (QS.GetUnit().Trim().ToUpper() != "" ? QS.GetUnit().Trim().ToUpper() : "");
-            txtNama.Text = "";
-            txtAlias.Text = "";
-            cboJenis.SelectedValue = "";
-            txtKeterangan.Text = "";
-        }
+       
 
         protected void btnDoAdd_Click(object sender, EventArgs e)
         {
-            InitFields();
+            //InitFields();
             txtKeyAction.Value = JenisAction.Add.ToString();
         }
 
@@ -271,73 +231,43 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-        protected void lnkOKInput_Click(object sender, EventArgs e)
-        {
-            try
-            {
-                Mapel m = new Mapel();
-                m.Rel_Sekolah = cboUnit.SelectedValue;
-                m.Nama = txtNama.Text;
-                m.Alias = txtAlias.Text;
-                m.Jenis = cboJenis.SelectedValue;
-                m.Keterangan = txtKeterangan.Text;
-                if (txtID.Value.Trim() != "")
-                {
-                    m.Kode = new Guid(txtID.Value);
-                    DAO_Mapel.Update(m, Libs.LOGGED_USER_M.UserID);
-                    BindListView(!IsPostBack, this.Master.txtCariData.Text.Trim());
-                    txtKeyAction.Value = JenisAction.DoUpdate.ToString();
-                }
-                else
-                {
-                    DAO_Mapel.Insert(m, Libs.LOGGED_USER_M.UserID);
-                    BindListView(!IsPostBack, this.Master.txtCariData.Text.Trim());
-                    InitFields();
-                    txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
-                }
-            }
-            catch (Exception ex)
-            {
-                txtKeyAction.Value = ex.Message;
-            }
-        }
-
-        protected void btnRumahSoal_Click(object sender, EventArgs e)
-        {
-            string[] commandArgs = (sender as LinkButton).CommandArgument.ToString().Split(new char[] { ',' });
-            string mapel = commandArgs[0];
-            string unit = commandArgs[1];
+       
+        //protected void btnRumahSoal_Click(object sender, EventArgs e)
+        //{
+        //    string[] commandArgs = (sender as LinkButton).CommandArgument.ToString().Split(new char[] { ',' });
+        //    string mapel = commandArgs[0];
+        //    string unit = commandArgs[1];
            
-            if (unit == "SMA")
-            {
-                Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?m=" + mapel + "&u=" + unit);
-            }
-            else if (unit == "SMP")
-            {
-                Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMP.ROUTE + "?m=" + mapel + "&u=" + unit);
-            }
+        //    if (unit == "SMA")
+        //    {
+        //        Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?m=" + mapel + "&u=" + unit);
+        //    }
+        //    else if (unit == "SMP")
+        //    {
+        //        Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMP.ROUTE + "?m=" + mapel + "&u=" + unit);
+        //    }
 
-        }
-        protected void btnShowDetail_Click(object sender, EventArgs e)
-        {
-            if (txtID.Value.Trim() != "")
-            {
-                Mapel m = DAO_Mapel.GetByID_Entity(txtID.Value.Trim());
-                if (m != null)
-                {
-                    if (m.Nama != null)
-                    {
-                        cboUnit.SelectedValue = m.Rel_Sekolah.Trim().ToUpper();
-                        txtID.Value = m.Kode.ToString();
-                        txtNama.Text = m.Nama;
-                        txtAlias.Text = m.Alias;
-                        Libs.JENIS_MAPEL.SelectDropdown(cboJenis, m.Jenis);
-                        txtKeterangan.Text = m.Keterangan;
-                        txtKeyAction.Value = JenisAction.DoShowData.ToString();
-                    }
-                }
-            }
-        }
+        //}
+        //protected void btnShowDetail_Click(object sender, EventArgs e)
+        //{
+        //    if (txtID.Value.Trim() != "")
+        //    {
+        //        Mapel m = DAO_Mapel.GetByID_Entity(txtID.Value.Trim());
+        //        if (m != null)
+        //        {
+        //            if (m.Nama != null)
+        //            {
+        //                cboUnit.SelectedValue = m.Rel_Sekolah.Trim().ToUpper();
+        //                txtID.Value = m.Kode.ToString();
+        //                txtNama.Text = m.Nama;
+        //                txtAlias.Text = m.Alias;
+        //                Libs.JENIS_MAPEL.SelectDropdown(cboJenis, m.Jenis);
+        //                txtKeterangan.Text = m.Keterangan;
+        //                txtKeyAction.Value = JenisAction.DoShowData.ToString();
+        //            }
+        //        }
+        //    }
+        //}
 
         protected void btnDoCari_Click(object sender, EventArgs e)
         {
@@ -346,22 +276,22 @@ namespace AI_ERP.Application_Modules.CBT
             BindListView(true, this.Master.txtCariData.Text);
         }
 
-        protected void btnShowConfirmDelete_Click(object sender, EventArgs e)
-        {
-            if (txtID.Value.Trim() != "")
-            {
-                Mapel m = DAO_Mapel.GetByID_Entity(txtID.Value.Trim());
-                if (m != null)
-                {
-                    if (m.Nama != null)
-                    {
-                        ltrMsgConfirmHapus.Text = "Hapus <span style=\"font-weight: bold;\">\"" +
-                                                            Libs.GetHTMLSimpleText(m.Nama) +
-                                                      "\"</span>?";
-                        txtKeyAction.Value = JenisAction.DoShowConfirmHapus.ToString();
-                    }
-                }
-            }
-        }
+        //protected void btnShowConfirmDelete_Click(object sender, EventArgs e)
+        //{
+        //    if (txtID.Value.Trim() != "")
+        //    {
+        //        Mapel m = DAO_Mapel.GetByID_Entity(txtID.Value.Trim());
+        //        if (m != null)
+        //        {
+        //            if (m.Nama != null)
+        //            {
+        //                ltrMsgConfirmHapus.Text = "Hapus <span style=\"font-weight: bold;\">\"" +
+        //                                                    Libs.GetHTMLSimpleText(m.Nama) +
+        //                                              "\"</span>?";
+        //                txtKeyAction.Value = JenisAction.DoShowConfirmHapus.ToString();
+        //            }
+        //        }
+        //    }
+        //}
     }
 }

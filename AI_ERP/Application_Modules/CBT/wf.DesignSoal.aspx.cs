@@ -326,7 +326,7 @@ namespace AI_ERP.Application_Modules.CBT
         protected void btnDoCariSoal_Click(object sender, EventArgs e)
         {
             this.Session[SessionViewDataName] = 0;
-            dpDataBs.SetPageProperties(0, dpData.MaximumRows, true);
+            //dpDataBs.SetPageProperties(0, dpData.MaximumRows, true);
             
             BindListBankSoalView(true,txtCariSoal.Text);
             txtKeyAction.Value = JenisAction.Add.ToString();

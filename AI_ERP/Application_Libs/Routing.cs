@@ -1626,6 +1626,24 @@ namespace AI_ERP.Application_Libs
 
                         public static string RouteName { get { return GetRouteName(ROUTE); } }
                     }
+                    
+                    public static class MAPEL_SISWA
+                    {
+                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
+                        public const string ROUTE = "~/cbt/ms";
+                        public const string FILE = "~/Application_Modules/CBT/wf.MapelCBT.Siswa.aspx";
+
+                        public static string RouteName { get { return GetRouteName(ROUTE); } }
+                    }
+                    
+                    public static class START_ATTEMPT
+                    {
+                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
+                        public const string ROUTE = "~/cbt/sa";
+                        public const string FILE = "~/Application_Modules/CBT/wf.StartAttempt.aspx";
+
+                        public static string RouteName { get { return GetRouteName(ROUTE); } }
+                    }
                 }
             }
 

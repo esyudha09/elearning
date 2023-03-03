@@ -1777,7 +1777,7 @@ namespace AI_ERP
                           
                                                             "<div class=\"tooltip\">" +
                                                                 "<a class=\"btn btn-flat waves-attach waves-effect\" " +
-                                                                    "href=\"" + ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.ROUTE) +
+                                                                    "href=\"" + ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.MAPEL_SISWA.ROUTE) +
                                                                          //"?rs=" + Libs.LOGGED_USER_M.NoInduk ""
                                                                             "\" " +
                                                                     "style=\"margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;\">" +

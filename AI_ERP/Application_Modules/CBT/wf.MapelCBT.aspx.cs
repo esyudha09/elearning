@@ -11,7 +11,7 @@ using AI_ERP.Application_DAOs;
 
 namespace AI_ERP.Application_Modules.CBT
 {
-    public partial class wf_MapelCBT_Siswa : System.Web.UI.Page
+    public partial class wf_MapelCBT : System.Web.UI.Page
     {
         public const string SessionViewDataName = "PAGEDATAMAPEL";
 

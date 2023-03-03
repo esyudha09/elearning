@@ -1198,6 +1198,7 @@
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\I-C.jpg" />
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\KEPSEK_SD.jpg" />
     <Content Include="Application_Modules\CBT\wf.BankSoal.View.aspx" />
+    <Content Include="Application_Modules\CBT\wf.StartAttempt.aspx" />
     <Content Include="Application_Modules\CBT\wf.DesignSoal.aspx" />
     <Content Include="Application_Modules\CBT\wf.MapelCBT.Siswa.aspx" />
     <Content Include="Application_Modules\CBT\wf.RumahSoal.Input.aspx" />
@@ -1397,6 +1398,7 @@
     <Content Include="Application_Templates\material-master\css\base.min-20200113h.css" />
     <Content Include="Application_Templates\material-master\js\base.js" />
     <Content Include="Application_Templates\material-master\js\base.ok.js" />
+    <Content Include="Application_Templates\sd header.png" />
     <Content Include="Logout.aspx" />
     <Content Include="wf.Dashboard.Siswa.aspx" />
     <Content Include="wf.UbahPassword.aspx" />
@@ -2779,6 +2781,13 @@
     </Compile>
     <Compile Include="Application_Modules\CBT\wf.BankSoal.View.aspx.designer.cs">
       <DependentUpon>wf.BankSoal.View.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.StartAttempt.aspx.cs">
+      <DependentUpon>wf.StartAttempt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.StartAttempt.aspx.designer.cs">
+      <DependentUpon>wf.StartAttempt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application_Modules\CBT\wf.DesignSoal.aspx.cs">
       <DependentUpon>wf.DesignSoal.aspx</DependentUpon>

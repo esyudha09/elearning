@@ -11,7 +11,7 @@ namespace AI_ERP.Application_Modules.CBT
 {
 
 
-    public partial class wf_MapelCBT_Siswa
+    public partial class wf_StartAttempt
     {
 
         /// <summary>
@@ -51,58 +51,58 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.HiddenField txtID;
 
         /// <summary>
-        /// btnDoCari control.
+        /// txtMapel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Button btnDoCari;
+        protected global::System.Web.UI.WebControls.Literal txtMapel;
 
         /// <summary>
-        /// mvMain control.
+        /// txtKelas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.MultiView mvMain;
+        protected global::System.Web.UI.WebControls.Literal txtKelas;
 
         /// <summary>
-        /// vList control.
+        /// txtTahunAjaran control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.View vList;
+        protected global::System.Web.UI.WebControls.Literal txtTahunAjaran;
 
         /// <summary>
-        /// lvData control.
+        /// txtSemester control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.ListView lvData;
+        protected global::System.Web.UI.WebControls.Literal txtSemester;
 
         /// <summary>
-        /// sql_ds control.
+        /// txtNamaKP control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.SqlDataSource sql_ds;
+        protected global::System.Web.UI.WebControls.Literal txtNamaKP;
 
         /// <summary>
-        /// dpData control.
+        /// txtDeskripsi control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.DataPager dpData;
+        protected global::System.Web.UI.WebControls.Literal txtDeskripsi;
 
         /// <summary>
         /// Master property.

@@ -52,6 +52,8 @@ namespace AI_ERP.Application_Entities
         public DateTime EndDatetime { get; set; }
         public int LimitTime { get; set; }
         public string LimitSatuan { get; set; }
+        public string NamaKelas { get; set; }
+        public string NamaMapel { get; set; }   
     }
 
     public class CBT_DesignSoal

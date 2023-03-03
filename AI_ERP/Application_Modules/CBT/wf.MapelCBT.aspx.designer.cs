@@ -11,7 +11,7 @@ namespace AI_ERP.Application_Modules.CBT
 {
 
 
-    public partial class wf_MapelCBT_Siswa
+    public partial class wf_MapelCBT
     {
 
         /// <summary>
