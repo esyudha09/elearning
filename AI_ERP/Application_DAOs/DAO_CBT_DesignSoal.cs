@@ -18,6 +18,8 @@ namespace AI_ERP.Application_DAOs
         
         public const string SP_SELECT_BY_ID = "CBT_DESIGN_SOAL_SELECT_BY_ID";
         public const string SP_SELECT_BY_RS = "CBT_DESIGN_SOAL_SELECT_BY_RS";
+        public const string SP_SELECT_JWB_BY_DS_SISWA = "CBT_DESIGN_SOAL_JWB_SELECT_BY_RS_BY_SISWA";
+        public const string SP_SELECT_JWB_BY_RS_SISWA = "CBT_JWB_BY_RS_BY_SISWA";
                 
         public const string SP_INSERT = "CBT_DESIGN_SOAL_INSERT";
 
@@ -35,7 +37,12 @@ namespace AI_ERP.Application_DAOs
             public const string Rel_BankSoal = "Rel_BankSoal";          
             public const string Skor = "Skor";
             public const string Urut = "Urut";
-                         
+            public const string JwbEssay = "JwbEssay";
+            public const string Rel_JwbGanda = "Rel_JwbGanda";
+            public const string Rel_Siswa = "Rel_Siswa";
+            public const string Rel_Jwb = "Rel_Jwb";
+            public const string Rel_DesignSoal = "Rel_DesignSoal";
+
         }
 
         public static CBT_DesignSoal GetEntityFromDataRow(DataRow row)
@@ -49,8 +56,34 @@ namespace AI_ERP.Application_DAOs
                             
             };
         }
-
         
+        public static CBT_Jwb GetEntityJwbFromDataRow(DataRow row)
+        {
+            return new CBT_Jwb
+            {
+                Kode = new Guid(row[NamaField.Kode].ToString()),
+                Rel_RumahSoal = row[NamaField.Rel_RumahSoal].ToString(),
+                Rel_DesignSoal = row[NamaField.Rel_DesignSoal].ToString(),
+                Rel_Siswa = row[NamaField.Rel_Siswa].ToString(),
+                Rel_JwbGanda = row[NamaField.Rel_JwbGanda].ToString(),
+                JwbEssay = row[NamaField.JwbEssay].ToString(),
+            };
+        }
+        
+        
+        //public static CBT_DesignSoalJwb GetEntityJwbFromDataRow(DataRow row)
+        //{
+        //    return new CBT_DesignSoalJwb
+        //    {
+        //        Kode = new Guid(row[NamaField.Kode].ToString()),
+        //        Rel_RumahSoal = row[NamaField.Rel_RumahSoal].ToString(),
+        //        Rel_BankSoal = row[NamaField.Rel_BankSoal].ToString(),
+        //        Rel_Siswa = row[NamaField.Rel_Siswa].ToString(),
+        //        Rel_Jwb = row[NamaField.Rel_Jwb].ToString(),
+        //    };
+        //}
+        
+               
 
         public static CBT_DesignSoal GetByRumahSoal_Entity(string Rel_RumahSoal)
         {
@@ -87,6 +120,8 @@ namespace AI_ERP.Application_DAOs
 
             return hasil;
         }
+        
+       
 
         public static CBT_DesignSoal GetByID_Entity(string kode)
         {

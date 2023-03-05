@@ -234,7 +234,7 @@
                                         <asp:View runat="server" ID="vList">
 
                                             <div style="padding: 0px; margin: 0px;">
-                                                <asp:ListView ID="lvData" DataSourceID="sql_ds" runat="server" OnSorting="lvData_Sorting" OnPagePropertiesChanging="lvData_PagePropertiesChanging">
+                                                <asp:ListView ID="lvData" DataSourceID="sql_ds" runat="server"  >
                                                     <LayoutTemplate>
                                                         <div class="table-responsive" style="margin: 0px; box-shadow: none;">
                                                             <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">

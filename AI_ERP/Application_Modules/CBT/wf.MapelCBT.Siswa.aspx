@@ -23,7 +23,7 @@
         }
 
         function EndRequest() {
-            alert("asdf")
+          
             var jenis_act = document.getElementById("<%= txtKeyAction.ClientID %>").value;
 
             switch (jenis_act) {
@@ -112,16 +112,17 @@
             }
         }
 
-        <%--function InitModalFocus() {
-            $('#ui_modal_input_data').on('shown.bs.modal', function () {
+        function InitModalFocus() {
+
+           <%-- $('#ui_modal_input_data').on('shown.bs.modal', function () {
                 if (document.getElementById("<%= cboUnit.ClientID %>") !== undefined && document.getElementById("<%= cboUnit.ClientID %>") !== null) {
                     document.getElementById("<%= cboUnit.ClientID %>").focus();
                 }
                 else {
                     document.getElementById("<%= txtNama.ClientID %>").focus();
                 }
-            });
-        }--%>
+            });--%>
+        }
 
         function TriggerSave() {
             tinyMCE.triggerSave();
@@ -172,7 +173,7 @@
                                         <asp:View runat="server" ID="vList">
 
                                             <div style="padding: 0px; margin: 0px;">
-                                                <asp:ListView ID="lvData" DataSourceID="sql_ds" runat="server" OnSorting="lvData_Sorting" OnPagePropertiesChanging="lvData_PagePropertiesChanging">
+                                                <asp:ListView ID="lvData" DataSourceID="sql_ds" runat="server"  OnPagePropertiesChanging="lvData_PagePropertiesChanging">
                                                     <LayoutTemplate>
                                                         <div class="table-responsive" style="margin: 0px; box-shadow: none;">
                                                             <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">
@@ -258,14 +259,14 @@
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Convert.ToDateTime(Eval("StartDateTime").ToString()).ToString("dd MMMM yyyy HH:mm:ss")) 
+                                                                        AI_ERP.Application_Libs.Libs.GetTanggalIndonesiaFromDate(Convert.ToDateTime(Eval("StartDateTime")),true) 
                                                                     %>
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
                                                                 <span style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <%# 
-                                                                        AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Convert.ToDateTime(Eval("EndDateTime").ToString()).ToString("dd MMMM yyyy HH:mm:ss")) 
+                                                                        AI_ERP.Application_Libs.Libs.GetTanggalIndonesiaFromDate(Convert.ToDateTime(Eval("EndDateTime")),true) 
                                                                     %>
                                                                 </span>
                                                             </td>
@@ -331,7 +332,7 @@
                                                 style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
 
                                                 <div style="padding-left: 15px;">
-                                                    <asp:DataPager ID="dpData" runat="server" PageSize="100" PagedControlID="lvData">
+                                                    <asp:DataPager ID="dpData" runat="server" PageSize="2" PagedControlID="lvData">
                                                         <Fields>
                                                             <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowFirstPageButton="True" FirstPageText='&nbsp;<i class="fa fa-backward"></i>&nbsp;' ShowPreviousPageButton="True" PreviousPageText='&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;' ShowNextPageButton="false" />
                                                             <asp:TemplatePagerField>

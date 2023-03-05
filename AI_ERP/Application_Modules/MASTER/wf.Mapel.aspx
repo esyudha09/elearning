@@ -316,7 +316,7 @@
                                                         padding: 8px; margin: 0px;">
                 	
                                                 <div style="padding-left: 15px;">
-				                                    <asp:DataPager ID="dpData" runat="server" PageSize="100" PagedControlID="lvData">
+				                                    <asp:DataPager ID="dpData" runat="server" PageSize="1" PagedControlID="lvData">
                                                         <Fields>
                                                             <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowFirstPageButton="True" FirstPageText='&nbsp;<i class="fa fa-backward"></i>&nbsp;' ShowPreviousPageButton="True" PreviousPageText='&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;' ShowNextPageButton="false" />
                                                             <asp:TemplatePagerField>

@@ -101,7 +101,7 @@ namespace AI_ERP.Application_Modules.CBT
 
             if (!IsPostBack)
             {
-               
+                var a = 10;
                 
             }       
             BindListView(!IsPostBack, this.Master.txtCariData.Text);

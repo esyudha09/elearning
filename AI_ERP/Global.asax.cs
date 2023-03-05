@@ -874,6 +874,11 @@ namespace AI_ERP
              Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.RouteName,
              Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.FILE
          );
+            RouteTable.Routes.MapPageRoute(
+             "CBT_ATTEMPT",
+             Routing.URL.APPLIACTION_MODULES.CBT.ATTEMPT.RouteName,
+             Routing.URL.APPLIACTION_MODULES.CBT.ATTEMPT.FILE
+         );
 
             RouteTable.Routes.MapHubs();
         }

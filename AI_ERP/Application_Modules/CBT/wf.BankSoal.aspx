@@ -110,13 +110,13 @@
 
             RenderDropDownOnTables();
             InitModalFocus();
-            document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
+            <%--document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
             Sys.Browser.WebKit = {};
             if (navigator.userAgent.indexOf('WebKit/') > -1) {
                 Sys.Browser.agent = Sys.Browser.WebKit;
                 Sys.Browser.version = parseFloat(navigator.userAgent.match(/WebKit\/(\d+(\.\d+)?)/)[1]);
                 Sys.Browser.name = 'WebKit';
-            }
+            }--%>
         }
 
         function InitModalFocus() {
@@ -296,16 +296,16 @@
                                                 style="background-color: white; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 10; position: fixed; bottom: 28px; right: 25px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px;">
 
                                                 <div style="padding-left: 15px;">
-                                                    <asp:DataPager ID="dpData" runat="server" PageSize="100" PagedControlID="lvData">
+                                                    <asp:DataPager ID="dpData" runat="server" PageSize="1" PagedControlID="lvData">
                                                         <Fields>
                                                             <asp:NextPreviousPagerField ButtonType="Link" ButtonCssClass="btn-trans" ShowFirstPageButton="True" FirstPageText='&nbsp;<i class="fa fa-backward"></i>&nbsp;' ShowPreviousPageButton="True" PreviousPageText='&nbsp;<i class="fa fa-arrow-left"></i>&nbsp;' ShowNextPageButton="false" />
                                                             <asp:TemplatePagerField>
                                                                 <PagerTemplate>
                                                                     <label style="color: grey; font-weight: normal; padding: 5px; border-style: solid; border-color: #F1F1F1; border-width: 1px; padding-left: 10px; padding-right: 10px; border-radius: 5px;">
                                                                         Hal.
-                                                                        <%# ((Container.StartRowIndex + 1) / (Container.PageSize)) + 1 %>
+                                                                        <%# ((Container.StartRowIndex + 1) / (Container.PageSize)) %>
                                                                         &nbsp;/&nbsp;
-                                                                        <%# Math.Floor(Convert.ToDecimal((Container.TotalRowCount) / (Container.PageSize))) + 1 %>
+                                                                        <%# Math.Floor(Convert.ToDecimal((Container.TotalRowCount) / (Container.PageSize))) %>
                                                                     </label>
                                                                 </PagerTemplate>
                                                             </asp:TemplatePagerField>

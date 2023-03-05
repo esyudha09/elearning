@@ -151,6 +151,7 @@ namespace AI_ERP.Application_Modules.CBT
                 }
             }
 
+            cboLimitSatuan.Items.Add(new ListItem("", ""));
             cboLimitSatuan.Items.Add(new ListItem("Minggu", "Minggu"));
             cboLimitSatuan.Items.Add(new ListItem("Hari", "Hari"));
             cboLimitSatuan.Items.Add(new ListItem("Jam", "Jam"));

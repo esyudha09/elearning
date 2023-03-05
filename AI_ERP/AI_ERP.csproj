@@ -1197,6 +1197,7 @@
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\I-B.jpg" />
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\I-C.jpg" />
     <Content Include="Application_Files\Rapor\__TTD\2019-2020-02\KEPSEK_SD.jpg" />
+    <Content Include="Application_Modules\CBT\wf.Attempt.aspx" />
     <Content Include="Application_Modules\CBT\wf.BankSoal.View.aspx" />
     <Content Include="Application_Modules\CBT\wf.StartAttempt.aspx" />
     <Content Include="Application_Modules\CBT\wf.DesignSoal.aspx" />
@@ -2774,6 +2775,13 @@
     </Compile>
     <Compile Include="Application_Masters\Main.Master.designer.cs">
       <DependentUpon>Main.Master</DependentUpon>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.Attempt.aspx.cs">
+      <DependentUpon>wf.Attempt.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.Attempt.aspx.designer.cs">
+      <DependentUpon>wf.Attempt.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application_Modules\CBT\wf.BankSoal.View.aspx.cs">
       <DependentUpon>wf.BankSoal.View.aspx</DependentUpon>

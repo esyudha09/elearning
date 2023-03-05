@@ -111,24 +111,57 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void GetData()
         {
+            
             CBT_RumahSoal m = DAO_CBT_RumahSoal_Input.GetByID_Entity(Libs.GetQueryString("rs"));
 
             if(m != null)
             {
 
+                txtHeader.Text = "<img src=\"../../Application_Templates/sd header.png\" width=\"100%\">";
+
+
                 txtNamaKP.Text = m.Nama.ToString();
+               
                 txtDeskripsi.Text = m.Deskripsi.ToString(); 
                 txtKelas.Text = m.NamaKelas.ToString();
                 txtMapel.Text = m.NamaMapel.ToString();
                 txtTahunAjaran.Text = m.TahunAjaran.ToString();
                 txtSemester.Text = m.Semester.ToString();
+                txtStart.Text = Libs.GetTanggalIndonesiaFromDate(m.StartDatetime,true);
+               txtEnd.Text = Libs.GetTanggalIndonesiaFromDate(m.EndDatetime,true);
+                txtLimit.Text = m.LimitTime.ToString() + " " + m.LimitSatuan.ToString();
 
-                
+                if (m.LimitTime != 0)
+                {
+                    divStart.Attributes.Add("style", "display:none");
+                    divEnd.Attributes.Add("style", "display:none");
+                    divLimit.Attributes.Add("style", "display:block");
+                }
+                else
+                {
+                    divStart.Attributes.Add("style", "display:block");
+                    divEnd.Attributes.Add("style", "display:block");
+                    divLimit.Attributes.Add("style", "display:none");
+                }
+
+
+
             }
 
 
         }
 
-        
+        protected void btnAttempt_Click(object sender, EventArgs e)
+        {
+            var rs = Libs.GetQueryString("rs");
+          
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.ATTEMPT.ROUTE + "?rs=" + rs
+                        )
+                );
+        }
+
+
     }
 }

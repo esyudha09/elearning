@@ -144,146 +144,101 @@
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnDoCari" OnClick="btnDoCari_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowDetail" OnClick="btnShowDetail_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
-
-            <div class="card" style="margin-top: 10px; border-radius: 5px; border-style: solid; border-width: 1px; border-color: #dddddd; box-shadow: none;">
-                <div class="card-main" style="background: url(); background-position: bottom right; background-repeat: no-repeat;">
-                    <div class="card-action" style="background: url(/Application_CLibs/images/kelas/b.png); background-position: top right; background-color: #0AC6AE; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; background-repeat: no-repeat; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
-                        <p class="card-heading" style="margin-bottom: 0px; margin-top: 15px; color: white;">
-                            <span style="font-weight: bold; color: white; font-weight: bold; font-size: larger;"><asp:Literal ID="txtMapel" runat="server"></asp:Literal> - <asp:Literal ID="txtKelas" runat="server"></asp:Literal></span>                        
-                        </p>
-                        <div style="font-size: medium; color: white;">
-                            <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal> - <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
+            <div class="col-md-8 col-md-offset-2" style="padding: 0px;">
+                <div class="card " style="margin-top: 10px; border-radius: 5px; border-style: solid; border-width: 1px; border-color: #dddddd; box-shadow: none;">
+                    <div class="card-main" style="background: url(); background-position: bottom right; background-repeat: no-repeat;">
+                        <div class="card-action" style="background: url(/Application_CLibs/images/kelas/d.png); background-position: top right; background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; background-repeat: no-repeat; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
+                            <p class="card-heading" style="margin-bottom: 0px; margin-top: 15px; color: white;">
+                                <span style="font-weight: bold; color: white; font-weight: bold; font-size: larger;">
+                                    <asp:Literal ID="txtMapel" runat="server"></asp:Literal>
+                                    -
+                                    <asp:Literal ID="txtKelas" runat="server"></asp:Literal></span>
+                            </p>
+                            <div style="font-size: medium; color: white;">
+                                <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal>
+                                -
+                                <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
+                            </div>
+                            <div style="font-size: medium; color: white; font-weight: bold; color: yellow;">
+                                <label class="badge" style="margin-top: 10px; margin-left: -5px;">
+                                    <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
+                            </div>
+                            <p></p>
                         </div>
-                        <div style="font-size: medium; color: white; font-size: small; font-weight: bold; color: yellow;">
-                            <label class="badge" style="margin-top: 10px; margin-left: -5px;">
-                                <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
-                        </div>
-                        <p></p>
-                    </div>
-                    <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
+                        <div class="card-inner">
+
+                            <div class="col-md-12 ">
+                                <asp:Literal ID="txtHeader" runat="server"></asp:Literal>
+                            </div>
+                            <div class="col-md-12 form-group-label">
+                                <asp:Literal ID="txtDeskripsi" runat="server">Deskripsi :</asp:Literal>
+                            </div>
 
 
-                        <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                        </div>
+                            <div class="row margin-left-sm form-group-label" id="divStart" runat="server">
+                                <div class="col-md-2">
+                                    <label style="font-weight: bold">Waktu Mulai :</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <asp:Literal ID="txtStart" runat="server" />
+                                </div>
+                            </div>
 
+                            <div class="row margin-left-sm form-group-label" id="divEnd" runat="server">
+                                <div class="col-md-2">
+                                    <label style="font-weight: bold">Waktu Selesai :</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <asp:Literal ID="txtEnd" runat="server" />
+                                </div>
+                            </div>
 
-
-                        <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                            <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-                                <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                    <asp:Literal ID="txtDeskripsi" runat="server">Deskripsi :</asp:Literal>
-
+                            <div class="row margin-left-sm form-group-label" id="divLimit" runat="server">
+                                <div class="col-md-2">
+                                    <label style="font-weight: bold">Batas Waktu :</label>
+                                </div>
+                                <div class="col-md-10">
+                                    <asp:Literal ID="txtLimit" runat="server" />
                                 </div>
                             </div>
                         </div>
+                        <div class="card-action" style="padding-left: 10px; padding-right: 10px;">
+                            <div class="card-action-btn pull-left text-center col-md-12" style="margin-left: 0px; margin-right: 0px; color: grey;">
 
-                        <%-- <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                            <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
+                                <%--<a class="btn btn-flat waves-attach waves-effect" href="/e/xMzY4ODda/tl?t=99689637&amp;ft=Yi5wbmc=&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: red; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px; font-size: larger">
+                                    <i class="fa fa-folder-open"></i>Mulai
+                                </a>--%>
+                                <asp:LinkButton  OnClick="btnAttempt_Click" runat="server"><i class="fa fa-folder-open"></i> Mulai</asp:LinkButton>
 
-                                <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-
-
-                                    <div class="col-xs-8">
-                                        <label class="label-input" for="<%= txtStartDate.ClientID %>" style="text-transform: none;">Tanggal Mulai :</label>
-                                        <asp:TextBox ValidationGroup="vldInput" CssClass="form-control col-xs-10" runat="server" ID="txtStartDate"></asp:TextBox>
-                                    </div>
-                                    <div class="col-xs-1">
-                                        <label class="label-input" for="<%= cboStartJam.ClientID %>" style="text-transform: none;">Jam</label>
-                                        <asp:DropDownList runat="server" ID="cboStartJam" CssClass="form-control  col-xs-2">
-                                        </asp:DropDownList>
-                                    </div>
-                                    <div class="col-xs-1">
-                                        <label class="label-input" for="<%= cboStartMenit.ClientID %>" style="text-transform: none;">Menit</label>
-                                        <asp:DropDownList runat="server" ID="cboStartMenit" CssClass="form-control  col-xs-2">
-                                        </asp:DropDownList>
-                                    </div>
-
+                            </div>
+                            <%-- <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
+                                <div class="tooltip">
+                                    <a class="btn btn-flat waves-attach waves-effect" href="/l/93notypjdshkljfs/kp?t=99689637&amp;ft=Yi5wbmc=&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-address-book-o"></i></a>
+                                    <div class="top">Perpustakaan<i></i></div>
                                 </div>
                             </div>
-                        </div>
-
-
-                        <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                            <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-
-                                <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-
-
-                                    <div class="col-xs-8">
-                                        <label class="label-input" for="<%= txtEndDate.ClientID %>" style="text-transform: none;">Tanggal Selesai :</label>
-                                        <asp:TextBox ValidationGroup="vldInput" CssClass="form-control col-xs-10" runat="server" ID="txtEndDate"></asp:TextBox>
-                                    </div>
-                                    <div class="col-xs-1">
-                                        <label class="label-input" for="<%= cboEndJam.ClientID %>" style="text-transform: none;">Jam</label>
-                                        <asp:DropDownList runat="server" ID="cboEndJam" CssClass="form-control  col-xs-2">
-                                        </asp:DropDownList>
-                                    </div>
-                                    <div class="col-xs-1">
-                                        <label class="label-input" for="<%= cboEndMenit.ClientID %>" style="text-transform: none;">Menit</label>
-                                        <asp:DropDownList runat="server" ID="cboEndMenit" CssClass="form-control  col-xs-2">
-                                        </asp:DropDownList>
-                                    </div>
-
+                            <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
+                                <div class="tooltip">
+                                    <a class="btn btn-flat waves-attach waves-effect" href="/e/zcgfu16/vs?t=99689637&amp;ft=Yi5wbmc=&amp;s=2&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-handshake-o"></i></a>
+                                    <div class="top">Volunteer<i></i></div>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row" style="margin-left: 30px; margin-right: 30px;">
-                            <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
-
-                                <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
-                                    <div class="col-xs-12">
-                                        <label class="label-input" for="<%= txtTimeLimit.ClientID %>" style="text-transform: none;">Batas Waktu :</label>
-                                    </div>
-                                    <div class="col-xs-2">
-
-                                        <asp:TextBox ValidationGroup="vldInput" CssClass="form-control col-xs-10" runat="server" ID="txtTimeLimit"></asp:TextBox>
-                                    </div>
-                                    <div class="col-xs-2">
-                                        <asp:DropDownList runat="server" ID="cboLimitSatuan" CssClass="form-control  col-xs-2">
-                                        </asp:DropDownList>
-                                    </div>
-
-
+                            <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
+                                <div class="tooltip">
+                                    <a class="btn btn-flat waves-attach waves-effect" href="/e/zcgfu17/csw?t=99689637&amp;ft=Yi5wbmc=&amp;s=2&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-edit"></i></a>
+                                    <div class="top">Catatan Wali Kelas<i></i></div>
                                 </div>
                             </div>
-                        </div>--%>
-                    </div>
-                    <div class="card-action" style="padding-left: 10px; padding-right: 10px;">
-                        <div class="card-action-btn pull-left" style="margin-left: 0px; margin-right: 0px; color: grey;">
-                            <div class="tooltip">
-                                <a class="btn btn-flat waves-attach waves-effect" href="/e/xMzY4ODda/tl?t=99689637&amp;ft=Yi5wbmc=&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-folder-open"></i></a>
-                                <div class="top">Buka<i></i></div>
-                            </div>
-                        </div>
-                        <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                            <div class="tooltip">
-                                <a class="btn btn-flat waves-attach waves-effect" href="/l/93notypjdshkljfs/kp?t=99689637&amp;ft=Yi5wbmc=&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-address-book-o"></i></a>
-                                <div class="top">Perpustakaan<i></i></div>
-                            </div>
-                        </div>
-                        <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                            <div class="tooltip">
-                                <a class="btn btn-flat waves-attach waves-effect" href="/e/zcgfu16/vs?t=99689637&amp;ft=Yi5wbmc=&amp;s=2&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-handshake-o"></i></a>
-                                <div class="top">Volunteer<i></i></div>
-                            </div>
-                        </div>
-                        <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                            <div class="tooltip">
-                                <a class="btn btn-flat waves-attach waves-effect" href="/e/zcgfu17/csw?t=99689637&amp;ft=Yi5wbmc=&amp;s=2&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-edit"></i></a>
-                                <div class="top">Catatan Wali Kelas<i></i></div>
-                            </div>
-                        </div>
-                        <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                            <div class="tooltip">
-                                <label class="btn btn-flat waves-attach waves-effect" onclick="document.location.href='/e/las-NdYWuo9OFAw?kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf';" style="cursor: pointer; margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-file-text-o"></i></label>
-                                <div class="top">Laporan Presensi Siswa<i></i></div>
-                            </div>
+                            <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
+                                <div class="tooltip">
+                                    <label class="btn btn-flat waves-attach waves-effect" onclick="document.location.href='/e/las-NdYWuo9OFAw?kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf';" style="cursor: pointer; margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-file-text-o"></i></label>
+                                    <div class="top">Laporan Presensi Siswa<i></i></div>
+                                </div>
+                            </div>--%>
                         </div>
                     </div>
                 </div>
             </div>
-
 
         </ContentTemplate>
         <Triggers>

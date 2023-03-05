@@ -239,7 +239,14 @@ namespace AI_ERP.Application_Modules.CBT
             this.Master.txtCariData.Text = "";
             this.Session[SessionViewDataName] = 0;
             dpData.SetPageProperties(0, dpData.MaximumRows, true);
-            BindListView(true, "");
+
+            if (!IsPostBack)
+            {
+                //InitInput();
+                //InitKeyEventClient();
+                id_login.Value = Libs.LOGGED_USER_M.UserID;
+            }
+            BindListView(!IsPostBack, this.Master.txtCariData.Text);
         }
 
         protected void btnDoAddSoal_Click(object sender, EventArgs e)
