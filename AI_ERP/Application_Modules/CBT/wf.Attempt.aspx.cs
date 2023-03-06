@@ -13,6 +13,7 @@ using System.Xml.Linq;
 using System.Data.SqlClient;
 using System.Data;
 using System.Web.UI.WebControls.WebParts;
+using Newtonsoft.Json.Linq;
 
 namespace AI_ERP.Application_Modules.CBT
 {
@@ -23,8 +24,11 @@ namespace AI_ERP.Application_Modules.CBT
         public static List<CBT_DesignSoal> lstDesignSoalJwb = null;
         public static List<CBT_Jwb> lstJwb = null;
 
-        public static int lstIdx = 0;
-        public static int mxIdx = 0;
+        public static int st_lstIdx = 0;
+        public static int st_mxIdx = 0;
+        public static string st_jenis = "";
+
+
 
         public enum JenisAction
         {
@@ -87,6 +91,34 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
+        public class CountDownTimer
+        {
+            public TimeSpan TimeLeft;
+            System.Threading.Thread thread;
+            public CountDownTimer(TimeSpan original)
+            {
+                this.TimeLeft = original;
+            }
+            public void Start()
+            {
+                // Start a background thread to count down time
+                thread = new System.Threading.Thread(() =>
+                {
+                    while (true)
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        TimeLeft = TimeLeft.Subtract(TimeSpan.Parse("00:00:01"));
+                        //if (TimeLeft.TotalMilliseconds == 0)                      
+                        //    thread.Abort();                                                                      
+                    }
+
+                });
+                thread.Start();
+
+            }
+        }
+
+
         protected bool IsByAdminUnit()
         {
             return (QS.GetUnit().Trim() != "" && QS.GetToken().Trim() != "" &&
@@ -107,13 +139,35 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 btnPrev.Enabled = false;
 
-                lstIdx = 0;
+                st_lstIdx = 0;
                 lstDesignSoalJwb = null;
                 getListDs();
                 getListJwb();
                 getListLInk();
-                getData(lstDesignSoalJwb[lstIdx].Rel_BankSoal.ToString());
+                getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
+                CBT_RumahSoal m = DAO_CBT_RumahSoal_Input.GetByID_Entity(Libs.GetQueryString("rs"));
+                int tcd = 0;
+                if (m != null)
+                {
+                    if (m.LimitTime > 0)
+                    {
+                        if (m.LimitSatuan == "Menit")
+                        {
+                            tcd = m.LimitTime;
+                        }
+                    }
 
+
+                }
+
+            
+               
+
+                if (Session["CountdownTimer"] == null)
+                {
+                    Session["CountdownTimer"] = new CountDownTimer(TimeSpan.FromMinutes(tcd));
+                    (Session["CountdownTimer"] as CountDownTimer).Start();
+                }
             }
 
             var IdSoal = Libs.GetQueryString("id");
@@ -121,9 +175,37 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 getData(IdSoal);
             }
+        }
 
+        protected void Timer1_Tick(object sender, EventArgs e)
+        {
+            if (Session["CountdownTimer"] != null)
+            {
+                Label1.Text = (Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
+                if ((Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds == 0)
+                {
+                    Session["CountdownTimer"] = null;
+                    Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs")));
+                }
+            }
+        }
+
+
+        protected void CountStop(object sender, EventArgs e)
+        {
+            Session["CountdownTimer"] = null;
 
         }
+
+        protected void CountStart(object sender, EventArgs e)
+        {
+            if (Session["CountdownTimer"] == null)
+            {
+                Session["CountdownTimer"] = new CountDownTimer(TimeSpan.Parse(Label1.Text));
+                (Session["CountdownTimer"] as CountDownTimer).Start();
+            }
+        }
+
 
         protected void getListDs()
         {
@@ -150,7 +232,7 @@ namespace AI_ERP.Application_Modules.CBT
                 j = DAO_CBT_DesignSoal.GetEntityFromDataRow(row);
                 lstDesignSoalJwb.Add(j);
             }
-            mxIdx = lstDesignSoalJwb.Count;
+            st_mxIdx = lstDesignSoalJwb.Count - 1;
         }
 
         protected void getListJwb()
@@ -181,51 +263,58 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void checkButton()
         {
-            if (lstIdx > 0)
+            if (st_lstIdx > 0)
             {
+                btnPrev.Visible = true;
                 btnPrev.Enabled = true;
             }
             else
             {
-                btnPrev.Enabled = false;
+                btnPrev.Visible = false;
             }
 
-            if (lstIdx < mxIdx - 1)
+            if (st_lstIdx < st_mxIdx)
             {
+                btnNext.Visible = true;
                 btnNext.Enabled = true;
             }
             else
             {
-                btnNext.Enabled = false;
+                btnNext.Visible = false;
             }
         }
         protected void btnNext_Click(object sender, EventArgs e)
         {
-            lstIdx = lstIdx + 1;
 
-            getData(lstDesignSoalJwb[lstIdx].Rel_BankSoal.ToString());
+
+            st_lstIdx = st_lstIdx + 1;
+
+            getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
 
         }
 
         protected void btnPrev_Click(object sender, EventArgs e)
         {
-            lstIdx = lstIdx - 1;
+            st_lstIdx = st_lstIdx - 1;
 
-            getData(lstDesignSoalJwb[lstIdx].Rel_BankSoal.ToString());
+            getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
 
         }
 
         protected void btnLink_Click(object sender, EventArgs e)
         {
-            lstIdx = Convert.ToInt32(hdIdx.Value) - 1;
+            st_lstIdx = Convert.ToInt32(hdIdx.Value) - 1;
 
 
-            getData(lstDesignSoalJwb[lstIdx].Rel_BankSoal.ToString());
+            getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
 
         }
 
         protected void getData(string idsoal)
         {
+            st_jenis = "";
+
+
 
             CBT_BankSoal m = DAO_CBT_BankSoal.GetByID_Entity(idsoal.Trim());
 
@@ -234,8 +323,8 @@ namespace AI_ERP.Application_Modules.CBT
                 if (m.Soal != null)
                 {
 
+
                     txtSoal.Text = m.Soal.ToString();
-                    //txtJwbEssay.Text = m.JwbEssay.ToString();
 
 
 
@@ -250,13 +339,57 @@ namespace AI_ERP.Application_Modules.CBT
                         GandaDiv.Attributes.Add("style", "display:block");
                     }
 
+                    st_jenis = m.Jenis;
 
+
+                    hdKodejwbGanda1.Value = m.ListJwbGanda[0].Kode.ToString();
+                    hdKodejwbGanda2.Value = m.ListJwbGanda[1].Kode.ToString();
+                    hdKodejwbGanda3.Value = m.ListJwbGanda[2].Kode.ToString();
+                    hdKodejwbGanda4.Value = m.ListJwbGanda[3].Kode.ToString();
+                    hdKodejwbGanda5.Value = m.ListJwbGanda[4].Kode.ToString();
 
                     txtJwbGanda1.Text = m.ListJwbGanda[0].Jawaban.ToString();
                     txtJwbGanda2.Text = m.ListJwbGanda[1].Jawaban.ToString();
                     txtJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
                     txtJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
                     txtJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
+
+                    ChkJwbGanda1.Checked = false;
+                    ChkJwbGanda2.Checked = false;
+                    ChkJwbGanda3.Checked = false;
+                    ChkJwbGanda4.Checked = false;
+                    ChkJwbGanda5.Checked = false;
+
+                    var ds = lstDesignSoalJwb[st_lstIdx].Kode.ToString();
+                    var jwb = lstJwb.Where(x => x.Rel_DesignSoal.ToUpper() == ds.ToUpper()).FirstOrDefault();
+                    if (jwb != null)
+                    {
+
+                        //.Rel_JwbGanda;
+                        if (hdKodejwbGanda1.Value == jwb.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda1.Checked = true;
+                        }
+                        else if (hdKodejwbGanda2.Value == jwb.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda2.Checked = true;
+                        }
+                        else if (hdKodejwbGanda3.Value == jwb.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda3.Checked = true;
+                        }
+                        else if (hdKodejwbGanda4.Value == jwb.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda4.Checked = true;
+                        }
+                        else if (hdKodejwbGanda5.Value == jwb.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda5.Checked = true;
+                        }
+                    }
+
+
+
 
                 }
 
@@ -273,6 +406,64 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
+
+        protected void lnkOKInput_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                string jwbGanda = "";
+                string jwbEssay = "";
+                if (st_jenis == "ganda")
+                {
+
+                    bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
+                    string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
+
+                    for (int i = 0; i < 5; i++)
+                    {
+                        if (arrJwbGandaChk[i])
+                            jwbGanda = arrKodeJwbGanda[i].ToString();
+                    }
+                }
+                else
+                {
+                    jwbEssay = txtJwbEssayVal.Value != "" ? txtJwbEssayVal.Value : txtJwbEssay.Text;
+                }
+
+
+
+                if (jwbGanda != "" || jwbEssay != "")
+                {
+                    CBT_Jwb m = new CBT_Jwb()
+                    {
+                        Rel_RumahSoal = Libs.GetQueryString("rs"),
+                        Rel_DesignSoal = lstDesignSoalJwb[st_lstIdx].Kode.ToString(),
+                        Rel_BankSoal = lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString(),
+                        Rel_Siswa = Libs.LOGGED_USER_M.NoInduk.ToString(),
+                        Rel_JwbGanda = jwbGanda.ToString(),
+                        JwbEssay = jwbEssay.ToString()
+                    };
+
+                    DAO_CBT_DesignSoal.DeleteJwb(m.Rel_DesignSoal);
+                    DAO_CBT_DesignSoal.InsertJwb(m);
+                    //txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
+                    //if(st_lstIdx < st_mxIdx)
+                    //btnNext_Click(null, null);
+                    getListJwb();
+                    getListLInk();
+                }
+
+
+            }
+            catch (Exception ex)
+            {
+                txtKeyAction.Value = ex.Message;
+            }
+        }
+
+
+
+
         protected void getListLInk()
         {
             string link = "";
@@ -282,7 +473,7 @@ namespace AI_ERP.Application_Modules.CBT
             {
 
                 if (lstJwb != null)
-                    exist = lstJwb.Any(m=> m.Rel_DesignSoal == row.Kode.ToString().ToUpper());
+                    exist = lstJwb.Any(m => m.Rel_DesignSoal.ToUpper() == row.Kode.ToString().ToUpper());
                 if (exist)
                 {
                     link += "<div class=\"col-md-2\">    <button class=\"btn btn-green\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"padding:15px\"> " + i + " </button> </div>";
@@ -290,7 +481,7 @@ namespace AI_ERP.Application_Modules.CBT
                 }
                 else
                 {
-                    link += "<div class=\"col-md-2\">    <button class=\"btn btn-orange\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"padding:15px\"> " + i + " </button> </div>";
+                    link += "<div class=\"col-md-2\">    <button class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"padding:15px\"> " + i + " </button> </div>";
 
                 }
                 i++;
@@ -309,5 +500,7 @@ namespace AI_ERP.Application_Modules.CBT
                         )
                 );
         }
+
+
     }
 }

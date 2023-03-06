@@ -22,10 +22,12 @@ namespace AI_ERP.Application_DAOs
         public const string SP_SELECT_JWB_BY_RS_SISWA = "CBT_JWB_BY_RS_BY_SISWA";
                 
         public const string SP_INSERT = "CBT_DESIGN_SOAL_INSERT";
+        public const string SP_JWB_INSERT = "CBT_JWB_INSERT";
 
         public const string SP_UPDATE = "CBT_DESIGN_SOAL_UPDATE";
 
         public const string SP_DELETE = "CBT_DESIGN_SOAL_DELETE";
+        public const string SP_JWB_DELETE = "CBT_JWB_DELETE";
 
         public const string SP_UPDATE_SKOR = "CBT_DESIGN_SOAL_UPDATE_SKOR";
         public const string SP_UPDATE_URUT = "CBT_DESIGN_SOAL_UPDATE_URUT";
@@ -288,40 +290,74 @@ namespace AI_ERP.Application_DAOs
         }
 
 
-        //public static void Update(CBT_DesignSoal DesignSoal, string user_id)
-        //{
-        //    SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
-        //    SqlCommand comm = conn.CreateCommand();
-        //    SqlTransaction transaction = null;
-        //    try
-        //    {
-        //        conn.Open();
-        //        transaction = conn.BeginTransaction();
-        //        comm.Transaction = transaction;
-        //        comm.CommandType = CommandType.StoredProcedure;
-        //        comm.CommandText = SP_UPDATE;
+        public static void InsertJwb(CBT_Jwb JwbSoal)
+        {
 
-        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, DesignSoal.Kode));
-        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Guid.NewGuid()));
-        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_RumahSoal, DesignSoal.Rel_RumahSoal));
-        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, DesignSoal.Rel_BankSoal));           
-        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Skor, DesignSoal.Skor));
+            SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
+            SqlCommand comm = conn.CreateCommand();
+            SqlTransaction transaction = null;
+            try
+            {
+                conn.Open();
+                transaction = conn.BeginTransaction();
+                comm.Transaction = transaction;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = SP_JWB_INSERT;
 
-        //        comm.Parameters.Add(new SqlParameter("@user_id", user_id));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Guid.NewGuid()));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_RumahSoal, JwbSoal.Rel_RumahSoal));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_DesignSoal, JwbSoal.Rel_DesignSoal));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, JwbSoal.Rel_BankSoal));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Siswa, JwbSoal.Rel_Siswa));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_JwbGanda, JwbSoal.Rel_JwbGanda));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbEssay, JwbSoal.JwbEssay));
 
-        //        comm.ExecuteNonQuery();
-        //        transaction.Commit();
-        //    }
-        //    catch (Exception ec)
-        //    {
-        //        transaction.Rollback();
-        //        throw new Exception(ec.Message.ToString());
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-        //}
+
+                comm.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ec)
+            {
+                transaction.Rollback();
+                throw new Exception(ec.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        public static void DeleteJwb(string Rel_DesignSoal)
+        {
+
+            SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
+            SqlCommand comm = conn.CreateCommand();
+            SqlTransaction transaction = null;
+            try
+            {
+                conn.Open();
+                transaction = conn.BeginTransaction();
+                comm.Transaction = transaction;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = SP_JWB_DELETE;
+
+                
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_DesignSoal, Rel_DesignSoal));
+               
+
+                comm.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ec)
+            {
+                transaction.Rollback();
+                throw new Exception(ec.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
 
 

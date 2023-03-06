@@ -7,7 +7,7 @@
     <script type="text/javascript">
 
         var currentValue = 0;
-        document.getElementById("<%= txtKeyAction.ClientID %>").value = "";    
+        document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
         function EndRequestHandler() {
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequest);
         }
@@ -24,7 +24,7 @@
 
                     break;
                 case "<%= JenisAction.AddWithMessage %>":
-                   // ReInitTinyMCE();
+                    // ReInitTinyMCE();
 
                     $('body').snackbar({
                         alive: 2000,
@@ -35,22 +35,32 @@
                     });
                     break;
                 case "<%= JenisAction.DoShowData %>":
-                   ReInitTinyMCE();
+                    ReInitTinyMCE();
 
                     break;
                 case "<%= JenisAction.Clear %>":
-                    document.getElementById("<%= txtKeyAction.ClientID %>").value = "";    
+                    document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
                     break;
 
                 default:
+                    if (jenis_act.trim() != "") {
+                        $('body').snackbar({
+                            alive: 6000,
+                            content: '<i class=\"fa fa-exclamation-triangle\"></i>&nbsp;&nbsp;&nbsp;PERHATIAN : ' + jenis_act,
+                            show: function () {
+                                snackbarText++;
+                            }
+                        });
+                    }
 
-                   
                     break;
             }
 
 
 
         }
+
+        document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
 
         function LoadTinyMCEjwbEssay() {
             tfm_path = 'Application_CLibs/fileman';
@@ -79,15 +89,16 @@
                 }
             });
         }
-        
+
         function RemoveTinyMCE() {
             tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbEssay.ClientID %>');
         }
-        function ReInitTinyMCE() { 
+        function ReInitTinyMCE() {
             RemoveTinyMCE();
             LoadTinyMCEjwbEssay();
-            
+
         }
+        ////////document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -109,9 +120,19 @@
 
                     <div class="card">
                         <div class="card-main">
-                            <div class="card-header" style="background-color: #295BC8; padding: 10px; font-weight: bold; vertical-align: middle; color: white; padding-left: 20px; font-size: 15px;">
+                            <div class="card-header" style="background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
                                 <span></span>
-
+                                <button class="btn btn-brand">
+                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
+                                        <ContentTemplate>
+                                            <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="Timer1_Tick">
+                                            </asp:Timer>
+                                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
+                                        </ContentTemplate>
+                                    </asp:UpdatePanel>
+                                </button>
+                                <asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> stop timer</asp:LinkButton>
+                                 <asp:LinkButton OnClick="CountStart" runat="server" ID="LinkButton3" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> star timer</asp:LinkButton>
                             </div>
                             <div class="card-inner">
 
@@ -126,16 +147,8 @@
                                     </div>
                                 </div>
 
-                                <%-- <div class="col-md-3 row">
-                                        <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
-                                            <label style="color: #B7770D; font-size: small;">
-                                                JENIS SOAL :
-                                            </label>
-                                             <asp:Literal runat="server" id="txtJenis"> </asp:Literal>
-                                        </div>
-                                    </div>--%>
 
-                                <div class="col-md-12 row" runat="server" id="EssayDiv" style="display: none">
+                                <div class="col-md-12 row" runat="server" id="EssayDiv" style="display: none;">
                                     <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
 
                                         <label style="color: #B7770D; font-size: small;">
@@ -150,79 +163,81 @@
                                         <label style="color: #B7770D; font-size: small;">
                                             JAWABAN PILIHAN GANDA :
                                         </label>
-                                        <ul type="none">
-                                            <li>
-                                                <asp:HiddenField ID="hdKodejwbGanda1" runat="server" />
-                                                <div class="row form-group">
-                                                    <div class="col-md-1 text-right">
-                                                        <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" />
-                                                    </div>
-                                                    <div class="col-md-11">
-                                                        <asp:Literal runat="server" ID="txtJwbGanda1"></asp:Literal>
 
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <asp:HiddenField ID="hdKodejwbGanda2" runat="server" />
-                                                <div class="row form-group">
-                                                    <div class="col-md-1 text-right">
-                                                        <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" />
-                                                    </div>
-                                                    <div class="col-md-11">
-                                                        <asp:Literal runat="server" ID="txtJwbGanda2"></asp:Literal>
+                                        <asp:HiddenField ID="hdKodejwbGanda1" runat="server" />
+                                        <div class="row form-group">
+                                            <div class="col-md-1 text-right">
+                                                <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" />
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda1"></asp:Literal>
 
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <asp:HiddenField ID="hdKodejwbGanda3" runat="server" />
-                                                <div class="row form-group">
-                                                    <div class="col-md-1 text-right">
-                                                        <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" />
-                                                    </div>
-                                                    <div class="col-md-11">
-                                                        <asp:Literal runat="server" ID="txtJwbGanda3"></asp:Literal>
+                                            </div>
+                                        </div>
 
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <asp:HiddenField ID="hdKodejwbGanda4" runat="server" />
-                                                <div class="row form-group">
-                                                    <div class="col-md-1 text-right">
-                                                        <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" />
-                                                    </div>
-                                                    <div class="col-md-11">
-                                                        <asp:Literal runat="server" ID="txtJwbGanda4"></asp:Literal>
+                                        <asp:HiddenField ID="hdKodejwbGanda2" runat="server" />
+                                        <div class="row form-group">
+                                            <div class="col-md-1 text-right">
+                                                <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" />
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda2"></asp:Literal>
 
-                                                    </div>
-                                                </div>
-                                            </li>
-                                            <li>
-                                                <asp:HiddenField ID="hdKodejwbGanda5" runat="server" />
-                                                <div class="row form-group">
-                                                    <div class="col-md-1 text-right">
-                                                        <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" />
-                                                    </div>
-                                                    <div class="col-md-11">
-                                                        <asp:Literal runat="server" ID="txtJwbGanda5"></asp:Literal>
+                                            </div>
+                                        </div>
 
-                                                    </div>
-                                                </div>
-                                            </li>
-                                        </ul>
+                                        <asp:HiddenField ID="hdKodejwbGanda3" runat="server" />
+                                        <div class="row form-group">
+                                            <div class="col-md-1 text-right">
+                                                <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" />
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda3"></asp:Literal>
+
+                                            </div>
+                                        </div>
+
+                                        <asp:HiddenField ID="hdKodejwbGanda4" runat="server" />
+                                        <div class="row form-group">
+                                            <div class="col-md-1 text-right">
+                                                <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" />
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda4"></asp:Literal>
+
+                                            </div>
+                                        </div>
+
+                                        <asp:HiddenField ID="hdKodejwbGanda5" runat="server" />
+                                        <div class="row form-group">
+                                            <div class="col-md-1 text-right">
+                                                <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" />
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda5"></asp:Literal>
+
+                                            </div>
+                                        </div>
+
+
                                     </div>
                                 </div>
                             </div>
                             <div class="card-action" style="padding-left: 10px; padding-right: 10px;">
-                                <div class="card-action-btn pull-left text-center col-md-12" style="margin-left: 0px; margin-right: 0px; color: grey;">
+                                <div class="card-action-btn pull-left text-center col-md-12 row" style="margin-left: 0px; margin-right: 0px; color: red;">
 
+                                    <div class="text-left col-md-2">
+                                        <asp:LinkButton OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-grey margin-right-lg"><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
+                                    </div>
+                                    <div class="text-center col-md-8">
+                                        <asp:LinkButton OnClick="lnkOKInput_Click" runat="server" ID="LinkButton1" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-save" ></i> Simpan</asp:LinkButton>
+                                    </div>
+                                    <div class="text-right  col-md-2">
+                                        <asp:LinkButton OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> Lanjutkan</asp:LinkButton>
 
-                                    <asp:LinkButton OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-brand margin-right-lg"><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
-                                    <asp:LinkButton OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-brand margin-left-lg"><i class="fa fa-arrow-right" ></i> Lanjutkan</asp:LinkButton>
-
+                                    </div>                               
                                 </div>
+
 
                             </div>
                         </div>
@@ -232,13 +247,13 @@
 
                     <div class="card">
                         <div class="card-main">
-                            <div class="card-header" style="background-color: #295BC8; padding: 10px; font-weight: bold; vertical-align: middle; color: white; padding-left: 20px; font-size: 15px;">
+                            <div class="card-header" style="background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
                                 <span></span>
 
                             </div>
                             <div class="card-inner row">
 
-                               <asp:Literal ID="txtLink" runat="server"></asp:Literal>
+                                <asp:Literal ID="txtLink" runat="server"></asp:Literal>
 
                             </div>
 
@@ -257,11 +272,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="KontenBawah" runat="server">
     <script type="text/javascript">
 
-
-
-        LoadTinyMCEjwbEssay();
-
-    </script>
+</script>
 
     <script type="text/javascript">
         RenderDropDownOnTables();
