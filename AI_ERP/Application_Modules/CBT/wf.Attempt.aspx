@@ -98,9 +98,9 @@
             RemoveTinyMCE();
             LoadTinyMCEjwbEssay();
 
-            document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
+            //document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
         }
-       
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -122,7 +122,7 @@
 
                     <div class="card">
                         <div class="card-main">
-                            <div class="card-header row" style="background-position: top right; background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px;  margin-left: -1px; margin-top: -1px; margin-right: -1px;">
+                            <div class="card-header row" style="background-position: top right; background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
                                 <div class="col-md-2">
                                     <span style="font-weight: bold; color: white; font-weight: bold; font-size: larger;">
                                         <asp:Literal ID="txtMapel" runat="server"></asp:Literal>
@@ -131,10 +131,10 @@
                                     </span>
                                     <br />
                                     <span style="font-size: medium; color: white;">
-                                    <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal>
-                                    -
+                                        <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal>
+                                        -
                                 <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
-                                        </span>
+                                    </span>
 
 
                                 </div>
@@ -236,13 +236,13 @@
                                 <div class="card-action-btn pull-left text-center col-md-12 row" style="margin-left: 0px; margin-right: 0px;">
 
                                     <div class="text-left col-md-2">
-                                        <asp:LinkButton style="font-size: larger" OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-grey margin-right-lg"><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
+                                        <asp:LinkButton Style="font-size: larger" OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-grey margin-right-lg"><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
                                     </div>
                                     <div class="text-center col-md-8">
-                                        <asp:LinkButton style="font-size: larger" OnClick="lnkOKInput_Click" runat="server" ID="LinkButton1" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-save" ></i> Simpan</asp:LinkButton>
+                                        <asp:LinkButton Style="font-size: larger" OnClick="lnkOKInput_Click" runat="server" ID="LinkButton1" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-save" ></i> Simpan</asp:LinkButton>
                                     </div>
                                     <div class="text-right  col-md-2">
-                                        <asp:LinkButton style="font-size: larger" OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> Lanjutkan</asp:LinkButton>
+                                        <asp:LinkButton Style="font-size: larger" OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> Lanjutkan</asp:LinkButton>
 
                                     </div>
                                 </div>
@@ -258,7 +258,7 @@
                         <div class="card-main">
                             <div class="card-header" style="background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
                                 <span></span>
-                                <button class="btn btn-brand">
+                                <%--<button class="btn btn-brand">
                                     <asp:UpdatePanel ID="UpdatePanel1" runat="server" style="font-weight: bold; color: white; font-weight: bold; font-size: larger;">
                                         <ContentTemplate>
                                             <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="Timer1_Tick">
@@ -267,8 +267,21 @@
                                         </ContentTemplate>
                                     </asp:UpdatePanel>
 
-                                </button>
-                                <asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-paper-plane" ></i> Selesai</asp:LinkButton>
+                                </button>--%>
+                                <div>
+                                   
+                                    <button class="btn btn-brand">
+                                        <asp:UpdatePanel runat="server">
+                                            <ContentTemplate>
+                                                <asp:Label ID="lblTime" Text="text" runat="server" />
+                                                <asp:Timer ID="timer" runat="server" Interval="1000">
+                                                </asp:Timer>
+                                            </ContentTemplate>
+                                        </asp:UpdatePanel>
+                                    </button>
+                                </div>
+
+                                <%--<asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-paper-plane" ></i> Selesai</asp:LinkButton>--%>
                                 <%--<asp:LinkButton OnClick="CountStart" runat="server" ID="LinkButton3" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> star timer</asp:LinkButton>--%>
                             </div>
                             <div class="card-inner row">

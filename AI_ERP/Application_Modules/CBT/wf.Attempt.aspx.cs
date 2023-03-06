@@ -91,30 +91,30 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-        public class CountDownTimer
-        {
-            public TimeSpan TimeLeft;
-            System.Threading.Thread thread;
-            public CountDownTimer(TimeSpan original)
-            {
-                this.TimeLeft = original;
-            }
-            public void Start()
-            {
-                // Start a background thread to count down time
-                thread = new System.Threading.Thread(() =>
-                {
-                    while (true)
-                    {
-                        System.Threading.Thread.Sleep(1000);
-                        TimeLeft = TimeLeft.Subtract(TimeSpan.Parse("00:00:01"));                                                                                         
-                    }
+        //public class CountDownTimer
+        //{
+        //    public TimeSpan TimeLeft;
+        //    System.Threading.Thread thread;
+        //    public CountDownTimer(TimeSpan original)
+        //    {
+        //        this.TimeLeft = original;
+        //    }
+        //    public void Start()
+        //    {
+        //        // Start a background thread to count down time
+        //        thread = new System.Threading.Thread(() =>
+        //        {
+        //            while (true)
+        //            {
+        //                System.Threading.Thread.Sleep(1000);
+        //                TimeLeft = TimeLeft.Subtract(TimeSpan.Parse("00:00:01"));                                                                                         
+        //            }
 
-                });
-                thread.Start();
+        //        });
+        //        thread.Start();
 
-            }
-        }
+        //    }
+        //}
 
 
         protected bool IsByAdminUnit()
@@ -163,15 +163,23 @@ namespace AI_ERP.Application_Modules.CBT
 
                 }
 
-            
-               
+              
 
-                if (Session["CountdownTimer"] == null)
-                {
-                    Session["CountdownTimer"] = new CountDownTimer(TimeSpan.FromMinutes(10));
-                    (Session["CountdownTimer"] as CountDownTimer).Start();
-                }
+                //if (Session["CountdownTimer"] == null)
+                //{
+                //    Session["CountdownTimer"] = new CountDownTimer(TimeSpan.FromMinutes(10));
+                //    (Session["CountdownTimer"] as CountDownTimer).Start();
+                //}
             }
+
+
+          
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("EndDate", typeof(DateTime));
+            //dt.Rows.Add("2023-03-07 00:49:00");
+            DateTime startDate = DateTime.Now;
+            DateTime endDate = Convert.ToDateTime("2023-03-07 01:00:00");
+            lblTime.Text = CalculateTimeDifference(startDate, endDate);
 
             var IdSoal = Libs.GetQueryString("id");
             if (!string.IsNullOrEmpty(IdSoal))
@@ -180,36 +188,55 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
+        public string CalculateTimeDifference(DateTime startDate, DateTime endDate)
         {
-            if (Session["CountdownTimer"] != null)
+            int days = 0; int hours = 0; int mins = 0; int secs = 0;
+            string final = string.Empty;
+            if (endDate > startDate)
             {
-                Label1.Text = (Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
-                if ((Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds <= 0)
-                {
-                    Session["CountdownTimer"] = null;
-                    Timer1.Enabled = false;
-                    //Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs")));
-
-                }
+                days = (endDate - startDate).Days;
+                hours = (endDate - startDate).Hours;
+                mins = (endDate - startDate).Minutes;
+                secs = (endDate - startDate).Seconds;
+                final = string.Format("{0} days {1} hours {2} mins {3} secs", days, hours, mins, secs);
             }
-        }
-
-
-        protected void CountStop(object sender, EventArgs e)
-        {
-            Session["CountdownTimer"] = null;
-            Timer1.Enabled = false;
-        }
-
-        protected void CountStart(object sender, EventArgs e)
-        {
-            if (Session["CountdownTimer"] == null)
+            else
             {
-                Session["CountdownTimer"] = new CountDownTimer(TimeSpan.Parse(Label1.Text));
-                (Session["CountdownTimer"] as CountDownTimer).Start();
+                timer.Enabled = false;
             }
+            return final;
+            
         }
+        //protected void Timer1_Tick(object sender, EventArgs e)
+        //{
+        //    if (Session["CountdownTimer"] != null)
+        //    {
+        //        Label1.Text = (Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
+        //        if ((Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds <= 0)
+        //        {
+        //            Session["CountdownTimer"] = null;
+        //            Timer1.Enabled = false;
+        //            //Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs")));
+
+        //        }
+        //    }
+        //}
+
+
+        //protected void CountStop(object sender, EventArgs e)
+        //{
+        //    Session["CountdownTimer"] = null;
+        //    Timer1.Enabled = false;
+        //}
+
+        //protected void CountStart(object sender, EventArgs e)
+        //{
+        //    if (Session["CountdownTimer"] == null)
+        //    {
+        //        Session["CountdownTimer"] = new CountDownTimer(TimeSpan.Parse(Label1.Text));
+        //        (Session["CountdownTimer"] as CountDownTimer).Start();
+        //    }
+        //}
 
 
         protected void getListDs()
