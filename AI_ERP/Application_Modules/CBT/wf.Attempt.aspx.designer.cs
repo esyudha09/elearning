@@ -69,31 +69,49 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.Button btnLinkClick;
 
         /// <summary>
-        /// UpdatePanel1 control.
+        /// txtMapel control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.UpdatePanel UpdatePanel1;
+        protected global::System.Web.UI.WebControls.Literal txtMapel;
 
         /// <summary>
-        /// Timer1 control.
+        /// txtKelas control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.Timer Timer1;
+        protected global::System.Web.UI.WebControls.Literal txtKelas;
 
         /// <summary>
-        /// Label1 control.
+        /// txtTahunAjaran control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label Label1;
+        protected global::System.Web.UI.WebControls.Literal txtTahunAjaran;
+
+        /// <summary>
+        /// txtSemester control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtSemester;
+
+        /// <summary>
+        /// txtNamaKP control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtNamaKP;
 
         /// <summary>
         /// LinkButton2 control.
@@ -103,15 +121,6 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton2;
-
-        /// <summary>
-        /// LinkButton3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
 
         /// <summary>
         /// txtSoal control.
@@ -285,15 +294,6 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.Literal txtJwbGanda5;
 
         /// <summary>
-        /// btnPrev control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton btnPrev;
-
-        /// <summary>
         /// LinkButton1 control.
         /// </summary>
         /// <remarks>
@@ -301,6 +301,24 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
+
+        /// <summary>
+        /// LinkButton3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlAnchor LinkButton3;
+
+        /// <summary>
+        /// btnPrev control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnPrev;
 
         /// <summary>
         /// btnNext control.

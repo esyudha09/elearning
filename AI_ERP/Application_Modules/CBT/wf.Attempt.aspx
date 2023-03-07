@@ -91,14 +91,20 @@
         }
 
         function RemoveTinyMCE() {
+            console.log("oii")
             tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbEssay.ClientID %>');
         }
         function ReInitTinyMCE() {
             RemoveTinyMCE();
             LoadTinyMCEjwbEssay();
 
+            //document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
         }
-        ////////document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
+
+        function ClearJwb() {
+            $('input[type="radio"]').attr('checked', false);
+        }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -115,25 +121,66 @@
             <asp:HiddenField runat="server" ID="hdIdx" />
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnLinkClick" OnClick="btnLink_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
+            <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="counterClick" OnClick="counter_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                 <div class="col-xs-9">
 
                     <div class="card">
                         <div class="card-main">
-                            <div class="card-header" style="background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
-                                <span></span>
-                                <button class="btn btn-brand">
-                                    <asp:UpdatePanel ID="UpdatePanel1" runat="server">
-                                        <ContentTemplate>
-                                            <asp:Timer ID="Timer1" runat="server" Interval="1000" OnTick="Timer1_Tick">
-                                            </asp:Timer>
-                                            <asp:Label ID="Label1" runat="server" Text=""></asp:Label>
-                                        </ContentTemplate>
-                                    </asp:UpdatePanel>
-                                </button>
-                                <asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> stop timer</asp:LinkButton>
-                                 <asp:LinkButton OnClick="CountStart" runat="server" ID="LinkButton3" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> star timer</asp:LinkButton>
+                            <div class="card-action" style="background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; background-repeat: no-repeat; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
+                                <div style="float: left">
+                                    <p class="card-heading" style="margin-bottom: 0px; margin-top: 15px; color: white;">
+                                        <span style="font-weight: bold; color: white; font-weight: bold; font-size: larger;">
+                                            <asp:Literal ID="txtMapel" runat="server"></asp:Literal>
+                                            -
+                                    <asp:Literal ID="txtKelas" runat="server"></asp:Literal></span>
+                                    </p>
+                                    <div style="font-size: medium; color: white;">
+                                        <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal>
+                                        -
+                                <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
+                                    </div>
+                                    <div style="font-size: medium; color: white; font-weight: bold; color: yellow;">
+                                        <label class="badge" style="margin: 10px; margin-left: -5px;">
+                                            <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
+                                    </div>
+                                </div>
+                                <div class="float-right">
+                                    <p class="text-right">
+                                        <asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey" Style="font-weight: bold; color: white; font-weight: bold; font-size: small;"><i class="fa fa-paper-plane" ></i> Selesai</asp:LinkButton>
+                                    </p>
+                                    <p class="text-right">
+                                        <label id="counter" class="margin-left-sm margin-top-sm" style="font-weight: bold; color: white; font-weight: bold; font-size: large;"></label>
+                                    </p>
+                                </div>
                             </div>
+                            <%--<div class="card-header" style="background-color: #4AA4A4; padding-left: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
+                                <div class="row col-md-12">
+                                    <div class="col-md-4">
+                                        <span style="font-weight: bold; color: white; font-weight: bold; font-size: medium;">
+                                            <asp:Literal ID="txtMapel" runat="server"></asp:Literal>
+
+                                            <asp:Literal ID="txtKelas" runat="server"></asp:Literal>
+
+                                            <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal>
+                                            -
+                                <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
+                                        </span>
+                                    </div>
+
+                                    <div class="col-md-4 text-center" style="font-weight: bold; color: #cbcbcb; font-weight: bold; font-size: medium;">
+                                        <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal>
+                                    </div>
+
+
+
+                                    <div class="col-md-4">
+                                        <asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey" Style="font-weight: bold; color: white; font-weight: bold; font-size: small;"><i class="fa fa-paper-plane" ></i> Selesai</asp:LinkButton>
+
+                                        <label id="counter" class="margin-left-sm" style="font-weight: bold; color: white; font-weight: bold; font-size: x-large;"></label>
+                                    </div>
+                                </div>
+                            </div>--%>
                             <div class="card-inner">
 
                                 <div class="col-md-12 row">
@@ -144,6 +191,7 @@
                                         </label>
                                         <%--<asp:TextBox CssClass="form-control mcetiny_soal" runat="server" ID="txtSoal" Height="200px"></asp:TextBox>--%>
                                         <asp:Literal runat="server" ID="txtSoal"> </asp:Literal>
+                                         <hr/>
                                     </div>
                                 </div>
 
@@ -223,19 +271,16 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-action" style="padding-left: 10px; padding-right: 10px;">
-                                <div class="card-action-btn pull-left text-center col-md-12 row" style="margin-left: 0px; margin-right: 0px; color: red;">
-
-                                    <div class="text-left col-md-2">
-                                        <asp:LinkButton OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-grey margin-right-lg"><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
-                                    </div>
-                                    <div class="text-center col-md-8">
-                                        <asp:LinkButton OnClick="lnkOKInput_Click" runat="server" ID="LinkButton1" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-save" ></i> Simpan</asp:LinkButton>
-                                    </div>
-                                    <div class="text-right  col-md-2">
-                                        <asp:LinkButton OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-grey margin-left-lg"><i class="fa fa-arrow-right" ></i> Lanjutkan</asp:LinkButton>
-
-                                    </div>                               
+                            <div class="card-action">
+                                <div class="card-action-btn col-md-12" style="margin-left: 0px; margin-right: 0px;">
+                                     <hr/>
+                                  
+                                        <asp:LinkButton Style="font-size: small; \" OnClick="lnkOKInput_Click" runat="server" ID="LinkButton1" CssClass="btn btn-red"><i class="fa fa-save"></i> Simpan</asp:LinkButton>
+                                     <a href="javascript:void()" Style="font-size: small;" OnClick="ClearJwb()" runat="server" ID="LinkButton3" CssClass="btn btn-red"> Bersihkan Jawaban</a>
+                                    <hr/>
+                                        <asp:LinkButton Style="font-size: small; float: left;margin-bottom:5px" OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-brand "><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
+                                        <asp:LinkButton Style="font-size: small; float: right;margin-bottom:5px" OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-brand"> Berikutnya <i class="fa fa-arrow-right"></i></asp:LinkButton>
+                                   
                                 </div>
 
 
@@ -248,8 +293,6 @@
                     <div class="card">
                         <div class="card-main">
                             <div class="card-header" style="background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
-                                <span></span>
-
                             </div>
                             <div class="card-inner row">
 
@@ -272,11 +315,54 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="KontenBawah" runat="server">
     <script type="text/javascript">
 
-</script>
+        setInterval(function () {
+            var pageUrl = '<%=ResolveUrl("wf.Attempt.aspx")%>';
+            $.ajax({
+                type: "POST",
+                url: pageUrl + "/Counter_Click",
+                data: '{name: "tes" }',
+                contentType: "application/json; charset=utf-8",
+                dataType: "json",
+                success: function (data) {
+                    $("#counter").html(data.d);
+                },
+                error: function (data) {
+                    //console.log(JSON.stringify(error));
+                }
+            });
+        }, 1000);
 
-    <script type="text/javascript">
-        RenderDropDownOnTables();
-        InitModalFocus();
+        //var countDownDate = new Date("2023-03-07 09:30:00").getTime();
+
+        //// Update the count down every 1 second
+        //var x = setInterval(function () {
+
+        //    // Get today's date and time
+        //    var now = new Date().getTime();
+
+        //    // Find the distance between now and the count down date
+        //    var distance = countDownDate - now;
+
+        //    // Time calculations for days, hours, minutes and seconds
+        //    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
+        //    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        //    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+        //    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+        //    // Display the result in the element with id="demo"
+        //    document.getElementById("counter").innerHTML = days + "d " + hours + "h "
+        //        + minutes + "m " + seconds + "s ";
+
+        //    // If the count down is finished, write some text
+        //    if (distance < 0) {
+        //        clearInterval(x);
+        //        document.getElementById("counter").innerHTML = "EXPIRED";
+        //    }
+        //}, 1000);
+
+        //LoadTinyMCEjwbEssay();
+        //RenderDropDownOnTables();
+        //InitModalFocus();
         //DoAutoSave();
     </script>
 </asp:Content>

@@ -108,8 +108,6 @@ namespace AI_ERP.Application_Modules.CBT
                     {
                         System.Threading.Thread.Sleep(1000);
                         TimeLeft = TimeLeft.Subtract(TimeSpan.Parse("00:00:01"));
-                        //if (TimeLeft.TotalMilliseconds == 0)                      
-                        //    thread.Abort();                                                                      
                     }
 
                 });
@@ -147,6 +145,11 @@ namespace AI_ERP.Application_Modules.CBT
                 getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
                 CBT_RumahSoal m = DAO_CBT_RumahSoal_Input.GetByID_Entity(Libs.GetQueryString("rs"));
                 int tcd = 0;
+                txtNamaKP.Text = m.Nama.ToString();
+                txtKelas.Text = m.NamaKelas.ToString();
+                txtMapel.Text = m.NamaMapel.ToString();
+                txtTahunAjaran.Text = m.TahunAjaran.ToString();
+                txtSemester.Text = m.Semester.ToString();
                 if (m != null)
                 {
                     if (m.LimitTime > 0)
@@ -160,8 +163,7 @@ namespace AI_ERP.Application_Modules.CBT
 
                 }
 
-            
-               
+
 
                 if (Session["CountdownTimer"] == null)
                 {
@@ -170,6 +172,15 @@ namespace AI_ERP.Application_Modules.CBT
                 }
             }
 
+
+
+            //DataTable dt = new DataTable();
+            //dt.Columns.Add("EndDate", typeof(DateTime));
+            //dt.Rows.Add("2023-03-07 00:49:00");
+            //DateTime startDate = DateTime.Now;
+            //DateTime endDate = Convert.ToDateTime("2023-03-07 01:00:00");
+            //lblTime.Text = CalculateTimeDifference(startDate, endDate);
+
             var IdSoal = Libs.GetQueryString("id");
             if (!string.IsNullOrEmpty(IdSoal))
             {
@@ -177,34 +188,69 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-        protected void Timer1_Tick(object sender, EventArgs e)
+        //public string CalculateTimeDifference(DateTime startDate, DateTime endDate)
+        //{
+        //    int days = 0; int hours = 0; int mins = 0; int secs = 0;
+        //    string final = string.Empty;
+        //    if (endDate > startDate)
+        //    {
+        //        days = (endDate - startDate).Days;
+        //        hours = (endDate - startDate).Hours;
+        //        mins = (endDate - startDate).Minutes;
+        //        secs = (endDate - startDate).Seconds;
+        //        final = string.Format("{0} days {1} hours {2} mins {3} secs", days, hours, mins, secs);
+        //    }
+        //    else
+        //    {
+        //        timer.Enabled = false;
+        //    }
+        //    return final;
+
+        //}
+
+        [System.Web.Services.WebMethod]
+        public static string Counter_Click(string name)
         {
-            if (Session["CountdownTimer"] != null)
+            var x = "";
+            if (HttpContext.Current.Session["CountdownTimer"] != null)
             {
-                Label1.Text = (Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
-                if ((Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds == 0)
+                x = (HttpContext.Current.Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
+                if ((HttpContext.Current.Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds <= 0)
                 {
-                    Session["CountdownTimer"] = null;
-                    Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs")));
+                    HttpContext.Current.Session["CountdownTimer"] = null;
+                    //Timer1.Enabled = false;
+                    //Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs")));
+
                 }
+
+
             }
+            return x;
         }
+        //protected void Timer1_Tick(object sender, EventArgs e)
+        //{
+        //    if (Session["CountdownTimer"] != null)
+        //    {
+        //        Label1.Text = (Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
+        //        if ((Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds <= 0)
+        //        {
+        //            Session["CountdownTimer"] = null;
+        //            Timer1.Enabled = false;
+        //            //Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs")));
+
+        //        }
+        //    }
+        //    txtKeyAction.Value = JenisAction.Add.ToString();
+        //}
 
 
         protected void CountStop(object sender, EventArgs e)
         {
             Session["CountdownTimer"] = null;
-
+            //Timer1.Enabled = false;
         }
 
-        protected void CountStart(object sender, EventArgs e)
-        {
-            if (Session["CountdownTimer"] == null)
-            {
-                Session["CountdownTimer"] = new CountDownTimer(TimeSpan.Parse(Label1.Text));
-                (Session["CountdownTimer"] as CountDownTimer).Start();
-            }
-        }
+
 
 
         protected void getListDs()
@@ -286,7 +332,7 @@ namespace AI_ERP.Application_Modules.CBT
         protected void btnNext_Click(object sender, EventArgs e)
         {
 
-
+            lnkOKInput_Click(null, null);
             st_lstIdx = st_lstIdx + 1;
 
             getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
@@ -295,6 +341,7 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void btnPrev_Click(object sender, EventArgs e)
         {
+          
             st_lstIdx = st_lstIdx - 1;
 
             getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
@@ -302,9 +349,8 @@ namespace AI_ERP.Application_Modules.CBT
         }
 
         protected void btnLink_Click(object sender, EventArgs e)
-        {
+        {        
             st_lstIdx = Convert.ToInt32(hdIdx.Value) - 1;
-
 
             getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
 
@@ -322,11 +368,7 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 if (m.Soal != null)
                 {
-
-
                     txtSoal.Text = m.Soal.ToString();
-
-
 
                     if (m.Jenis == "essay")
                     {
@@ -364,6 +406,8 @@ namespace AI_ERP.Application_Modules.CBT
                     var jwb = lstJwb.Where(x => x.Rel_DesignSoal.ToUpper() == ds.ToUpper()).FirstOrDefault();
                     if (jwb != null)
                     {
+                        //txtJwbEssayVal.Value = jwb.JwbEssay;
+                        txtJwbEssay.Text = jwb.JwbEssay;
 
                         //.Rel_JwbGanda;
                         if (hdKodejwbGanda1.Value == jwb.Rel_JwbGanda.ToString())
@@ -386,6 +430,8 @@ namespace AI_ERP.Application_Modules.CBT
                         {
                             ChkJwbGanda5.Checked = true;
                         }
+
+
                     }
 
 
@@ -400,10 +446,7 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 txtKeyAction.Value = JenisAction.DoShowData.ToString();
             }
-            else
-            {
-                txtKeyAction.Value = JenisAction.Clear.ToString();
-            }
+
         }
 
 
@@ -451,6 +494,7 @@ namespace AI_ERP.Application_Modules.CBT
                     //btnNext_Click(null, null);
                     getListJwb();
                     getListLInk();
+                    getData(m.Rel_BankSoal);
                 }
 
 
@@ -476,13 +520,25 @@ namespace AI_ERP.Application_Modules.CBT
                     exist = lstJwb.Any(m => m.Rel_DesignSoal.ToUpper() == row.Kode.ToString().ToUpper());
                 if (exist)
                 {
-                    link += "<div class=\"col-md-2\">    <button class=\"btn btn-green\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"padding:15px\"> " + i + " </button> </div>";
-
+                    if (st_lstIdx == i-1)
+                    {
+                        link += "<button class=\"btn\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"background-color:#808080;color:white;padding:10px;margin:5px;margin-bottom:5px; border: 2px solid red;font-weight: bold; font-size: medium;\"> " + i + " </button>";
+                    }
+                    else
+                    {
+                        link += "<button class=\"btn\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"background-color:#808080;color:white;padding:10px;margin:5px;margin-bottom:5px;font-weight: bold; font-size: medium;\"> " + i + " </button>";
+                    }
                 }
                 else
                 {
-                    link += "<div class=\"col-md-2\">    <button class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"padding:15px\"> " + i + " </button> </div>";
-
+                    if (st_lstIdx == i-1)
+                    {
+                        link += "<button class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"color:#808080;padding:10px;margin:5px;margin-bottom:5px; border: 2px solid red;font-weight: bold; font-size: medium;\"> " + i + " </button> ";
+                    }
+                    else
+                    {
+                        link += "<button class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"color:#808080;padding:10px;margin:5px;margin-bottom:5px;font-weight: bold; font-size: medium; \"> " + i + " </button> ";
+                    }
                 }
                 i++;
             }
@@ -500,6 +556,8 @@ namespace AI_ERP.Application_Modules.CBT
                         )
                 );
         }
+
+
 
 
     }
