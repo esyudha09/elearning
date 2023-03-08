@@ -106,11 +106,11 @@ namespace AI_ERP.Application_Modules.CBT
             this.Master.HeaderCardVisible = false;
 
 
-            SetDropdown();
+            
 
             if (!IsPostBack)
             {
-                
+                SetDropdown();
                 //InitInput();
                 InitKeyEventClient();
                 getData();
@@ -152,11 +152,14 @@ namespace AI_ERP.Application_Modules.CBT
             }
 
             cboLimitSatuan.Items.Add(new ListItem("", ""));
-            cboLimitSatuan.Items.Add(new ListItem("Minggu", "Minggu"));
-            cboLimitSatuan.Items.Add(new ListItem("Hari", "Hari"));
-            cboLimitSatuan.Items.Add(new ListItem("Jam", "Jam"));
             cboLimitSatuan.Items.Add(new ListItem("Menit", "Menit"));
-            cboLimitSatuan.Items.Add(new ListItem("Detik", "Detik"));
+            cboLimitSatuan.Items.Add(new ListItem("Jam", "Jam"));
+            cboLimitSatuan.Items.Add(new ListItem("Hari", "Hari"));
+            cboLimitSatuan.Items.Add(new ListItem("Minggu", "Minggu"));
+            
+            
+         
+           
         }
 
         private void InitKeyEventClient()
@@ -327,7 +330,7 @@ namespace AI_ERP.Application_Modules.CBT
                 }
                 else
                 {
-                    txtDeskripsi.Text = "<p><img src=\"../../Application_Templates/sd header.png\" width=\"100%\"></p>";
+                   // txtDeskripsi.Text = "<p><img src=\"../../Application_Templates/sd header.png\" width=\"100%\"></p>";
                                        
                     txtNama.Text = Libs.GetQueryString("nama");
 

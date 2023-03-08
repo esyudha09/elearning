@@ -8,10 +8,11 @@ using System.Web.UI.WebControls;
 using AI_ERP.Application_Libs;
 using AI_ERP.Application_Entities;
 using AI_ERP.Application_DAOs;
+using System.Web.SessionState;
 
 namespace AI_ERP.Application_Modules.CBT
 {
-    public partial class wf_StartAttempt : System.Web.UI.Page
+    public partial class wf_AttemptStart : System.Web.UI.Page
     {
         public const string SessionViewDataName = "PAGEDATAMAPEL";
 
@@ -91,44 +92,48 @@ namespace AI_ERP.Application_Modules.CBT
             //{
             //    Libs.RedirectToBeranda(this.Page);
             //}
+            if (Session["CountdownTimer"] != null)
+            {
+                Session["CountdownTimer"] = null;
+            }
 
             this.Master.HeaderTittle = "<img style=\"height: 28px; width: 28px; display: initial;\" src=\"" + ResolveUrl("~/Application_CLibs/images/svg/document.svg") + "\">" +
-                                       "&nbsp;&nbsp;" +
-                                       "Data Mata Pelajaran";
+                                   "&nbsp;&nbsp;" +
+                                   "";
 
             this.Master.ShowHeaderTools = false;
             this.Master.HeaderCardVisible = false;
 
             if (!IsPostBack)
             {
-               
-                
+
+
             }
             GetData();
         }
 
-        
+
 
         protected void GetData()
         {
-            
+
             CBT_RumahSoal m = DAO_CBT_RumahSoal_Input.GetByID_Entity(Libs.GetQueryString("rs"));
 
-            if(m != null)
+            if (m != null)
             {
 
                 txtHeader.Text = "<img src=\"../../Application_Templates/sd header.png\" width=\"100%\">";
 
 
                 txtNamaKP.Text = m.Nama.ToString();
-               
-                txtDeskripsi.Text = m.Deskripsi.ToString(); 
+
+                txtDeskripsi.Text = m.Deskripsi.ToString();
                 txtKelas.Text = m.NamaKelas.ToString();
                 txtMapel.Text = m.NamaMapel.ToString();
                 txtTahunAjaran.Text = m.TahunAjaran.ToString();
                 txtSemester.Text = m.Semester.ToString();
-                txtStart.Text = Libs.GetTanggalIndonesiaFromDate(m.StartDatetime,true);
-               txtEnd.Text = Libs.GetTanggalIndonesiaFromDate(m.EndDatetime,true);
+                txtStart.Text = Libs.GetTanggalIndonesiaFromDate(m.StartDatetime, true);
+                txtEnd.Text = Libs.GetTanggalIndonesiaFromDate(m.EndDatetime, true);
                 txtLimit.Text = m.LimitTime.ToString() + " " + m.LimitSatuan.ToString();
 
                 if (m.LimitTime != 0)
@@ -144,7 +149,10 @@ namespace AI_ERP.Application_Modules.CBT
                     divLimit.Attributes.Add("style", "display:none");
                 }
 
-
+                if (m.LimitTime == 0 && m.EndDatetime < DateTime.Now)
+                {
+                    btnStart.Visible = false;
+                }
 
             }
 
@@ -153,8 +161,10 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void btnAttempt_Click(object sender, EventArgs e)
         {
+            StatusSiswaInsert();
+
             var rs = Libs.GetQueryString("rs");
-          
+
             Response.Redirect(
                     ResolveUrl(
                             Routing.URL.APPLIACTION_MODULES.CBT.ATTEMPT.ROUTE + "?rs=" + rs
@@ -162,6 +172,24 @@ namespace AI_ERP.Application_Modules.CBT
                 );
         }
 
+        protected void StatusSiswaInsert()
+        {
+            try
+            {
+                CBT_StatusSiswa m = new CBT_StatusSiswa();
+                m.Rel_RumahSoal = Libs.GetQueryString("rs");
+                m.Rel_Siswa = Libs.LOGGED_USER_M.NoInduk;
+
+
+                DAO_CBT_RumahSoal_Input.InsertStatus(m);
+
+
+            }
+            catch (Exception ex)
+            {
+                txtKeyAction.Value = ex.Message;
+            }
+        }
 
     }
 }

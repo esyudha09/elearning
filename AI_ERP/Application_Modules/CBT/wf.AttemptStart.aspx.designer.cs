@@ -11,7 +11,7 @@ namespace AI_ERP.Application_Modules.CBT
 {
 
 
-    public partial class wf_StartAttempt
+    public partial class wf_AttemptStart
     {
 
         /// <summary>
@@ -166,6 +166,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtLimit;
+
+        /// <summary>
+        /// btnStart control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton btnStart;
 
         /// <summary>
         /// Master property.

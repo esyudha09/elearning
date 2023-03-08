@@ -79,7 +79,16 @@ namespace AI_ERP.Application_Entities
         public string Rel_JwbGanda { get; set; }
         public string JwbEssay { get; set; }
         public DateTime Tanggal_Buat { get; set; }
-       
+
+    }
+
+    public class CBT_StatusSiswa
+    {
+        public Guid Kode { get; set; }
+        public string Rel_RumahSoal { get; set; }
+        public string Rel_Siswa { get; set; }
+        public DateTime StartDate { get; set; }
+        public DateTime EndDate { get; set; }
     }
 
 }

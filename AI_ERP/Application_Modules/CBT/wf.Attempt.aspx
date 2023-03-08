@@ -101,9 +101,7 @@
             //document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
         }
 
-        function ClearJwb() {
-            $('input[type="radio"]').attr('checked', false);
-        }
+
 
     </script>
 </asp:Content>
@@ -140,47 +138,21 @@
                                         -
                                 <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
                                     </div>
-                                    <div style="font-size: medium; color: white; font-weight: bold; color: yellow;">
-                                        <label class="badge" style="margin: 10px; margin-left: -5px;">
-                                            <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
-                                    </div>
+                                     <div >
+                                <label class="badge" style="font-size: medium; color: white; font-weight: bold; color: white;"">
+                                    <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
+                                         <p></p>
+                            </div>
                                 </div>
                                 <div class="float-right">
                                     <p class="text-right">
-                                        <asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey" Style="font-weight: bold; color: white; font-weight: bold; font-size: small;"><i class="fa fa-paper-plane" ></i> Selesai</asp:LinkButton>
+                                        <asp:LinkButton OnClick="btnSelesai_Click" runat="server" ID="LinkButton2" CssClass="btn btn-grey" Style="font-weight: bold; color: white; font-weight: bold; font-size: small;"><i class="fa fa-paper-plane" ></i> Selesai</asp:LinkButton>
                                     </p>
                                     <p class="text-right">
-                                        <label id="counter" class="margin-left-sm margin-top-sm" style="font-weight: bold; color: white; font-weight: bold; font-size: large;"></label>
+                                        <label id="counter" class="margin-left-sm" style="font-weight: bold; color: white; font-weight: bold; font-size: large;"></label>
                                     </p>
                                 </div>
                             </div>
-                            <%--<div class="card-header" style="background-color: #4AA4A4; padding-left: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
-                                <div class="row col-md-12">
-                                    <div class="col-md-4">
-                                        <span style="font-weight: bold; color: white; font-weight: bold; font-size: medium;">
-                                            <asp:Literal ID="txtMapel" runat="server"></asp:Literal>
-
-                                            <asp:Literal ID="txtKelas" runat="server"></asp:Literal>
-
-                                            <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal>
-                                            -
-                                <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
-                                        </span>
-                                    </div>
-
-                                    <div class="col-md-4 text-center" style="font-weight: bold; color: #cbcbcb; font-weight: bold; font-size: medium;">
-                                        <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal>
-                                    </div>
-
-
-
-                                    <div class="col-md-4">
-                                        <asp:LinkButton OnClick="CountStop" runat="server" ID="LinkButton2" CssClass="btn btn-grey" Style="font-weight: bold; color: white; font-weight: bold; font-size: small;"><i class="fa fa-paper-plane" ></i> Selesai</asp:LinkButton>
-
-                                        <label id="counter" class="margin-left-sm" style="font-weight: bold; color: white; font-weight: bold; font-size: x-large;"></label>
-                                    </div>
-                                </div>
-                            </div>--%>
                             <div class="card-inner">
 
                                 <div class="col-md-12 row">
@@ -191,7 +163,7 @@
                                         </label>
                                         <%--<asp:TextBox CssClass="form-control mcetiny_soal" runat="server" ID="txtSoal" Height="200px"></asp:TextBox>--%>
                                         <asp:Literal runat="server" ID="txtSoal"> </asp:Literal>
-                                         <hr/>
+                                        <hr />
                                     </div>
                                 </div>
 
@@ -271,20 +243,19 @@
                                     </div>
                                 </div>
                             </div>
-                            <div class="card-action">
-                                <div class="card-action-btn col-md-12" style="margin-left: 0px; margin-right: 0px;">
-                                     <hr/>
-                                  
-                                        <asp:LinkButton Style="font-size: small; \" OnClick="lnkOKInput_Click" runat="server" ID="LinkButton1" CssClass="btn btn-red"><i class="fa fa-save"></i> Simpan</asp:LinkButton>
-                                     <a href="javascript:void()" Style="font-size: small;" OnClick="ClearJwb()" runat="server" ID="LinkButton3" CssClass="btn btn-red"> Bersihkan Jawaban</a>
-                                    <hr/>
-                                        <asp:LinkButton Style="font-size: small; float: left;margin-bottom:5px" OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-brand "><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
-                                        <asp:LinkButton Style="font-size: small; float: right;margin-bottom:5px" OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-brand"> Berikutnya <i class="fa fa-arrow-right"></i></asp:LinkButton>
-                                   
+
+                           
+                                <div class="card-action-btn pull-left col-md-12" style="margin-left: 0px; margin-right: 0px; color: grey;">     
+                                    <button style="font-size: small" onclick="ClearJwb()" id="lnkClrJwb" class="btn btn-red;">Bersihkan Jawaban </button>
+                                    <hr />
+                                    <asp:LinkButton Style="font-size: small; float: left; margin-bottom: 5px" OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-brand "><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
+                                    <asp:LinkButton Style="font-size: small; float: right; margin-bottom: 5px" OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-brand"> Berikutnya <i class="fa fa-arrow-right"></i></asp:LinkButton>
+
                                 </div>
+                          
 
 
-                            </div>
+
                         </div>
                     </div>
                 </div>
@@ -314,6 +285,17 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="KontenBawah" runat="server">
     <script type="text/javascript">
+        function ClearJwb() {
+            $('input[type="radio"]').attr('checked', false);
+
+            $("#<%=txtJwbEssay.ClientID%>").html("");
+        }
+
+        $('input[type="radio"]').change(function () {
+            if (this.checked) {
+                $("#lnkClrJwb").css("display", "block");
+            }
+        });
 
         setInterval(function () {
             var pageUrl = '<%=ResolveUrl("wf.Attempt.aspx")%>';
@@ -324,7 +306,14 @@
                 contentType: "application/json; charset=utf-8",
                 dataType: "json",
                 success: function (data) {
-                    $("#counter").html(data.d);
+                    if (data.d == "end") {
+                        const urlParams = new URLSearchParams(window.location.search);
+                        const rs = urlParams.get('rs')
+                        window.location.href = "sa?rs=" + rs;
+                    } else {
+                        $("#counter").html(data.d);
+                    }
+
                 },
                 error: function (data) {
                     //console.log(JSON.stringify(error));

@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Main.Master" AutoEventWireup="true" CodeBehind="wf.StartAttempt.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_StartAttempt" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Main.Master" AutoEventWireup="true" CodeBehind="wf.AttemptStart.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_AttemptStart" %>
 
 <%@ MasterType VirtualPath="~/Application_Masters/Main.Master" %>
 <%@ Register TagPrefix="ucl" TagName="PostbackUpdateProgress" Src="~/Application_Controls/Res/PostbackUpdateProgress.ascx" %>
@@ -159,8 +159,8 @@
                                 -
                                 <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
                             </div>
-                            <div style="font-size: medium; color: white; font-weight: bold; color: yellow;">
-                                <label class="badge" style="margin-top: 10px; margin-left: -5px;">
+                            <div >
+                                <label class="badge" style="font-size: medium; color: white; font-weight: bold; color: white;"">
                                     <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
                             </div>
                             <p></p>
@@ -203,38 +203,10 @@
                             </div>
                         </div>
                         <div class="card-action" style="padding-left: 10px; padding-right: 10px;">
-                            <div class="card-action-btn pull-left text-center col-md-12" style="margin-left: 0px; margin-right: 0px; color: grey;">
-
-                                <%--<a class="btn btn-flat waves-attach waves-effect" href="/e/xMzY4ODda/tl?t=99689637&amp;ft=Yi5wbmc=&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: red; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px; font-size: larger">
-                                    <i class="fa fa-folder-open"></i>Mulai
-                                </a>--%>
-                                <asp:LinkButton  OnClick="btnAttempt_Click" runat="server"><i class="fa fa-folder-open"></i> Mulai</asp:LinkButton>
-
+                            <div class="card-action-btn pull-left text-center col-md-12" style="margin-left: 0px; margin-right: 0px; color: grey;">                           
+                                <asp:LinkButton  OnClick="btnAttempt_Click" runat="server" ID="btnStart"><i class="fa fa-folder-open"></i> Mulai</asp:LinkButton>
                             </div>
-                            <%-- <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                                <div class="tooltip">
-                                    <a class="btn btn-flat waves-attach waves-effect" href="/l/93notypjdshkljfs/kp?t=99689637&amp;ft=Yi5wbmc=&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-address-book-o"></i></a>
-                                    <div class="top">Perpustakaan<i></i></div>
-                                </div>
-                            </div>
-                            <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                                <div class="tooltip">
-                                    <a class="btn btn-flat waves-attach waves-effect" href="/e/zcgfu16/vs?t=99689637&amp;ft=Yi5wbmc=&amp;s=2&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-handshake-o"></i></a>
-                                    <div class="top">Volunteer<i></i></div>
-                                </div>
-                            </div>
-                            <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                                <div class="tooltip">
-                                    <a class="btn btn-flat waves-attach waves-effect" href="/e/zcgfu17/csw?t=99689637&amp;ft=Yi5wbmc=&amp;s=2&amp;kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf" style="margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-edit"></i></a>
-                                    <div class="top">Catatan Wali Kelas<i></i></div>
-                                </div>
-                            </div>
-                            <div class="card-action-btn pull-left" style="margin-left: 0px; padding-left: 0px; margin-right: 0px; color: grey;">
-                                <div class="tooltip">
-                                    <label class="btn btn-flat waves-attach waves-effect" onclick="document.location.href='/e/las-NdYWuo9OFAw?kd=f9d0d215-a4cb-47f6-aa52-8a303d69e6bf';" style="cursor: pointer; margin-left: 0px; color: #8f8f8f; font-weight: bold; text-transform: none; padding-top: 5px; padding-bottom: 5px; margin-top: 2px;"><i class="fa fa-file-text-o"></i></label>
-                                    <div class="top">Laporan Presensi Siswa<i></i></div>
-                                </div>
-                            </div>--%>
+                            
                         </div>
                     </div>
                 </div>
