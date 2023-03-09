@@ -1,4 +1,4 @@
-﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Second.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="wf.Attempt.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_Attempt" %>
+﻿<%@ Page Title="" Language="C#" MasterPageFile="~/Application_Masters/Main.Master" ValidateRequest="false" AutoEventWireup="true" CodeBehind="wf.Attempt.aspx.cs" Inherits="AI_ERP.Application_Modules.CBT.wf_Attempt" %>
 
 <%@ MasterType VirtualPath="~/Application_Masters/Main.Master" %>
 <%@ Register TagPrefix="ucl" TagName="PostbackUpdateProgress" Src="~/Application_Controls/Res/PostbackUpdateProgress.ascx" %>
@@ -7,24 +7,51 @@
     <script type="text/javascript">
 
         var currentValue = 0;
-        document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
+        function loadCkEditor() {
+            CKEDITOR.config.toolbar_Full =
+                [
+                    { name: 'document', items: ['Source'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find'] },
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                    { name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight'] }
+                ];
+            CKEDITOR.config.height = '40px';
+            CKEDITOR.config.removePlugins = 'maximize';
+            CKEDITOR.config.removePlugins = 'resize';
+            CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
+            CKEDITOR.replace('<%= txtJwbEssay.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+                startupFocus: true
+            });
+
+            
+        }
+
+        function UpdateCk() {
+
+            CKEDITOR.instances["<%= txtJwbEssay.ClientID %>"].updateElement();
+        };
+
         function EndRequestHandler() {
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequest);
         }
+
         function EndRequest() {
             var jenis_act = document.getElementById("<%= txtKeyAction.ClientID %>").value;
 
             switch (jenis_act) {
                 case "<%= JenisAction.DoChangePage %>":
-                    //ReInitTinyMCE();
+                    loadCkEditor();
                     window.scrollTo(0, 0);
                     break;
                 case "<%= JenisAction.Add %>":
-                    //ReInitTinyMCE();
+                    loadCkEditor();
 
                     break;
                 case "<%= JenisAction.AddWithMessage %>":
-                    // ReInitTinyMCE();
+                    loadCkEditor();
 
                     $('body').snackbar({
                         alive: 2000,
@@ -35,14 +62,15 @@
                     });
                     break;
                 case "<%= JenisAction.DoShowData %>":
-                    ReInitTinyMCE();
+                    loadCkEditor();
 
                     break;
                 case "<%= JenisAction.Clear %>":
-                    document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
+
                     break;
 
                 default:
+
                     if (jenis_act.trim() != "") {
                         $('body').snackbar({
                             alive: 6000,
@@ -60,48 +88,6 @@
 
         }
 
-        document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
-
-        function LoadTinyMCEjwbEssay() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_jwbEssay",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 400,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtJwbEssayVal.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
-            });
-        }
-
-        function RemoveTinyMCE() {
-            console.log("oii")
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbEssay.ClientID %>');
-        }
-        function ReInitTinyMCE() {
-            RemoveTinyMCE();
-            LoadTinyMCEjwbEssay();
-
-            //document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
-        }
-
-
 
     </script>
 </asp:Content>
@@ -115,7 +101,6 @@
     <asp:UpdatePanel runat="server" ID="upMain">
         <ContentTemplate>
             <asp:HiddenField runat="server" ID="txtKeyAction" />
-            <asp:HiddenField runat="server" ID="txtJwbEssayVal" />
             <asp:HiddenField runat="server" ID="hdIdx" />
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnLinkClick" OnClick="btnLink_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
@@ -136,13 +121,14 @@
                                     <div style="font-size: medium; color: white;">
                                         <asp:Literal ID="txtTahunAjaran" runat="server"></asp:Literal>
                                         -
-                                <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
+                                    <asp:Literal ID="txtSemester" runat="server"></asp:Literal>
                                     </div>
-                                     <div >
-                                <label class="badge" style="font-size: medium; color: white; font-weight: bold; color: white;"">
-                                    <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
-                                         <p></p>
-                            </div>
+
+                                    <div>
+                                        <label class="badge" style="font-size: medium; color: white; font-weight: bold; color: white;">
+                                            <asp:Literal ID="txtNamaKP" runat="server"></asp:Literal></label>
+                                        <p></p>
+                                    </div>
                                 </div>
                                 <div class="float-right">
                                     <p class="text-right">
@@ -174,7 +160,7 @@
                                         <label style="color: #B7770D; font-size: small;">
                                             JAWABAN ESSAY :
                                         </label>
-                                        <asp:TextBox ValidationGroup="vldInput" CssClass="form-control  mcetiny_jwbEssay" runat="server" ID="txtJwbEssay" TextMode="MultiLine" Height="200px"></asp:TextBox>
+                                        <asp:TextBox contenteditable="true" CssClass="form-control" runat="server" ID="txtJwbEssay" TextMode="MultiLine" Height="200px"></asp:TextBox>
                                     </div>
                                 </div>
 
@@ -244,15 +230,15 @@
                                 </div>
                             </div>
 
-                           
-                                <div class="card-action-btn pull-left col-md-12" style="margin-left: 0px; margin-right: 0px; color: grey;">     
-                                    <button style="font-size: small" onclick="ClearJwb()" id="lnkClrJwb" class="btn btn-red;">Bersihkan Jawaban </button>
-                                    <hr />
-                                    <asp:LinkButton Style="font-size: small; float: left; margin-bottom: 5px" OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-brand "><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
-                                    <asp:LinkButton Style="font-size: small; float: right; margin-bottom: 5px" OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-brand"> Berikutnya <i class="fa fa-arrow-right"></i></asp:LinkButton>
 
-                                </div>
-                          
+                            <div class="card-action-btn pull-left col-md-12" style="margin-left: 0px; margin-right: 0px; color: grey;">
+                                <button style="font-size: small" onclick="ClearJwb()" id="lnkClrJwb" class="btn btn-red;">Bersihkan Jawaban </button>
+                                <hr />
+                                <asp:LinkButton Style="font-size: small; float: left; margin-bottom: 5px" OnClientClick="UpdateCk()" OnClick="btnPrev_Click" runat="server" ID="btnPrev" CssClass="btn btn-brand btnSave"><i class="fa fa-arrow-left"></i> Sebelumnya</asp:LinkButton>
+                                <asp:LinkButton Style="font-size: small; float: right; margin-bottom: 5px" OnClientClick="UpdateCk()" OnClick="btnNext_Click" runat="server" ID="btnNext" CssClass="btn btn-brand btnSave"> Berikutnya <i class="fa fa-arrow-right"></i></asp:LinkButton>
+
+                            </div>
+
 
 
 
@@ -285,6 +271,7 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="KontenBawah" runat="server">
     <script type="text/javascript">
+        loadCkEditor();
         function ClearJwb() {
             $('input[type="radio"]').attr('checked', false);
 
@@ -321,33 +308,7 @@
             });
         }, 1000);
 
-        //var countDownDate = new Date("2023-03-07 09:30:00").getTime();
 
-        //// Update the count down every 1 second
-        //var x = setInterval(function () {
-
-        //    // Get today's date and time
-        //    var now = new Date().getTime();
-
-        //    // Find the distance between now and the count down date
-        //    var distance = countDownDate - now;
-
-        //    // Time calculations for days, hours, minutes and seconds
-        //    var days = Math.floor(distance / (1000 * 60 * 60 * 24));
-        //    var hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        //    var minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
-        //    var seconds = Math.floor((distance % (1000 * 60)) / 1000);
-
-        //    // Display the result in the element with id="demo"
-        //    document.getElementById("counter").innerHTML = days + "d " + hours + "h "
-        //        + minutes + "m " + seconds + "s ";
-
-        //    // If the count down is finished, write some text
-        //    if (distance < 0) {
-        //        clearInterval(x);
-        //        document.getElementById("counter").innerHTML = "EXPIRED";
-        //    }
-        //}, 1000);
 
         //LoadTinyMCEjwbEssay();
         //RenderDropDownOnTables();

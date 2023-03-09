@@ -247,14 +247,14 @@ namespace AI_ERP.Application_Modules.CBT
                 m.Kurikulum = Libs.GetQueryString("kur");
                 m.TahunAjaran = Libs.GetQueryString("ta");
                 m.Semester = Libs.GetQueryString("sm");
-
+                m.Deskripsi = txtDeskripsi.Text;
 
 
 
                 if (txtID.Value.Trim() != "")
                 {
                     m.Nama = txtNama.Text;
-                    m.Deskripsi = txtDeskripsi.Text;
+                    
                     var a = txtStartDate.Text;
                     m.StartDatetime = !string.IsNullOrEmpty(txtStartDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtStartDate.Text).ToString("yyyy-MM-dd") + " " + cboStartJam.Text + ":" + cboStartMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
                     m.EndDatetime = !string.IsNullOrEmpty(txtEndDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtEndDate.Text).ToString("yyyy-MM-dd") + " " + cboEndJam.Text + ":" + cboEndMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
@@ -273,7 +273,7 @@ namespace AI_ERP.Application_Modules.CBT
                 {
 
                     m.Nama = txtNama.Text;
-                    m.Deskripsi = txtDeskripsi.Text;
+                    //m.Deskripsi = txtDeskripsi.Text;
                     
                     m.StartDatetime = !string.IsNullOrEmpty(txtStartDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtStartDate.Text).ToString("yyyy-MM-dd") + " " + cboStartJam.Text + ":" + cboStartMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
                     m.EndDatetime = !string.IsNullOrEmpty(txtEndDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtEndDate.Text).ToString("yyyy-MM-dd") + " " + cboEndJam.Text + ":" + cboEndMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
@@ -288,6 +288,7 @@ namespace AI_ERP.Application_Modules.CBT
                     //InitFields();
                     txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
                 }
+                getData();
             }
             catch (Exception ex)
             {

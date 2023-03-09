@@ -127,6 +127,14 @@ namespace AI_ERP.Application_Modules.CBT
             //{
             //    Libs.RedirectToBeranda(this.Page);
             //}
+
+            this.Master.HeaderTittle = "<img style=\"height: 28px; width: 28px; display: initial;\" src=\"" + ResolveUrl("~/Application_CLibs/images/svg/document.svg") + "\">" +
+                                       "&nbsp;&nbsp;" +
+                                       "";
+
+            this.Master.ShowHeaderTools = false;
+            this.Master.HeaderCardVisible = false;
+
             if (!IsPostBack)
             {
                 btnPrev.Enabled = false;
@@ -172,11 +180,11 @@ namespace AI_ERP.Application_Modules.CBT
             }
 
 
-            var IdSoal = Libs.GetQueryString("id");
-            if (!string.IsNullOrEmpty(IdSoal))
-            {
-                getData(IdSoal);
-            }
+            //var IdSoal = Libs.GetQueryString("id");
+            //if (!string.IsNullOrEmpty(IdSoal))
+            //{
+            //    getData(IdSoal);
+            //}
         }
 
 
@@ -193,10 +201,7 @@ namespace AI_ERP.Application_Modules.CBT
                     HttpContext.Current.Session["CountdownTimer"] = null;
                     return "end";
 
-
                 }
-
-
 
             }
             return x;
@@ -308,6 +313,7 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void btnLink_Click(object sender, EventArgs e)
         {
+            lnkOKInput_Click();
             st_lstIdx = Convert.ToInt32(hdIdx.Value) - 1;
             getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
         }
@@ -315,8 +321,6 @@ namespace AI_ERP.Application_Modules.CBT
         protected void getData(string idsoal)
         {
             st_jenis = "";
-
-
 
             CBT_BankSoal m = DAO_CBT_BankSoal.GetByID_Entity(idsoal.Trim());
 
@@ -398,10 +402,9 @@ namespace AI_ERP.Application_Modules.CBT
             }
             checkButton();
             getListLInk();
-            if (m.Jenis == "essay")
-            {
+            
                 txtKeyAction.Value = JenisAction.DoShowData.ToString();
-            }
+            
 
         }
 
@@ -426,7 +429,7 @@ namespace AI_ERP.Application_Modules.CBT
                 }
                 else
                 {
-                    jwbEssay = txtJwbEssayVal.Value != "" ? txtJwbEssayVal.Value : txtJwbEssay.Text;
+                    jwbEssay =  txtJwbEssay.Text;
                 }
 
                 CBT_Jwb m = new CBT_Jwb()
@@ -474,22 +477,22 @@ namespace AI_ERP.Application_Modules.CBT
                 {
                     if (st_lstIdx == i - 1)
                     {
-                        link += "<button class=\"btn\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"background-color:#808080;color:white;padding:10px;margin:5px;margin-bottom:5px; border: 2px solid red;font-weight: bold; font-size: medium;\"> " + i + " </button>";
+                        link += "<lable class=\"btn \"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"background-color:#808080;color:white;padding:10px;margin:5px;margin-bottom:5px; border: 2px solid red;font-weight: bold; font-size: medium;\"> " + i + " </lable>";
                     }
                     else
                     {
-                        link += "<button class=\"btn\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"background-color:#808080;color:white;padding:10px;margin:5px;margin-bottom:5px;font-weight: bold; font-size: medium;\"> " + i + " </button>";
+                        link += "<lable class=\"btn\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"background-color:#808080;color:white;padding:10px;margin:5px;margin-bottom:5px;font-weight: bold; font-size: medium;\"> " + i + " </lable>";
                     }
                 }
                 else
                 {
                     if (st_lstIdx == i - 1)
                     {
-                        link += "<button class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"color:#808080;padding:10px;margin:5px;margin-bottom:5px; border: 2px solid red;font-weight: bold; font-size: medium;\"> " + i + " </button> ";
+                        link += "<lable class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"color:#808080;padding:10px;margin:5px;margin-bottom:5px; border: 2px solid red;font-weight: bold; font-size: medium;\"> " + i + " </lable> ";
                     }
                     else
                     {
-                        link += "<button class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"color:#808080;padding:10px;margin:5px;margin-bottom:5px;font-weight: bold; font-size: medium; \"> " + i + " </button> ";
+                        link += "<lable class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"color:#808080;padding:10px;margin:5px;margin-bottom:5px;font-weight: bold; font-size: medium; \"> " + i + " </lable> ";
                     }
                 }
                 i++;

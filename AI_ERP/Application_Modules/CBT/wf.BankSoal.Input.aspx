@@ -20,222 +20,69 @@
         }
 
 
-        function LoadTinyMCESoal() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_soal",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 300,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtSoalVal.ClientID %>').value = ed.getContent();
-                    });
+     
 
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+        function loadCkEditor() {
+            CKEDITOR.config.toolbar_Full =
+                [
+                    { name: 'document', items: ['Source'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find'] },
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                    { name: 'paragraph', items: ['JustifyLeft', 'JustifyCenter', 'JustifyRight'] }
+                ];
+            CKEDITOR.config.height = '40px';
+            CKEDITOR.config.removePlugins = 'maximize';
+            CKEDITOR.config.removePlugins = 'resize';
+            CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
+            CKEDITOR.replace('<%= txtSoal.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+                startupFocus: true
             });
-        }
-
-        function LoadTinyMCEjwbEssay() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_jwbEssay",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 300,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtJwbEssayVal.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+            CKEDITOR.replace('<%= txtJwbEssay.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+             
             });
-        }
-
-        function LoadTinyMCEjwbGanda1() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_jwbGanda1",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 300,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtJwbGanda1Val.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+            CKEDITOR.replace('<%= txtJwbGanda1.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+            
             });
-        }
-
-        function LoadTinyMCEjwbGanda2() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_jwbGanda2",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 300,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtJwbGanda2Val.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+            CKEDITOR.replace('<%= txtJwbGanda2.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+                
             });
-        }
-
-
-        function LoadTinyMCEjwbGanda3() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_jwbGanda3",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 300,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtJwbGanda3Val.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+            CKEDITOR.replace('<%= txtJwbGanda3.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+               
             });
-        }
-
-        function LoadTinyMCEjwbGanda4() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_jwbGanda4",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 300,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtJwbGanda4Val.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+            CKEDITOR.replace('<%= txtJwbGanda4.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+                
             });
-        }
-
-        function LoadTinyMCEjwbGanda5() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_jwbGanda5",
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount ',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight | checklist numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 300,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtJwbGanda5Val.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+            CKEDITOR.replace('<%= txtJwbGanda5.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock',
+                language: 'en',
+                
             });
-        }
 
-        function RemoveTinyMCE() {
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtSoal.ClientID %>');
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbEssay.ClientID %>');
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbGanda1.ClientID %>');
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbGanda2.ClientID %>');
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbGanda3.ClientID %>');
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbGanda4.ClientID %>');
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtJwbGanda5.ClientID %>');
 
-        }
-        function ReInitTinyMCE() {
-            RemoveTinyMCE();
-            LoadTinyMCESoal();
-            LoadTinyMCEjwbEssay();
-            LoadTinyMCEjwbGanda1();
-            LoadTinyMCEjwbGanda2();
-            LoadTinyMCEjwbGanda3();
-            LoadTinyMCEjwbGanda4();
-            LoadTinyMCEjwbGanda5();
+            $("#<%=lnkOKInput.ClientID %>").click(function () {
+
+                CKEDITOR.instances["<%= txtSoal.ClientID %>"].updateElement();
+                CKEDITOR.instances["<%= txtJwbEssay.ClientID %>"].updateElement();
+                CKEDITOR.instances["<%= txtJwbGanda1.ClientID %>"].updateElement();
+                CKEDITOR.instances["<%= txtJwbGanda2.ClientID %>"].updateElement();
+                CKEDITOR.instances["<%= txtJwbGanda3.ClientID %>"].updateElement();
+                CKEDITOR.instances["<%= txtJwbGanda4.ClientID %>"].updateElement();
+                CKEDITOR.instances["<%= txtJwbGanda5.ClientID %>"].updateElement();
+
+            });
         }
 
 
@@ -262,16 +109,17 @@
 
             switch (jenis_act) {
                 case "<%= JenisAction.DoChangePage %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     window.scrollTo(0, 0);
                     break;
                 case "<%= JenisAction.Add %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     JenisCheck();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.AddWithMessage %>":
-                    ReInitTinyMCE();
+                    loadCkEditor();
+                    //ReInitTinyMCE();
                     JenisCheck();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     $('body').snackbar({
@@ -283,24 +131,25 @@
                     });
                     break;
                 case "<%= JenisAction.DoShowData %>":
-                    ReInitTinyMCE();
+                    loadCkEditor();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.DoShowConfirmHapus %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     //$('#ui_modal_confirm_hapus').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.Update %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     JenisCheck();
                     //HideModal();
                     break;
                 case "<%= JenisAction.Delete %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
 
                     break;
                 case "<%= JenisAction.DoAdd %>":
-                    ReInitTinyMCE();
+                    loadCkEditor();
+                    //ReInitTinyMCE();
 
                     $('body').snackbar({
                         alive: 2000,
@@ -311,7 +160,8 @@
                     });
                     break;
                 case "<%= JenisAction.DoUpdate %>":
-                    ReInitTinyMCE();
+                    loadCkEditor();
+                    //ReInitTinyMCE();
                     //HideModal();
                     $('body').snackbar({
                         alive: 2000,
@@ -322,7 +172,7 @@
                     });
                     break;
                 case "<%= JenisAction.DoDelete %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     HideModal();
                     $('body').snackbar({
                         alive: 2000,
@@ -409,7 +259,7 @@
                                 </div>
                                 <div class="card-inner">
                                     <div class="text-right">
-                                        <asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-brand" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="Simpan"></asp:LinkButton>
+                                        <asp:LinkButton OnClientClick="TriggerSave()" CssClass="btn btn-brand" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="Simpan"></asp:LinkButton>
                                     </div>
                                     <div class="col-md-12 row">
                                         <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
@@ -417,7 +267,7 @@
                                             <label for="<%= txtSoal.ClientID %>" style="color: #B7770D; font-size: small;">
                                                 SOAL :
                                             </label>
-                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_soal" runat="server" ID="txtSoal" Height="200px"></asp:TextBox>
+                                            <asp:TextBox contenteditable="true" CssClass="form-control " runat="server" ID="txtSoal" TextMode="MultiLine" Height="200px"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -426,7 +276,7 @@
                                             <label for="<%= cboJenis.ClientID %>" style="color: #B7770D; font-size: small;">
                                                 JENIS SOAL :
                                             </label>
-                                            <asp:DropDownList ValidationGroup="vldInput" runat="server" ID="cboJenis" CssClass="input-box" onchange="JenisCheck(this);">
+                                            <asp:DropDownList runat="server" ID="cboJenis" CssClass="input-box" onchange="JenisCheck(this);">
                                                 <asp:ListItem Text="" Value=""></asp:ListItem>
                                                 <asp:ListItem Text="Pilihan Ganda" Value="ganda"></asp:ListItem>
                                                 <asp:ListItem Text="Essay" Value="essay"></asp:ListItem>
@@ -442,7 +292,7 @@
                                             <label for="<%= txtJwbEssay.ClientID %>" style="color: #B7770D; font-size: small;">
                                                 JAWABAN ESSAY :
                                             </label>
-                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control  mcetiny_jwbEssay" runat="server" ID="txtJwbEssay" TextMode="MultiLine" Height="200px"></asp:TextBox>
+                                            <asp:TextBox contenteditable="true" CssClass="form-control  " runat="server" ID="txtJwbEssay" TextMode="MultiLine" Height="200px"></asp:TextBox>
                                         </div>
                                     </div>
 
@@ -459,7 +309,7 @@
                                                             <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" />
                                                         </div>
                                                         <div class="col-md-11">
-                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda1" TextMode="MultiLine"></asp:TextBox>
+                                                            <asp:TextBox contenteditable="true" CssClass="form-control   " runat="server" ID="txtJwbGanda1" TextMode="MultiLine" Height="200px"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -471,7 +321,7 @@
                                                             <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" />
                                                         </div>
                                                         <div class="col-md-11">
-                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda2" TextMode="MultiLine"></asp:TextBox>
+                                                            <asp:TextBox contenteditable="true" CssClass="form-control   " runat="server" ID="txtJwbGanda2" TextMode="MultiLine"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -483,7 +333,7 @@
                                                             <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" />
                                                         </div>
                                                         <div class="col-md-11">
-                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda3" TextMode="MultiLine"></asp:TextBox>
+                                                            <asp:TextBox contenteditable="true" CssClass="form-control   " runat="server" ID="txtJwbGanda3" TextMode="MultiLine"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -495,7 +345,7 @@
                                                             <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" />
                                                         </div>
                                                         <div class="col-md-11">
-                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda4" TextMode="MultiLine"></asp:TextBox>
+                                                            <asp:TextBox contenteditable="true" CssClass="form-control   " runat="server" ID="txtJwbGanda4" TextMode="MultiLine"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -507,7 +357,7 @@
                                                             <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" />
                                                         </div>
                                                         <div class="col-md-11">
-                                                            <asp:TextBox ValidationGroup="vldInput" CssClass="form-control mcetiny_jwbGanda1  " runat="server" ID="txtJwbGanda5" TextMode="MultiLine"></asp:TextBox>
+                                                            <asp:TextBox contenteditable="true" CssClass="form-control   " runat="server" ID="txtJwbGanda5" TextMode="MultiLine"></asp:TextBox>
 
                                                         </div>
                                                     </div>
@@ -651,15 +501,10 @@
     <script type="text/javascript">
 
 
+     
+        loadCkEditor();
 
-
-        LoadTinyMCESoal();
-        LoadTinyMCEjwbEssay();
-        LoadTinyMCEjwbGanda1();
-        LoadTinyMCEjwbGanda2();
-        LoadTinyMCEjwbGanda3();
-        LoadTinyMCEjwbGanda4();
-        LoadTinyMCEjwbGanda5();
+        
 
     </script>
 
