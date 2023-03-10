@@ -14,6 +14,7 @@ using System.Data.SqlClient;
 using System.Data;
 using System.Web.UI.WebControls.WebParts;
 using Newtonsoft.Json.Linq;
+using System.Windows.Controls;
 
 namespace AI_ERP.Application_Modules.CBT
 {
@@ -27,8 +28,6 @@ namespace AI_ERP.Application_Modules.CBT
         public static int st_lstIdx = 0;
         public static int st_mxIdx = 0;
         public static string st_jenis = "";
-
-
 
         public enum JenisAction
         {
@@ -50,16 +49,12 @@ namespace AI_ERP.Application_Modules.CBT
 
         private static class QS
         {
-            public static string GetUnit()
+            public static string GetRumahSoal()
             {
-                if (Libs.GetQueryString("u").Trim() != "")
-                {
-                    return Libs.GetQueryString("u");
-                }
-                else
-                {
-                    return Libs.GetQueryString("unit");
-                }
+
+                return Libs.GetQueryString("rs");
+
+
             }
 
             public static string GetToken()
@@ -91,37 +86,37 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-        //public class CountDownTimer
-        //{
-        //    public TimeSpan TimeLeft;
-        //    System.Threading.Thread thread;
-        //    public CountDownTimer(TimeSpan original)
-        //    {
-        //        this.TimeLeft = original;
-        //    }
-        //    public void Start()
-        //    {
-        //        // Start a background thread to count down time
-        //        thread = new System.Threading.Thread(() =>
-        //        {
-        //            while (true)
-        //            {
-        //                System.Threading.Thread.Sleep(1000);
-        //                TimeLeft = TimeLeft.Subtract(TimeSpan.Parse("00:00:01"));                                                                                         
-        //            }
-
-        //        });
-        //        thread.Start();
-
-        //    }
-        //}
-
-
-        protected bool IsByAdminUnit()
+        public class CountDownTimer
         {
-            return (QS.GetUnit().Trim() != "" && QS.GetToken().Trim() != "" &&
-                    DAO_Sekolah.IsValidTokenUnit(Libs.GetQueryString("unit"), Libs.GetQueryString("token")) ? true : false);
+            public TimeSpan TimeLeft;
+            System.Threading.Thread thread;
+            public CountDownTimer(TimeSpan original)
+            {
+                this.TimeLeft = original;
+            }
+            public void Start()
+            {
+                // Start a background thread to count down time
+                thread = new System.Threading.Thread(() =>
+                {
+                    while (true)
+                    {
+                        System.Threading.Thread.Sleep(1000);
+                        TimeLeft = TimeLeft.Subtract(TimeSpan.Parse("00:00:01"));
+                    }
+
+                });
+                thread.Start();
+
+            }
         }
+
+
+        //protected bool IsByAdminUnit()
+        //{
+        //    return (QS.GetUnit().Trim() != "" && QS.GetToken().Trim() != "" &&
+        //            DAO_Sekolah.IsValidTokenUnit(Libs.GetQueryString("unit"), Libs.GetQueryString("token")) ? true : false);
+        //}
 
         protected void Page_Load(object sender, EventArgs e)
         {
@@ -133,6 +128,14 @@ namespace AI_ERP.Application_Modules.CBT
             //{
             //    Libs.RedirectToBeranda(this.Page);
             //}
+
+            //this.Master.HeaderTittle = "<img style=\"height: 28px; width: 28px; display: initial;\" src=\"" + ResolveUrl("~/Application_CLibs/images/svg/document.svg") + "\">" +
+            //                           "&nbsp;&nbsp;" +
+            //                           "";
+
+            //this.Master.ShowHeaderTools = false;
+            //this.Master.HeaderCardVisible = false;
+
             if (!IsPostBack)
             {
                 btnPrev.Enabled = false;
@@ -144,7 +147,7 @@ namespace AI_ERP.Application_Modules.CBT
                 getListLInk();
                 getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
                 CBT_RumahSoal m = DAO_CBT_RumahSoal_Input.GetByID_Entity(Libs.GetQueryString("rs"));
-                int tcd = 0;
+                int CounterMnt = 0;
                 txtNamaKP.Text = m.Nama.ToString();
                 txtKelas.Text = m.NamaKelas.ToString();
                 txtMapel.Text = m.NamaMapel.ToString();
@@ -156,87 +159,64 @@ namespace AI_ERP.Application_Modules.CBT
                     {
                         if (m.LimitSatuan == "Menit")
                         {
-                            tcd = m.LimitTime;
+                            CounterMnt = m.LimitTime;
                         }
+                    }
+                    else if (m.EndDatetime != null && m.EndDatetime > new DateTime(2000, 1, 1, 1, 1, 1))
+                    {
+                        var a = m.EndDatetime - DateTime.Now;
+                        CounterMnt = Convert.ToInt32(a.TotalMinutes);
                     }
 
 
                 }
 
-              
+                //counter session
 
-                //if (Session["CountdownTimer"] == null)
-                //{
-                //    Session["CountdownTimer"] = new CountDownTimer(TimeSpan.FromMinutes(10));
-                //    (Session["CountdownTimer"] as CountDownTimer).Start();
-                //}
+                if (Session["CountdownTimer"] == null && CounterMnt > 0)
+                {
+                    Session["CountdownTimer"] = new CountDownTimer(TimeSpan.FromMinutes(CounterMnt));
+                    (Session["CountdownTimer"] as CountDownTimer).Start();
+                }
             }
 
 
-          
-            //DataTable dt = new DataTable();
-            //dt.Columns.Add("EndDate", typeof(DateTime));
-            //dt.Rows.Add("2023-03-07 00:49:00");
-            DateTime startDate = DateTime.Now;
-            DateTime endDate = Convert.ToDateTime("2023-03-07 01:00:00");
-            lblTime.Text = CalculateTimeDifference(startDate, endDate);
-
-            var IdSoal = Libs.GetQueryString("id");
-            if (!string.IsNullOrEmpty(IdSoal))
-            {
-                getData(IdSoal);
-            }
+            //var IdSoal = Libs.GetQueryString("id");
+            //if (!string.IsNullOrEmpty(IdSoal))
+            //{
+            //    getData(IdSoal);
+            //}
         }
 
-        public string CalculateTimeDifference(DateTime startDate, DateTime endDate)
+
+
+        [System.Web.Services.WebMethod]
+        public static string Counter_Click(string name)
         {
-            int days = 0; int hours = 0; int mins = 0; int secs = 0;
-            string final = string.Empty;
-            if (endDate > startDate)
+            var x = "";
+            if (HttpContext.Current.Session["CountdownTimer"] != null)
             {
-                days = (endDate - startDate).Days;
-                hours = (endDate - startDate).Hours;
-                mins = (endDate - startDate).Minutes;
-                secs = (endDate - startDate).Seconds;
-                final = string.Format("{0} days {1} hours {2} mins {3} secs", days, hours, mins, secs);
+                x = (HttpContext.Current.Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
+                if ((HttpContext.Current.Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds <= 0)
+                {
+                    HttpContext.Current.Session["CountdownTimer"] = null;
+                    return "end";
+
+                }
+
             }
-            else
-            {
-                timer.Enabled = false;
-            }
-            return final;
-            
+            return x;
         }
-        //protected void Timer1_Tick(object sender, EventArgs e)
-        //{
-        //    if (Session["CountdownTimer"] != null)
-        //    {
-        //        Label1.Text = (Session["CountdownTimer"] as CountDownTimer).TimeLeft.ToString();
-        //        if ((Session["CountdownTimer"] as CountDownTimer).TimeLeft.TotalMilliseconds <= 0)
-        //        {
-        //            Session["CountdownTimer"] = null;
-        //            Timer1.Enabled = false;
-        //            //Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs")));
-
-        //        }
-        //    }
-        //}
 
 
-        //protected void CountStop(object sender, EventArgs e)
-        //{
-        //    Session["CountdownTimer"] = null;
-        //    Timer1.Enabled = false;
-        //}
+        protected void btnSelesai_Click(object sender, EventArgs e)
+        {
+            Session["CountdownTimer"] = null;
+            StatusSiswaUpdate();
+            Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.START_ATTEMPT.ROUTE + "?rs=" + Libs.GetQueryString("rs"));
+        }
 
-        //protected void CountStart(object sender, EventArgs e)
-        //{
-        //    if (Session["CountdownTimer"] == null)
-        //    {
-        //        Session["CountdownTimer"] = new CountDownTimer(TimeSpan.Parse(Label1.Text));
-        //        (Session["CountdownTimer"] as CountDownTimer).Start();
-        //    }
-        //}
+
 
 
         protected void getListDs()
@@ -257,7 +237,7 @@ namespace AI_ERP.Application_Modules.CBT
             sqlDA.Fill(dtResult2);
 
             lstDesignSoalJwb = new List<CBT_DesignSoal>();
-
+            txtTotalSoal.Text = dtResult2.Rows.Count.ToString();
             foreach (DataRow row in dtResult2.Rows)
             {
                 CBT_DesignSoal j = new CBT_DesignSoal();
@@ -265,6 +245,7 @@ namespace AI_ERP.Application_Modules.CBT
                 lstDesignSoalJwb.Add(j);
             }
             st_mxIdx = lstDesignSoalJwb.Count - 1;
+            
         }
 
         protected void getListJwb()
@@ -284,13 +265,14 @@ namespace AI_ERP.Application_Modules.CBT
             sqlDA = new SqlDataAdapter(comm);
             sqlDA.Fill(dtResult2);
             lstJwb = new List<CBT_Jwb>();
-
+            txtTerjawab.Text = dtResult2.Rows.Count.ToString();
             foreach (DataRow row in dtResult2.Rows)
             {
                 CBT_Jwb j = new CBT_Jwb();
                 j = DAO_CBT_DesignSoal.GetEntityJwbFromDataRow(row);
                 lstJwb.Add(j);
             }
+                 
         }
 
         protected void checkButton()
@@ -318,7 +300,7 @@ namespace AI_ERP.Application_Modules.CBT
         protected void btnNext_Click(object sender, EventArgs e)
         {
 
-
+            lnkOKInput_Click();
             st_lstIdx = st_lstIdx + 1;
 
             getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
@@ -327,26 +309,21 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void btnPrev_Click(object sender, EventArgs e)
         {
+            lnkOKInput_Click();
             st_lstIdx = st_lstIdx - 1;
-
             getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
-
         }
 
         protected void btnLink_Click(object sender, EventArgs e)
         {
+            lnkOKInput_Click();
             st_lstIdx = Convert.ToInt32(hdIdx.Value) - 1;
-
-
             getData(lstDesignSoalJwb[st_lstIdx].Rel_BankSoal.ToString());
-
         }
 
         protected void getData(string idsoal)
         {
             st_jenis = "";
-
-
 
             CBT_BankSoal m = DAO_CBT_BankSoal.GetByID_Entity(idsoal.Trim());
 
@@ -354,16 +331,13 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 if (m.Soal != null)
                 {
-
-
                     txtSoal.Text = m.Soal.ToString();
-
-
 
                     if (m.Jenis == "essay")
                     {
                         EssayDiv.Attributes.Add("style", "display:block");
                         GandaDiv.Attributes.Add("style", "display:none");
+                        txtJwbEssay.Attributes.Add("onchange", "FormChangeCheck();");
                     }
                     else if (m.Jenis == "ganda")
                     {
@@ -396,7 +370,7 @@ namespace AI_ERP.Application_Modules.CBT
                     var jwb = lstJwb.Where(x => x.Rel_DesignSoal.ToUpper() == ds.ToUpper()).FirstOrDefault();
                     if (jwb != null)
                     {
-                        txtJwbEssayVal.Value = jwb.JwbEssay;
+                        //txtJwbEssayVal.Value = jwb.JwbEssay;
                         txtJwbEssay.Text = jwb.JwbEssay;
 
                         //.Rel_JwbGanda;
@@ -421,52 +395,42 @@ namespace AI_ERP.Application_Modules.CBT
                             ChkJwbGanda5.Checked = true;
                         }
 
-                        
                     }
-
-
-
-
                 }
-
             }
             checkButton();
             getListLInk();
-            if (m.Jenis == "essay")
-            {
-                txtKeyAction.Value = JenisAction.DoShowData.ToString();
-            }
-            
+            txtKeyAction.Value = JenisAction.DoShowData.ToString();
         }
 
 
-        protected void lnkOKInput_Click(object sender, EventArgs e)
+        protected void lnkOKInput_Click()
         {
             try
             {
-                string jwbGanda = "";
-                string jwbEssay = "";
-                if (st_jenis == "ganda")
+                var isFormChange = hdFormChange.Value;
+
+                if (isFormChange == "1" || st_jenis == "essay")
                 {
-
-                    bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
-                    string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
-
-                    for (int i = 0; i < 5; i++)
+                    string jwbGanda = "";
+                    string jwbEssay = "";
+                    if (st_jenis == "ganda")
                     {
-                        if (arrJwbGandaChk[i])
-                            jwbGanda = arrKodeJwbGanda[i].ToString();
+
+                        bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
+                        string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
+
+                        for (int i = 0; i < 5; i++)
+                        {
+                            if (arrJwbGandaChk[i])
+                                jwbGanda = arrKodeJwbGanda[i].ToString();
+                        }
                     }
-                }
-                else
-                {
-                    jwbEssay = txtJwbEssayVal.Value != "" ? txtJwbEssayVal.Value : txtJwbEssay.Text;
-                }
+                    else
+                    {
+                        jwbEssay = txtJwbEssay.Text;
+                    }
 
-
-
-                if (jwbGanda != "" || jwbEssay != "")
-                {
                     CBT_Jwb m = new CBT_Jwb()
                     {
                         Rel_RumahSoal = Libs.GetQueryString("rs"),
@@ -477,16 +441,20 @@ namespace AI_ERP.Application_Modules.CBT
                         JwbEssay = jwbEssay.ToString()
                     };
 
+
                     DAO_CBT_DesignSoal.DeleteJwb(m.Rel_DesignSoal);
-                    DAO_CBT_DesignSoal.InsertJwb(m);
-                    //txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
-                    //if(st_lstIdx < st_mxIdx)
-                    //btnNext_Click(null, null);
+                    if (jwbGanda != "" || jwbEssay != "")
+                    {
+
+                        DAO_CBT_DesignSoal.InsertJwb(m);
+
+                    }
+
                     getListJwb();
                     getListLInk();
+
+                    hdFormChange.Value = "0";
                 }
-
-
             }
             catch (Exception ex)
             {
@@ -509,13 +477,25 @@ namespace AI_ERP.Application_Modules.CBT
                     exist = lstJwb.Any(m => m.Rel_DesignSoal.ToUpper() == row.Kode.ToString().ToUpper());
                 if (exist)
                 {
-                    link += "<div class=\"col-md-2\">    <button class=\"btn btn-green\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"padding:15px\"> " + i + " </button> </div>";
-
+                    if (st_lstIdx == i - 1)
+                    {
+                        link += "<span><lable class=\"btn  btnLnk\"  onclick=\"" + hdIdx.ClientID + ".value =\' " + i + "  \';UpdateCkEditor();" + btnLinkClick.ClientID + ".click();\" style=\"color:white; border: 2px solid red;background-color:grey; \"> " + i + " </lable> </span>";
+                    }
+                    else
+                    {
+                        link += "<span><lable class=\"btn btnLnk \"  onclick=\"" + hdIdx.ClientID + ".value =\' " + i + "  \';UpdateCkEditor();" + btnLinkClick.ClientID + ".click();\" style=\"color:white;background-color:grey;  \" > " + i + " </lable></span> ";
+                    }
                 }
                 else
                 {
-                    link += "<div class=\"col-md-2\">    <button class=\"btn btn-grey\"  onclick=\"ContentPlaceHolder1_hdIdx.value=\' " + i + "  \';ContentPlaceHolder1_btnLinkClick.click();\" style=\"padding:15px\"> " + i + " </button> </div>";
-
+                    if (st_lstIdx == i - 1)
+                    {
+                        link += "<span><lable class=\"btn  btnLnk\"  onclick=\"" + hdIdx.ClientID + ".value =\' " + i + "  \';UpdateCkEditor();" + btnLinkClick.ClientID + ".click();\" style=\"border: 2px solid red; \"> " + i + " </lable> </span>";
+                    }
+                    else
+                    {
+                        link += "<span><lable class=\"btn btnLnk \"  onclick=\"" + hdIdx.ClientID + ".value =\' " + i + "  \';UpdateCkEditor();" + btnLinkClick.ClientID + ".click();\" style=\" \" > " + i + " </lable></span> ";
+                    }
                 }
                 i++;
             }
@@ -523,6 +503,22 @@ namespace AI_ERP.Application_Modules.CBT
             txtLink.Text = link;
         }
 
+
+        protected void StatusSiswaUpdate()
+        {
+            try
+            {
+                CBT_StatusSiswa m = new CBT_StatusSiswa();
+                m.Rel_RumahSoal = Libs.GetQueryString("rs");
+                m.Rel_Siswa = Libs.LOGGED_USER_M.NoInduk;
+
+                DAO_CBT_RumahSoal_Input.UpdateStatus(m);
+            }
+            catch (Exception ex)
+            {
+                txtKeyAction.Value = ex.Message;
+            }
+        }
 
         protected void btnBackToMenu_Click(object sender, EventArgs e)
         {
@@ -533,6 +529,9 @@ namespace AI_ERP.Application_Modules.CBT
                         )
                 );
         }
+
+
+
 
 
     }

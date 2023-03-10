@@ -106,11 +106,11 @@ namespace AI_ERP.Application_Modules.CBT
             this.Master.HeaderCardVisible = false;
 
 
-            SetDropdown();
+            
 
             if (!IsPostBack)
             {
-                
+                SetDropdown();
                 //InitInput();
                 InitKeyEventClient();
                 getData();
@@ -152,11 +152,14 @@ namespace AI_ERP.Application_Modules.CBT
             }
 
             cboLimitSatuan.Items.Add(new ListItem("", ""));
-            cboLimitSatuan.Items.Add(new ListItem("Minggu", "Minggu"));
-            cboLimitSatuan.Items.Add(new ListItem("Hari", "Hari"));
-            cboLimitSatuan.Items.Add(new ListItem("Jam", "Jam"));
             cboLimitSatuan.Items.Add(new ListItem("Menit", "Menit"));
-            cboLimitSatuan.Items.Add(new ListItem("Detik", "Detik"));
+            cboLimitSatuan.Items.Add(new ListItem("Jam", "Jam"));
+            cboLimitSatuan.Items.Add(new ListItem("Hari", "Hari"));
+            cboLimitSatuan.Items.Add(new ListItem("Minggu", "Minggu"));
+            
+            
+         
+           
         }
 
         private void InitKeyEventClient()
@@ -244,14 +247,14 @@ namespace AI_ERP.Application_Modules.CBT
                 m.Kurikulum = Libs.GetQueryString("kur");
                 m.TahunAjaran = Libs.GetQueryString("ta");
                 m.Semester = Libs.GetQueryString("sm");
-
+                m.Deskripsi = txtDeskripsi.Text;
 
 
 
                 if (txtID.Value.Trim() != "")
                 {
                     m.Nama = txtNama.Text;
-                    m.Deskripsi = txtDeskripsi.Text;
+                    
                     var a = txtStartDate.Text;
                     m.StartDatetime = !string.IsNullOrEmpty(txtStartDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtStartDate.Text).ToString("yyyy-MM-dd") + " " + cboStartJam.Text + ":" + cboStartMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
                     m.EndDatetime = !string.IsNullOrEmpty(txtEndDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtEndDate.Text).ToString("yyyy-MM-dd") + " " + cboEndJam.Text + ":" + cboEndMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
@@ -270,7 +273,7 @@ namespace AI_ERP.Application_Modules.CBT
                 {
 
                     m.Nama = txtNama.Text;
-                    m.Deskripsi = txtDeskripsi.Text;
+                    //m.Deskripsi = txtDeskripsi.Text;
                     
                     m.StartDatetime = !string.IsNullOrEmpty(txtStartDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtStartDate.Text).ToString("yyyy-MM-dd") + " " + cboStartJam.Text + ":" + cboStartMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
                     m.EndDatetime = !string.IsNullOrEmpty(txtEndDate.Text) ? Convert.ToDateTime(Libs.GetDateFromTanggalIndonesiaStr(txtEndDate.Text).ToString("yyyy-MM-dd") + " " + cboEndJam.Text + ":" + cboEndMenit.Text + ":00") : Convert.ToDateTime("1900-01-01 00:00:00");
@@ -285,6 +288,7 @@ namespace AI_ERP.Application_Modules.CBT
                     //InitFields();
                     txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
                 }
+                getData();
             }
             catch (Exception ex)
             {
@@ -327,7 +331,7 @@ namespace AI_ERP.Application_Modules.CBT
                 }
                 else
                 {
-                    txtDeskripsi.Text = "<p><img src=\"../../Application_Templates/sd header.png\" width=\"100%\"></p>";
+                   // txtDeskripsi.Text = "<p><img src=\"../../Application_Templates/sd header.png\" width=\"100%\"></p>";
                                        
                     txtNama.Text = Libs.GetQueryString("nama");
 

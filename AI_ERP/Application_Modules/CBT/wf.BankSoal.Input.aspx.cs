@@ -213,10 +213,11 @@ namespace AI_ERP.Application_Modules.CBT
             {
                 CBT_BankSoal m = new CBT_BankSoal();
 
-                m.Kode = Guid.NewGuid();
+                
                 m.Rel_Mapel = Libs.GetQueryString("m");
                 m.Rel_Guru = Libs.LOGGED_USER_M.NoInduk;
-                m.Soal = txtSoalVal.Value;
+                //m.Soal = txtSoalVal.Value;
+                m.Soal = txtSoal.Text;
                 m.Jenis = cboJenis.SelectedValue;
 
                 List<CBT_BankSoalJawabGanda> list_JwbGanda = new List<CBT_BankSoalJawabGanda>();
@@ -224,14 +225,7 @@ namespace AI_ERP.Application_Modules.CBT
                 
                 bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
                 string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
-                string[] arrJwbGanda = 
-                    {
-                    txtJwbGanda1Val.Value != "" ? txtJwbGanda1Val.Value : txtJwbGanda1.Text,
-                    txtJwbGanda2Val.Value != "" ? txtJwbGanda2Val.Value : txtJwbGanda2.Text,
-                    txtJwbGanda3Val.Value != "" ? txtJwbGanda3Val.Value : txtJwbGanda3.Text,
-                    txtJwbGanda4Val.Value != "" ? txtJwbGanda4Val.Value : txtJwbGanda4.Text,
-                    txtJwbGanda5Val.Value != "" ? txtJwbGanda5Val.Value : txtJwbGanda5.Text,
-                    };
+                string[] arrJwbGanda = { txtJwbGanda1.Text,txtJwbGanda2.Text,txtJwbGanda3.Text,txtJwbGanda4.Text,txtJwbGanda5.Text };
 
                 for (int i = 0; i < 5; i++)
                 {
@@ -253,16 +247,16 @@ namespace AI_ERP.Application_Modules.CBT
                 if (txtID.Value.Trim() != "")
                 {
 
-                    m.JwbEssay = txtJwbEssayVal.Value != "" ? txtJwbEssayVal.Value : txtJwbEssay.Text;
+                    m.JwbEssay = txtJwbEssay.Text;
                     m.Kode = new Guid(txtID.Value);
                     DAO_CBT_BankSoal.Update(m, Libs.LOGGED_USER_M.UserID);
-                    getData(txtID.Value);
+                    InitFields();
 
                     txtKeyAction.Value = JenisAction.DoUpdate.ToString();
                 }
                 else
                 {
-
+                    m.Kode = Guid.NewGuid();
                     m.JwbEssay = txtJwbEssay.Text;
                     DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
 
@@ -281,10 +275,11 @@ namespace AI_ERP.Application_Modules.CBT
                     //    btnBackToSoal_Click(null, null);
                     //}
 
-                    //InitFields();
-                    getData(txtID.Value);
+                    InitFields();
+                  
                     txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
                 }
+                getData(m.Kode.ToString());
             }
             catch (Exception ex)
             {

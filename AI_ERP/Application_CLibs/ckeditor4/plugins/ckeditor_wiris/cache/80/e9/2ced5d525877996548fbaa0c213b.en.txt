@@ -1,0 +1,1 @@
+{"result":{"text":"bevelled fraction numerator square root of 2 over denominator 2 end fraction"},"status":"ok"}

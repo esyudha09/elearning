@@ -1640,7 +1640,7 @@ namespace AI_ERP.Application_Libs
                     {
                         public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
                         public const string ROUTE = "~/cbt/sa";
-                        public const string FILE = "~/Application_Modules/CBT/wf.StartAttempt.aspx";
+                        public const string FILE = "~/Application_Modules/CBT/wf.AttemptStart.aspx";
 
                         public static string RouteName { get { return GetRouteName(ROUTE); } }
                     }

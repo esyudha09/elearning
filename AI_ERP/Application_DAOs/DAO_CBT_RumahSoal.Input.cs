@@ -20,8 +20,10 @@ namespace AI_ERP.Application_DAOs
         public const string SP_SELECT_BY_KP = "CBT_RUMAH_SOAL_SELECT_BY_KP";
                 
         public const string SP_INSERT = "CBT_RUMAH_SOAL_INSERT";
+        public const string SP_INSERT_STATUS = "CBT_STATUS_SISWA_INSERT";
 
         public const string SP_UPDATE = "CBT_RUMAH_SOAL_UPDATE";
+        public const string SP_UPDATE_STATUS = "CBT_STATUS_SISWA_UPDATE";
 
         public const string SP_DELETE = "CBT_RUMAH_SOAL_DELETE";
 
@@ -43,6 +45,8 @@ namespace AI_ERP.Application_DAOs
             public const string LimitSatuan = "LimitSatuan";
             public const string NamaKelas = "NamaKelas";
             public const string NamaMapel = "NamaMapel";
+            public const string Rel_RumahSoal = "Rel_RumahSoal";
+            public const string Rel_Siswa = "Rel_Siswa";
 
         }
 
@@ -142,34 +146,7 @@ namespace AI_ERP.Application_DAOs
             return hasil;
         }
 
-        //public static void Delete(string Kode, string user_id)
-        //{
-        //    SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
-        //    SqlCommand comm = conn.CreateCommand();
-        //    SqlTransaction transaction = null;
-        //    try
-        //    {
-        //        conn.Open();
-        //        transaction = conn.BeginTransaction();
-        //        comm.Transaction = transaction;
-        //        comm.CommandType = CommandType.StoredProcedure;
-        //        comm.CommandText = SP_DELETE;
-
-        //        comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Kode));
-        //        comm.Parameters.Add(new SqlParameter("@user_id", user_id));
-        //        comm.ExecuteNonQuery();
-        //        transaction.Commit();
-        //    }
-        //    catch (Exception ec)
-        //    {
-        //        transaction.Rollback();
-        //        throw new Exception(ec.Message.ToString());
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-        //}
+    
 
         public static void Insert(CBT_RumahSoal RumahSoal, string user_id)
         {
@@ -259,6 +236,67 @@ namespace AI_ERP.Application_DAOs
             }
         }
 
+
+        public static void InsertStatus(CBT_StatusSiswa param)
+        {
+            SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
+            SqlCommand comm = conn.CreateCommand();
+            SqlTransaction transaction = null;
+            try
+            {
+                conn.Open();
+                transaction = conn.BeginTransaction();
+                comm.Transaction = transaction;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = SP_INSERT_STATUS;
+
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, Guid.NewGuid()));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Siswa, param.Rel_Siswa));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_RumahSoal, param.Rel_RumahSoal));         
+
+                comm.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ec)
+            {
+                transaction.Rollback();
+                throw new Exception(ec.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        } 
+        
+        public static void UpdateStatus(CBT_StatusSiswa param)
+        {
+            SqlConnection conn = Application_Libs.Libs.GetConnection_ERP();
+            SqlCommand comm = conn.CreateCommand();
+            SqlTransaction transaction = null;
+            try
+            {
+                conn.Open();
+                transaction = conn.BeginTransaction();
+                comm.Transaction = transaction;
+                comm.CommandType = CommandType.StoredProcedure;
+                comm.CommandText = SP_UPDATE_STATUS;
+
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Siswa, param.Rel_Siswa));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_RumahSoal, param.Rel_RumahSoal));         
+
+                comm.ExecuteNonQuery();
+                transaction.Commit();
+            }
+            catch (Exception ec)
+            {
+                transaction.Rollback();
+                throw new Exception(ec.Message.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
 
 
 

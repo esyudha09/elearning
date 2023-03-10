@@ -6,64 +6,36 @@
 
     <script type="text/javascript">
 
-        var currentValue = 0;
+        var currentValue = 0; 
 
-
-       <%-- function jenischeck() {
-
-            if (document.getelementbyid("<%= chkessay.clientid %>").checked) {
-                document.getelementbyid('essaydiv').style.display = 'block';
-                document.getelementbyid('gandadiv').style.display = 'none';
-            } else if (document.getelementbyid("<%= chkganda.clientid %>").checked) {
-                document.getelementbyid('essaydiv').style.display = 'none';
-                document.getelementbyid('gandadiv').style.display = 'block';
-            }
-        }--%>
-
-        function LoadTinyMCEDeskripsi() {
-            tfm_path = 'Application_CLibs/fileman';
-            tinymce.init({
-                mode: "exact",
-                selector: ".mcetiny_deskripsi",
-             
-                plugins: 'anchor autolink charmap codesample emoticons image link lists media searchreplace table visualblocks wordcount',
-                toolbar: 'undo redo | blocks fontfamily fontsize | bold italic underline strikethrough | link image media table mergetags | addcomment showcomments | spellcheckdialog a11ycheck typography | align lineheight |  numlist bullist indent outdent | emoticons charmap | removeformat',
-                tinycomments_mode: 'embedded',
-                tinycomments_author: 'Author name',
-                mergetags_list: [
-                    { value: 'First.Name', title: 'First Name' },
-                    { value: 'Email', title: 'Email' },
-                ],
-                statusbar: true,
-                menubar: true,
-                height: 400,
-                setup: function (ed) {
-                    ed.on('change', function (e) {
-                        document.getElementById('<%= txtDeskripsiVal.ClientID %>').value = ed.getContent();
-                    });
-
-                    ed.on('init', function () {
-                        ed.getBody().style.fontSize = '14px';
-                    });
-                }
+        function loadCkEditorDeskripsi() {
+            CKEDITOR.config.toolbar_Full =
+                [
+                    { name: 'document', items: ['Source'] },
+                    { name: 'clipboard', items: ['Cut', 'Copy', 'Paste', '-', 'Undo', 'Redo'] },
+                    { name: 'editing', items: ['Find'] },
+                    { name: 'basicstyles', items: ['Bold', 'Italic', 'Underline'] },
+                    { name: 'paragraph', items: ['indent','JustifyLeft', 'JustifyCenter', 'JustifyRight'] }
+                ];
+            CKEDITOR.config.height = '40px';
+            CKEDITOR.config.removePlugins = 'maximize';
+            CKEDITOR.config.removePlugins = 'resize';
+            CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
+            //CKEDITOR.config.extraPlugins = 'textindent';
+            CKEDITOR.replace('<%= txtDeskripsi.ClientID %>', {
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent',
+                language: 'en',
+                startupFocus: true,
+                //indentation: "10px"
+                
             });
-        }
+           
 
-
-
-        function RemoveTinyMCE() {
-            tinyMCE.execCommand('mceRemoveEditor', true, '<%= txtDeskripsi.ClientID %>');
-
-
-        }
-        function ReInitTinyMCE() {
-            RemoveTinyMCE();
-            LoadTinyMCEDeskripsi();
-
-        }
-
-
-
+            $("#<%=lnkOKInput.ClientID %>").click(function () {
+              
+                   CKEDITOR.instances["<%= txtDeskripsi.ClientID %>"].updateElement();
+               });
+         }
 
         function GoToURL(url) {
             document.location.href = url;
@@ -88,15 +60,16 @@
 
             switch (jenis_act) {
                 case "<%= JenisAction.DoChangePage %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     window.scrollTo(0, 0);
                     break;
                 case "<%= JenisAction.Add %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.AddWithMessage %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
+                    loadCkEditorDeskripsi();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     $('body').snackbar({
                         alive: 2000,
@@ -107,24 +80,25 @@
                     });
                     break;
                 case "<%= JenisAction.DoShowData %>":
-                    ReInitTinyMCE();
+                    loadCkEditorDeskripsi();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.DoShowConfirmHapus %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     //$('#ui_modal_confirm_hapus').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.Update %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
+                    loadCkEditorDeskripsi();
                     //HideModal();
                     break;
                 case "<%= JenisAction.Delete %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
 
                     break;
                 case "<%= JenisAction.DoAdd %>":
-                    ReInitTinyMCE();
-
+                    //ReInitTinyMCE();
+                    loadCkEditorDeskripsi();
                     $('body').snackbar({
                         alive: 2000,
                         content: '<i class=\"fa fa-info-circle\"></i>&nbsp;&nbsp;&nbsp;Data sudah disimpan',
@@ -134,8 +108,8 @@
                     });
                     break;
                 case "<%= JenisAction.DoUpdate %>":
-                    ReInitTinyMCE();
-                    //HideModal();
+                    //ReInitTinyMCE();
+                    loadCkEditorDeskripsi();
                     $('body').snackbar({
                         alive: 2000,
                         content: '<i class=\"fa fa-info-circle\"></i>&nbsp;&nbsp;&nbsp;Data sudah diupdate',
@@ -145,7 +119,7 @@
                     });
                     break;
                 case "<%= JenisAction.DoDelete %>":
-                    ReInitTinyMCE();
+                    //ReInitTinyMCE();
                     HideModal();
                     $('body').snackbar({
                         alive: 2000,
@@ -205,10 +179,12 @@
 
         }
 
-        function TriggerSave() {
+        <%--function TriggerSave() {
             tinyMCE.triggerSave();
             document.getElementById("<%= btnSoal.ClientID %>").style.display = 'block';
-        }
+        }--%>
+
+       
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -257,7 +233,7 @@
                                         <div class="col-xs-12" style="padding-left: 0px; padding-right: 0px;">
                                             <div class="form-group form-group-label" style="margin-bottom: 5px; padding-bottom: 5px; margin-top: 10px;">
                                                 <label class="label-input" for="<%= txtDeskripsi.ClientID %>" style="text-transform: none;">Deskripsi :</label>
-                                                <asp:TextBox ValidationGroup="vldInput" CssClass="form-control  mcetiny_deskripsi" runat="server" ID="txtDeskripsi" TextMode="MultiLine" Height="200px"></asp:TextBox>
+                                                <asp:TextBox contenteditable="true" id="txtDeskripsi" ValidationGroup="vldInput" CssClass="form-control " runat="server" TextMode="MultiLine" Height="200px"></asp:TextBox>
                                             </div>
                                         </div>
                                     </div>
@@ -334,7 +310,7 @@
                                         </div>
                                     </div>
 
-
+                                    
 
                                     <p class="text-right">
                                         <asp:LinkButton OnClientClick="TriggerSave()" ValidationGroup="vldInput" CssClass="btn btn-brand margin-right-sm" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="Simpan"></asp:LinkButton>
@@ -407,7 +383,7 @@
                     </a>
                     <div class="fbtn-dropup" style="z-index: 999999;">
 
-                        <asp:LinkButton runat="server" ID="btnSoal" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;display:none" OnClick="btnSoal_Click">
+                        <asp:LinkButton runat="server" ID="btnSoal" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228; display: none" OnClick="btnSoal_Click">
                                                             <span class="fbtn-text fbtn-text-left">Pengaturan Soal</span>
                                                             <i class="fa fa-plus" style="color: white;"></i>
                         </asp:LinkButton>
@@ -452,12 +428,10 @@
 </asp:Content>
 <asp:Content ID="Content4" ContentPlaceHolderID="KontenBawah" runat="server">
     <script type="text/javascript">
+  
+        loadCkEditorDeskripsi();
 
-
-
-
-        LoadTinyMCEDeskripsi();
-
+      
         InitPicker();
     </script>
 
@@ -466,4 +440,8 @@
         InitModalFocus();
         //DoAutoSave();
     </script>
+
+   
+     
+
 </asp:Content>

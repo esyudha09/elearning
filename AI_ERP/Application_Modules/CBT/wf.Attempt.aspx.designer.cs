@@ -42,15 +42,6 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.HiddenField txtKeyAction;
 
         /// <summary>
-        /// txtJwbEssayVal control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField txtJwbEssayVal;
-
-        /// <summary>
         /// hdIdx control.
         /// </summary>
         /// <remarks>
@@ -58,6 +49,60 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.HiddenField hdIdx;
+
+        /// <summary>
+        /// hdFormChange control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdFormChange;
+
+        /// <summary>
+        /// hdKodejwbGanda1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda1;
+
+        /// <summary>
+        /// hdKodejwbGanda2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda2;
+
+        /// <summary>
+        /// hdKodejwbGanda3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda3;
+
+        /// <summary>
+        /// hdKodejwbGanda4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda4;
+
+        /// <summary>
+        /// hdKodejwbGanda5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda5;
 
         /// <summary>
         /// btnLinkClick control.
@@ -150,15 +195,6 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.HtmlControls.HtmlGenericControl GandaDiv;
 
         /// <summary>
-        /// hdKodejwbGanda1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda1;
-
-        /// <summary>
         /// ChkJwbGanda1 control.
         /// </summary>
         /// <remarks>
@@ -175,15 +211,6 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtJwbGanda1;
-
-        /// <summary>
-        /// hdKodejwbGanda2 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda2;
 
         /// <summary>
         /// ChkJwbGanda2 control.
@@ -204,15 +231,6 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.Literal txtJwbGanda2;
 
         /// <summary>
-        /// hdKodejwbGanda3 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda3;
-
-        /// <summary>
         /// ChkJwbGanda3 control.
         /// </summary>
         /// <remarks>
@@ -231,15 +249,6 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.Literal txtJwbGanda3;
 
         /// <summary>
-        /// hdKodejwbGanda4 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda4;
-
-        /// <summary>
         /// ChkJwbGanda4 control.
         /// </summary>
         /// <remarks>
@@ -256,15 +265,6 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtJwbGanda4;
-
-        /// <summary>
-        /// hdKodejwbGanda5 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.HiddenField hdKodejwbGanda5;
 
         /// <summary>
         /// ChkJwbGanda5 control.
@@ -294,15 +294,6 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.LinkButton btnPrev;
 
         /// <summary>
-        /// LinkButton1 control.
-        /// </summary>
-        /// <remarks>
-        /// Auto-generated field.
-        /// To modify move field declaration from designer file to code-behind file.
-        /// </remarks>
-        protected global::System.Web.UI.WebControls.LinkButton LinkButton1;
-
-        /// <summary>
         /// btnNext control.
         /// </summary>
         /// <remarks>
@@ -312,22 +303,22 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.LinkButton btnNext;
 
         /// <summary>
-        /// lblTime control.
+        /// txtTerjawab control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Label lblTime;
+        protected global::System.Web.UI.WebControls.Literal txtTerjawab;
 
         /// <summary>
-        /// timer control.
+        /// txtTotalSoal control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.Timer timer;
+        protected global::System.Web.UI.WebControls.Literal txtTotalSoal;
 
         /// <summary>
         /// txtLink control.
@@ -339,16 +330,25 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.Literal txtLink;
 
         /// <summary>
+        /// lnkOKHapus control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton lnkOKHapus;
+
+        /// <summary>
         /// Master property.
         /// </summary>
         /// <remarks>
         /// Auto-generated property.
         /// </remarks>
-        public new AI_ERP.Application_Masters.Main Master
+        public new AI_ERP.Application_Masters.Second Master
         {
             get
             {
-                return ((AI_ERP.Application_Masters.Main)(base.Master));
+                return ((AI_ERP.Application_Masters.Second)(base.Master));
             }
         }
     }

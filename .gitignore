@@ -3,6 +3,22 @@
 ################################################################################
 
 /AI_ERP/obj/Debug/DesignTimeResolveAssemblyReferencesInput.cache
+<<<<<<< HEAD
+/.vs/AI_ERP/config/applicationhost.config
+/.vs/AI_ERP/FileContentIndex/1d35c5c5-fd0f-4aa6-995c-20c7eb4309fd.vsidx
+/.vs/AI_ERP/config/applicationhost.config
+*.vsidx
+/.vs/e-learning/FileContentIndex/18f5b3ad-5cce-43eb-8c69-94b31ded2d2a.vsidx
+/AI_ERP/bin/AI_ERP.dll
+/AI_ERP/bin/AI_ERP.pdb
+/AI_ERP/obj/Debug/AI_ERP.csproj.AssemblyReference.cache
+/AI_ERP/obj/Debug/AI_ERP.csproj.FileListAbsolute.txt
+/AI_ERP/obj/Debug/AI_ERP.dll
+/AI_ERP/obj/Debug/AI_ERP.pdb
+/.vs/AI_ERP/FileContentIndex/2a75f5f0-75c6-464a-bfda-04fe21bf2d99.vsidx
+/.vs/AI_ERP/v17/.suo
+=======
 /.vs/AI_ERP/FileContentIndex/ea435ac6-e828-4b84-ba4b-4fe34d6f6d61.vsidx
 /.vs/AI_ERP/FileContentIndex/fca7c671-d83f-4ccb-9e4a-c4fbc06af1c5.vsidx
 /.vs/AI_ERP/FileContentIndex
+>>>>>>> 7321bed2af82aedfe108a98f6025d8e73235cb0d
