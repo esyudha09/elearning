@@ -1903,6 +1903,9 @@
     <Content Include="Application_CLibs\ckeditor4\plugins\newpage\lang\zh-cn.js" />
     <Content Include="Application_CLibs\ckeditor4\plugins\newpage\lang\zh.js" />
     <Content Include="Application_CLibs\ckeditor4\plugins\newpage\plugin.js" />
+    <Content Include="Application_CLibs\ckeditor4\plugins\onchange\docs\install.html" />
+    <Content Include="Application_CLibs\ckeditor4\plugins\onchange\docs\styles.css" />
+    <Content Include="Application_CLibs\ckeditor4\plugins\onchange\plugin.js" />
     <Content Include="Application_CLibs\ckeditor4\plugins\pagebreak\icons\hidpi\pagebreak-rtl.png" />
     <Content Include="Application_CLibs\ckeditor4\plugins\pagebreak\icons\hidpi\pagebreak.png" />
     <Content Include="Application_CLibs\ckeditor4\plugins\pagebreak\icons\pagebreak-rtl.png" />

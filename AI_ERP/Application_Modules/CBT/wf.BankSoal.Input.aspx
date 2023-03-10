@@ -36,37 +36,37 @@
             CKEDITOR.config.removePlugins = 'resize';
             CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
             CKEDITOR.replace('<%= txtSoal.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                 language: 'en',
                 startupFocus: true
             });
             CKEDITOR.replace('<%= txtJwbEssay.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                 language: 'en',
              
             });
             CKEDITOR.replace('<%= txtJwbGanda1.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                 language: 'en',
             
             });
             CKEDITOR.replace('<%= txtJwbGanda2.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                 language: 'en',
                 
             });
             CKEDITOR.replace('<%= txtJwbGanda3.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                 language: 'en',
                
             });
             CKEDITOR.replace('<%= txtJwbGanda4.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                 language: 'en',
                 
             });
             CKEDITOR.replace('<%= txtJwbGanda5.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                 language: 'en',
                 
             });

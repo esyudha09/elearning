@@ -22,7 +22,7 @@
             CKEDITOR.config.removePlugins = 'resize';
             CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
             CKEDITOR.replace('<%= txtDeskripsi.ClientID %>', {
-                 extraPlugins: 'ckeditor_wiris,indentblock',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify',
                  language: 'en',
                  startupFocus: true
              });
