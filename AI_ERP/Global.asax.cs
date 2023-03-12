@@ -824,6 +824,28 @@ namespace AI_ERP
             );
 
             RouteTable.Routes.MapPageRoute(
+               "CBT_Kelas",
+               Routing.URL.APPLIACTION_MODULES.CBT.KELAS.RouteName,
+               Routing.URL.APPLIACTION_MODULES.CBT.KELAS.FILE
+           );
+            
+            RouteTable.Routes.MapPageRoute(
+               "CBT_StrukturNilaiSMA",
+               Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.RouteName,
+               Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.FILE
+           );
+            RouteTable.Routes.MapPageRoute(
+               "CBT_StrukturPenilaianSMA",
+               Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.RouteName,
+               Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.FILE
+           ); 
+            RouteTable.Routes.MapPageRoute(
+               "CBT_StrukturPenilaianSMA2",
+               Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA2.RouteName,
+               Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA2.FILE
+           );
+
+            RouteTable.Routes.MapPageRoute(
                "CBT_Mapel",
                Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.RouteName,
                Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.FILE
@@ -839,16 +861,7 @@ namespace AI_ERP
               Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.RouteName,
               Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.FILE
           );
-            RouteTable.Routes.MapPageRoute(
-              "CBT_RUMAH_SOAL_SMP",
-              Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMP.RouteName,
-              Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMP.FILE
-          );
-            RouteTable.Routes.MapPageRoute(
-              "CBT_RUMAH_SOAL_SMA",
-              Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.RouteName,
-              Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.FILE
-          );
+           
             RouteTable.Routes.MapPageRoute(
              "CBT_RUMAH_SOAL_INPUT",
              Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.RouteName,

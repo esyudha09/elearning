@@ -376,12 +376,21 @@ namespace AI_ERP.Application_Modules.CBT
         protected void btnBackToKelas_Click(object sender, EventArgs e)
         {
             var m = Libs.GetQueryString("m");
-            var kp = Libs.GetQueryString("kp");
-            var kur = Libs.GetQueryString("kur");
-            var unit = Libs.GetQueryString("u");
+            var strukturNilai = Libs.GetQueryString("sn");
             Response.Redirect(
                     ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?&m=" + m + "&u=" + unit
+                            Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?&m=" + m 
+                        )
+                );
+        }
+        
+        protected void btnBackToStrukturNilai_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var strukturNilai = Libs.GetQueryString("sn");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?&m=" + m + "&sn=" + strukturNilai
                         )
                 );
         }
@@ -391,10 +400,12 @@ namespace AI_ERP.Application_Modules.CBT
             var m = Libs.GetQueryString("m");
             var kp = Libs.GetQueryString("kp");
             var kur = Libs.GetQueryString("kur");
-            var unit = Libs.GetQueryString("u");
+            var kelas = Libs.GetQueryString("k");
+            var sn = Libs.GetQueryString("sn");
+
             Response.Redirect(
                    ResolveUrl(
-                           Routing.URL.APPLIACTION_MODULES.CBT.DESIGN_SOAL.ROUTE + "?rs="+txtID.Value + "&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                           Routing.URL.APPLIACTION_MODULES.CBT.DESIGN_SOAL.ROUTE + "?rs="+txtID.Value + "&m=" + m + "&kp=" + kp + "&kur=" + kur + "&k=" + kelas  + "&sn=" + sn
 
                        )
                );

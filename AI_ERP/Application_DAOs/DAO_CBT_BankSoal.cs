@@ -13,8 +13,8 @@ namespace AI_ERP.Application_DAOs
 {
     public static class DAO_CBT_BankSoal
     {
-        public const string SP_SELECT_ALL_BY_MAPEL = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL";
-        public const string SP_SELECT_ALL_BY_MAPEL_FOR_SEARCH = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL_FOR_SEARCH";
+        public const string SP_SELECT_ALL_BY_MAPEL_BY_KELAS = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL_BY_KELAS";
+        public const string SP_SELECT_ALL_BY_MAPEL_BY_KELAS_FOR_SEARCH = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL__BY_KELAS_FOR_SEARCH";
         public const string SP_SELECT_BY_ID = "CBT_BANK_SOAL_SELECT_BY_ID";
         public const string SP_SELECT_JWB_GANDA_BY_HEADER = "CBT_BANK_SOAL_JWB_GANDA_SELECT_BY_HEADER";
 
@@ -46,6 +46,7 @@ namespace AI_ERP.Application_DAOs
         {
             public const string Kode = "Kode";
             public const string Rel_Mapel = "Rel_Mapel";
+            public const string Rel_Kelas = "Rel_Kelas";
             public const string Rel_Guru = "Rel_Guru";
             public const string Soal = "Soal";
             public const string Jenis = "Jenis";
@@ -54,6 +55,7 @@ namespace AI_ERP.Application_DAOs
 
             public const string Rel_BankSoal = "Rel_BankSoal";
             public const string Jawaban = "Jawaban";
+            public const string Urut = "Urut";
 
         }
 
@@ -179,6 +181,7 @@ namespace AI_ERP.Application_DAOs
 
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, BankSoal.Kode));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Mapel, BankSoal.Rel_Mapel));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Kelas, BankSoal.Rel_Kelas));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Guru, BankSoal.Rel_Guru));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Soal, BankSoal.Soal));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Jenis, BankSoal.Jenis));
@@ -197,6 +200,7 @@ namespace AI_ERP.Application_DAOs
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, b.Kode));
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, BankSoal.Kode));
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Jawaban, b.Jawaban));
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Urut, b.Urut));
                     comm.Parameters.Add(new SqlParameter("@user_id", user_id));
                     comm.CommandText = SP_JWB_GANDA_INSERT;
                     comm.ExecuteNonQuery();
@@ -252,6 +256,7 @@ namespace AI_ERP.Application_DAOs
                     comm.Parameters.Clear();
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, b.Kode));                 
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Jawaban, b.Jawaban));
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Urut, b.Urut));
                     comm.Parameters.Add(new SqlParameter("@user_id", user_id));
                     comm.CommandText = SP_JWB_GANDA_UPDATE;
                     comm.ExecuteNonQuery();

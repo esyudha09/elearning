@@ -2845,6 +2845,7 @@
     <Content Include="Application_CLibs\ckeditor4\plugins\uicolor\lang\_translationstatus.txt" />
     <Content Include="Application_CLibs\ckeditor4\plugins\uicolor\plugin.js" />
     <Content Include="Application_CLibs\ckeditor4\plugins\uploadfile\plugin.js" />
+    <Content Include="Application_CLibs\ckeditor4\plugins\uploadimage\plugin.js" />
     <Content Include="Application_CLibs\ckeditor4\plugins\widget\images\handle.png" />
     <Content Include="Application_CLibs\ckeditor4\plugins\wsc\dialogs\ciframe.html" />
     <Content Include="Application_CLibs\ckeditor4\plugins\wsc\dialogs\tmpFrameset.html" />
@@ -4001,7 +4002,9 @@
     <Content Include="Application_Modules\CBT\wf.BankSoal.Input.aspx" />
     <Content Include="Application_Modules\CBT\wf.BankSoal.aspx" />
     <Content Include="Application_Modules\CBT\wf.MapelCBT.aspx" />
-    <Content Include="Application_Modules\CBT\wf.RumahSoalSMA.aspx" />
+    <Content Include="Application_Modules\CBT\wf.Kelas.aspx" />
+    <Content Include="Application_Modules\CBT\wf.StrukturPenilaianSMA.aspx" />
+    <Content Include="Application_Modules\CBT\wf.StrukturPenilaianSMA2.aspx" />
     <Content Include="Application_Modules\EDUCATION\Elearning\wf.Admin.Rpt.AbsensiSiswa.aspx" />
     <Content Include="Application_Modules\EDUCATION\Elearning\wf.Guru.DataSiswaCatatanEdit.aspx" />
     <Content Include="Application_Modules\EDUCATION\Elearning\wf.LinkPembelajaranEksternal.aspx" />
@@ -5667,12 +5670,26 @@
     <Compile Include="Application_Modules\CBT\wf.MapelCBT.aspx.designer.cs">
       <DependentUpon>wf.MapelCBT.aspx</DependentUpon>
     </Compile>
-    <Compile Include="Application_Modules\CBT\wf.RumahSoalSMA.aspx.cs">
-      <DependentUpon>wf.RumahSoalSMA.aspx</DependentUpon>
+    <Compile Include="Application_Modules\CBT\wf.Kelas.aspx.cs">
+      <DependentUpon>wf.Kelas.aspx</DependentUpon>
       <SubType>ASPXCodeBehind</SubType>
     </Compile>
-    <Compile Include="Application_Modules\CBT\wf.RumahSoalSMA.aspx.designer.cs">
-      <DependentUpon>wf.RumahSoalSMA.aspx</DependentUpon>
+    <Compile Include="Application_Modules\CBT\wf.Kelas.aspx.designer.cs">
+      <DependentUpon>wf.Kelas.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.StrukturPenilaianSMA.aspx.cs">
+      <DependentUpon>wf.StrukturPenilaianSMA.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.StrukturPenilaianSMA.aspx.designer.cs">
+      <DependentUpon>wf.StrukturPenilaianSMA.aspx</DependentUpon>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.StrukturPenilaianSMA2.aspx.cs">
+      <DependentUpon>wf.StrukturPenilaianSMA2.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Application_Modules\CBT\wf.StrukturPenilaianSMA2.aspx.designer.cs">
+      <DependentUpon>wf.StrukturPenilaianSMA2.aspx</DependentUpon>
     </Compile>
     <Compile Include="Application_Modules\EDUCATION\Elearning\wf.Admin.Rpt.AbsensiSiswa.aspx.cs">
       <DependentUpon>wf.Admin.Rpt.AbsensiSiswa.aspx</DependentUpon>
@@ -7275,6 +7292,7 @@
     <Folder Include="Application_Reports\Elearning\" />
     <Folder Include="Application_Reports\Penilaian\__ALL\" />
     <Folder Include="Application_Resources\Files\Headers-Footers\" />
+    <Folder Include="Application_Resources\ImageSoal\" />
     <Folder Include="Application_Resources\Thumbs\" />
     <Folder Include="crystalreportviewers13\" />
   </ItemGroup>

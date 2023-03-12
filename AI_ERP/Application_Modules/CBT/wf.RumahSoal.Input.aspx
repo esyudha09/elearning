@@ -397,7 +397,7 @@
             </div>
 
             <div class="content-header ui-content-header"
-                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 260px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 390px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                 <div style="padding-left: 0px;">
                     <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1"
                         OnClick="btnBackToMapel_Click"
@@ -409,7 +409,7 @@
                 </div>
             </div>
             <div class="content-header ui-content-header"
-                style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 110px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 240px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                 <div style="padding-left: 0px;">
                     <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2"
                         OnClick="btnBackToKelas_Click"
@@ -417,6 +417,18 @@
                                                         &nbsp;&nbsp;
                                                         <i class="fa fa-arrow-left"></i>
                                                         &nbsp;&nbsp;Kelas
+                    </asp:LinkButton>
+                </div>
+            </div>
+            <div class="content-header ui-content-header"
+                style="background-color: purple; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 160px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                <div style="padding-left: 0px;">
+                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton3"
+                        OnClick="btnBackToStrukturNilai_Click"
+                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Struktur Nilai
                     </asp:LinkButton>
                 </div>
             </div>

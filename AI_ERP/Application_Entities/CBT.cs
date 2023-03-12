@@ -9,6 +9,7 @@ namespace AI_ERP.Application_Entities
     {
         public Guid Kode { get; set; }
         public string Rel_Mapel { get; set; }
+        public string Rel_Kelas { get; set; }
         public string Rel_Guru { get; set; }
         public string Soal { get; set; }
         public string Jenis { get; set; }
@@ -23,6 +24,7 @@ namespace AI_ERP.Application_Entities
     {
         public Guid Kode { get; set; }
         public string Jawaban { get; set; }
+        public int Urut { get; set; }
     }
 
     public class CBT_RumahSoal

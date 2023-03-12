@@ -156,13 +156,15 @@ namespace AI_ERP.Application_Modules.CBT
                 sql_ds.SelectParameters.Clear();
                 sql_ds.SelectParameters.Add("nama", keyword);
                 sql_ds.SelectParameters.Add("Rel_Mapel", Libs.GetQueryString("m"));
-                sql_ds.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL_FOR_SEARCH;
+                sql_ds.SelectParameters.Add("Rel_Kelas", Libs.GetQueryString("k"));
+                sql_ds.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL_BY_KELAS_FOR_SEARCH;
             }
             else
             {
                 sql_ds.SelectParameters.Clear();
                 sql_ds.SelectParameters.Add("Rel_Mapel", Libs.GetQueryString("m"));
-                sql_ds.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL;
+                sql_ds.SelectParameters.Add("Rel_Kelas", Libs.GetQueryString("k"));
+                sql_ds.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL_BY_KELAS;
             }
 
             if (isbind) lvData.DataBind();
@@ -242,8 +244,9 @@ namespace AI_ERP.Application_Modules.CBT
         {
             //InitFields();
             //txtKeyAction.Value = JenisAction.Add.ToString();
-            var urlInput = Libs.GetQueryString("m");
-            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?m=" + urlInput));
+            var mapel = Libs.GetQueryString("m");
+            var kelas = Libs.GetQueryString("k");
+            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?m=" + mapel + "&k="+ kelas));
         }
 
         protected void lnkOKHapus_Click(object sender, EventArgs e)
@@ -309,8 +312,9 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void btnShowDetail_Click(object sender, EventArgs e)
         {
-            var urlInput = Libs.GetQueryString("m");
-            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?id=" + txtID.Value + "&m=" + urlInput));
+            var mapel = Libs.GetQueryString("m");
+            var kelas = Libs.GetQueryString("k");
+            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?id=" + txtID.Value + "&m=" + mapel + "&k=" + kelas));
         }
 
         protected void btnDoCari_Click(object sender, EventArgs e)
@@ -347,6 +351,17 @@ namespace AI_ERP.Application_Modules.CBT
             Response.Redirect(
                     ResolveUrl(
                             Routing.URL.APPLIACTION_MODULES.CBT.MAPEL.ROUTE // + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                        )
+                );
+        }
+
+        protected void btnBackToKelas_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var unit = Libs.GetQueryString("u");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?&m=" + m 
                         )
                 );
         }

@@ -3,7 +3,7 @@
 <%@ MasterType VirtualPath="~/Application_Masters/Main.Master" %>
 <%@ Register TagPrefix="ucl" TagName="PostbackUpdateProgress" Src="~/Application_Controls/Res/PostbackUpdateProgress.ascx" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="head" runat="server">
-    <script type="text/javascript" src="<%= ResolveUrl("~/Application_CLibs/js/jquery.min.js") %>"></script>
+
     <script type="text/javascript">
 
         var currentValue = 0;
@@ -242,10 +242,10 @@
                                                                 </span>
                                                                 <br />--%>
                                                                 <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
-                                                                     <%#     (Eval("Soal").ToString().Length > 100) ? 
+                                                                    <%#     (Eval("Soal").ToString().Length > 100) ? 
                                                                                                 (AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString().Substring(0,100) + "...")) : 
                                                                                                  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
-                                                                                            %>
+                                                                    %>
                                                                 </span>
                                                             </td>
 
@@ -339,13 +339,13 @@
                                                         <asp:LinkButton ToolTip=" Tambah Data " runat="server" ID="btnDoAdd" CssClass="fbtn fbtn-green waves-attach waves-circle waves-effect" Style="background-color: #257228;" OnClick="btnDoAdd_Click">
                                                             <span class="fbtn-text fbtn-text-left">Tambah Data</span>
                                                             <i class="fa fa-plus" style="color: white;"></i>
-                                                        </asp:LinkButton>                                                      
+                                                        </asp:LinkButton>
                                                     </div>
 
                                                 </div>
                                             </div>
                                             <div class="content-header ui-content-header"
-                                                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 450px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 550px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                                                 <div style="padding-left: 0px;">
                                                     <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1"
                                                         OnClick="btnBackToMapel_Click"
@@ -353,6 +353,18 @@
                                                         &nbsp;&nbsp;
                                                         <i class="fa fa-arrow-left"></i>
                                                         &nbsp;&nbsp;Mata Pelajaran
+                                                    </asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="content-header ui-content-header"
+                                                style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 400px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                <div style="padding-left: 0px;">
+                                                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2"
+                                                        OnClick="btnBackToKelas_Click"
+                                                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Kelas
                                                     </asp:LinkButton>
                                                 </div>
                                             </div>
