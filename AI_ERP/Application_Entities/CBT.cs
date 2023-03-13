@@ -9,11 +9,17 @@ namespace AI_ERP.Application_Entities
     {
         public Guid Kode { get; set; }
         public string Rel_Mapel { get; set; }
+        public string Rel_Kelas { get; set; }
         public string Rel_Guru { get; set; }
+        public string Nama { get; set; }
+        public string Rel_Rapor_AspekPenilaian { get; set; }
         public string Soal { get; set; }
         public string Jenis { get; set; }
         public string JwbEssay { get; set; }
         public string Rel_JwbGanda { get; set; }
+        public string FileImage { get; set; }
+        public string FileAudio { get; set; }
+        public string FileVideo { get; set; }
 
         public List<CBT_BankSoalJawabGanda> ListJwbGanda { get; set; }
 
@@ -23,6 +29,7 @@ namespace AI_ERP.Application_Entities
     {
         public Guid Kode { get; set; }
         public string Jawaban { get; set; }
+        public int Urut { get; set; }
     }
 
     public class CBT_RumahSoal

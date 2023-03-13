@@ -11,9 +11,9 @@ using AI_ERP.Application_DAOs;
 using AI_ERP.Application_Entities.Elearning.SMA;
 using AI_ERP.Application_DAOs.Elearning.SMA;
 
-namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
+namespace AI_ERP.Application_Modules.CBT
 {
-    public partial class wf_RumahSoalSMA : System.Web.UI.Page
+    public partial class wf_StrukturPenilaianSMA : System.Web.UI.Page
     {
         public const string SessionViewDataName = "PAGEDATASTRUKTURPENILAIAN_SMA";
         public static List<Rapor_NilaiSiswa_KURTILAS_Det_Lengkap> lst_nilai_kurtilas = new List<Rapor_NilaiSiswa_KURTILAS_Det_Lengkap>();
@@ -95,6 +95,12 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
                 BindListView(true, Libs.GetQ());
             }
 
+            if( !string.IsNullOrEmpty(Libs.GetQueryString("sn")))
+            {
+                txtID.Value = Libs.GetQueryString("sn");
+                btnShowStrukturNilai_Click(null, null);
+
+            }
             switch (mvMain.ActiveViewIndex)
             {
                 case 0:
@@ -124,8 +130,6 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
 
         private void BindListView(bool isbind = true, string keyword = "")
         {
-
-
 
             string unit = Libs.GetQueryString("u");
 
@@ -915,10 +919,10 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
                                                 html += "<td style=\"background-color: white;\">" +
                                                                 "<a class=\"btn btn-flat waves-attach waves-effect\" " +
                                                                     "href=\"" + ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE) +
-                                                                            "?m=" + Libs.GetQueryString("m") + "&k=" + m_strukturnilai.Rel_Kelas +"&ta=" + m_strukturnilai.TahunAjaran +"&sm=" + m_strukturnilai.Semester + "&u=" + Libs.GetQueryString("u") + "&kp=" + m.Kode + "&kur='KURTILAS'" + "&nama=" + Libs.GetHTMLSimpleText(m_kp.Nama) +
+                                                                            "?m=" + Libs.GetQueryString("m") + "&sn=" + txtID.Value + "&k=" + m_strukturnilai.Rel_Kelas +"&ta=" + m_strukturnilai.TahunAjaran +"&sm=" + m_strukturnilai.Semester  + "&kp=" + m.Kode + "&kur='KURTILAS'" + "&nama=" + Libs.GetHTMLSimpleText(m_kp.Nama) +"&u=" + Libs.GetQueryString("u")+
                                                                             "\" " +
                                                                    ">" +
-                                                                    "<i class=\"fa fa-edit\"></i> Create " +
+                                                                    "<i class=\"fa fa-edit\"></i> Rumah Soal " +
                                                                 "</a>" +
                                                         "</td>";
                                                 html += "</tr>" +
@@ -1648,31 +1652,7 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
             txtKeyAction.Value = JenisAction.ShowDataList.ToString();
         }
 
-       
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+      
 
         protected void lnkOKDeskripsiLTSRapor_Click(object sender, EventArgs e)
         {

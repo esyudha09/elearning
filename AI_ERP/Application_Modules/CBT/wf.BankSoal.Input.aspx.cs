@@ -8,6 +8,11 @@ using System.Web.UI.WebControls;
 using AI_ERP.Application_Libs;
 using AI_ERP.Application_Entities;
 using AI_ERP.Application_DAOs;
+using System.IO;
+using static AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT;
+using AI_ERP.Application_Entities.Elearning.SMA;
+using AI_ERP.Application_DAOs.Elearning.SMA;
+using System.Globalization;
 
 namespace AI_ERP.Application_Modules.CBT
 {
@@ -81,6 +86,24 @@ namespace AI_ERP.Application_Modules.CBT
                     DAO_Sekolah.IsValidTokenUnit(Libs.GetQueryString("unit"), Libs.GetQueryString("token")) ? true : false);
         }
 
+        protected void UploadFile(object sender, EventArgs e)
+        {
+            string folderPath = Server.MapPath("~/Application_Resources/ImageSoal");
+            var fileName = FileUpload1.FileName;
+            var fileExt = Path.GetExtension(fileName);
+
+            //Check whether Directory (Folder) exists.
+            if (!Directory.Exists(folderPath))
+            {
+                //If Directory (Folder) does not exists Create it.
+                Directory.CreateDirectory(folderPath);
+            }
+
+            FileUpload1.SaveAs(folderPath + "/" + fileName);
+
+           
+        }
+
         protected void Page_Load(object sender, EventArgs e)
         {
             //if (Session[Constantas.NAMA_SESSION_LOGIN] == null)
@@ -109,9 +132,10 @@ namespace AI_ERP.Application_Modules.CBT
                 fromDesignSoal.Attributes.Add("style", "display:none");
             }
 
-
+            
             if (!IsPostBack)
             {
+                SetSelectAP();
                 //InitInput();
                 InitKeyEventClient();
                 var IdSoal = Libs.GetQueryString("id");
@@ -119,9 +143,32 @@ namespace AI_ERP.Application_Modules.CBT
                 {
                     getData(IdSoal);
                 }
+
+             
+
             }
+            
+        }
 
 
+        private void SetSelectAP()
+        {
+            var sn = Libs.GetQueryString("sn");
+
+            if (QS.GetUnit() == "SMA")
+            {
+                List<Rapor_StrukturNilai_KURTILAS_AP> lst_aspek_penilaian = DAO_Rapor_StrukturNilai_KURTILAS_AP.GetAllByHeader_Entity(sn);
+
+                cboAP.Items.Add("");
+                foreach (Rapor_StrukturNilai_KURTILAS_AP m in lst_aspek_penilaian)
+                {
+                    cboAP.Items.Add(new ListItem
+                    {
+                        Value = m.Rel_Rapor_AspekPenilaian.ToString(),
+                        Text = Libs.GetHTMLSimpleText(m.KompetensiDasar.Trim())
+                    });
+                }
+            }
 
 
         }
@@ -212,33 +259,66 @@ namespace AI_ERP.Application_Modules.CBT
             try
             {
                 CBT_BankSoal m = new CBT_BankSoal();
+                if (FileUpload1.HasFile)
+                {   
+                    
+                    string folderPath = Server.MapPath("~/Application_Resources/ImageSoal");
+                    var fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + FileUpload1.FileName;
+                    var fileExt = Path.GetExtension(FileUpload1.FileName);
+               
+                    //Check whether Directory (Folder) exists.
+                    if (!Directory.Exists(folderPath))
+                    {
+                        //If Directory (Folder) does not exists Create it.
+                        Directory.CreateDirectory(folderPath);
+                    }
 
-                
+                    FileUpload1.SaveAs(folderPath + "/" + fileName);
+
+                    if(fileExt == ".png" || fileExt == ".jpg" || fileExt == ".jpeg")
+                    {
+                        m.FileImage = fileName;
+                    }
+                    else if (fileExt == ".mp3")
+                    {
+                        m.FileAudio = fileName;
+                    }else if (fileExt == ".mp4")
+                    {
+                        m.FileVideo = fileName;
+                    }
+                }
+
                 m.Rel_Mapel = Libs.GetQueryString("m");
+                m.Rel_Kelas = Libs.GetQueryString("k");
                 m.Rel_Guru = Libs.LOGGED_USER_M.NoInduk;
-                //m.Soal = txtSoalVal.Value;
+                m.Nama = txtNama.Text;
+                m.Rel_Rapor_AspekPenilaian = cboAP.SelectedValue;
                 m.Soal = txtSoal.Text;
                 m.Jenis = cboJenis.SelectedValue;
 
                 List<CBT_BankSoalJawabGanda> list_JwbGanda = new List<CBT_BankSoalJawabGanda>();
 
-                
+
                 bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
                 string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
-                string[] arrJwbGanda = { txtJwbGanda1.Text,txtJwbGanda2.Text,txtJwbGanda3.Text,txtJwbGanda4.Text,txtJwbGanda5.Text };
+                string[] arrJwbGanda = { txtJwbGanda1.Text, txtJwbGanda2.Text, txtJwbGanda3.Text, txtJwbGanda4.Text, txtJwbGanda5.Text };
 
-                for (int i = 0; i < 5; i++)
+                if (m.Jenis == "ganda")
                 {
-                    var j = new CBT_BankSoalJawabGanda
-                    {                     
-                        Kode = arrKodeJwbGanda[i] != "" ? new Guid(arrKodeJwbGanda[i]) : Guid.NewGuid(),
-                        Jawaban = arrJwbGanda[i]
-                    };
+                    for (int i = 0; i < 5; i++)
+                    {
+                        var j = new CBT_BankSoalJawabGanda
+                        {
+                            Kode = arrKodeJwbGanda[i] != "" ? new Guid(arrKodeJwbGanda[i]) : Guid.NewGuid(),
+                            Jawaban = arrJwbGanda[i],
+                            Urut = i + 1
+                        };
 
-                    list_JwbGanda.Add(j);
+                        list_JwbGanda.Add(j);
 
-                    if (arrJwbGandaChk[i])
-                        m.Rel_JwbGanda = j.Kode.ToString();
+                        if (arrJwbGandaChk[i])
+                            m.Rel_JwbGanda = j.Kode.ToString();
+                    }
                 }
 
                 m.ListJwbGanda = list_JwbGanda;
@@ -276,10 +356,11 @@ namespace AI_ERP.Application_Modules.CBT
                     //}
 
                     InitFields();
-                  
+
                     txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
                 }
-                getData(m.Kode.ToString());
+
+              
             }
             catch (Exception ex)
             {
@@ -297,6 +378,8 @@ namespace AI_ERP.Application_Modules.CBT
                 if (m.Soal != null)
                 {
                     txtID.Value = m.Kode.ToString();
+                    txtNama.Text = m.Nama.ToString();
+                    cboAP.SelectedValue = m.Rel_Rapor_AspekPenilaian.ToString();
                     txtSoal.Text = m.Soal.ToString();
                     txtJwbEssay.Text = m.JwbEssay.ToString();
 
@@ -324,7 +407,7 @@ namespace AI_ERP.Application_Modules.CBT
                     txtJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
                     txtJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
                     txtJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
-                   
+
 
 
 
@@ -377,10 +460,14 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void btnBackToSoal_Click(object sender, EventArgs e)
         {
+            var m = Libs.GetQueryString("m");
+            var unit = Libs.GetQueryString("u");
+            var kelas = Libs.GetQueryString("k");
+
             Response.Redirect(
                     ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE +
-                            QS.GetURLVariable()
+                            Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE + "?&m=" + m + "&k=" + kelas + "&u=" + unit + "&sn=" + Libs.GetQueryString("sn")
+
                         )
                 );
         }
@@ -401,12 +488,21 @@ namespace AI_ERP.Application_Modules.CBT
         protected void btnBackToKelas_Click(object sender, EventArgs e)
         {
             var m = Libs.GetQueryString("m");
-            var kp = Libs.GetQueryString("kp");
-            var kur = Libs.GetQueryString("kur");
             var unit = Libs.GetQueryString("u");
             Response.Redirect(
                     ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?&m=" + m + "&u=" + unit
+                            Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?&m=" + m + "&u=" + unit
+                        )
+                );
+        }
+
+        protected void btnBackToStrukturNilai_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var strukturNilai = Libs.GetQueryString("sn");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?&m=" + m + "&sn=" + strukturNilai + "&u=" + Libs.GetQueryString("u")
                         )
                 );
         }
@@ -416,10 +512,10 @@ namespace AI_ERP.Application_Modules.CBT
             var m = Libs.GetQueryString("m");
             var kp = Libs.GetQueryString("kp");
             var kur = Libs.GetQueryString("kur");
-            var unit = Libs.GetQueryString("u");
+            var sn = Libs.GetQueryString("sn");
             Response.Redirect(
                     ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&sn=" + sn + "&u=" + Libs.GetQueryString("u")
                         )
                 );
         }
@@ -429,11 +525,11 @@ namespace AI_ERP.Application_Modules.CBT
             var m = Libs.GetQueryString("m");
             var kp = Libs.GetQueryString("kp");
             var kur = Libs.GetQueryString("kur");
-            var unit = Libs.GetQueryString("u");
+            var sn = Libs.GetQueryString("sn");
             var rs = Libs.GetQueryString("rs");
             Response.Redirect(
                     ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.DESIGN_SOAL.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit + "&rs=" + rs
+                            Routing.URL.APPLIACTION_MODULES.CBT.DESIGN_SOAL.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&sn=" + sn + "&rs=" + rs + "&u=" + Libs.GetQueryString("u")
                         )
                 );
         }

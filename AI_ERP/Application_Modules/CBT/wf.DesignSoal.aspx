@@ -234,7 +234,7 @@
                                         <asp:View runat="server" ID="vList">
 
                                             <div style="padding: 0px; margin: 0px;">
-                                                <asp:ListView ID="lvData" DataSourceID="sql_ds" runat="server"  >
+                                                <asp:ListView ID="lvData" DataSourceID="sql_ds" runat="server">
                                                     <LayoutTemplate>
                                                         <div class="table-responsive" style="margin: 0px; box-shadow: none;">
                                                             <table class="table" id="itemPlaceholderContainer" runat="server" style="width: 100%; margin: 0px;">
@@ -261,16 +261,16 @@
                                                     </LayoutTemplate>
                                                     <ItemTemplate>
                                                         <tr class="<%# (Container.DisplayIndex % 2 == 0 ? "standardrow" : "oddrow") %>">
-                                                           <%-- <td style="text-align: center; padding: 10px; vertical-align: middle; color: #bfbfbf;">
+                                                            <%-- <td style="text-align: center; padding: 10px; vertical-align: middle; color: #bfbfbf;">
                                                                 <%# (int)(this.Session[SessionViewDataName] == null ? 0 : this.Session[SessionViewDataName]) + (Container.DisplayIndex + 1) %>.
                                                             </td>--%>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-                                                                <a href="javascript:void(0);" style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;" >
+                                                                <a href="javascript:void(0);" style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <i class="fa fa-edit" onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>';<%# txtUrutVal.ClientID%>.value = '<%# Eval("Urut").ToString() %>'; <%= btnUpdateUrut.ClientID %>.click(); "></i>
                                                                     <%# 
                                                                         AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Urut").ToString())
                                                                     %>  &nbsp;                                                                                                                                                                                            
-                                                                </a>                                                              
+                                                                </a>
                                                             </td>
                                                             <td style="padding: 0px; text-align: center; width: 80px; vertical-align: middle;">
                                                                 <div style="margin: 0 auto; display: table;">
@@ -309,10 +309,10 @@
                                                                 </span>
                                                                 <br />--%>
                                                                 <span style="color: grey; font-weight: bold; text-transform: none; text-decoration: none;">
-                                                                     <%#     (Eval("Soal").ToString().Length > 100) ? 
+                                                                    <%#     (Eval("Soal").ToString().Length > 100) ? 
                                                                                                 (AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString().Substring(0,100) + "...")) : 
                                                                                                  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Soal").ToString())
-                                                                                            %>
+                                                                    %>
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
@@ -323,13 +323,13 @@
                                                                 </span>
                                                             </td>
                                                             <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: left;">
-                                                                <a href="javascript:void(0);" style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;" >
+                                                                <a href="javascript:void(0);" style="color: grey; font-weight: normal; text-transform: none; text-decoration: none;">
                                                                     <i class="fa fa-edit" onclick="<%= txtID.ClientID %>.value = '<%# Eval("Kode").ToString() %>';<%# txtSkorVal.ClientID%>.value = '<%# Eval("Skor").ToString() %>'; <%= btnUpdateSkor.ClientID %>.click(); "></i>
                                                                     <%# 
                                                                         AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Skor").ToString())
                                                                     %>  &nbsp;                                                                                                                          
                                                                   
-                                                                </a>                                                             
+                                                                </a>
                                                             </td>
                                                         </tr>
                                                     </ItemTemplate>
@@ -427,7 +427,7 @@
                                                 </div>
                                             </div>
                                             <div class="content-header ui-content-header"
-                                                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 700px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 830px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                                                 <div style="padding-left: 0px;">
                                                     <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2"
                                                         OnClick="btnBackToMapel_Click"
@@ -439,7 +439,7 @@
                                                 </div>
                                             </div>
                                             <div class="content-header ui-content-header"
-                                                style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 550px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 680px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                                                 <div style="padding-left: 0px;">
                                                     <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton3"
                                                         OnClick="btnBackToKelas_Click"
@@ -451,7 +451,19 @@
                                                 </div>
                                             </div>
                                             <div class="content-header ui-content-header"
-                                                style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 460px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                style="background-color: purple; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 600px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                                                <div style="padding-left: 0px;">
+                                                    <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton7"
+                                                        OnClick="btnBackToStrukturNilai_Click"
+                                                        CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Struktur Nilai
+                                                    </asp:LinkButton>
+                                                </div>
+                                            </div>
+                                            <div class="content-header ui-content-header"
+                                                style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 8; position: fixed; bottom: 33px; right: 50px; width: 460px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                                                 <div style="padding-left: 0px;">
                                                     <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton4"
                                                         OnClick="btnBackToFormRumahSoal_Click"
@@ -571,7 +583,7 @@
 
                                                                                     <td style="font-weight: bold; padding: 10px; vertical-align: middle; text-align: right;">
                                                                                         <label
-                                                                                            onclick="GoToURL2('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetQueryString("m")%>&id=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%> ');"
+                                                                                            onclick="GoToURL2('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetQueryString("m")%>&id=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())%>&u=<%#  AI_ERP.Application_Libs.Libs.GetQueryString("u")%> ');"
                                                                                             title=" Lihat Data Soal" class="btn btn-brand">
                                                                                             <i class="fa fa-eye"></i>
                                                                                         </label>
@@ -838,7 +850,7 @@
                         </div>
                         <div class="modal-footer">
                             <p class="text-right">
-                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton6" onclick="lnkOKUpdateSkor_Click" Text="  OK  "></asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton6" OnClick="lnkOKUpdateSkor_Click" Text="  OK  "></asp:LinkButton>
                                 <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
                                 <br />
                                 <br />
@@ -887,7 +899,7 @@
                         </div>
                         <div class="modal-footer">
                             <p class="text-right">
-                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton5" onclick="lnkOKUpdateUrut_Click" Text="  OK  "></asp:LinkButton>
+                                <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="LinkButton5" OnClick="lnkOKUpdateUrut_Click" Text="  OK  "></asp:LinkButton>
                                 <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
                                 <br />
                                 <br />

@@ -302,7 +302,7 @@ namespace AI_ERP.Application_Modules.CBT
             }
         }
 
-        protected void btnRumahSoal_Click(object sender, EventArgs e)
+        protected void btnStrukturPenilaian_Click(object sender, EventArgs e)
         {
             string[] commandArgs = (sender as LinkButton).CommandArgument.ToString().Split(new char[] { ',' });
             string mapel = commandArgs[0];
@@ -310,12 +310,13 @@ namespace AI_ERP.Application_Modules.CBT
            
             if (unit == "SMA")
             {
-                Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?m=" + mapel + "&u=" + unit);
+                Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?m=" + mapel + "&u=" + unit);
+                //}
             }
-            else if (unit == "SMP")
-            {
-                Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMP.ROUTE + "?m=" + mapel + "&u=" + unit);
-            }
+            //else if (unit == "SMP")
+            //{
+            //    Response.Redirect(Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMP.ROUTE + "?m=" + mapel + "&u=" + unit);
+            //}
 
         }
         protected void btnShowDetail_Click(object sender, EventArgs e)

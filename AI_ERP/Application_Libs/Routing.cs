@@ -1564,6 +1564,33 @@ namespace AI_ERP.Application_Libs
 
                         public static string RouteName { get { return GetRouteName(ROUTE); } }
                     }
+                    
+                    public static class KELAS
+                    {
+                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
+                        public const string ROUTE = "~/cbt/k";
+                        public const string FILE = "~/Application_Modules/CBT/wf.Kelas.aspx";
+
+                        public static string RouteName { get { return GetRouteName(ROUTE); } }
+                    }
+                    
+                    public static class STRUKTUR_PENILAIAN_SMA
+                    {
+                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
+                        public const string ROUTE = "~/cbt/sp_sma";
+                        public const string FILE = "~/Application_Modules/CBT/wf.StrukturPenilaianSMA.aspx";
+
+                        public static string RouteName { get { return GetRouteName(ROUTE); } }
+                    }
+
+                    public static class STRUKTUR_PENILAIAN_SMA2
+                    {
+                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
+                        public const string ROUTE = "~/cbt/sp_sma2";
+                        public const string FILE = "~/Application_Modules/CBT/wf.StrukturPenilaianSMA2.aspx";
+
+                        public static string RouteName { get { return GetRouteName(ROUTE); } }
+                    }
 
                     public static class SOAL
                     {
@@ -1590,24 +1617,7 @@ namespace AI_ERP.Application_Libs
 
                         public static string RouteName { get { return GetRouteName(ROUTE); } }
                     }
-
-                    public static class RUMAH_SOAL_SMP
-                    {
-                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
-                        public const string ROUTE = "~/cbt/rssmp";
-                        public const string FILE = "~/Application_Modules/CBT/wf.RumahSoalSMP.aspx";
-
-                        public static string RouteName { get { return GetRouteName(ROUTE); } }
-                    }
-
-                    public static class RUMAH_SOAL_SMA
-                    {
-                        public const string ID = "ff5c86c3-1f1d-4cfa-9578-988095bfa648";
-                        public const string ROUTE = "~/cbt/rssma";
-                        public const string FILE = "~/Application_Modules/CBT/wf.RumahSoalSMA.aspx";
-
-                        public static string RouteName { get { return GetRouteName(ROUTE); } }
-                    }
+             
 
                     public static class RUMAH_SOAL_INPUT
                     {

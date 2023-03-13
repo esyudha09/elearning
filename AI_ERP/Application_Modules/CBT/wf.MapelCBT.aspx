@@ -273,13 +273,13 @@
                                                                     style="margin-left: 10px; float: right; padding: 0px; padding-left: 15px; padding-right: 15px; cursor: pointer; color: cadetblue; border-width: 1px; border-style: solid; border-color: cadetblue; border-radius: 10px; font-size: 9pt;">
                                                                     Rumah Soal
                                                                 </label>--%>
-                                                                <asp:LinkButton OnClick="btnRumahSoal_Click" CssClass="btn btn-green waves-attach waves-light " runat="server" ID="btnRumahSoal" CommandArgument ='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())+","+ AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Unit").ToString())%>' Text ="Rumah Soal"> </asp:LinkButton>                                                                                                                                                                                 
-                                                                <label
+                                                                <asp:LinkButton OnClick="btnStrukturPenilaian_Click" CssClass="btn btn-flat" runat="server" ID="btnRumahSoal" CommandArgument ='<%#AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString())+","+ AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Unit").ToString())%>' Text ="Kelas"><i class="fa fa-sitemap"></i> Kelas </asp:LinkButton>                                                                                                                                                                                 
+                                                               <%-- <label
                                                                     onclick="GoToURL('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL.ROUTE) %>?m=<%#  AI_ERP.Application_Libs.Libs.GetHTMLSimpleText(Eval("Kode").ToString()) %>');"
                                                                     title=" Lihat Data Soal" class="btn btn-brand"
                                                                     >
                                                                     Bank Soal
-                                                                </label>
+                                                                </label>--%>
 
                                                             </td>
                                                         </tr>

@@ -275,10 +275,10 @@ namespace AI_ERP.Application_Modules.CBT
             var m = Libs.GetQueryString("m");
             var kp = Libs.GetQueryString("kp");
             var kur = Libs.GetQueryString("kur");
-            var unit = Libs.GetQueryString("u");
             var rs = Libs.GetQueryString("rs");
+            var sn = Libs.GetQueryString("sn");
 
-            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit + "&rs=" + rs));
+            Response.Redirect(ResolveUrl(Routing.URL.APPLIACTION_MODULES.CBT.SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&sn=" + sn + "&rs=" + rs + "&k=" + Libs.GetQueryString("k") + "&u=" + Libs.GetQueryString("u")));
         }
 
         protected void lnkOKHapus_Click(object sender, EventArgs e)
@@ -370,13 +370,15 @@ namespace AI_ERP.Application_Modules.CBT
                 Sql_dsbs.SelectParameters.Clear();
                 Sql_dsbs.SelectParameters.Add("nama", keyword);
                 Sql_dsbs.SelectParameters.Add("Rel_Mapel", Libs.GetQueryString("m"));
-                Sql_dsbs.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL_FOR_SEARCH;
+                Sql_dsbs.SelectParameters.Add("Rel_Kelas", Libs.GetQueryString("k"));
+                Sql_dsbs.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL_BY_KELAS_FOR_SEARCH;
             }
             else
             {
                 Sql_dsbs.SelectParameters.Clear();
                 Sql_dsbs.SelectParameters.Add("Rel_Mapel", Libs.GetQueryString("m"));
-                Sql_dsbs.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL;
+                Sql_dsbs.SelectParameters.Add("Rel_Kelas", Libs.GetQueryString("k"));
+                Sql_dsbs.SelectCommand = DAO_CBT_BankSoal.SP_SELECT_ALL_BY_MAPEL_BY_KELAS;
             }
 
             if (isbind) lvDataBs.DataBind();
@@ -403,20 +405,31 @@ namespace AI_ERP.Application_Modules.CBT
             var unit = Libs.GetQueryString("u");
             Response.Redirect(
                     ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_SMA.ROUTE + "?&m=" + m + "&u=" + unit
+                            Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?&m=" + m + "&u=" + Libs.GetQueryString("u")
                         )
                 );
         }
 
+        protected void btnBackToStrukturNilai_Click(object sender, EventArgs e)
+        {
+            var m = Libs.GetQueryString("m");
+            var strukturNilai = Libs.GetQueryString("sn");
+            Response.Redirect(
+                    ResolveUrl(
+                            Routing.URL.APPLIACTION_MODULES.CBT.STRUKTUR_PENILAIAN_SMA.ROUTE + "?&m=" + m + "&sn=" + strukturNilai + "&u=" + Libs.GetQueryString("u")
+                        )
+                );
+        }
         protected void btnBackToFormRumahSoal_Click(object sender, EventArgs e)
         {
             var m = Libs.GetQueryString("m");
             var kp = Libs.GetQueryString("kp");
             var kur = Libs.GetQueryString("kur");
-            var unit = Libs.GetQueryString("u");
+            var sn = Libs.GetQueryString("sn");
+
             Response.Redirect(
                     ResolveUrl(
-                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&u=" + unit
+                            Routing.URL.APPLIACTION_MODULES.CBT.RUMAH_SOAL_INPUT.ROUTE + "?&m=" + m + "&kp=" + kp + "&kur=" + kur + "&sn=" + sn + "&u=" + Libs.GetQueryString("u")
                         )
                 );
         }

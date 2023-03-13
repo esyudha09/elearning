@@ -14,5 +14,6 @@ namespace AI_ERP.Application_Entities.Elearning.SMA
         public string JenisPerhitungan { get; set; }
         public decimal BobotRapor { get; set; }
         public int Urutan { get; set; }
+        public string KompetensiDasar { get; set; }
     }
 }

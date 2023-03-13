@@ -13,8 +13,8 @@ namespace AI_ERP.Application_DAOs
 {
     public static class DAO_CBT_BankSoal
     {
-        public const string SP_SELECT_ALL_BY_MAPEL = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL";
-        public const string SP_SELECT_ALL_BY_MAPEL_FOR_SEARCH = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL_FOR_SEARCH";
+        public const string SP_SELECT_ALL_BY_MAPEL_BY_KELAS = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL_BY_KELAS";
+        public const string SP_SELECT_ALL_BY_MAPEL_BY_KELAS_FOR_SEARCH = "CBT_BANK_SOAL_SELECT_ALL_BY_MAPEL__BY_KELAS_FOR_SEARCH";
         public const string SP_SELECT_BY_ID = "CBT_BANK_SOAL_SELECT_BY_ID";
         public const string SP_SELECT_JWB_GANDA_BY_HEADER = "CBT_BANK_SOAL_JWB_GANDA_SELECT_BY_HEADER";
 
@@ -46,14 +46,22 @@ namespace AI_ERP.Application_DAOs
         {
             public const string Kode = "Kode";
             public const string Rel_Mapel = "Rel_Mapel";
+            public const string Rel_Kelas = "Rel_Kelas";
             public const string Rel_Guru = "Rel_Guru";
+            public const string Nama = "Nama";
+            public const string Rel_Rapor_AspekPenilaian = "Rel_Rapor_AspekPenilaian";
             public const string Soal = "Soal";
             public const string Jenis = "Jenis";
             public const string JwbEssay = "JwbEssay";
             public const string Rel_JwbGanda = "Rel_JwbGanda";
+            public const string FileImage = "FileImage";
+            public const string FileAudio = "FileAudio";
+            public const string FileVideo = "FileVideo";
+
 
             public const string Rel_BankSoal = "Rel_BankSoal";
             public const string Jawaban = "Jawaban";
+            public const string Urut = "Urut";
 
         }
 
@@ -64,10 +72,15 @@ namespace AI_ERP.Application_DAOs
                 Kode = new Guid(row[NamaField.Kode].ToString()),
                 Rel_Mapel = row[NamaField.Rel_Mapel].ToString(),
                 Rel_Guru = row[NamaField.Rel_Guru].ToString(),
+                Nama = row[NamaField.Nama].ToString(),
+                Rel_Rapor_AspekPenilaian = row[NamaField.Rel_Rapor_AspekPenilaian].ToString(),
                 Soal = row[NamaField.Soal].ToString(),
                 Jenis = row[NamaField.Jenis].ToString(),
                 JwbEssay = row[NamaField.JwbEssay].ToString(),
-                Rel_JwbGanda = row[NamaField.Rel_JwbGanda].ToString()
+                Rel_JwbGanda = row[NamaField.Rel_JwbGanda].ToString(),
+                FileImage = row[NamaField.FileImage].ToString(),
+                FileAudio = row[NamaField.FileAudio].ToString(),
+                FileVideo = row[NamaField.FileVideo].ToString()
             };
         }
 
@@ -179,7 +192,10 @@ namespace AI_ERP.Application_DAOs
 
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, BankSoal.Kode));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Mapel, BankSoal.Rel_Mapel));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Kelas, BankSoal.Rel_Kelas));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Guru, BankSoal.Rel_Guru));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Nama, BankSoal.Nama));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Rapor_AspekPenilaian, BankSoal.Rel_Rapor_AspekPenilaian));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Soal, BankSoal.Soal));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Jenis, BankSoal.Jenis));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbEssay, BankSoal.JwbEssay));
@@ -197,6 +213,7 @@ namespace AI_ERP.Application_DAOs
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, b.Kode));
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_BankSoal, BankSoal.Kode));
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Jawaban, b.Jawaban));
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Urut, b.Urut));
                     comm.Parameters.Add(new SqlParameter("@user_id", user_id));
                     comm.CommandText = SP_JWB_GANDA_INSERT;
                     comm.ExecuteNonQuery();
@@ -234,6 +251,8 @@ namespace AI_ERP.Application_DAOs
                 comm.CommandText = SP_UPDATE;
 
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, BankSoal.Kode));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Nama, BankSoal.Nama));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_Rapor_AspekPenilaian, BankSoal.Rel_Rapor_AspekPenilaian));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Soal, BankSoal.Soal));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Jenis, BankSoal.Jenis));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbEssay, BankSoal.JwbEssay));
@@ -252,6 +271,7 @@ namespace AI_ERP.Application_DAOs
                     comm.Parameters.Clear();
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Kode, b.Kode));                 
                     comm.Parameters.Add(new SqlParameter("@" + NamaField.Jawaban, b.Jawaban));
+                    comm.Parameters.Add(new SqlParameter("@" + NamaField.Urut, b.Urut));
                     comm.Parameters.Add(new SqlParameter("@user_id", user_id));
                     comm.CommandText = SP_JWB_GANDA_UPDATE;
                     comm.ExecuteNonQuery();

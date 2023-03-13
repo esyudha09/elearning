@@ -33,6 +33,51 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.UpdatePanel upMain;
 
         /// <summary>
+        /// hdSourceAudio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdSourceAudio;
+
+        /// <summary>
+        /// hdSourceVideo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdSourceVideo;
+
+        /// <summary>
+        /// FileImageID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlImage FileImageID;
+
+        /// <summary>
+        /// FileVideoID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileVideoID;
+
+        /// <summary>
+        /// FileAudioID control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl FileAudioID;
+
+        /// <summary>
         /// txtSoal control.
         /// </summary>
         /// <remarks>

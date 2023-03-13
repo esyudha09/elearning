@@ -92,10 +92,7 @@ namespace AI_ERP.Application_Modules.CBT
             //{
             //    Libs.RedirectToBeranda(this.Page);
             //}
-            if (Session["CountdownTimer"] != null)
-            {
-                Session["CountdownTimer"] = null;
-            }
+            
 
             this.Master.HeaderTittle = "<img style=\"height: 28px; width: 28px; display: initial;\" src=\"" + ResolveUrl("~/Application_CLibs/images/svg/document.svg") + "\">" +
                                    "&nbsp;&nbsp;" +

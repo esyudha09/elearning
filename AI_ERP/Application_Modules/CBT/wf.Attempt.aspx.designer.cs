@@ -204,6 +204,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda1;
 
         /// <summary>
+        /// txtJwbGanda1 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtJwbGanda1;
+
+        /// <summary>
         /// ChkJwbGanda2 control.
         /// </summary>
         /// <remarks>
@@ -211,6 +220,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda2;
+
+        /// <summary>
+        /// txtJwbGanda2 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtJwbGanda2;
 
         /// <summary>
         /// ChkJwbGanda3 control.
@@ -222,6 +240,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda3;
 
         /// <summary>
+        /// txtJwbGanda3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtJwbGanda3;
+
+        /// <summary>
         /// ChkJwbGanda4 control.
         /// </summary>
         /// <remarks>
@@ -231,6 +258,15 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda4;
 
         /// <summary>
+        /// txtJwbGanda4 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtJwbGanda4;
+
+        /// <summary>
         /// ChkJwbGanda5 control.
         /// </summary>
         /// <remarks>
@@ -238,6 +274,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.RadioButton ChkJwbGanda5;
+
+        /// <summary>
+        /// txtJwbGanda5 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtJwbGanda5;
 
         /// <summary>
         /// btnPrev control.
@@ -265,6 +310,15 @@ namespace AI_ERP.Application_Modules.CBT
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.Literal txtTerjawab;
+
+        /// <summary>
+        /// txtSisa control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.Literal txtSisa;
 
         /// <summary>
         /// txtTotalSoal control.

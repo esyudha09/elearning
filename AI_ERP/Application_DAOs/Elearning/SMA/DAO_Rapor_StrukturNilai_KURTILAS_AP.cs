@@ -35,6 +35,7 @@ namespace AI_ERP.Application_DAOs.Elearning.SMA
             public const string JenisPerhitungan = "JenisPerhitungan";
             public const string BobotRapor = "BobotRapor";
             public const string Urutan = "Urutan";
+            public const string KompetensiDasar = "KompetensiDasar";
         }
 
         private static Rapor_StrukturNilai_KURTILAS_AP GetEntityFromDataRow(DataRow row)
@@ -47,7 +48,8 @@ namespace AI_ERP.Application_DAOs.Elearning.SMA
                 Rel_Rapor_AspekPenilaian = new Guid(row[NamaField.Rel_Rapor_AspekPenilaian].ToString()),
                 JenisPerhitungan = row[NamaField.JenisPerhitungan].ToString(),
                 BobotRapor = Convert.ToDecimal(row[NamaField.BobotRapor]),
-                Urutan = Convert.ToInt16(row[NamaField.Urutan])
+                Urutan = Convert.ToInt16(row[NamaField.Urutan]),
+                KompetensiDasar = row[NamaField.KompetensiDasar].ToString()
             };
         }
 

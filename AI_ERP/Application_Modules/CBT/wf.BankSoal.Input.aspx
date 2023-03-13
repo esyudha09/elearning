@@ -20,7 +20,7 @@
         }
 
 
-     
+
 
         function loadCkEditor() {
             CKEDITOR.config.toolbar_Full =
@@ -35,40 +35,42 @@
             CKEDITOR.config.removePlugins = 'maximize';
             CKEDITOR.config.removePlugins = 'resize';
             CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
+            CKEDITOR.config.pasteFilter = 'p; a[!href]';
+            //CKEDITOR.config.imageUploadUrl = '/uploader/upload.php?type=Images';
             CKEDITOR.replace('<%= txtSoal.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent,uploadimage',
                 language: 'en',
                 startupFocus: true
             });
             CKEDITOR.replace('<%= txtJwbEssay.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent',
                 language: 'en',
-             
+
             });
             CKEDITOR.replace('<%= txtJwbGanda1.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent',
                 language: 'en',
-            
+
             });
             CKEDITOR.replace('<%= txtJwbGanda2.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent',
                 language: 'en',
-                
+
             });
             CKEDITOR.replace('<%= txtJwbGanda3.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent',
                 language: 'en',
-               
+
             });
             CKEDITOR.replace('<%= txtJwbGanda4.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent',
                 language: 'en',
-                
+
             });
             CKEDITOR.replace('<%= txtJwbGanda5.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,justify,textindent',
                 language: 'en',
-                
+
             });
 
 
@@ -109,11 +111,11 @@
 
             switch (jenis_act) {
                 case "<%= JenisAction.DoChangePage %>":
-                    //ReInitTinyMCE();
+                    loadCkEditor();
                     window.scrollTo(0, 0);
                     break;
                 case "<%= JenisAction.Add %>":
-                    //ReInitTinyMCE();
+                    loadCkEditor();
                     JenisCheck();
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
@@ -135,17 +137,17 @@
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.DoShowConfirmHapus %>":
-                    //ReInitTinyMCE();
+                    loadCkEditor();
                     //$('#ui_modal_confirm_hapus').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.Update %>":
-                    //ReInitTinyMCE();
+                    loadCkEditor();
                     JenisCheck();
                     //HideModal();
                     break;
                 case "<%= JenisAction.Delete %>":
                     //ReInitTinyMCE();
-
+                    loadCkEditor();
                     break;
                 case "<%= JenisAction.DoAdd %>":
                     loadCkEditor();
@@ -172,7 +174,7 @@
                     });
                     break;
                 case "<%= JenisAction.DoDelete %>":
-                    //ReInitTinyMCE();
+                    loadCkEditor();
                     HideModal();
                     $('body').snackbar({
                         alive: 2000,
@@ -216,14 +218,22 @@
                     document.getElementById("<%= txtJawaban.ClientID %>").focus();
                 }
                 else {
-                    document.getElementById("<%= txtSoal.ClientID %>").focus();
+                    document.getElementById(imgFile).focus();
                 }
             });--%>
         }
 
-        function TriggerSave() {
-            tinyMCE.triggerSave();
-        }
+        function ImageChange(input) {
+            if (input.files[0].type == "image/png") {
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#<%=Image1.ClientID%>").prop('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            }
+        };
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -238,13 +248,7 @@
 
             <asp:HiddenField runat="server" ID="txtKeyAction" />
             <asp:HiddenField runat="server" ID="txtID" />
-            <asp:HiddenField runat="server" ID="txtSoalVal" />
-            <asp:HiddenField runat="server" ID="txtJwbEssayVal" />
-            <asp:HiddenField runat="server" ID="txtJwbGanda1Val" />
-            <asp:HiddenField runat="server" ID="txtJwbGanda2Val" />
-            <asp:HiddenField runat="server" ID="txtJwbGanda3Val" />
-            <asp:HiddenField runat="server" ID="txtJwbGanda4Val" />
-            <asp:HiddenField runat="server" ID="txtJwbGanda5Val" />
+            
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
 
@@ -265,11 +269,51 @@
                                         <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
 
                                             <label for="<%= txtSoal.ClientID %>" style="color: #B7770D; font-size: small;">
+                                                NAMA :
+                                            </label>
+                                            <asp:TextBox contenteditable="true" CssClass="form-control " runat="server" ID="txtNama"></asp:TextBox>
+                                        </div>
+                                    </div>
+                                    <div class="col-md-6 row">
+                                        <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
+                                            <label for="<%= cboJenis.ClientID %>" style="color: #B7770D; font-size: small;">
+                                                ASPEK PENILAIAN :
+                                            </label>
+                                            <asp:DropDownList runat="server" ID="cboAP" CssClass="input-box">
+                                                <asp:ListItem Text="-Pilih Aspek Penilaian-" Value=""></asp:ListItem>
+                                            </asp:DropDownList>
+
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 row">
+                                        <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
+                                              <label for="<%= cboJenis.ClientID %>" style="color: #B7770D; font-size: small;">
+                                                FILE MEDIA (png/jpg/jpeg/mp3/mp4) :
+                                            </label>
+                                       <%--     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                                                <ContentTemplate>--%>
+                                                    <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImageChange(this)"></asp:FileUpload>
+                                                    <%--<asp:Button ID="btnUpload" runat="server" OnClick="lnkOKInput_Click" Text="Upload" />--%>
+                                               <%-- </ContentTemplate>
+                                                <Triggers>
+                                                    <asp:PostBackTrigger ControlID="btnUpload" />
+                                                </Triggers>
+                                            </asp:UpdatePanel>--%>
+                                            <asp:Image ID="Image1" runat="server" Width="300" />
+                                           
+                                        
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 row">
+                                        <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
+
+                                            <label for="<%= txtSoal.ClientID %>" style="color: #B7770D; font-size: small;">
                                                 SOAL :
                                             </label>
                                             <asp:TextBox contenteditable="true" CssClass="form-control " runat="server" ID="txtSoal" TextMode="MultiLine" Height="200px"></asp:TextBox>
                                         </div>
                                     </div>
+
 
                                     <div class="col-md-3 row">
                                         <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
@@ -277,7 +321,7 @@
                                                 JENIS SOAL :
                                             </label>
                                             <asp:DropDownList runat="server" ID="cboJenis" CssClass="input-box" onchange="JenisCheck(this);">
-                                                <asp:ListItem Text="" Value=""></asp:ListItem>
+                                                <asp:ListItem Text="-Pilih Tipe Soal-" Value=""></asp:ListItem>
                                                 <asp:ListItem Text="Pilihan Ganda" Value="ganda"></asp:ListItem>
                                                 <asp:ListItem Text="Essay" Value="essay"></asp:ListItem>
 
@@ -301,6 +345,8 @@
                                             <label style="color: #B7770D; font-size: small;">
                                                 JAWABAN PILIHAN GANDA :
                                             </label>
+                                            <div class="form-check form-switch">
+                                            </div>
                                             <ul type="none">
                                                 <li>
                                                     <asp:HiddenField ID="hdKodejwbGanda1" runat="server" />
@@ -420,7 +466,7 @@
             </div>
             <div id="fromBankSoal" runat="server" style="display: none">
                 <div class="content-header ui-content-header"
-                    style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 250px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 350px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">
                         <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton1"
                             OnClick="btnBackToMapel_Click"
@@ -432,7 +478,19 @@
                     </div>
                 </div>
                 <div class="content-header ui-content-header"
-                    style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 100px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 200px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton6"
+                            OnClick="btnBackToKelas_Click"
+                            CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Kelas
+                        </asp:LinkButton>
+                    </div>
+                </div>
+                <div class="content-header ui-content-header"
+                    style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 100px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">
                         <asp:LinkButton ToolTip=" Kembali " runat="server" ID="btnShowDataList" CssClass="btn-trans waves-attach waves-circle waves-effect" OnClick="btnBackToSoal_Click" Style="font-weight: bold; color: ghostwhite;">
                                                         &nbsp;&nbsp;
@@ -444,7 +502,7 @@
             </div>
             <div id="fromDesignSoal" runat="server" style="display: none">
                 <div class="content-header ui-content-header"
-                    style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 560px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    style="background-color: #00198d; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 5; position: fixed; bottom: 33px; right: 50px; width: 690px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">
                         <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton2"
                             OnClick="btnBackToMapel_Click"
@@ -456,7 +514,7 @@
                     </div>
                 </div>
                 <div class="content-header ui-content-header"
-                    style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 410px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    style="background-color: red; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 6; position: fixed; bottom: 33px; right: 50px; width: 540px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">
                         <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton3"
                             OnClick="btnBackToKelas_Click"
@@ -468,7 +526,19 @@
                     </div>
                 </div>
                 <div class="content-header ui-content-header"
-                    style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    style="background-color: purple; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 455px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    <div style="padding-left: 0px;">
+                        <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton7"
+                            OnClick="btnBackToStrukturNilai_Click"
+                            CssClass="btn-trans waves-attach waves-circle waves-effect" Style="font-weight: bold; color: ghostwhite;">
+                                                        &nbsp;&nbsp;
+                                                        <i class="fa fa-arrow-left"></i>
+                                                        &nbsp;&nbsp;Struktur Nilai
+                        </asp:LinkButton>
+                    </div>
+                </div>
+                <div class="content-header ui-content-header"
+                    style="background-color: green; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 8; position: fixed; bottom: 33px; right: 50px; width: 320px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">
                         <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton4"
                             OnClick="btnBackToFormRumahSoal_Click"
@@ -480,7 +550,7 @@
                     </div>
                 </div>
                 <div class="content-header ui-content-header"
-                    style="background-color: orange; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 7; position: fixed; bottom: 33px; right: 50px; width: 150px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
+                    style="background-color: orange; box-shadow: 0 5px 6px rgba(0,0,0,0.16), 0 -2px 6px rgba(0,0,0,0.23); background-image: none; color: white; display: block; z-index: 9; position: fixed; bottom: 33px; right: 50px; width: 150px; border-radius: 25px; padding: 8px; margin: 0px; height: 35px;">
                     <div style="padding-left: 0px;">
                         <asp:LinkButton ToolTip=" Kembali " runat="server" ID="LinkButton5"
                             OnClick="btnBackToDesignSoal_Click"
@@ -494,6 +564,7 @@
             </div>
         </ContentTemplate>
         <Triggers>
+            <asp:PostBackTrigger ControlID="lnkOKInput" />
         </Triggers>
     </asp:UpdatePanel>
 </asp:Content>
@@ -501,10 +572,10 @@
     <script type="text/javascript">
 
 
-     
+
         loadCkEditor();
 
-        
+
 
     </script>
 

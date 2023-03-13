@@ -266,6 +266,8 @@ namespace AI_ERP.Application_Modules.CBT
             sqlDA.Fill(dtResult2);
             lstJwb = new List<CBT_Jwb>();
             txtTerjawab.Text = dtResult2.Rows.Count.ToString();
+            int sisa = (Convert.ToInt32(txtTotalSoal.Text.ToString()) - Convert.ToInt32(txtTerjawab.Text.ToString()));
+            txtSisa.Text = sisa.ToString();
             foreach (DataRow row in dtResult2.Rows)
             {
                 CBT_Jwb j = new CBT_Jwb();
@@ -354,11 +356,11 @@ namespace AI_ERP.Application_Modules.CBT
                     hdKodejwbGanda4.Value = m.ListJwbGanda[3].Kode.ToString();
                     hdKodejwbGanda5.Value = m.ListJwbGanda[4].Kode.ToString();
 
-                    ChkJwbGanda1.Text = m.ListJwbGanda[0].Jawaban.ToString();
-                    ChkJwbGanda2.Text = m.ListJwbGanda[1].Jawaban.ToString();
-                    ChkJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
-                    ChkJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
-                    ChkJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
+                    txtJwbGanda1.Text = m.ListJwbGanda[0].Jawaban.ToString();
+                    txtJwbGanda2.Text = m.ListJwbGanda[1].Jawaban.ToString();
+                    txtJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
+                    txtJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
+                    txtJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
 
                     ChkJwbGanda1.Checked = false;
                     ChkJwbGanda2.Checked = false;

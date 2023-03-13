@@ -7,11 +7,11 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
+namespace AI_ERP.Application_Modules.CBT
 {
 
 
-    public partial class wf_RumahSoalSMA
+    public partial class wf_StrukturPenilaianSMA
     {
 
         /// <summary>
@@ -445,6 +445,15 @@ namespace AI_ERP.Application_Modules.EDUCATION.Penilaian.SMA
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
         protected global::System.Web.UI.WebControls.DataPager dpData;
+
+        /// <summary>
+        /// LinkButton3 control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.LinkButton LinkButton3;
 
         /// <summary>
         /// vListKTSPDet control.

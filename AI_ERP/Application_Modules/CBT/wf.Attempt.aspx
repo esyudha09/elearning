@@ -19,9 +19,11 @@
             CKEDITOR.config.height = '40px';
             CKEDITOR.config.removePlugins = 'maximize';
             CKEDITOR.config.removePlugins = 'resize';
+           //CKEDITOR.config.contentsCss = 'body { word - wrap: break-word;} ';
+           
             CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
             CKEDITOR.replace('<%= txtJwbEssay.ClientID %>', {
-                extraPlugins: 'ckeditor_wiris,indentblock,justify',
+                extraPlugins: 'ckeditor_wiris,indentblock,indent,justify,textindent',
                 language: 'en',
                 startupFocus: true
             });
@@ -129,10 +131,10 @@
                         <div class="card-main">
                             <div class="card-action" style="background-color: #4AA4A4; padding-left: 20px; padding-right: 20px; border-top-left-radius: 6px; border-top-right-radius: 6px; background-repeat: no-repeat; margin-left: -1px; margin-top: -1px; margin-right: -1px;">
                                 <div style="float: right">
-                                    <p >
-                                        <button OnClick="btnSelesai_Click" data-toggle="modal" data-target="#ui_modal_confirm_selesai" ID="LinkButton2" class="btn btn-grey" Style="color: white; font-size: smaller;"><i class="fa fa-paper-plane" ></i> Selesai</button>
+                                    <p>
+                                        <button onclick="btnSelesai_Click" data-toggle="modal" data-target="#ui_modal_confirm_selesai" id="LinkButton2" class="btn btn-grey" style="color: white; font-size: smaller;"><i class="fa fa-paper-plane"></i>Selesai</button>
                                         <br />
-                                        <label id="counter" style="font-weight: bold; color: white; font-weight: bold; font-size: large;margin-top:10px"></label>
+                                        <label id="counter" style="font-weight: bold; color: white; font-weight: bold; font-size: large; margin-top: 10px"></label>
                                     </p>
                                 </div>
                                 <div style="float: left">
@@ -182,32 +184,60 @@
                                         <%--  <label style="color: #B7770D; font-size: small;">
                                             JAWABAN PILIHAN GANDA :
                                         </label>--%>
+                                        <div class="row">
+                                            <div class="col-md-1 text-right padding-top-sm">
+                                                <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda1"></asp:Literal>
 
-                                        <div>
-                                            <div class="col-md-12">
-                                                <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="col-md-12">
-                                                <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
+
+                                       
+                                        <div class="row">
+                                            <div class="col-md-1 text-right padding-top-sm">
+                                                <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda2"></asp:Literal>
+
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="col-md-12 ">
-                                                <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
+
+                                       
+                                        <div class="row">
+                                            <div class="col-md-1 text-right padding-top-sm">
+                                                <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda3"></asp:Literal>
+
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="col-md-12">
-                                                <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
+
+                                       
+                                        <div class="row">
+                                            <div class="col-md-1 text-right padding-top-sm">
+                                                <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda4"></asp:Literal>
+
                                             </div>
                                         </div>
-                                        <div>
-                                            <div class="col-md-12 ">
-                                                <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
+
+                                      
+                                        <div class="row">
+                                            <div class="col-md-1 text-right padding-top-sm">
+                                                <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                            </div>
+                                            <div class="col-md-11">
+                                                <asp:Literal runat="server" ID="txtJwbGanda5"></asp:Literal>
+
                                             </div>
                                         </div>
+
                                     </div>
                                 </div>
                             </div>
@@ -230,6 +260,9 @@
                                     Terjawab
                                     <span style="font-weight: bold">
                                         <asp:Literal ID="txtTerjawab" runat="server"></asp:Literal></span>
+                                    sisa
+                                    <span style="font-weight: bold">
+                                        <asp:Literal ID="txtSisa" runat="server"></asp:Literal></span>
                                     dari
                                    <span style="font-weight: bold">
                                        <asp:Literal ID="txtTotalSoal" runat="server"></asp:Literal></span>
@@ -245,30 +278,21 @@
             </div>
 
             <div aria-hidden="true" class="modal fade" id="ui_modal_confirm_selesai" role="dialog" tabindex="-1" style="display: none; padding-right: 9px; z-index: 2000;">
-		        <div class="modal-dialog modal-xs">
-			        <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
-				        <div class="modal-inner" 
-                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; 
-                            padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; 
-                            border-top-left-radius: 5px;
-                            border-top-right-radius: 5px;
-                            background-color: #EDEDED;
-                            background-repeat: no-repeat;
-                            background-size: auto;
-                            background-position: right; 
-                            background-position-y: -1px;">
+                <div class="modal-dialog modal-xs">
+                    <div class="modal-content" style="border: none; border-top-left-radius: 6px; border-top-right-radius: 6px;">
+                        <div class="modal-inner"
+                            style="margin-left: 0px; margin-right: 0px; margin-bottom: 0px; margin-top: 0px; padding-left: 0px; padding-right: 0px; padding-bottom: 0px; padding-top: 25px; border-top-left-radius: 5px; border-top-right-radius: 5px; background-color: #EDEDED; background-repeat: no-repeat; background-size: auto; background-position: right; background-position-y: -1px;">
                             <div class="media margin-bottom-no margin-top-no" style="padding-left: 20px; padding-right: 20px; color: black; padding-bottom: 20px;">
-							    <div class="media-object margin-right-sm pull-left">
-								    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
-							    </div>
-							    <div class="media-inner">
-								    <span style="font-weight: bold;">
-                                        Konfirmasi
-								    </span>
-							    </div>
-						    </div>
+                                <div class="media-object margin-right-sm pull-left">
+                                    <span class="icon icon-lg text-brand-accent" style="color: black;">info_outline</span>
+                                </div>
+                                <div class="media-inner">
+                                    <span style="font-weight: bold;">Konfirmasi
+                                    </span>
+                                </div>
+                            </div>
                             <div style="width: 100%;">
-							    <div class="row">
+                                <div class="row">
                                     <div class="col-lg-12">
 
                                         <div style="width: 100%; background-color: white; padding-top: 15px;">
@@ -281,22 +305,23 @@
                                                     </div>
                                                 </div>
                                             </div>
-										</div>  
+                                        </div>
 
                                     </div>
-                                </div>								                            
-							</div>
-				        </div>
-				        <div class="modal-footer">
-					        <p class="text-right">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal-footer">
+                            <p class="text-right">
                                 <asp:LinkButton CssClass="btn btn-flat btn-brand-accent waves-attach waves-effect" runat="server" ID="lnkOKHapus" OnClick="btnSelesai_Click" Text="  OK  "></asp:LinkButton>
-                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>      
-                                <br /><br />                              
-					        </p>
-				        </div>
-			        </div>
-		        </div>
-	        </div>
+                                <a class="btn btn-flat btn-brand-accent waves-attach waves-effect" data-dismiss="modal">Batal</a>
+                                <br />
+                                <br />
+                            </p>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </ContentTemplate>
         <Triggers>
         </Triggers>
