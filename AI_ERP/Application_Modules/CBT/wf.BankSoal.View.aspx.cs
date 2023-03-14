@@ -187,85 +187,88 @@ namespace AI_ERP.Application_Modules.CBT
                     {
                         EssayDiv.Attributes.Add("style", "display:block");
                         GandaDiv.Attributes.Add("style", "display:none");
+                        txtJwbEssay.Text = m.JwbEssay;
                     }
                     else if (m.Jenis == "ganda")
                     {
                         EssayDiv.Attributes.Add("style", "display:none");
                         GandaDiv.Attributes.Add("style", "display:block");
+
+                        hdKodejwbGanda1.Value = m.ListJwbGanda[0].Kode.ToString();
+                        hdKodejwbGanda2.Value = m.ListJwbGanda[1].Kode.ToString();
+                        hdKodejwbGanda3.Value = m.ListJwbGanda[2].Kode.ToString();
+                        hdKodejwbGanda4.Value = m.ListJwbGanda[3].Kode.ToString();
+                        hdKodejwbGanda5.Value = m.ListJwbGanda[4].Kode.ToString();
+
+                        txtJwbGanda1.Text = m.ListJwbGanda[0].Jawaban.ToString();
+                        txtJwbGanda2.Text = m.ListJwbGanda[1].Jawaban.ToString();
+                        txtJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
+                        txtJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
+                        txtJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
+
+                        ChkJwbGanda1.Checked = false;
+                        ChkJwbGanda2.Checked = false;
+                        ChkJwbGanda3.Checked = false;
+                        ChkJwbGanda4.Checked = false;
+                        ChkJwbGanda5.Checked = false;
+
+
+
+
+                        if (hdKodejwbGanda1.Value == m.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda1.Checked = true;
+                        }
+                        else if (hdKodejwbGanda2.Value == m.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda2.Checked = true;
+                        }
+                        else if (hdKodejwbGanda3.Value == m.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda3.Checked = true;
+                        }
+                        else if (hdKodejwbGanda4.Value == m.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda4.Checked = true;
+                        }
+                        else if (hdKodejwbGanda5.Value == m.Rel_JwbGanda.ToString())
+                        {
+                            ChkJwbGanda5.Checked = true;
+                        }
                     }
 
-                    string folderPath = "~/Application_Resources/ImageSoal/";
-                    string folderPath2 = "../Application_Resources/ImageSoal/";
+                    string folderPath = "~/Application_Resources/FileSoal/";
+                    string folderPath2 = "../Application_Resources/FileSoal/";
+
+                    FileImageID.Attributes.Add("style", "display:none");
+                    FileAudioID.Attributes.Add("style", "display:none");
+                    FileVideoID.Attributes.Add("style", "display:none");
+                    hdSourceAudio.Value = "";
+                    hdSourceVideo.Value = "";
+                    FileImageID.Src = "";
 
                     if (m.FileImage != "")
                     {
 
-                        FileImageID.Attributes.Add("style", "display:block");
+                        FileImageID.Attributes.Add("style", "display:block;margin-left: auto;margin-right: auto;width: 50%;");
                         FileImageID.Src = folderPath + m.FileImage.ToString();
                     }
                     if (m.FileAudio != "")
                     {
 
-                        FileAudioID.Attributes.Add("style", "display:block");
-                        //FileAudioID.Attributes.Add("src", folderPath + m.FileImage.ToString());
+                        FileAudioID.Attributes.Add("style", "display:block;margin-left: auto;margin-right: auto;width: 50%;");
                         hdSourceAudio.Value = folderPath2 + m.FileAudio.ToString();
                     }
-                     if (m.FileVideo != "")
+                    if (m.FileVideo != "")
                     {
 
-                        FileVideoID.Attributes.Add("style", "display:block");
-                        //    FileVideoID.Attributes["Src"] = folderPath + m.FileImage.ToString();
+                        FileVideoID.Attributes.Add("style", "display:block;margin-left: auto;margin-right: auto;width: 50%;");
                         hdSourceVideo.Value = folderPath2 + m.FileVideo.ToString();
                     }
 
-                    hdKodejwbGanda1.Value = m.ListJwbGanda[0].Kode.ToString();
-                    hdKodejwbGanda2.Value = m.ListJwbGanda[1].Kode.ToString();
-                    hdKodejwbGanda3.Value = m.ListJwbGanda[2].Kode.ToString();
-                    hdKodejwbGanda4.Value = m.ListJwbGanda[3].Kode.ToString();
-                    hdKodejwbGanda5.Value = m.ListJwbGanda[4].Kode.ToString();
+                   
 
-                    txtJwbGanda1.Text = m.ListJwbGanda[0].Jawaban.ToString();
-                    txtJwbGanda2.Text = m.ListJwbGanda[1].Jawaban.ToString();
-                    txtJwbGanda3.Text = m.ListJwbGanda[2].Jawaban.ToString();
-                    txtJwbGanda4.Text = m.ListJwbGanda[3].Jawaban.ToString();
-                    txtJwbGanda5.Text = m.ListJwbGanda[4].Jawaban.ToString();
-
-                    ChkJwbGanda1.Checked = false;
-                    ChkJwbGanda2.Checked = false;
-                    ChkJwbGanda3.Checked = false;
-                    ChkJwbGanda4.Checked = false;
-                    ChkJwbGanda5.Checked = false;
-
-
-                    //var jwb = lstJwb.Where(x => x.Rel_DesignSoal.ToUpper() == ds.ToUpper()).FirstOrDefault();
-                    //if (jwb != null)
-                    //{
-                    //    //txtJwbEssayVal.Value = jwb.JwbEssay;
-                    //    txtJwbEssay.Text = jwb.JwbEssay;
-
-                    //    //.Rel_JwbGanda;
-                    //    if (hdKodejwbGanda1.Value == jwb.Rel_JwbGanda.ToString())
-                    //    {
-                    //        ChkJwbGanda1.Checked = true;
-                    //    }
-                    //    else if (hdKodejwbGanda2.Value == jwb.Rel_JwbGanda.ToString())
-                    //    {
-                    //        ChkJwbGanda2.Checked = true;
-                    //    }
-                    //    else if (hdKodejwbGanda3.Value == jwb.Rel_JwbGanda.ToString())
-                    //    {
-                    //        ChkJwbGanda3.Checked = true;
-                    //    }
-                    //    else if (hdKodejwbGanda4.Value == jwb.Rel_JwbGanda.ToString())
-                    //    {
-                    //        ChkJwbGanda4.Checked = true;
-                    //    }
-                    //    else if (hdKodejwbGanda5.Value == jwb.Rel_JwbGanda.ToString())
-                    //    {
-                    //        ChkJwbGanda5.Checked = true;
-                    //    }
-
-                    //}
+                    
                 }
             }
         }

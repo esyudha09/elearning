@@ -19,8 +19,8 @@
             CKEDITOR.config.height = '40px';
             CKEDITOR.config.removePlugins = 'maximize';
             CKEDITOR.config.removePlugins = 'resize';
-           //CKEDITOR.config.contentsCss = 'body { word - wrap: break-word;} ';
-           
+            //CKEDITOR.config.contentsCss = 'body { word - wrap: break-word;} ';
+
             CKEDITOR.config.sharedSpaces = { top: 'toolbar1' };
             CKEDITOR.replace('<%= txtJwbEssay.ClientID %>', {
                 extraPlugins: 'ckeditor_wiris,indentblock,indent,justify,textindent',
@@ -60,35 +60,13 @@
             var jenis_act = document.getElementById("<%= txtKeyAction.ClientID %>").value;
 
             switch (jenis_act) {
-                case "<%= JenisAction.DoChangePage %>":
+                case "<%= JenisAction.DoShowDataEssay %>":
                     loadCkEditor();
-                    window.scrollTo(0, 0);
-                    break;
-                case "<%= JenisAction.Add %>":
-                    loadCkEditor();
-
-                    break;
-                case "<%= JenisAction.AddWithMessage %>":
-                    loadCkEditor();
-
-                    $('body').snackbar({
-                        alive: 2000,
-                        content: '<i class=\"fa fa-info-circle\"></i>&nbsp;&nbsp;&nbsp;Data sudah disimpan',
-                        show: function () {
-                            snackbarText++;
-                        }
-                    });
-                    break;
-                case "<%= JenisAction.DoShowData %>":
-                    loadCkEditor();
-
-                    break;
-                case "<%= JenisAction.Clear %>":
-
+                    document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
                     break;
 
                 default:
-
+                    loadMedia();
                     if (jenis_act.trim() != "") {
                         $('body').snackbar({
                             alive: 6000,
@@ -102,6 +80,7 @@
                     break;
             }
         }
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -121,6 +100,8 @@
             <asp:HiddenField runat="server" ID="hdKodejwbGanda3" />
             <asp:HiddenField runat="server" ID="hdKodejwbGanda4" />
             <asp:HiddenField runat="server" ID="hdKodejwbGanda5" />
+            <asp:HiddenField runat="server" ID="hdSourceAudio" />
+            <asp:HiddenField runat="server" ID="hdSourceVideo" />
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnLinkClick" OnClick="btnLink_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="counterClick" OnClick="counter_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
@@ -155,14 +136,30 @@
 
                             </div>
                             <div class="card-inner margin-top-xs">
+                                <div class="col-md-12 ">
 
+                                    <img id="FileImageID" width="300" style="display: none;" runat="server" />
+
+                                    <video width="320" height="240" controls id="FileVideoID" runat="server">
+                                        <source type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+
+                                    <audio controls id="FileAudioID" runat="server">
+                                        <source type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+
+                                    <asp:Literal runat="server" ID="Literal1"> </asp:Literal>
+
+                                </div>
                                 <div class="col-md-12 row">
                                     <div style="margin-top: 5px; margin-bottom: 5px;">
 
                                         <label for="<%= txtSoal.ClientID %>" style="color: #B7770D; font-size: small;">
                                             SOAL :
                                         </label>
-                                        <%--<asp:TextBox CssClass="form-control mcetiny_soal" runat="server" ID="txtSoal" Height="200px"></asp:TextBox>--%>
+
                                         <asp:Literal runat="server" ID="txtSoal"> </asp:Literal>
                                         <hr />
                                     </div>
@@ -172,9 +169,7 @@
                                 <div class="col-md-12 row" runat="server" id="EssayDiv" style="display: none;">
                                     <div>
 
-                                        <%-- <label style="color: #B7770D; font-size: small;">
-                                            JAWABAN ESSAY :
-                                        </label>--%>
+
                                         <asp:TextBox contenteditable="true" CssClass="form-control" runat="server" ID="txtJwbEssay" TextMode="MultiLine" Height="200px"></asp:TextBox>
                                     </div>
                                 </div>
@@ -186,7 +181,7 @@
                                         </label>--%>
                                         <div class="row">
                                             <div class="col-md-1 text-right padding-top-sm">
-                                                <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                                <asp:RadioButton ID="ChkJwbGanda1" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
                                             </div>
                                             <div class="col-md-11">
                                                 <asp:Literal runat="server" ID="txtJwbGanda1"></asp:Literal>
@@ -194,10 +189,10 @@
                                             </div>
                                         </div>
 
-                                       
+
                                         <div class="row">
                                             <div class="col-md-1 text-right padding-top-sm">
-                                                <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                                <asp:RadioButton ID="ChkJwbGanda2" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
                                             </div>
                                             <div class="col-md-11">
                                                 <asp:Literal runat="server" ID="txtJwbGanda2"></asp:Literal>
@@ -205,10 +200,10 @@
                                             </div>
                                         </div>
 
-                                       
+
                                         <div class="row">
                                             <div class="col-md-1 text-right padding-top-sm">
-                                                <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                                <asp:RadioButton ID="ChkJwbGanda3" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
                                             </div>
                                             <div class="col-md-11">
                                                 <asp:Literal runat="server" ID="txtJwbGanda3"></asp:Literal>
@@ -216,10 +211,10 @@
                                             </div>
                                         </div>
 
-                                       
+
                                         <div class="row">
                                             <div class="col-md-1 text-right padding-top-sm">
-                                                <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                                <asp:RadioButton ID="ChkJwbGanda4" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
                                             </div>
                                             <div class="col-md-11">
                                                 <asp:Literal runat="server" ID="txtJwbGanda4"></asp:Literal>
@@ -227,10 +222,10 @@
                                             </div>
                                         </div>
 
-                                      
+
                                         <div class="row">
                                             <div class="col-md-1 text-right padding-top-sm">
-                                                <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()"/>
+                                                <asp:RadioButton ID="ChkJwbGanda5" runat="server" Text="" GroupName="ganda" OnClick="FormChangeCheck()" />
                                             </div>
                                             <div class="col-md-11">
                                                 <asp:Literal runat="server" ID="txtJwbGanda5"></asp:Literal>
@@ -391,7 +386,21 @@
             });
         }, 1000);
 
+        function loadMedia() {
+            if (<%=hdSourceAudio.ClientID%>.value != "") {
+                var audio = document.getElementById("<%=FileAudioID.ClientID%>")
+                audio.getElementsByTagName('source')[0].src = <%=hdSourceAudio.ClientID%>.value;
+                audio.load();
+            }
 
+            if (<%=hdSourceVideo.ClientID%>.value != "") {
+                var video = document.getElementById("<%=FileVideoID.ClientID%>")
+                video.getElementsByTagName('source')[0].src = <%=hdSourceVideo.ClientID%>.value;
+                video.load();
+            }
+        }
+
+        loadMedia();
 
         //LoadTinyMCEjwbEssay();
         //RenderDropDownOnTables();

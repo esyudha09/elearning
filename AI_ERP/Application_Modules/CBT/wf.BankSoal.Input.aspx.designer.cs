@@ -51,6 +51,24 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.HiddenField txtID;
 
         /// <summary>
+        /// hdSourceAudio control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdSourceAudio;
+
+        /// <summary>
+        /// hdSourceVideo control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.WebControls.HiddenField hdSourceVideo;
+
+        /// <summary>
         /// btnShowConfirmDelete control.
         /// </summary>
         /// <remarks>
@@ -96,13 +114,31 @@ namespace AI_ERP.Application_Modules.CBT
         protected global::System.Web.UI.WebControls.FileUpload FileUpload1;
 
         /// <summary>
-        /// Image1 control.
+        /// ImagePrev control.
         /// </summary>
         /// <remarks>
         /// Auto-generated field.
         /// To modify move field declaration from designer file to code-behind file.
         /// </remarks>
-        protected global::System.Web.UI.WebControls.Image Image1;
+        protected global::System.Web.UI.HtmlControls.HtmlImage ImagePrev;
+
+        /// <summary>
+        /// VideoPrev control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl VideoPrev;
+
+        /// <summary>
+        /// AudioPrev control.
+        /// </summary>
+        /// <remarks>
+        /// Auto-generated field.
+        /// To modify move field declaration from designer file to code-behind file.
+        /// </remarks>
+        protected global::System.Web.UI.HtmlControls.HtmlGenericControl AudioPrev;
 
         /// <summary>
         /// txtSoal control.

@@ -86,30 +86,13 @@ namespace AI_ERP.Application_Modules.CBT
                     DAO_Sekolah.IsValidTokenUnit(Libs.GetQueryString("unit"), Libs.GetQueryString("token")) ? true : false);
         }
 
-        protected void UploadFile(object sender, EventArgs e)
-        {
-            string folderPath = Server.MapPath("~/Application_Resources/ImageSoal");
-            var fileName = FileUpload1.FileName;
-            var fileExt = Path.GetExtension(fileName);
-
-            //Check whether Directory (Folder) exists.
-            if (!Directory.Exists(folderPath))
-            {
-                //If Directory (Folder) does not exists Create it.
-                Directory.CreateDirectory(folderPath);
-            }
-
-            FileUpload1.SaveAs(folderPath + "/" + fileName);
-
-           
-        }
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session[Constantas.NAMA_SESSION_LOGIN] == null)
-            //{
-            //    Libs.RedirectToLogin(this.Page);
-            //}
+            if (Session[Constantas.NAMA_SESSION_LOGIN] == null)
+            {
+                Libs.RedirectToLogin(this.Page);
+            }
             //if (!DAO_Sekolah.IsValidTokenUnit(Libs.GetQueryString("unit"), Libs.GetQueryString("token")))
             //{
             //    Libs.RedirectToBeranda(this.Page);
@@ -135,8 +118,8 @@ namespace AI_ERP.Application_Modules.CBT
             
             if (!IsPostBack)
             {
+                
                 SetSelectAP();
-                //InitInput();
                 InitKeyEventClient();
                 var IdSoal = Libs.GetQueryString("id");
                 if (!string.IsNullOrEmpty(IdSoal))
@@ -214,11 +197,6 @@ namespace AI_ERP.Application_Modules.CBT
 
 
 
-        protected void lvData_PagePropertiesChanging(object sender, PagePropertiesChangingEventArgs e)
-        {
-            this.Session[SessionViewDataName] = e.StartRowIndex;
-            txtKeyAction.Value = JenisAction.DoChangePage.ToString();
-        }
 
 
         protected void InitFields()
@@ -231,8 +209,18 @@ namespace AI_ERP.Application_Modules.CBT
             txtJwbGanda3.Text = "";
             txtJwbGanda4.Text = "";
             txtJwbGanda5.Text = "";
-            //chkEssay.Checked = false;
-            //chkGanda.Checked = false;
+            ChkJwbGanda1.Checked = false;
+            ChkJwbGanda2.Checked = false;
+            ChkJwbGanda3.Checked = false;
+            ChkJwbGanda4.Checked = false;
+            ChkJwbGanda5.Checked = false;
+
+            ImagePrev.Attributes.Add("style", "display:none");
+            AudioPrev.Attributes.Add("style", "display:none");
+            VideoPrev.Attributes.Add("style", "display:none");
+            hdSourceAudio.Value = "";
+            hdSourceVideo.Value = "";
+            ImagePrev.Src = "";
         }
 
 
@@ -258,109 +246,120 @@ namespace AI_ERP.Application_Modules.CBT
         {
             try
             {
-                CBT_BankSoal m = new CBT_BankSoal();
-                if (FileUpload1.HasFile)
-                {   
-                    
-                    string folderPath = Server.MapPath("~/Application_Resources/ImageSoal");
-                    var fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + FileUpload1.FileName;
-                    var fileExt = Path.GetExtension(FileUpload1.FileName);
-               
-                    //Check whether Directory (Folder) exists.
-                    if (!Directory.Exists(folderPath))
-                    {
-                        //If Directory (Folder) does not exists Create it.
-                        Directory.CreateDirectory(folderPath);
-                    }
-
-                    FileUpload1.SaveAs(folderPath + "/" + fileName);
-
-                    if(fileExt == ".png" || fileExt == ".jpg" || fileExt == ".jpeg")
-                    {
-                        m.FileImage = fileName;
-                    }
-                    else if (fileExt == ".mp3")
-                    {
-                        m.FileAudio = fileName;
-                    }else if (fileExt == ".mp4")
-                    {
-                        m.FileVideo = fileName;
-                    }
-                }
-
-                m.Rel_Mapel = Libs.GetQueryString("m");
-                m.Rel_Kelas = Libs.GetQueryString("k");
-                m.Rel_Guru = Libs.LOGGED_USER_M.NoInduk;
-                m.Nama = txtNama.Text;
-                m.Rel_Rapor_AspekPenilaian = cboAP.SelectedValue;
-                m.Soal = txtSoal.Text;
-                m.Jenis = cboJenis.SelectedValue;
-
-                List<CBT_BankSoalJawabGanda> list_JwbGanda = new List<CBT_BankSoalJawabGanda>();
-
-
-                bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
-                string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
-                string[] arrJwbGanda = { txtJwbGanda1.Text, txtJwbGanda2.Text, txtJwbGanda3.Text, txtJwbGanda4.Text, txtJwbGanda5.Text };
-
-                if (m.Jenis == "ganda")
+                if (txtNama.Text != "")
                 {
-                    for (int i = 0; i < 5; i++)
+                    CBT_BankSoal m = new CBT_BankSoal();
+                    if (FileUpload1.HasFile)
                     {
-                        var j = new CBT_BankSoalJawabGanda
+
+                        string folderPath = Server.MapPath("~/Application_Resources/FileSoal");
+                        var fileName = DateTime.Now.ToString("yyyy-MM-dd-HH-mm-ss-") + FileUpload1.FileName;
+                        var fileExt = Path.GetExtension(FileUpload1.FileName);
+
+                        //Check whether Directory (Folder) exists.
+                        if (!Directory.Exists(folderPath))
                         {
-                            Kode = arrKodeJwbGanda[i] != "" ? new Guid(arrKodeJwbGanda[i]) : Guid.NewGuid(),
-                            Jawaban = arrJwbGanda[i],
-                            Urut = i + 1
-                        };
+                            //If Directory (Folder) does not exists Create it.
+                            Directory.CreateDirectory(folderPath);
+                        }
 
-                        list_JwbGanda.Add(j);
+                        FileUpload1.SaveAs(folderPath + "/" + fileName);
 
-                        if (arrJwbGandaChk[i])
-                            m.Rel_JwbGanda = j.Kode.ToString();
+                        if (fileExt == ".png" || fileExt == ".jpg" || fileExt == ".jpeg")
+                        {
+                            m.FileImage = fileName;
+                            m.FileAudio = "";
+                            m.FileVideo = "";
+                        }
+                        else if (fileExt == ".mp3")
+                        {
+                            m.FileImage = "";
+                            m.FileAudio = fileName;
+                            m.FileVideo = "";
+                        }
+                        else if (fileExt == ".mp4")
+                        {
+                            m.FileImage = "";
+                            m.FileAudio = "";
+                            m.FileVideo = fileName;
+                        }
                     }
-                }
 
-                m.ListJwbGanda = list_JwbGanda;
+                    m.Rel_Mapel = Libs.GetQueryString("m");
+                    m.Rel_Kelas = Libs.GetQueryString("k");
+                    m.Rel_Guru = Libs.LOGGED_USER_M.NoInduk;
+                    m.Nama = txtNama.Text;
+                    m.Rel_Rapor_AspekPenilaian = cboAP.SelectedValue;
+                    m.Soal = txtSoal.Text;
+                    m.Jenis = cboJenis.SelectedValue;
+
+                    List<CBT_BankSoalJawabGanda> list_JwbGanda = new List<CBT_BankSoalJawabGanda>();
 
 
-                if (txtID.Value.Trim() != "")
-                {
+                    bool[] arrJwbGandaChk = { ChkJwbGanda1.Checked, ChkJwbGanda2.Checked, ChkJwbGanda3.Checked, ChkJwbGanda4.Checked, ChkJwbGanda5.Checked };
+                    string[] arrKodeJwbGanda = { hdKodejwbGanda1.Value, hdKodejwbGanda2.Value, hdKodejwbGanda3.Value, hdKodejwbGanda4.Value, hdKodejwbGanda5.Value };
+                    string[] arrJwbGanda = { txtJwbGanda1.Text, txtJwbGanda2.Text, txtJwbGanda3.Text, txtJwbGanda4.Text, txtJwbGanda5.Text };
 
-                    m.JwbEssay = txtJwbEssay.Text;
-                    m.Kode = new Guid(txtID.Value);
-                    DAO_CBT_BankSoal.Update(m, Libs.LOGGED_USER_M.UserID);
-                    InitFields();
+                    if (m.Jenis == "ganda")
+                    {
+                        for (int i = 0; i < 5; i++)
+                        {
+                            var j = new CBT_BankSoalJawabGanda
+                            {
+                                Kode = arrKodeJwbGanda[i] != "" ? new Guid(arrKodeJwbGanda[i]) : Guid.NewGuid(),
+                                Jawaban = arrJwbGanda[i],
+                                Urut = i + 1
+                            };
 
-                    txtKeyAction.Value = JenisAction.DoUpdate.ToString();
-                }
-                else
-                {
-                    m.Kode = Guid.NewGuid();
-                    m.JwbEssay = txtJwbEssay.Text;
-                    DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
+                            list_JwbGanda.Add(j);
 
-                    if (!string.IsNullOrEmpty(Libs.GetQueryString("rs")))
+                            if (arrJwbGandaChk[i])
+                                m.Rel_JwbGanda = j.Kode.ToString();
+                        }
+                    }
+
+                    m.ListJwbGanda = list_JwbGanda;
+
+
+                    if (txtID.Value.Trim() != "")
                     {
 
-                        CBT_DesignSoal d = new CBT_DesignSoal();
-                        d.Rel_RumahSoal = Libs.GetQueryString("rs");
-                        d.Rel_BankSoal = m.Kode.ToString();
-                        DAO_CBT_DesignSoal.Insert(d, Libs.LOGGED_USER_M.UserID);
-
-                        // btnBackToDesignSoal_Click(null, null);
+                        m.JwbEssay = txtJwbEssay.Text;
+                        m.Kode = new Guid(txtID.Value);
+                        DAO_CBT_BankSoal.Update(m, Libs.LOGGED_USER_M.UserID);
+                        //InitFields();
+                        getData(txtID.Value);
+                        txtKeyAction.Value = JenisAction.DoUpdate.ToString();
                     }
-                    //else
-                    //{
-                    //    btnBackToSoal_Click(null, null);
-                    //}
+                    else
+                    {
+                        m.Kode = Guid.NewGuid();
+                        m.JwbEssay = txtJwbEssay.Text;
+                        DAO_CBT_BankSoal.Insert(m, Libs.LOGGED_USER_M.UserID);
 
-                    InitFields();
+                        if (!string.IsNullOrEmpty(Libs.GetQueryString("rs")))
+                        {
 
-                    txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
+                            CBT_DesignSoal d = new CBT_DesignSoal();
+                            d.Rel_RumahSoal = Libs.GetQueryString("rs");
+                            d.Rel_BankSoal = m.Kode.ToString();
+                            DAO_CBT_DesignSoal.Insert(d, Libs.LOGGED_USER_M.UserID);
+
+                            // btnBackToDesignSoal_Click(null, null);
+                        }
+                        //else
+                        //{
+                        //    btnBackToSoal_Click(null, null);
+                        //}
+
+                        //InitFields();
+                        getData(m.Kode.ToString());
+
+                        txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
+                    }
+
+
                 }
-
-              
             }
             catch (Exception ex)
             {
@@ -370,13 +369,37 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void getData(string idsoal)
         {
-
+            InitFields();
             CBT_BankSoal m = DAO_CBT_BankSoal.GetByID_Entity(idsoal.Trim());
 
             if (m != null)
             {
                 if (m.Soal != null)
                 {
+                                   
+                    string folderPath = "~/Application_Resources/FileSoal/";
+                    string folderPath2 = "../Application_Resources/FileSoal/";
+
+
+                    
+
+                    if (m.FileImage != "")
+                    {
+                        ImagePrev.Attributes.Add("style", "display:block;");
+                        ImagePrev.Src = folderPath + m.FileImage.ToString();
+                    }
+                    if (m.FileAudio != "")
+                    {
+                        AudioPrev.Attributes.Add("style", "display:block;");
+                        hdSourceAudio.Value = folderPath2 + m.FileAudio.ToString();
+                    }
+                    if (m.FileVideo != "")
+                    {
+                        VideoPrev.Attributes.Add("style", "display:block;");
+                        hdSourceVideo.Value = folderPath2 + m.FileVideo.ToString();
+                    }
+
+
                     txtID.Value = m.Kode.ToString();
                     txtNama.Text = m.Nama.ToString();
                     cboAP.SelectedValue = m.Rel_Rapor_AspekPenilaian.ToString();
@@ -432,10 +455,12 @@ namespace AI_ERP.Application_Modules.CBT
                         ChkJwbGanda5.Checked = true;
                     }
 
-
+                    
+                    txtKeyAction.Value = JenisAction.DoShowData.ToString();
                 }
 
-                txtKeyAction.Value = JenisAction.DoShowData.ToString();
+                
+
 
             }
         }
@@ -533,5 +558,6 @@ namespace AI_ERP.Application_Modules.CBT
                         )
                 );
         }
+        
     }
 }

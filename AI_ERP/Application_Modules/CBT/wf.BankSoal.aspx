@@ -152,7 +152,7 @@
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                 <div class="col-xs-12">
-                    <div class="col-md-8 col-md-offset-2" style="padding: 0px;">
+                    <div class="col-md-10 col-md-offset-1" style="padding: 0px;">
                         <div class="card" style="margin-top: 40px;">
                             <div class="card-main">
                                 <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">
@@ -311,9 +311,9 @@
                                                                 <PagerTemplate>
                                                                     <label style="color: grey; font-weight: normal; padding: 5px; border-style: solid; border-color: #F1F1F1; border-width: 1px; padding-left: 10px; padding-right: 10px; border-radius: 5px;">
                                                                         Hal.
-                                                                        <%# ((Container.StartRowIndex + 1) / (Container.PageSize)) %>
+                                                                        <%# ((Container.StartRowIndex + 1) / (Container.PageSize)) +1 %>
                                                                         &nbsp;/&nbsp;
-                                                                        <%# Math.Floor(Convert.ToDecimal((Container.TotalRowCount) / (Container.PageSize))) %>
+                                                                        <%# Math.Floor(Convert.ToDecimal((Container.TotalRowCount) / (Container.PageSize))) +1 %>
                                                                     </label>
                                                                 </PagerTemplate>
                                                             </asp:TemplatePagerField>

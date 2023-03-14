@@ -200,6 +200,11 @@ namespace AI_ERP.Application_DAOs
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Jenis, BankSoal.Jenis));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbEssay, BankSoal.JwbEssay));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_JwbGanda, BankSoal.Rel_JwbGanda));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.FileImage, BankSoal.FileImage));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.FileAudio, BankSoal.FileAudio));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.FileVideo, BankSoal.FileVideo));
+
+
                 comm.Parameters.Add(new SqlParameter("@user_id", user_id));
 
                 comm.CommandText = SP_INSERT;
@@ -257,6 +262,9 @@ namespace AI_ERP.Application_DAOs
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Jenis, BankSoal.Jenis));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.JwbEssay, BankSoal.JwbEssay));
                 comm.Parameters.Add(new SqlParameter("@" + NamaField.Rel_JwbGanda, BankSoal.Rel_JwbGanda));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.FileImage, BankSoal.FileImage));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.FileAudio, BankSoal.FileAudio));
+                comm.Parameters.Add(new SqlParameter("@" + NamaField.FileVideo, BankSoal.FileVideo));
                 comm.Parameters.Add(new SqlParameter("@user_id", user_id));
                 comm.ExecuteNonQuery();
 

@@ -31,20 +31,7 @@ namespace AI_ERP.Application_Modules.CBT
 
         public enum JenisAction
         {
-            Add,
-            AddWithMessage,
-            Edit,
-            Update,
-            Delete,
-            Search,
-            DoAdd,
-            DoUpdate,
-            DoDelete,
-            DoSearch,
-            DoShowData,
-            DoChangePage,
-            DoShowConfirmHapus,
-            Clear
+           DoShowDataEssay
         }
 
         private static class QS
@@ -120,10 +107,10 @@ namespace AI_ERP.Application_Modules.CBT
 
         protected void Page_Load(object sender, EventArgs e)
         {
-            //if (Session[Constantas.NAMA_SESSION_LOGIN] == null)
-            //{
-            //    Libs.RedirectToLogin(this.Page);
-            //}
+            if (Session[Constantas.NAMA_SESSION_LOGIN] == null)
+            {
+                Libs.RedirectToLogin(this.Page);
+            }
             //if (!DAO_Sekolah.IsValidTokenUnit(Libs.GetQueryString("unit"), Libs.GetQueryString("token")))
             //{
             //    Libs.RedirectToBeranda(this.Page);
@@ -245,7 +232,7 @@ namespace AI_ERP.Application_Modules.CBT
                 lstDesignSoalJwb.Add(j);
             }
             st_mxIdx = lstDesignSoalJwb.Count - 1;
-            
+
         }
 
         protected void getListJwb()
@@ -274,7 +261,7 @@ namespace AI_ERP.Application_Modules.CBT
                 j = DAO_CBT_DesignSoal.GetEntityJwbFromDataRow(row);
                 lstJwb.Add(j);
             }
-                 
+
         }
 
         protected void checkButton()
@@ -331,24 +318,49 @@ namespace AI_ERP.Application_Modules.CBT
 
             if (m != null)
             {
-                if (m.Soal != null)
+                string folderPath = "~/Application_Resources/FileSoal/";
+                string folderPath2 = "../Application_Resources/FileSoal/";
+
+
+                FileImageID.Attributes.Add("style", "display:none");
+                FileAudioID.Attributes.Add("style", "display:none");
+                FileVideoID.Attributes.Add("style", "display:none");
+                hdSourceAudio.Value = "";
+                hdSourceVideo.Value = "";
+                FileImageID.Src = "";
+
+                if (m.FileImage != "")
                 {
-                    txtSoal.Text = m.Soal.ToString();
 
-                    if (m.Jenis == "essay")
-                    {
-                        EssayDiv.Attributes.Add("style", "display:block");
-                        GandaDiv.Attributes.Add("style", "display:none");
-                        txtJwbEssay.Attributes.Add("onchange", "FormChangeCheck();");
-                    }
-                    else if (m.Jenis == "ganda")
-                    {
-                        EssayDiv.Attributes.Add("style", "display:none");
-                        GandaDiv.Attributes.Add("style", "display:block");
-                    }
+                    FileImageID.Attributes.Add("style", "display:block;margin-left: auto;margin-right: auto;width: 50%;");
+                    FileImageID.Src = folderPath + m.FileImage.ToString();
+                }
+                if (m.FileAudio != "")
+                {
 
-                    st_jenis = m.Jenis;
+                    FileAudioID.Attributes.Add("style", "display:block;margin-left: auto;margin-right: auto;width: 50%;");                   
+                    hdSourceAudio.Value = folderPath2 + m.FileAudio.ToString();
+                }
+                if (m.FileVideo != "")
+                {
 
+                    FileVideoID.Attributes.Add("style", "display:block;margin-left: auto;margin-right: auto;width: 50%;");                
+                    hdSourceVideo.Value = folderPath2 + m.FileVideo.ToString();
+                }
+
+                txtSoal.Text = m.Soal.ToString();
+
+                if (m.Jenis == "essay")
+                {
+                    EssayDiv.Attributes.Add("style", "display:block");
+                    GandaDiv.Attributes.Add("style", "display:none");
+                    txtJwbEssay.Attributes.Add("onchange", "FormChangeCheck();");
+                    txtKeyAction.Value = JenisAction.DoShowDataEssay.ToString();
+                }
+                else if (m.Jenis == "ganda")
+                {
+                    EssayDiv.Attributes.Add("style", "display:none");
+                    GandaDiv.Attributes.Add("style", "display:block");
 
                     hdKodejwbGanda1.Value = m.ListJwbGanda[0].Kode.ToString();
                     hdKodejwbGanda2.Value = m.ListJwbGanda[1].Kode.ToString();
@@ -367,42 +379,48 @@ namespace AI_ERP.Application_Modules.CBT
                     ChkJwbGanda3.Checked = false;
                     ChkJwbGanda4.Checked = false;
                     ChkJwbGanda5.Checked = false;
+                }
 
-                    var ds = lstDesignSoalJwb[st_lstIdx].Kode.ToString();
-                    var jwb = lstJwb.Where(x => x.Rel_DesignSoal.ToUpper() == ds.ToUpper()).FirstOrDefault();
-                    if (jwb != null)
+                st_jenis = m.Jenis;
+
+
+
+
+                var ds = lstDesignSoalJwb[st_lstIdx].Kode.ToString();
+                var jwb = lstJwb.Where(x => x.Rel_DesignSoal.ToUpper() == ds.ToUpper()).FirstOrDefault();
+                if (jwb != null)
+                {
+                    //txtJwbEssayVal.Value = jwb.JwbEssay;
+                    txtJwbEssay.Text = jwb.JwbEssay;
+
+                    //.Rel_JwbGanda;
+                    if (hdKodejwbGanda1.Value == jwb.Rel_JwbGanda.ToString())
                     {
-                        //txtJwbEssayVal.Value = jwb.JwbEssay;
-                        txtJwbEssay.Text = jwb.JwbEssay;
-
-                        //.Rel_JwbGanda;
-                        if (hdKodejwbGanda1.Value == jwb.Rel_JwbGanda.ToString())
-                        {
-                            ChkJwbGanda1.Checked = true;
-                        }
-                        else if (hdKodejwbGanda2.Value == jwb.Rel_JwbGanda.ToString())
-                        {
-                            ChkJwbGanda2.Checked = true;
-                        }
-                        else if (hdKodejwbGanda3.Value == jwb.Rel_JwbGanda.ToString())
-                        {
-                            ChkJwbGanda3.Checked = true;
-                        }
-                        else if (hdKodejwbGanda4.Value == jwb.Rel_JwbGanda.ToString())
-                        {
-                            ChkJwbGanda4.Checked = true;
-                        }
-                        else if (hdKodejwbGanda5.Value == jwb.Rel_JwbGanda.ToString())
-                        {
-                            ChkJwbGanda5.Checked = true;
-                        }
-
+                        ChkJwbGanda1.Checked = true;
                     }
+                    else if (hdKodejwbGanda2.Value == jwb.Rel_JwbGanda.ToString())
+                    {
+                        ChkJwbGanda2.Checked = true;
+                    }
+                    else if (hdKodejwbGanda3.Value == jwb.Rel_JwbGanda.ToString())
+                    {
+                        ChkJwbGanda3.Checked = true;
+                    }
+                    else if (hdKodejwbGanda4.Value == jwb.Rel_JwbGanda.ToString())
+                    {
+                        ChkJwbGanda4.Checked = true;
+                    }
+                    else if (hdKodejwbGanda5.Value == jwb.Rel_JwbGanda.ToString())
+                    {
+                        ChkJwbGanda5.Checked = true;
+                    }
+
+
                 }
             }
             checkButton();
             getListLInk();
-            txtKeyAction.Value = JenisAction.DoShowData.ToString();
+            
         }
 
 

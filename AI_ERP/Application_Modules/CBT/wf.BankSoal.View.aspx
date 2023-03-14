@@ -8,7 +8,7 @@
 
         var currentValue = 0;
 
-      
+
 
     </script>
 </asp:Content>
@@ -23,9 +23,9 @@
     <asp:UpdatePanel runat="server" ID="upMain">
         <ContentTemplate>
 
-             <asp:HiddenField runat="server" ID="hdSourceAudio"/>
-            <asp:HiddenField runat="server" ID="hdSourceVideo"/>
-           
+            <asp:HiddenField runat="server" ID="hdSourceAudio" />
+            <asp:HiddenField runat="server" ID="hdSourceVideo" />
+
 
             <%--<asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />--%>
 
@@ -34,34 +34,42 @@
 
                     <div class="card">
                         <div class="card-main">
-                            <div class="card-header" style="background-color: #295BC8; padding: 10px; font-weight: bold; vertical-align: middle; color: white; padding-left: 20px; font-size: 15px;">
-                                <span></span>
-
-                            </div>
+                            <table style="width: 100%;">
+                                <tr>
+                                    <td style="background-color: #295BC8; padding: 10px; font-weight: normal; vertical-align: middle; color: white; padding-left: 20px; font-size: 15px;">
+                                        <img src="<%= ResolveUrl("~/Application_CLibs/images/svg/document.svg") %>"
+                                            style="margin: 0 auto; height: 25px; width: 25px;" />
+                                        &nbsp;
+                                                Preview Bank Soal
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td style="background-color: #295BC8; padding: 0px;">
+                                        <hr style="margin: 0px; border-style: solid; border-width: 1px; border-color: #2555BE;" />
+                                    </td>
+                                </tr>
+                            </table>
                             <div class="card-inner">
 
-                                <div class="col-md-12 row text-center">
-                                    <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
-
-                                        <label for="<%= txtSoal.ClientID %>" style="color: #B7770D; font-size: small;">
-                                            SOAL :
-                                        </label>
+                                <div class="col-md-12">
 
 
-                                        <img id="FileImageID"  width="300" src=""  style="display:none" runat="server"/>
 
-                                        <video width="320" height="240" controls id="FileVideoID"  style="display:none"   runat="server">
-                                            <source  type="video/mp4">
-                                            Your browser does not support the video tag.
-                                        </video>
 
-                                        <audio controls id="FileAudioID" style="display:none"  runat="server">
-                                            <source  type="audio/mpeg">
-                                            Your browser does not support the audio element.
-                                        </audio>
-                                       
-                                        <asp:Literal runat="server" ID="txtSoal"> </asp:Literal>
-                                    </div>
+                                    <img id="FileImageID" width="300" src="" style="display: none" runat="server" />
+
+                                    <video width="320" height="240" controls id="FileVideoID" style="display: none" runat="server">
+                                        <source type="video/mp4">
+                                        Your browser does not support the video tag.
+                                    </video>
+
+                                    <audio controls id="FileAudioID" style="display: none" runat="server">
+                                        <source type="audio/mpeg">
+                                        Your browser does not support the audio element.
+                                    </audio>
+
+                                    <asp:Literal runat="server" ID="txtSoal"> </asp:Literal>
+
                                 </div>
 
 
@@ -162,7 +170,7 @@
 <asp:Content ID="Content4" ContentPlaceHolderID="KontenBawah" runat="server">
     <script type="text/javascript">
 
-       
+
         var audio = document.getElementById("<%=FileAudioID.ClientID%>")
         audio.getElementsByTagName('source')[0].src = <%=hdSourceAudio.ClientID%>.value;
         audio.load();
@@ -170,8 +178,8 @@
         var video = document.getElementById("<%=FileVideoID.ClientID%>")
         video.getElementsByTagName('source')[0].src = <%=hdSourceVideo.ClientID%>.value;
         video.load();
-        
-       
+
+
 
     </script>
 

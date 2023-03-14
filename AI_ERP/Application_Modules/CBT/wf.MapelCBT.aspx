@@ -148,7 +148,7 @@
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                 <div class="col-xs-12">
 
-                    <div class="col-md-8 col-md-offset-2" style="padding: 0px;">
+                    <div class="col-md-10 col-md-offset-1" style="padding: 0px;">
                         <div class="card" style="margin-top: 40px;">
                             <div class="card-main">
                                 <div class="card-inner" style="margin: 0px; padding: 0px; margin-right: -0.5px;">

@@ -8,6 +8,14 @@
 
         var currentValue = 0;
 
+       
+
+        function GoToURL2(url) {
+            let params = `scrollbars=no,resizable=no,status=no,location=no,toolbar=no,menubar=no,width=0,height=0,left=-1000,top=-1000`;
+
+            open(url, 'test', params);
+        }
+
         function JenisCheck() {
 
             if (document.getElementById("<%= cboJenis.ClientID %>").value == 'essay') {
@@ -20,7 +28,7 @@
         }
 
 
-
+        
 
         function loadCkEditor() {
             CKEDITOR.config.toolbar_Full =
@@ -92,16 +100,7 @@
             document.location.href = url;
         }
 
-        function HideModal() {
-            $('#ui_modal_input_data').modal('hide');
-            $('#ui_modal_confirm_hapus').modal('hide');
-
-            $('body').removeClass('modal-open');
-            $('.modal-backdrop').remove();
-
-            document.body.style.paddingRight = "0px";
-        }
-
+       
         function EndRequestHandler() {
             Sys.WebForms.PageRequestManager.getInstance().add_endRequest(EndRequest);
         }
@@ -117,13 +116,12 @@
                 case "<%= JenisAction.Add %>":
                     loadCkEditor();
                     JenisCheck();
-                    //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
+                    
                     break;
                 case "<%= JenisAction.AddWithMessage %>":
-                    loadCkEditor();
-                    //ReInitTinyMCE();
+                    loadCkEditor();                   
                     JenisCheck();
-                    //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
+                   
                     $('body').snackbar({
                         alive: 2000,
                         content: '<i class=\"fa fa-info-circle\"></i>&nbsp;&nbsp;&nbsp;Data sudah disimpan',
@@ -133,7 +131,9 @@
                     });
                     break;
                 case "<%= JenisAction.DoShowData %>":
+                    alert()
                     loadCkEditor();
+                    $("#btnView").css("display","block")
                     //$('#ui_modal_input_data').modal({ backdrop: 'static', keyboard: false, show: true });
                     break;
                 case "<%= JenisAction.DoShowConfirmHapus %>":
@@ -151,7 +151,7 @@
                     break;
                 case "<%= JenisAction.DoAdd %>":
                     loadCkEditor();
-                    //ReInitTinyMCE();
+                    $("#btnView").css("display", "block")
 
                     $('body').snackbar({
                         alive: 2000,
@@ -161,10 +161,9 @@
                         }
                     });
                     break;
-                case "<%= JenisAction.DoUpdate %>":
+                case "<%= JenisAction.DoUpdate %>":                   
                     loadCkEditor();
-                    //ReInitTinyMCE();
-                    //HideModal();
+                    $("#btnView").css("display", "block")
                     $('body').snackbar({
                         alive: 2000,
                         content: '<i class=\"fa fa-info-circle\"></i>&nbsp;&nbsp;&nbsp;Data sudah diupdate',
@@ -185,7 +184,7 @@
                     });
                     break;
                 default:
-                    HideModal();
+               
                     if (jenis_act.trim() != "") {
                         $('body').snackbar({
                             alive: 6000,
@@ -203,6 +202,7 @@
             RenderDropDownOnTables();
             InitModalFocus();
             document.getElementById("<%= txtKeyAction.ClientID %>").value = "";
+           
 
             Sys.Browser.WebKit = {};
             if (navigator.userAgent.indexOf('WebKit/') > -1) {
@@ -223,17 +223,7 @@
             });--%>
         }
 
-        function ImageChange(input) {
-            if (input.files[0].type == "image/png") {
-                if (input.files && input.files[0]) {
-                    var reader = new FileReader();
-                    reader.onload = function (e) {
-                        $("#<%=Image1.ClientID%>").prop('src', e.target.result);
-                    };
-                    reader.readAsDataURL(input.files[0]);
-                }
-            }
-        };
+
     </script>
 </asp:Content>
 <asp:Content ID="Content2" ContentPlaceHolderID="ContentPlaceHolder1" runat="server">
@@ -248,13 +238,14 @@
 
             <asp:HiddenField runat="server" ID="txtKeyAction" />
             <asp:HiddenField runat="server" ID="txtID" />
-            
+            <asp:HiddenField runat="server" ID="hdSourceAudio" />
+            <asp:HiddenField runat="server" ID="hdSourceVideo" />
 
             <asp:Button runat="server" UseSubmitBehavior="false" ID="btnShowConfirmDelete" OnClick="btnShowConfirmDelete_Click" Style="position: absolute; left: -1000px; top: -1000px;" />
 
             <div class="row" style="margin-left: 0px; margin-right: 0px;">
                 <div class="col-xs-12">
-                    <div class="col-md-8 col-md-offset-2" style="padding: 0px;">
+                    <div class="col-md-10 col-md-offset-1" style="padding: 0px;">
                         <div class="card" style="margin-top: 40px;">
                             <div class="card-main">
                                 <div class="card-header" style="background-color: #295BC8; padding: 10px; font-weight: bold; vertical-align: middle; color: white; padding-left: 20px; font-size: 15px;">
@@ -263,7 +254,13 @@
                                 </div>
                                 <div class="card-inner">
                                     <div class="text-right">
-                                        <asp:LinkButton OnClientClick="TriggerSave()" CssClass="btn btn-brand" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="Simpan"></asp:LinkButton>
+                                        <asp:LinkButton CssClass="btn btn-brand" runat="server" ID="lnkOKInput" OnClick="lnkOKInput_Click" Text="Simpan"></asp:LinkButton>
+
+                                        <label id="btnView" 
+                                            onclick="GoToURL2('<%= ResolveUrl(AI_ERP.Application_Libs.Routing.URL.APPLIACTION_MODULES.CBT.SOAL_VIEW.ROUTE) %>?m=<%=  AI_ERP.Application_Libs.Libs.GetQueryString("m")%>&id=<%=  AI_ERP.Application_Libs.Libs.GetQueryString("id")%>&u=<%#  AI_ERP.Application_Libs.Libs.GetQueryString("u")%> ');"
+                                           class="btn btn-brand">
+                                            <i class="fa fa-eye"></i>
+                                        </label>
                                     </div>
                                     <div class="col-md-12 row">
                                         <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
@@ -287,21 +284,36 @@
                                     </div>
                                     <div class="col-md-12 row">
                                         <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
-                                              <label for="<%= cboJenis.ClientID %>" style="color: #B7770D; font-size: small;">
+                                            <label for="<%= cboJenis.ClientID %>" style="color: #B7770D; font-size: small;">
                                                 FILE MEDIA (png/jpg/jpeg/mp3/mp4) :
                                             </label>
-                                       <%--     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
+                                            <%--     <asp:UpdatePanel ID="UpdatePanel1" runat="server" UpdateMode="Conditional">
                                                 <ContentTemplate>--%>
-                                                    <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImageChange(this)"></asp:FileUpload>
-                                                    <%--<asp:Button ID="btnUpload" runat="server" OnClick="lnkOKInput_Click" Text="Upload" />--%>
-                                               <%-- </ContentTemplate>
+
+                                            <asp:FileUpload ID="FileUpload1" runat="server" onchange="ImageChange(this)" />
+                                            <%--<asp:Button ID="btnUpload" runat="server" OnClick="lnkOKInput_Click" Text="Upload" />--%>
+                                            <%-- </ContentTemplate>
                                                 <Triggers>
                                                     <asp:PostBackTrigger ControlID="btnUpload" />
                                                 </Triggers>
                                             </asp:UpdatePanel>--%>
-                                            <asp:Image ID="Image1" runat="server" Width="300" />
-                                           
-                                        
+                                        </div>
+                                    </div>
+                                    <div class="col-md-12 row">
+                                        <div class="form-group form-group-label" style="margin-top: 5px; margin-bottom: 5px;">
+
+                                            <img id="ImagePrev" width="300" style="display: none;" runat="server" class="MediaPrev" />
+
+                                            <video width="320" height="240" style="display: none;" controls id="VideoPrev" runat="server" class="MediaPrev">
+                                                <source type="video/mp4">
+                                                Your browser does not support the video tag.
+                                            </video>
+
+                                            <audio controls id="AudioPrev" style="display: none;" runat="server" class="MediaPrev">
+                                                <source type="audio/mpeg">
+                                                Your browser does not support the audio element.
+                                            </audio>
+
                                         </div>
                                     </div>
                                     <div class="col-md-12 row">
@@ -573,8 +585,66 @@
 
 
 
+        function loadMedia() {
+            if (<%=hdSourceAudio.ClientID%>.value != "") {
+                var audio = document.getElementById("<%=AudioPrev.ClientID%>")
+                audio.getElementsByTagName('source')[0].src = <%=hdSourceAudio.ClientID%>.value;
+                audio.load();
+            }
+
+            if (<%=hdSourceVideo.ClientID%>.value != "") {
+                var video = document.getElementById("<%=VideoPrev.ClientID%>")
+                video.getElementsByTagName('source')[0].src = <%=hdSourceVideo.ClientID%>.value;
+                video.load();
+            }
+        }
+
+        loadMedia();
+
         loadCkEditor();
 
+
+        function ImageChange(input) {
+            $(".MediaPrev").css("display", "none");
+            if (input.files[0].type.includes("image")) {
+                $("#<%=ImagePrev.ClientID%>").css("display", "block");
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        $("#<%=ImagePrev.ClientID%>").prop('src', e.target.result);
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            } else if (input.files[0].type.includes("audio")) {
+                var audio = document.getElementById("<%=AudioPrev.ClientID%>");
+                audio.style.display = "block";
+
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+
+                        audio.getElementsByTagName('source')[0].src = e.target.result;
+                        audio.load();
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+            } else if (input.files[0].type.includes("video")) {
+                var video = document.getElementById("<%=VideoPrev.ClientID%>");
+                video.style.display = "block";
+                if (input.files && input.files[0]) {
+                    var reader = new FileReader();
+                    reader.onload = function (e) {
+                        var video = document.getElementById("<%=VideoPrev.ClientID%>");
+                        video.getElementsByTagName('source')[0].src = e.target.result;
+                        video.load();
+                    };
+                    reader.readAsDataURL(input.files[0]);
+                }
+
+
+            }
+        }
 
 
     </script>

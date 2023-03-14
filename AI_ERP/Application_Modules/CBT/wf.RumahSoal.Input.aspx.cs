@@ -265,7 +265,7 @@ namespace AI_ERP.Application_Modules.CBT
 
                    
                     //DAO_CBT_BankSoal.Update(m, Libs.LOGGED_USER_M.UserID);
-                    //getData(txtID.Value);
+                    getData();
 
                     txtKeyAction.Value = JenisAction.DoUpdate.ToString();
                 }
@@ -288,7 +288,7 @@ namespace AI_ERP.Application_Modules.CBT
                     //InitFields();
                     txtKeyAction.Value = JenisAction.AddWithMessage.ToString();
                 }
-                getData();
+                
             }
             catch (Exception ex)
             {
